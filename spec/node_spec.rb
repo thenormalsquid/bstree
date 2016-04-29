@@ -8,16 +8,16 @@ describe Node do
   end
 
   it 'adds left node' do
-    node = Node.new
-    left_node = Node.new
-    node.left = left_node
+    node = Node.new 2
+    left_node = Node.new 1
+    node.add left_node
     expect(node.left).to eq left_node
   end
 
-  it 'adds left node' do
-    node = Node.new
-    right_node = Node.new
-    node.right = right_node
+  it 'adds right node' do
+    node = Node.new 1
+    right_node = Node.new 2
+    node.add right_node
     expect(node.right).to eq right_node
   end
 
@@ -27,9 +27,15 @@ describe Node do
     expect(node.value).to eq value
   end
 
-  it 'compares values' do
+  it 'compares values with <=>' do
     node1 = Node.new(1)
     node2 = Node.new(2)
     expect(node1 <=> node2).to be 1
+  end
+
+  it 'compares values with <' do
+    node1 = Node.new(1)
+    node2 = Node.new(2)
+    expect(node1 < node2).to be true
   end
 end
