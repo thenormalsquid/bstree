@@ -20,14 +20,12 @@ class Tree
   end
 
   def get_values node, collector
-    if node.left
-      get_values node.left, collector
-    end
-
+    get_values node.left, collector if node.left
     collector << node.value
+    get_values node.right, collector if node.right
+  end
 
-    if node.right
-      get_values node.right, collector
-    end
+  def find key
+    @root.find key
   end
 end

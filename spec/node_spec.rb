@@ -38,4 +38,12 @@ describe Node do
     node2 = Node.new(2)
     expect(node1 < node2).to be true
   end
+
+  describe '.find' do
+    xit 'finds a key' do
+      # node1 = Node.new 2
+      # node2 = Node.new 1
+      # node3 = Node.new 3
+    end
+  end
 end

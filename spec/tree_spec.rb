@@ -44,7 +44,15 @@ describe Tree do
     end
   end
 
-  describe 'collect node values' do
+  describe '.find' do
+    xit 'finds a node with given key' do
+      node = Node.new(9)
+      tree = Tree.new node
+      expect(tree.find(9).object_id).to eq node.object_id
+    end
+  end
+
+  describe 'collect node values with in-order traversal' do
     it 'collects node values for single node' do
       node = Node.new(9)
       tree = Tree.new node

@@ -20,6 +20,9 @@ class Node
     node < self ? addleft(node) : addright(node)
   end
 
+  def find key
+  end
+
   def addleft node
     @left.nil? ? @left = node : @left.add(node)
   end
