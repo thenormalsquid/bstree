@@ -40,6 +40,12 @@ describe Node do
   end
 
   describe '.find' do
+    it 'a single node finds a key' do
+      node1 = Node.new 2
+      node = node1.find 2
+      expect(node.object_id).to eq node1.object_id
+    end
+
     xit 'finds a key' do
       # node1 = Node.new 2
       # node2 = Node.new 1

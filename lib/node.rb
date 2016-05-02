@@ -21,6 +21,7 @@ class Node
   end
 
   def find key
+    return self if key == value
   end
 
   def addleft node
