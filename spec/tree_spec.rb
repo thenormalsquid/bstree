@@ -45,10 +45,18 @@ describe Tree do
   end
 
   describe '.find' do
-    xit 'finds a node with given key' do
+    it 'finds a node with given key' do
       node = Node.new(9)
       tree = Tree.new node
-      expect(tree.find(9).object_id).to eq node.object_id
+      tree.add Node.new(14)
+      tree.add Node.new(4)
+      tree.add Node.new(23)
+      tree.add Node.new(5)
+      tree.add Node.new(99)
+      target = Node.new(77)
+      tree.add target
+      expect(tree.size).to eq 7
+      expect(tree.find(77).object_id).to eq target.object_id
     end
   end
 

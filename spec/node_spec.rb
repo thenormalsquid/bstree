@@ -46,10 +46,40 @@ describe Node do
       expect(node.object_id).to eq node1.object_id
     end
 
-    xit 'finds a key' do
-      # node1 = Node.new 2
-      # node2 = Node.new 1
-      # node3 = Node.new 3
+    it 'finds a key on the left' do
+      node1 = Node.new 2
+      node2 = Node.new 1
+      node1.add node2
+      expect(node1.left).to eq node2
+      expect(node1.find(1).object_id).to eq node2.object_id
+    end
+
+    it 'finds a key on the right' do
+      node1 = Node.new 1
+      node2 = Node.new 2
+      node1.add node2
+      expect(node1.right).to eq node2
+      expect(node1.find(2).object_id).to eq node2.object_id
+    end
+
+    it 'finds a key on the right left' do
+      node1 = Node.new 2
+      node2 = Node.new 4
+      node3 = Node.new 3
+      node1.add node2
+      node1.add node3
+      expect(node1.right.left).to eq node3
+      expect(node1.find(3).object_id).to eq node3.object_id
+    end
+
+    it 'finds a key on the left right' do
+      node1 = Node.new 4
+      node2 = Node.new 2
+      node3 = Node.new 3
+      node1.add node2
+      node1.add node3
+      expect(node1.left.right).to eq node3
+      expect(node1.find(3).object_id).to eq node3.object_id
     end
   end
 end

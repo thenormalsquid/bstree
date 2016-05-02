@@ -21,7 +21,18 @@ class Node
   end
 
   def find key
-    return self if key == value
+    return self if key == self.value
+    key < self.value ? findleft(key) : findright(key)
+  end
+
+  def findleft key
+    return if @left.nil?
+    key == @left.value ? @left : @left.find(key)
+  end
+
+  def findright key
+    return if @right.nil?
+    key == @right.value ? @right : @right.find(key)
   end
 
   def addleft node
