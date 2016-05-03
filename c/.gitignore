@@ -1,0 +1,16 @@
+*.patch
+compile
+config.log
+config.status
+stamp-h1
+Makefile
+config.h
+*~
+auto*
+configure
+aclocal.m4
+config.h.in
+depcomp
+missing
+install-sh
+Makefile.in

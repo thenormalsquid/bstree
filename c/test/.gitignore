@@ -1,0 +1,6 @@
+initial
+*.o
+*.gch
+*~
+Makefile
+.deps
