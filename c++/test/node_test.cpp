@@ -2,18 +2,10 @@
 #include <cppunit/TestCase.h>
 
 #include "./testutils.h"
-#include <autotoolerpp.h>
+#include <node.h>
 
 
 using std::string;
-
-class Node {
-public:
-  Node(void) : value(1) {}
-  int value;
-};
-
-
 
 class NodeTest : public CppUnit::TestCase {
 
@@ -25,7 +17,7 @@ public:
 
     Spec spec;
     spec.it("Testing Node", DO_SPEC {
-      return (string("some") == get_some());
+      return (string("node") == get_node());
     });
   }
 

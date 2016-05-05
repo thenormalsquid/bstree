@@ -2,17 +2,10 @@
 #include <cppunit/TestCase.h>
 
 #include "./testutils.h"
-#include <autotoolerpp.h>
+#include <tree.h>
 
 
 using std::string;
-
-class Tree {
-public:
-  Tree(void) : value(1) {}
-  int value;
-};
-
 
 
 class TreeTest : public CppUnit::TestCase {
@@ -25,7 +18,7 @@ public:
 
     Spec spec;
     spec.it("Testing Tree", DO_SPEC {
-      return (string("some") == get_some());
+      return (string("tree") == get_tree());
     });
   }
 

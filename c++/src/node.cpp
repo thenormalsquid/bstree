@@ -1,7 +1,8 @@
-#include "autotoolerpp.h"
+#include <string>
+#include <node.h>
 
 std::string
-get_some(void) {
+get_node(void) {
 
-  return std::string("some");
+  return std::string("node");
 }
