@@ -1,4 +1,5 @@
-// tree.h
+#ifndef IS_TREE_H
+#define IS_TREE_H
 
 class Tree {
 public:
@@ -8,3 +9,5 @@ public:
 
 
 std::string get_tree(void);
+
+#endif /* IS_TREE_H */

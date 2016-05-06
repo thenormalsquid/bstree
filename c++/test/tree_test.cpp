@@ -13,9 +13,16 @@ class TreeTest : public CppUnit::TestCase {
 public:
   TreeTest( std::string name ) : CppUnit::TestCase( name ) {}
 
+  void test_instantiation() {
+    Spec spec;
+    spec.it("Testing Tree instantiaton", DO_SPEC {
+      Tree tree;
+      return (&tree != NULL);
+    });
+    
+  }
 
   void test_getsome() {
-
     Spec spec;
     spec.it("Testing Tree", DO_SPEC {
       return (string("tree") == get_tree());
@@ -24,6 +31,7 @@ public:
 
   void runTest() {
     test_getsome();
+    test_instantiation();
   }
 };
 
