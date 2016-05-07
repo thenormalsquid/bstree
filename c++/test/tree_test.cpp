@@ -3,6 +3,7 @@
 
 #include "./testutils.h"
 #include <tree.h>
+#include <node.h>
 
 
 using std::string;
@@ -19,19 +20,21 @@ public:
       Tree tree;
       return (&tree != NULL);
     });
-    
   }
 
-  void test_getsome() {
+  void test_add() {
     Spec spec;
-    spec.it("Testing Tree", DO_SPEC {
-      return (string("tree") == get_tree());
+    spec.it("Testing Tree.add", DO_SPEC {
+      Tree tree;
+      Node node(10);
+      tree.add(&node);
+      return (tree.root == &node);
     });
   }
 
   void runTest() {
-    test_getsome();
     test_instantiation();
+    test_add();
   }
 };
 
