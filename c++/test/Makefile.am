@@ -2,7 +2,6 @@ AM_CXXFLAGS = -std=c++11 -Wall -Wextra  -Wno-unused-parameter
 AM_CPPFLAGS = -I../include -I. $(shell cppunit-config --cflags)
 
 AM_LDFLAGS = $(shell cppunit-config --libs)
-LDADD = ../src/libautotoolerpp.a ../src/libtree.a
 # LDADD = ../src/libautotoolerpp.a ../src/libtree.a
 LDADD = ../src/libtree.a
 
