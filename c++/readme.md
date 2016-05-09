@@ -1,26 +1,19 @@
-# Autotooler++
+# Binary search tree c++
 
-Template for a small c++ project built with GNU autotools.
+I haven't written a binary tree since the mid-1990s. Really haven't had
+much need: the projects I've worked on have been built with libraries
+implementing equivalent functionality, or just haven't needed it.
 
-## Usage
-
-This tiny project template has two main uses:
-
-1. Starting point for a major, top level application.
-2. Branch for a c++ implementation within another project.
-
-In the first case, `git clone` as usual, or fork into your
-own top level repo.
-
-In the second case, clone this repo into a desired subdirectory,
-then remove the `.git` directory from the clone, then add
-the c++ directory to your main project. One use case for this
-is when implementing an algorithm in c++ (or c) for wrapping
-with script driver.
+But it's such a simple elegant thing, and c++11/14 is so much nicer than
+it used to be, it's inspiring to go back and revisit this simple data
+structure.
 
 ## TODO
 
-* Add in c++ spec
-  * port changes back from tfidf
-  * clean up the compiler warnings on unused params.
-  * create examples for every case, use disambiguator for examples.
+* Extend `Tree` to add nodes`
+* Implement `Tree.collect` for in-order traversal to e.g., print out
+  value of nodes.
+* Build tree with all pointer data (instead off on the stack) and
+  implement post-order traversal to ensure all nodes are freed before
+  tree is freed. This will force me to brush up on my c++ pointer juju.
+  Apparently raw pointers (`new`, `delete`) are out.
