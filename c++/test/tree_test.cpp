@@ -22,19 +22,39 @@ public:
     });
   }
 
+  void test_find() {
+  }
+
+  void test_collect() {
+  }
+
   void test_add() {
     Spec spec;
     spec.it("Testing Tree.add", DO_SPEC {
       Tree tree;
       Node node(10);
       tree.add(&node);
-      return (tree.root == &node);
+      Node node2(43);
+      Node node3(10);
+      Node node4(10);
+      Node node5(10);
+      Node node6(10);
+      Node node7(10);
+      tree.add(&node2);
+      tree.add(&node3);
+      tree.add(&node4);
+      tree.add(&node5);
+      tree.add(&node6);
+      tree.add(&node6);
+      return (tree.root->right == &node2);
     });
   }
 
   void runTest() {
     test_instantiation();
     test_add();
+    test_find();
+    test_collect();
   }
 };
 
