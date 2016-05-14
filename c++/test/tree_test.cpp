@@ -32,20 +32,22 @@ public:
     spec.it("Testing Tree.collect", DO_SPEC {
       Node node(25);
       Tree tree(&node);
-      std::vector<int> a1{8, 10, 15, 25, 33, 43, 97};
-      std::vector<int> a2{1};
+      std::vector<int> a1{4, 8, 10, 15, 25, 33, 43, 97};
       Node node2(43);
       Node node3(8);
       Node node4(10);
       Node node5(15);
       Node node6(33);
       Node node7(97);
+      Node node8(4);
       tree.add(&node2);
       tree.add(&node3);
       tree.add(&node4);
       tree.add(&node5);
       tree.add(&node6);
-      tree.add(&node6);
+      tree.add(&node7);
+      tree.add(&node8);
+      std::vector<int> a2 = tree.collect();
       return (a1 == a2);
     });
   }
@@ -55,7 +57,6 @@ public:
     spec.it("Testing Tree.add", DO_SPEC {
       Node node(20);
       Tree tree(&node);
-      //tree.add(&node);
       Node node2(43);
       Node node3(8);
       Node node4(10);
@@ -67,7 +68,7 @@ public:
       tree.add(&node4);
       tree.add(&node5);
       tree.add(&node6);
-      tree.add(&node6);
+      tree.add(&node7);
       return (tree.root->right->left == &node6);
     });
   }

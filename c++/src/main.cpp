@@ -19,6 +19,6 @@ int
 main(int __attribute__((unused))argc, char ** UP(argv)) {
 
   std::cout << get_node() << std::endl;
-  std::cout << get_tree() << std::endl;
+  //std::cout << get_tree() << std::endl;
   return 0;
 }
