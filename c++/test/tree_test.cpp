@@ -30,9 +30,9 @@ public:
   void test_collect() {
     Spec spec;
     spec.it("Testing Tree.collect", DO_SPEC {
-      Node node(1);
+      Node node(25);
       Tree tree(&node);
-      std::vector<int> a1{1};
+      std::vector<int> a1{8, 10, 15, 25, 33, 43, 97};
       std::vector<int> a2{1};
       Node node2(43);
       Node node3(8);

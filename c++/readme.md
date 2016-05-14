@@ -10,8 +10,8 @@ structure.
 
 ## TODO
 
-* Extend `Tree` to add nodes`
-* Implement `Tree.collect` for in-order traversal to e.g., print out
+* (DONE) Extend `Tree` to add nodes`
+* Implement `Tree.collect` for in-order traversal to e.g., list out
   value of nodes.
 * Build tree with all pointer data (instead off on the stack) and
   implement post-order traversal to ensure all nodes are freed before
