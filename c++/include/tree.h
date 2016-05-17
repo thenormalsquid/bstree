@@ -11,11 +11,13 @@ public:
 
   void add(Node * node);
   std::vector<int> collect(void);
+  Node * find(int);
 
   Node * root;
   std::vector<int> values;
 
 private:
+  Node * find_node(int, Node * node);
   void collect_values(Node * node);
   void get_left(Node * node);
   void get_right(Node * node);

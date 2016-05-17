@@ -10,6 +10,11 @@ std::vector<int> Tree::collect() {
   return values;
 }
 
+Node * Tree::find(int) {
+  //return find_node(int, @root);
+  return root;
+}
+
 void Tree::collect_values(Node * node) {
   get_left(node);
   values.push_back(node->value);

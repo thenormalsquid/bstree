@@ -25,6 +25,28 @@ public:
   }
 
   void test_find() {
+    Spec spec;
+    spec.it("Testing Tree.find", DO_SPEC {
+      Node node(25);
+      Tree tree(&node);
+      std::vector<int> a1{4, 8, 10, 15, 25, 33, 43, 97};
+      Node node2(43);
+      Node node3(8);
+      Node node4(10);
+      Node node5(15);
+      Node node6(33);
+      Node node7(97);
+      Node node8(4);
+      tree.add(&node2);
+      tree.add(&node3);
+      tree.add(&node4);
+      tree.add(&node5);
+      tree.add(&node6);
+      tree.add(&node7);
+      tree.add(&node8);
+      Node * n5 = tree.find(15);
+      return (n5->value == node5.value);
+    });
   }
 
   void test_collect() {
