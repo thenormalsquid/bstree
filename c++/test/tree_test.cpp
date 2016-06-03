@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <memory>
 #include <cppunit/TestCase.h>
 
 #include "./testutils.h"
@@ -95,11 +96,34 @@ public:
     });
   }
 
+  // my own edification b/c I reach for new and delete
+  void test_unique_ptr(void) {
+    Spec spec;
+    spec.it("Testing Tree.add", DO_SPEC {
+      std::unique_ptr<Node> node(new Node(20));
+      Tree tree(node);
+      Node node2(43);
+      Node node3(8);
+      Node node4(10);
+      Node node5(15);
+      Node node6(33);
+      Node node7(97);
+      tree.add(&node2);
+      tree.add(&node3);
+      tree.add(&node4);
+      tree.add(&node5);
+      tree.add(&node6);
+      tree.add(&node7);
+      return (tree.root->right->left == &node6);
+    });
+  }
+
   void runTest() {
     test_instantiation();
     test_add();
     test_find();
     test_collect();
+    test_unique_ptr();
   }
 };
 

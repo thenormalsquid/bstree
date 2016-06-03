@@ -11,9 +11,9 @@ structure.
 ## TODO
 
 * (DONE) Extend `Tree` to add nodes`
-* Implement `Tree.collect` for in-order traversal to e.g., list out
+* (DONE) Implement `Tree.collect` for in-order traversal to e.g., list out
   value of nodes.
-* Build tree with all pointer data (instead off on the stack) and
-  implement post-order traversal to ensure all nodes are freed before
+* Build tree with all pointer data (instead off on the stack)
+* Implement post-order traversal to ensure all nodes are freed before
   tree is freed. This will force me to brush up on my c++ pointer juju.
   Apparently raw pointers (`new`, `delete`) are out.
