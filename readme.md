@@ -15,3 +15,13 @@ The `Tree` data structure API:
 ## Implementations
 
 As of 2016-05-08, parts of the API have been implemented in Ruby and C++.
+
+## Fun things to do
+
+Here is a list of various exercises and questions pulled from books and
+web pages.
+
+* Laakman asks (Ex. 4.7, p. 86) how to find the first common ancestor for
+two nodes in a binary tree, which is not necessarily a binary search
+tree. (Binary search tree is probably much easier than an arbitrary
+binary tree.)
