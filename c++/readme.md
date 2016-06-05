@@ -13,7 +13,8 @@ structure.
 * (DONE) Extend `Tree` to add nodes`
 * (DONE) Implement `Tree.collect` for in-order traversal to e.g., list out
   value of nodes.
-* Build tree with all pointer data (instead off on the stack)
+* Build tree with all pointer data (instead off on the stack).
+* Return list of nodes in the tree as well as the keys/values.
 * Implement post-order traversal to ensure all nodes are freed before
   tree is freed. This will force me to brush up on my c++ pointer juju.
   Apparently raw pointers (`new`, `delete`) are out.

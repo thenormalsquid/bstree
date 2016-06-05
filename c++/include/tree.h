@@ -19,10 +19,15 @@ public:
   std::vector<int> values;
 
 private:
-  Node * find_node(int, Node * node);
+  Node * find_node(int value, Node * node);
+  void find_left(int value, Node * node);
+  void find_right(int value, Node * node);
+
   void collect_values(Node * node);
   void get_left(Node * node);
   void get_right(Node * node);
+
+  bool found;
 };
 
 #endif /* IS_TREE_H */

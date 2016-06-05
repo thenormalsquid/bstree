@@ -46,6 +46,7 @@ public:
       tree.add(&node7);
       tree.add(&node8);
       Node * n5 = tree.find(15);
+      std::cout << "After find()..." << std::endl;
       return (n5->value == node5.value);
     });
   }
