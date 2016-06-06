@@ -24,22 +24,23 @@ Node * Tree::find_node(int value, Node * node) {
     found = true;
     return node;
   }
-  find_left(value, node);
-  find_right(value, node);
+  node = find_left(value, node);
+  node = find_right(value, node);
+  return node;
 
   std::cout << "here..." << std::endl;
-  return (Node *) NULL;
+  // return (Node *) NULL;
 }
 
-void Tree::find_left(int value, Node * n) {
-  if (found) return;
-  if (n->left == NULL) return;
+Node * Tree::find_left(int value, Node * n) {
+  if (found) return n;
+  if (n->left == NULL) return n;
   find_node(value, n->left);
 }
 
-void Tree::find_right(int value, Node * n) {
-  if (found) return;
-  if (n->right == NULL) return;
+Node * Tree::find_right(int value, Node * n) {
+  if (found) return n;
+  if (n->right == NULL) return n;
   find_node(value, n->right);
 }
 

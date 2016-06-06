@@ -20,8 +20,8 @@ public:
 
 private:
   Node * find_node(int value, Node * node);
-  void find_left(int value, Node * node);
-  void find_right(int value, Node * node);
+  Node * find_left(int value, Node * node);
+  Node * find_right(int value, Node * node);
 
   void collect_values(Node * node);
   void get_left(Node * node);
