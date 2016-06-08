@@ -25,31 +25,80 @@ public:
     });
   }
 
+  void test_find_right_node() {
+    Spec spec;
+    spec.it("Testing Tree.find for right node", DO_SPEC {
+      Node node(25);
+      Tree tree(&node);
+      Node node2(43);
+      Node node3(8);
+      tree.add(&node2);
+      tree.add(&node3);
+
+      Node * n = tree.find(43);
+      std::cout << "(right node) n.value: " << n->value << std::endl;
+      return (n->value == node2.value);
+    });
+  }
+
+  void test_find_left_node() {
+    Spec spec;
+    spec.it("Testing Tree.find for left node", DO_SPEC {
+      Node node(25);
+      Tree tree(&node);
+      Node node2(43);
+      Node node3(8);
+      tree.add(&node2);
+      tree.add(&node3);
+
+      Node * n = tree.find(8);
+      return (n->value == node3.value);
+    });
+  }
+
+  void test_find_root_node() {
+    Spec spec;
+    spec.it("Testing Tree.find for root node", DO_SPEC {
+      Node node(25);
+      Tree tree(&node);
+      Node node2(43);
+      Node node3(8);
+      tree.add(&node2);
+      tree.add(&node3);
+
+      Node * n = tree.find(25);
+      return (n->value == node.value);
+    });
+  }
+
   void test_find() {
     Spec spec;
     spec.it("Testing Tree.find", DO_SPEC {
       Node node(25);
       Tree tree(&node);
-      std::vector<int> a1{4, 8, 10, 15, 25, 33, 43, 97};
       Node node2(43);
       Node node3(8);
+      /*
       Node node4(10);
       Node node5(15);
       Node node6(33);
       Node node7(97);
       Node node8(4);
+      */
       tree.add(&node2);
       tree.add(&node3);
+      /*
       tree.add(&node4);
       tree.add(&node5);
       tree.add(&node6);
       tree.add(&node7);
       tree.add(&node8);
+      */
 
-      Node * n5 = tree.find(15);
-      std::cout << "n5.value: " << n5->value << std::endl;
+      Node * n = tree.find(43);
+      std::cout << "n.value: " << n->value << std::endl;
       std::cout << "After find()..." << std::endl;
-      return (n5->value == node5.value);
+      return (n->value == node2.value);
     });
   }
 
@@ -125,7 +174,10 @@ public:
   void runTest() {
     test_instantiation();
     test_add();
-    test_find();
+    test_find_root_node();
+    test_find_right_node();
+    test_find_left_node();
+    //test_find();
     test_collect();
     // test_unique_ptr();
   }
