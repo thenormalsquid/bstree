@@ -36,7 +36,6 @@ public:
       tree.add(&node3);
 
       Node * n = tree.find(43);
-      std::cout << "(right node) n.value: " << n->value << std::endl;
       return (n->value == node2.value);
     });
   }
@@ -71,33 +70,29 @@ public:
     });
   }
 
+  //TODO: add test for NULL node indicating key not found.
+
   void test_find() {
     Spec spec;
-    spec.it("Testing Tree.find", DO_SPEC {
+    spec.it("Testing Tree.find with 8 nodes", DO_SPEC {
       Node node(25);
       Tree tree(&node);
       Node node2(43);
       Node node3(8);
-      /*
       Node node4(10);
       Node node5(15);
       Node node6(33);
       Node node7(97);
       Node node8(4);
-      */
       tree.add(&node2);
       tree.add(&node3);
-      /*
       tree.add(&node4);
       tree.add(&node5);
       tree.add(&node6);
       tree.add(&node7);
       tree.add(&node8);
-      */
 
       Node * n = tree.find(43);
-      std::cout << "n.value: " << n->value << std::endl;
-      std::cout << "After find()..." << std::endl;
       return (n->value == node2.value);
     });
   }
@@ -177,7 +172,7 @@ public:
     test_find_root_node();
     test_find_right_node();
     test_find_left_node();
-    //test_find();
+    test_find();
     test_collect();
     // test_unique_ptr();
   }

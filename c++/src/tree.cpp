@@ -19,27 +19,15 @@ Node * Tree::find(int value) {
 Node * Tree::find_node(int value, Node * node) {
   if (node == NULL) return node;
   if (node->value == value) return node;
-  return find_node(value, node->left);
-  return find_node(value, node->right);
 
-  /*
-  if (found) return node;
-  std::cout << "node->value: " << node->value << std::endl;
-  if (node->value == value) {
-    std::cout << "FOUND..." << std::endl;
-    found = true;
-    // change to add 'find_result'
-    return node;
+  if (node->left != NULL && value < node->value) {
+    return find_node(value, node->left);
+  } else if (node->right != NULL) {
+    return find_node(value, node->right);
   }
-  node = find_left(value, node);
-  node = find_right(value, node);
-  return node;
-
-  std::cout << "here..." << std::endl;
-  // return (Node *) NULL;
-  */
 }
 
+/*
 Node * Tree::find_left(int value, Node * n) {
   if (found) return n;
   if (n->left == NULL) return n;
@@ -51,6 +39,7 @@ Node * Tree::find_right(int value, Node * n) {
   if (n->right == NULL) return n;
   return find_node(value, n->right);
 }
+*/
 
 void Tree::collect_values(Node * node) {
   get_left(node);
