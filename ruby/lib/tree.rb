@@ -36,11 +36,13 @@ class Tree
   end
 
   def find_depth(node)
+    # puts "@current: #{@current}, node.value: #{node.value}" unless node.nil?
+
     return if node.nil?
     @current += 1
     find_depth(node.left)
-    @current -= 1
     find_depth(node.right)
+    @current -= 1
     @max = @max < @current ? @current : @max
   end
 end

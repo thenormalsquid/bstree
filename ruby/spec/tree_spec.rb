@@ -71,9 +71,15 @@ describe Tree do
       expect(tree.depth).to eq 0
     end
 
-    it 'finds the depth of two node tree' do
+    it 'finds the depth of two node tree with right child' do
       tree = Tree.new Node.new(9)
       tree.add Node.new(14)
+      expect(tree.depth).to eq 1
+    end
+
+    it 'finds the depth of two node tree with left child' do
+      tree = Tree.new Node.new(9)
+      tree.add Node.new(4)
       expect(tree.depth).to eq 1
     end
 
@@ -82,6 +88,18 @@ describe Tree do
       tree.add Node.new(14)
       tree.add Node.new(4)
       expect(tree.depth).to eq 1
+    end
+
+    it 'finds depth for arbitrary tree' do
+      node = Node.new(9)
+      tree = Tree.new node
+      tree.add Node.new(14)
+      tree.add Node.new(4)
+      tree.add Node.new(23)
+      tree.add Node.new(5)
+      tree.add Node.new(99)
+      tree.add Node.new(78)
+      expect(tree.depth).to eq 4
     end
   end
 
