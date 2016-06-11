@@ -60,6 +60,33 @@ describe Tree do
     end
   end
 
+  describe 'depth of tree' do
+    # Depth should be incremented when nodes are added,
+    # if the depth is to be considered as an attribute of the tree.
+    # As a virtual attribute (to borrow a notion from Ruby), calling a
+    # tree's depth method triggers a traversal of the entire tree to
+    # find maximum depth. Let's do this first.
+    it 'finds the depth of single node tree' do
+      tree = Tree.new Node.new(9)
+      expect(tree.depth).to eq 0
+    end
+
+    it 'finds the depth of two node tree' do
+      tree = Tree.new Node.new(9)
+      tree.add Node.new(14)
+      expect(tree.depth).to eq 1
+    end
+
+    it 'finds the depth of three node tree' do
+      tree = Tree.new Node.new(9)
+      tree.add Node.new(14)
+      tree.add Node.new(4)
+      expect(tree.depth).to eq 1
+    end
+  end
+
+
+
   describe 'collect node values with in-order traversal' do
     it 'collects node values for single node' do
       node = Node.new(9)

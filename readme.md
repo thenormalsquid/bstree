@@ -10,6 +10,7 @@ The `Tree` data structure API:
 * `add` provisions the tree.
 * `find` returns a reference to a particular node in the tree.
 * `collect` prints values in order to some container or stream.
+* `is_present` determines whether a key exists in the tree.
 * `destroy` (c/c++) cleans up memory.
 
 ## Implementations
