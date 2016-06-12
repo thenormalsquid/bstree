@@ -36,9 +36,8 @@ class Tree
   end
 
   def find_depth(node)
-    # puts "@current: #{@current}, node.value: #{node.value}" unless node.nil?
-
     return if node.nil?
+
     @current += 1
     find_depth(node.left)
     find_depth(node.right)
