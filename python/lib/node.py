@@ -1,7 +1,11 @@
 class Node(object):
 
-    def foo(self):
-        return "bar"
+    def __init__(self):
+        self.left = None
+        self.right = None
 
-    def bar(self):
-        return "foo"
+    def add(self):
+        return self
+
+    def find(self):
+        return self

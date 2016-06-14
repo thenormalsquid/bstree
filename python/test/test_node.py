@@ -11,9 +11,13 @@ class TestNode(unittest.TestCase):
         # dummy
         self.testing = True
 
-    def test_foo(self):
-        ps = Node()
-        assert ps.foo() == 'bar'
+    def test_add(self):
+        node = Node()
+        assert node.add() == node
+
+    def test_find(self):
+        node = Node()
+        assert node.find() == node
 
     def tearDown(self):
         # dummy
