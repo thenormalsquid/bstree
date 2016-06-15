@@ -1,7 +1,11 @@
-pyskel
-======
+# Simple binary search tree in python
 
-Simple python skeleton
+Python isn't my native language, so implementing a binary
+search tree seems like an excellent way to get more familiar
+with Python.
 
-Fork or clone this repo, then change the names of the files while
-leaving the structure intact.
+## To do
+
+* Implement `add`.
+* Implement `find`.
+* Implement `depth`.

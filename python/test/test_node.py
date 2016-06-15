@@ -12,11 +12,11 @@ class TestNode(unittest.TestCase):
         self.testing = True
 
     def test_add(self):
-        node = Node()
-        assert node.add() == node
+        node = Node(15)
+        assert node.add(Node(8)) == node # .left
 
     def test_find(self):
-        node = Node()
+        node = Node(15)
         assert node.find() == node
 
     def tearDown(self):

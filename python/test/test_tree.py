@@ -4,6 +4,7 @@ import unittest
 import sys
 sys.path.append('../lib')
 from tree import *
+from node import *
 
 class TestTree(unittest.TestCase):
 
@@ -12,6 +13,7 @@ class TestTree(unittest.TestCase):
         self.testing = True
 
     def test_foo(self):
+        node = Node(2)
         ps = Tree()
         assert('bar' == ps.foo())
 
