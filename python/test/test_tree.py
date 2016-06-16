@@ -12,10 +12,15 @@ class TestTree(unittest.TestCase):
         # dummy
         self.testing = True
 
-    def test_foo(self):
+    def test_init(self):
         node = Node(2)
-        ps = Tree()
-        assert('bar' == ps.foo())
+        tree = Tree(node)
+        assert tree.root == node
+
+    def test_add(self):
+        node = Node(2)
+        tree = Tree(node)
+        assert tree.add(node) == 'bar'
 
     def tearDown(self):
         # dummy
