@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# pylint: disable=R0201
+
 import unittest
 import sys
 sys.path.append('../lib')
@@ -11,9 +13,16 @@ class TestNode(unittest.TestCase):
         # dummy
         self.testing = True
 
+    def test_init(self):
+        node = Node(15)
+        assert node.left is None
+        assert node.right is None
+
     def test_add(self):
         node = Node(15)
-        assert node.add(Node(8)) == node # .left
+        node_l1 = Node(8)
+        node.add(node_l1)
+        assert node.left == node_l1
 
     def test_find(self):
         node = Node(15)

@@ -1,2 +1,5 @@
 [default]
 disable = missing-docstring
+
+[General]
+init-hook='import sys; sys.path.append("/Users/doolin/src/dool.in/lib/tree/python")'

@@ -18,9 +18,10 @@ class TestTree(unittest.TestCase):
         assert tree.root == node
 
     def test_add(self):
-        node = Node(2)
+        node = Node(8)
         tree = Tree(node)
-        assert tree.add(node) == 'bar'
+        node_l1 = Node(4)
+        assert tree.add(node_l1) == 'bar'
 
     def tearDown(self):
         # dummy
