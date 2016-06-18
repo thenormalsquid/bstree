@@ -21,8 +21,14 @@ class TestNode(unittest.TestCase):
     def test_add(self):
         node = Node(15)
         node_l1 = Node(8)
+        node_l2 = Node(33)
+        node_l3 = Node(25)
         node.add(node_l1)
+        node.add(node_l2)
+        node.add(node_l3)
         assert node.left == node_l1
+        assert node.right == node_l2
+        assert node.right.left == node_l3
 
     def test_find(self):
         node = Node(15)

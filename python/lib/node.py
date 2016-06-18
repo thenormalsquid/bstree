@@ -10,11 +10,12 @@ class Node(object):
             if self.left is None:
                 self.left = node
             else:
-                self.add(node.left)
+                self.left.add(node)
         else:
-            self.add(node.right)
-
-        return self
+            if self.right is None:
+                self.right = node
+            else:
+                self.right.add(node)
 
     def find(self):
         return self
