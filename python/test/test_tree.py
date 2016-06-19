@@ -21,7 +21,8 @@ class TestTree(unittest.TestCase):
         node = Node(8)
         tree = Tree(node)
         node_l1 = Node(4)
-        assert tree.add(node_l1) == 'bar'
+        tree.add(node_l1)
+        assert tree.root.left == node_l1
 
     def tearDown(self):
         # dummy

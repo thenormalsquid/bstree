@@ -1,9 +1,12 @@
 from node import *
 
-class Tree:
+class Tree(object):
 
     def __init__(self, node):
         self.root = node
 
     def add(self, node):
-        return "bar"
+        self.root.add(node)
+
+    def find(self, value):
+        return self.root

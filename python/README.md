@@ -6,6 +6,6 @@ with Python.
 
 ## To do
 
-* Implement `add`.
+* (DONE) Implement `add`.
 * Implement `find`.
 * Implement `depth`.
