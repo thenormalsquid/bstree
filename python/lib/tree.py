@@ -10,3 +10,6 @@ class Tree(object):
 
     def find(self, value):
         return self.root
+
+    def collect(self):
+        return []

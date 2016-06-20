@@ -7,5 +7,6 @@ with Python.
 ## To do
 
 * (DONE) Implement `add`.
+* Implement `collect`.
 * Implement `find`.
 * Implement `depth`.

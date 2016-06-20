@@ -24,6 +24,16 @@ class TestTree(unittest.TestCase):
         tree.add(node_l1)
         assert tree.root.left == node_l1
 
+    def test_collect(self):
+        node = Node(8)
+        tree = Tree(node)
+        node_l1 = Node(4)
+        tree.add(node_l1)
+        # Bound method results
+        # assert [], tree.collect
+        # http://stackoverflow.com/questions/28879886/python-beginner-where-comes-bound-method-of-object-at-0x0000000005ea
+        assert [] == tree.collect()
+
     def tearDown(self):
         # dummy
         self.testing = False
