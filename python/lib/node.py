@@ -1,24 +1,26 @@
+import pdb
+
 class Node(object):
 
     def __init__(self, value):
         self.value = value
         self.left = None
         self.right = None
-        self.values = []
 
-    def collect(self):
-        if self.left == None:
-            return
+    def collect(self, collector):
+        # pdb.set_trace()
+
+        if self.left is None:
+            pass
         else:
-            self.left.collect()
+            self.left.collect(collector)
 
-        self.values.append(self.value)
-        print self.value
+        collector.append(self.value)
 
-        if self.right == None:
-            return
+        if self.right is None:
+            pass
         else:
-            self.right.collect()
+            self.right.collect(collector)
 
     def add(self, node):
         if node.value < self.value:

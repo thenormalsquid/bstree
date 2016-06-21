@@ -28,8 +28,9 @@ class TestNode(unittest.TestCase):
         node.add(node_l2)
         node.add(node_l3)
         node.add(node_l4)
-        print node.collect()
-        assert node.collect() == [4, 8, 15, 25, 33]
+        collector = []
+        node.collect(collector)
+        assert collector == [4, 8, 15, 25, 33]
 
     def test_add(self):
         node = Node(15)
@@ -37,14 +38,17 @@ class TestNode(unittest.TestCase):
         node_l2 = Node(33)
         node_l3 = Node(25)
         node_l4 = Node(4)
+        node_l5 = Node(9)
         node.add(node_l1)
         node.add(node_l2)
         node.add(node_l3)
         node.add(node_l4)
+        node.add(node_l5)
         assert node.left == node_l1
         assert node.right == node_l2
         assert node.right.left == node_l3
         assert node.left.left == node_l4
+        assert node.left.right == node_l5
 
     def test_find(self):
         node = Node(15)
