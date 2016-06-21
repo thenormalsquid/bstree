@@ -4,6 +4,21 @@ class Node(object):
         self.value = value
         self.left = None
         self.right = None
+        self.values = []
+
+    def collect(self):
+        if self.left == None:
+            return
+        else:
+            self.left.collect()
+
+        self.values.append(self.value)
+        print self.value
+
+        if self.right == None:
+            return
+        else:
+            self.right.collect()
 
     def add(self, node):
         if node.value < self.value:

@@ -18,6 +18,19 @@ class TestNode(unittest.TestCase):
         assert node.left is None
         assert node.right is None
 
+    def test_collect(self):
+        node = Node(15)
+        node_l1 = Node(8)
+        node_l2 = Node(33)
+        node_l3 = Node(25)
+        node_l4 = Node(4)
+        node.add(node_l1)
+        node.add(node_l2)
+        node.add(node_l3)
+        node.add(node_l4)
+        print node.collect()
+        assert node.collect() == [4, 8, 15, 25, 33]
+
     def test_add(self):
         node = Node(15)
         node_l1 = Node(8)
