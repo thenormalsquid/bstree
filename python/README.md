@@ -7,6 +7,8 @@ with Python.
 ## To do
 
 * (DONE) Implement `add`.
-* Implement `collect`.
+* (DONE) Implement `collect`.
 * Implement `find`.
 * Implement `depth`.
+* Clean up the conditional code in the Node class, make it more
+  idiomatic Python.

@@ -34,5 +34,17 @@ class Node(object):
             else:
                 self.right.add(node)
 
-    def find(self):
-        return self
+    def find(self, value):
+        if self.value == value:
+            return self
+
+        if self.value < value:
+            if self.left is None:
+                pass
+            else:
+                self.left.find(value)
+        else:
+            if self.right is None:
+                pass
+            else:
+                self.right.find(value)

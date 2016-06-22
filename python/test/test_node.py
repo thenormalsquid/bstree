@@ -52,7 +52,18 @@ class TestNode(unittest.TestCase):
 
     def test_find(self):
         node = Node(15)
-        assert node.find() == node
+        node_l1 = Node(8)
+        node_l2 = Node(33)
+        node_l3 = Node(25)
+        node_l4 = Node(4)
+        node_l5 = Node(9)
+        node.add(node_l1)
+        node.add(node_l2)
+        node.add(node_l3)
+        node.add(node_l4)
+        node.add(node_l5)
+        assert node.find(15) == node
+        assert node.find(33) == node_l2
 
     def tearDown(self):
         # dummy
