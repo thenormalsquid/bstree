@@ -35,16 +35,17 @@ class Node(object):
                 self.right.add(node)
 
     def find(self, value):
-        if self.value == value:
-            return self
+        print self.value, id(self)
+        # pdb.set_trace()
 
         if self.value < value:
             if self.left is None:
-                pass
+                pass # return self
             else:
-                self.left.find(value)
+                return self.left.find(value)
         else:
             if self.right is None:
-                pass
+                pass # return self
             else:
-                self.right.find(value)
+                return self.right.find(value)
+
