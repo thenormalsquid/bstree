@@ -62,12 +62,6 @@ class TestNode(unittest.TestCase):
         node.add(node_l3)
         node.add(node_l4)
         node.add(node_l5)
-        # assert node.find(15) == node
-        print "------"
-        print id(node)
-        print id(node_l2)
-        print "------"
-        print node.find(33).value
         assert node.find(33) == node_l2
 
     def tearDown(self):
