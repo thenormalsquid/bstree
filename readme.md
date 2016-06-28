@@ -38,14 +38,14 @@ This table was created well after the beginning of the project, hence some
 entries simply show "Done" instead of the date completed. Each feature is
 regarded as complete when its associated test passes.
 
-|               | add        | collect    | find       | present?   | depth | destroy |
-|---            |---         |---         |---         |---         |---    |---      |
-| Ruby          | Done       | Done       | Done       |            | Done  |  N/A    |
-| Ruby (module) | 2016-06-27 | 2016-06-27 | 2016-06-27 |            |       |  N/A    |
-| Python        | Done       | Done       | 2016-06-27 |            |       |  N/A    |
-| Java          |            |            |            |            |       |  N/A    |
-| C++           |            |            |            |            |       |         |
-| C             |            |            |            |            |       |         |
+|               | add        | collect    | find       | present?   | depth | destroy | maximum    | minimum    |
+|---            |---         |---         |---         |---         |---    |---      |---         |---         |
+| Ruby          | Done       | Done       | Done       |            | Done  |  N/A    |            |            |
+| Ruby (module) | 2016-06-27 | 2016-06-27 | 2016-06-27 |            |       |  N/A    | 2016-06-28 | 2016-06-28 |
+| Python        | Done       | Done       | 2016-06-27 |            |       |  N/A    |            |            |
+| Java          |            |            |            |            |       |  N/A    |            |            |
+| C++           |            |            |            |            |       |         |            |            |
+| C             |            |            |            |            |       |         |            |            |
 
 
 

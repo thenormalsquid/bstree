@@ -23,4 +23,12 @@ module BinarySearchTree
       right.nil? ? nil : right.find(key)
     end
   end
+
+  def maximum
+    right.nil? ? self : right.maximum
+  end
+
+  def minimum
+    left.nil? ? self : left.minimum
+  end
 end

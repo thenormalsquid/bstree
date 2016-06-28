@@ -28,14 +28,26 @@ describe BinarySearchTree do
 
   describe 'algorithm methods' do
     before :all do
-      @root = Foo.new(10)
-      foo2 = Foo.new(20)
-      foo3 = Foo.new(5)
-      foo4 = Foo.new(2)
+      @expected = [2, 3, 4, 5, 8, 10, 20, 27, 33]
 
-      @root.add(foo2)
-      @root.add(foo3)
-      @root.add(foo4)
+      @root = Foo.new(10)
+      @foo2 = Foo.new(20)
+      @foo3 = Foo.new(5)
+      @foo4 = Foo.new(2)
+      foo5 = Foo.new(3)
+      foo6 = Foo.new(4)
+      @foo7 = Foo.new(8)
+      foo8 = Foo.new(27)
+      @foo9 = Foo.new(33)
+
+      @root.add(@foo2)
+      @root.add(@foo3)
+      @root.add(@foo4)
+      @root.add(foo5)
+      @root.add(foo6)
+      @root.add(@foo7)
+      @root.add(foo8)
+      @root.add(@foo9)
     end
 
     describe '.find' do
@@ -52,37 +64,35 @@ describe BinarySearchTree do
       end
 
       it 'finds an arbitrary node using the key' do
-        expect(@root.find(2)). to eq @root.left.left
+        expect(@root.find(8)). to eq @foo7
       end
     end
 
     describe '.add' do
       it 'adds a node' do
-        root = Foo.new(10)
-        foo2 = Foo.new(20)
-        foo3 = Foo.new(5)
-        foo4 = Foo.new(2)
-        root.add(foo2)
-        root.add(foo3)
-        root.add(foo4)
-
-        expect(root.right).to eq foo2
-        expect(root.left).to eq foo3
-        expect(root.left.left).to eq foo4
+        expect(@root.right).to eq @foo2
+        expect(@root.left).to eq @foo3
+        expect(@root.left.left).to eq @foo4
       end
     end
 
     describe '.collect' do
       it 'collects list of keys in correct order' do
-        expected = [3, 4, 8, 15, 25, 27, 33]
-        root = Foo.new(15)
-        foo2 = Foo.new(8)
-        foo3 = Foo.new(4)
-        root.add(foo2)
-        root.add(foo3)
         collector = []
-        root.collect(collector)
-        expect(collector).to eq [4, 8, 15]
+        @root.collect(collector)
+        expect(collector).to eq @expected
+      end
+    end
+
+    describe '.maximum' do
+      it 'finds the node with the largest key' do
+        expect(@root.maximum).to eq @foo9
+      end
+    end
+
+    describe '.minimum' do
+      it 'finds the node with the smallest key' do
+        expect(@root.minimum).to eq @foo4
       end
     end
   end
