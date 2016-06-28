@@ -3,9 +3,24 @@ module BinarySearchTree
 
   def add(node)
     if node < self
-      self.left.nil? ? self.left = node : self.add(node)
+      left.nil? ? self.left = node : left.add(node)
     else
-      self.right.nil? ? self.right = node : self.add(right, node)
+      right.nil? ? self.right = node : right.add(node)
+    end
+  end
+
+  def collect(collector)
+    left.collect(collector) unless left.nil?
+    collector.push @key
+    right.collect(collector) unless right.nil?
+  end
+
+  def find(key)
+    return self if @key == key
+    if key < @key
+      left.nil? ? nil : left.find(key)
+    else
+      right.nil? ? nil : right.find(key)
     end
   end
 end

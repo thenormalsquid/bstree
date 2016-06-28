@@ -27,16 +27,18 @@ describe Node do
     expect(node.value).to eq value
   end
 
-  it 'compares values with <=>' do
-    node1 = Node.new(1)
-    node2 = Node.new(2)
-    expect(node1 <=> node2).to be 1
-  end
+  describe 'comparators' do
+    it 'compares values with <=>' do
+      node1 = Node.new(1)
+      node2 = Node.new(2)
+      expect(node1 <=> node2).to be 1
+    end
 
-  it 'compares values with <' do
-    node1 = Node.new(1)
-    node2 = Node.new(2)
-    expect(node1 < node2).to be true
+    it 'compares values with <' do
+      node1 = Node.new(1)
+      node2 = Node.new(2)
+      expect(node1 < node2).to be true
+    end
   end
 
   describe '.find' do

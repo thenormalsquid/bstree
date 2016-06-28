@@ -12,12 +12,19 @@ class Node
   end
 
   def < other
-    return true if @value < other.value
-    false
+    @value < other.value
   end
 
   def add node
     node < self ? addleft(node) : addright(node)
+  end
+
+  def addleft node
+    @left.nil? ? @left = node : @left.add(node)
+  end
+
+  def addright node
+    @right.nil? ? @right = node : @right.add(node)
   end
 
   def find key
@@ -33,13 +40,5 @@ class Node
   def findright key
     return if @right.nil?
     key == @right.value ? @right : @right.find(key)
-  end
-
-  def addleft node
-    @left.nil? ? @left = node : @left.add(node)
-  end
-
-  def addright node
-    @right.nil? ? @right = node : @right.add(node)
   end
 end
