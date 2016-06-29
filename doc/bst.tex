@@ -1,5 +1,7 @@
 \documentclass{article}
 
+\usepackage{cite}
+
 \title{Some notes on binary search trees}
 \date{\today}
 \author{David M. Doolin}
@@ -29,6 +31,18 @@ node class, abstracting keys.
 \end{itemize}
 
 
+\section{Literature review}
+
+Skiena 2008~\cite{[pp. 77, 370, 375, 589]skiena} has a few notes.
+
+
+Rosen (2012)~\cite[pp. 757-760]{rosen} discusses three uses for binary search trees:
+
+\begin{enumerate}
+\item storing items from a list such that they can be easily found;
+\item finding an object in a collection of similar objects;
+\item efficiently encoding characters in a bit string.
+\end{enumerate}
 
 \section{Containerizing}
 
@@ -44,6 +58,8 @@ class methods.
 
 \section{References}
 
+\bibliography{references}{}
+\bibliographystyle{plain}
 
 \section{Summary}
 

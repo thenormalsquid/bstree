@@ -25,12 +25,16 @@ zips: $(ZIPS)
 # %.pdf: %.tex $(PREAMBLE) $(TEXFILES) phphook.tex thesis16.tex
 %.pdf: %.tex
 	$(LATEX) $*
+	bibtex	$*
+	$(LATEX) $*
 	$(LATEX) $*
 
 
 
 # %.zip: %.tex preamble.tex
 %.zip: %.tex
+	$(LATEX) $*
+	bibtex	$*
 	$(LATEX) $*
 	$(LATEX) $*
 	zip $* $*.pdf
