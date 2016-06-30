@@ -84,4 +84,26 @@ describe Node do
       expect(node1.find(3).object_id).to eq node3.object_id
     end
   end
+
+  describe '.to_a' do
+    it 'returns an array of representing the node and children' do
+      root = Node.new 3
+      left = Node.new 2
+      right = Node.new 4
+      root.add left
+      root.add right
+      expected = [root.value, left.uuid, right.uuid]
+      expect(root.to_a).to eq expected
+    end
+
+    xit 'deals with leaf nodes correctly' do
+      node1 = Node.new 4
+      node2 = Node.new 2
+      node3 = Node.new 3
+      node1.add node2
+      node1.add node3
+      expected = [node1.value, node2.uuid, node3.uuid]
+      expect(node1.to_a).to eq expected
+    end
+  end
 end

@@ -1,9 +1,19 @@
+require 'securerandom'
+require 'csv'
+
+class NodeCsvWriter
+  def initialize(node)
+    [node.value, node.left.uuid, node.right.uuid]
+  end
+end
+
 class Node
-  attr_reader :left, :right
+  attr_reader :left, :right, :uuid
   attr_accessor :value
 
   def initialize value = nil
     @value = value
+    @uuid = SecureRandom.uuid
   end
 
   def <=> other
@@ -40,5 +50,11 @@ class Node
   def findright key
     return if @right.nil?
     key == @right.value ? @right : @right.find(key)
+  end
+
+  def to_a
+    raise if @left.nil?
+    raise if @right.nil?
+    [value, @left.uuid, @right.uuid]
   end
 end
