@@ -32,10 +32,10 @@ class Tree
   def depth
     @max = 0
     @current = 0
-    find_depth(root)
+    find_depth root
   end
 
-  def find_depth(node)
+  def find_depth node
     return if node.nil?
 
     @current += 1

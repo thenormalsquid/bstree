@@ -1,7 +1,7 @@
 module BinarySearchTree
   attr_accessor :left, :right
 
-  def add(node)
+  def add node
     if node < self
       left.nil? ? self.left = node : left.add(node)
     else
@@ -9,13 +9,13 @@ module BinarySearchTree
     end
   end
 
-  def collect(collector)
-    left.collect(collector) unless left.nil?
+  def collect collector
+    left.collect collector unless left.nil?
     collector.push @key
-    right.collect(collector) unless right.nil?
+    right.collect collector unless right.nil?
   end
 
-  def find(key)
+  def find key
     return self if @key == key
     if key < @key
       left.nil? ? nil : left.find(key)

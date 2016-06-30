@@ -103,8 +103,6 @@ describe Tree do
     end
   end
 
-
-
   describe 'collect node values with in-order traversal' do
     it 'collects node values for single node' do
       node = Node.new(9)

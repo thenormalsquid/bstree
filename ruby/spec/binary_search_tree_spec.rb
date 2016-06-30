@@ -7,11 +7,11 @@ describe BinarySearchTree do
     include BinarySearchTree
     attr_reader :key
 
-    def initialize(key)
+    def initialize key
       @key = key
     end
 
-    def <(other)
+    def < other
       @key < other.key
     end
   end

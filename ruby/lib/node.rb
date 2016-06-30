@@ -7,7 +7,7 @@ class Node
   end
 
   def <=> other
-    return -1 if other.value < self.value
+    return -1 if other.value < value
     other.value == value ? 0 : 1
   end
 
@@ -28,8 +28,8 @@ class Node
   end
 
   def find key
-    return self if key == self.value
-    key < self.value ? findleft(key) : findright(key)
+    return self if key == value
+    key < value ? findleft(key) : findright(key)
   end
 
   def findleft key

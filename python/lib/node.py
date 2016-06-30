@@ -1,5 +1,3 @@
-import pdb
-
 class Node(object):
 
     def __init__(self, value):
@@ -8,8 +6,6 @@ class Node(object):
         self.right = None
 
     def collect(self, collector):
-        # pdb.set_trace()
-
         if self.left is None:
             pass
         else:
