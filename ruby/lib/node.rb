@@ -53,8 +53,6 @@ class Node
   end
 
   def to_a
-    raise if @left.nil?
-    raise if @right.nil?
-    [value, @left.uuid, @right.uuid]
+    [value, @left&.uuid, @right&.uuid]
   end
 end

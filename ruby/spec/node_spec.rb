@@ -96,13 +96,13 @@ describe Node do
       expect(root.to_a).to eq expected
     end
 
-    xit 'deals with leaf nodes correctly' do
+    it 'deals with leaf nodes correctly' do
       node1 = Node.new 4
       node2 = Node.new 2
       node3 = Node.new 3
       node1.add node2
       node1.add node3
-      expected = [node1.value, node2.uuid, node3.uuid]
+      expected = [node1.value, node2.uuid, nil]
       expect(node1.to_a).to eq expected
     end
   end
