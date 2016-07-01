@@ -32,4 +32,12 @@ module BinarySearchTree
   def minimum
     left&.minimum or self
   end
+
+  def to_hash
+    {
+      uuid: @uuid,
+      left: left&.to_hash,
+      right: right&.to_hash
+    }
+  end
 end

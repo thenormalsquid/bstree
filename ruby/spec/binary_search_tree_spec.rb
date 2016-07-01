@@ -4,11 +4,13 @@ require_relative '../lib/binary_search_tree'
 
 describe BinarySearchTree do
   class Foo
+    require 'securerandom'
     include BinarySearchTree
-    attr_reader :key
+    attr_reader :key, :uuid
 
     def initialize key
       @key = key
+      @uuid = SecureRandom.uuid
     end
 
     def < other
@@ -115,6 +117,31 @@ describe BinarySearchTree do
     describe '.minimum' do
       it 'finds the node with the smallest key' do
         expect(@root.minimum).to eq @foo4
+      end
+    end
+
+    describe '.to_hash' do
+      it 'creates a hash of the tree' do
+        root = Foo.new 10
+        n1  = Foo.new 5
+        n2 = Foo.new 15
+        root.add n1
+        root.add n2
+
+        expected = {
+          uuid: root.uuid,
+          left: {
+            uuid: n1.uuid,
+            left: nil,
+            right: nil
+          },
+          right: {
+            uuid: n2.uuid,
+            left: nil,
+            right: nil
+          }
+        }
+        expect(root.to_hash). to eq expected
       end
     end
   end
