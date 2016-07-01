@@ -52,19 +52,41 @@ describe BinarySearchTree do
 
     describe '.find' do
       it 'finds the root node using the key' do
-        expect(@root.find(10)). to eq @root
+        expect(@root.find(10)).to eq @root
       end
 
       it 'finds the root.left node using the key' do
-        expect(@root.find(5)). to eq @root.left
+        expect(@root.find(5)).to eq @root.left
       end
 
       it 'finds the root.right node using the key' do
-        expect(@root.find(20)). to eq @root.right
+        expect(@root.find(20)).to eq @root.right
       end
 
       it 'finds an arbitrary node using the key' do
-        expect(@root.find(8)). to eq @foo7
+        expect(@root.find(8)).to eq @foo7
+      end
+    end
+
+    describe '.present?' do
+      it 'finds the root node using the key' do
+        expect(@root.present?(10)).to eq true
+      end
+
+      it 'finds the root.left node using the key' do
+        expect(@root.present?(5)).to eq true
+      end
+
+      it 'finds the root.right node using the key' do
+        expect(@root.present?(20)).to eq true
+      end
+
+      it 'finds an arbitrary node using the key' do
+        expect(@root.present?(8)).to eq true
+      end
+
+      it 'does not find an arbitrary node when the key is not present' do
+        expect(@root.present?(88)).to eq nil
       end
     end
 

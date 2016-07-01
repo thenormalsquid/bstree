@@ -10,29 +10,26 @@ module BinarySearchTree
   end
 
   def collect collector
-    left.collect collector unless left.nil?
+    left&.collect collector
     collector.push @key
-    right.collect collector unless right.nil?
+    right&.collect collector
   end
 
   def find key
     return self if @key == key
-    if key < @key
-      # left.nil? ? nil : left.find(key)
-      left&.find(key)
-    else
-      # right.nil? ? nil : right.find(key)
-      right&.find(key)
-    end
+    key < @key ? left&.find(key) : right&.find(key)
+  end
+
+  def present? key
+    return true if key == @key
+    key < @key ? left&.present?(key) : right&.present?(key)
   end
 
   def maximum
-    # right.nil? ? self : right.maximum
     right&.maximum or self
   end
 
   def minimum
-    # left.nil? ? self : left.minimum
     left&.minimum or self
   end
 end

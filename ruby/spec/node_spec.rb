@@ -1,8 +1,11 @@
-require_relative '../lib/node.rb'
+require_relative '../lib/node'
+require_relative './nodes'
 
 require 'pry'
 
 describe Node do
+  include Nodes
+
   it 'instantiates' do
     expect(Node.new).not_to be_nil
   end
@@ -28,12 +31,6 @@ describe Node do
   end
 
   describe 'comparators' do
-    it 'compares values with <=>' do
-      node1 = Node.new(1)
-      node2 = Node.new(2)
-      expect(node1 <=> node2).to be 1
-    end
-
     it 'compares values with <' do
       node1 = Node.new(1)
       node2 = Node.new(2)

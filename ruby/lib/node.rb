@@ -16,11 +16,6 @@ class Node
     @uuid = SecureRandom.uuid
   end
 
-  def <=> other
-    return -1 if other.value < value
-    other.value == value ? 0 : 1
-  end
-
   def < other
     @value < other.value
   end
@@ -39,17 +34,7 @@ class Node
 
   def find key
     return self if key == value
-    key < value ? findleft(key) : findright(key)
-  end
-
-  def findleft key
-    return if @left.nil?
-    key == @left.value ? @left : @left.find(key)
-  end
-
-  def findright key
-    return if @right.nil?
-    key == @right.value ? @right : @right.find(key)
+    key < value ? left&.find(key) : right&.find(key)
   end
 
   def to_a
