@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module BinarySearchTree
   attr_accessor :left, :right
 
@@ -26,11 +27,11 @@ module BinarySearchTree
   end
 
   def maximum
-    right&.maximum or self
+    right&.maximum || self
   end
 
   def minimum
-    left&.minimum or self
+    left&.minimum || self
   end
 
   def to_hash

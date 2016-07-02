@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative './node'
 
 class Tree
@@ -39,8 +40,8 @@ class Tree
     return if node.nil?
 
     @current += 1
-    find_depth(node.left)
-    find_depth(node.right)
+    find_depth node.left
+    find_depth node.right
     @current -= 1
     @max = @max < @current ? @current : @max
   end

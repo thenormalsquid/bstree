@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative './spec_helper'
 
 require_relative '../lib/binary_search_tree'
@@ -123,7 +124,7 @@ describe BinarySearchTree do
     describe '.to_hash' do
       it 'creates a hash of the tree' do
         root = Foo.new 10
-        n1  = Foo.new 5
+        n1 = Foo.new 5
         n2 = Foo.new 15
         root.add n1
         root.add n2

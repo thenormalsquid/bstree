@@ -1,8 +1,9 @@
+# frozen_string_literal: true
 require 'securerandom'
 require 'csv'
 
 class NodeCsvWriter
-  def initialize(node)
+  def initialize node
     [node.value, node.left.uuid, node.right.uuid]
   end
 end
