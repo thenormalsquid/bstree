@@ -131,13 +131,16 @@ describe BinarySearchTree do
 
         expected = {
           uuid: root.uuid,
+          key: 10,
           left: {
             uuid: n1.uuid,
+            key: 5,
             left: nil,
             right: nil
           },
           right: {
             uuid: n2.uuid,
+            key: 15,
             left: nil,
             right: nil
           }

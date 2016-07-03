@@ -140,4 +140,36 @@ describe Tree do
       expect(tree.collect).to eq [1, 4, 5, 14, 23, 99]
     end
   end
+
+  describe 'breadth first search' do
+    it 'performs breadth-first search finds root node' do
+      node = Node.new(8)
+      tree = Tree.new node
+      expected = [8]
+      expect(tree.bfsearch).to eq expected
+    end
+
+    it 'performs breadth-first search finds root node' do
+      node = Node.new(8)
+      tree = Tree.new node
+      tree.add Node.new(14)
+      tree.add Node.new(4)
+      expected = [8, 4, 14]
+      expect(tree.bfsearch).to eq expected
+    end
+
+    it 'performs breadth-first search finds root node' do
+      node = Node.new(8)
+      tree = Tree.new node
+      tree.add Node.new(14)
+      tree.add Node.new(4)
+      tree.add Node.new(2)
+      tree.add Node.new(5)
+      tree.add Node.new(11)
+      tree.add Node.new(21)
+
+      expected = [8, 4, 14, 2, 5, 11, 21]
+      expect(tree.bfsearch).to eq expected
+    end
+  end
 end

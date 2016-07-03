@@ -34,9 +34,15 @@ module BinarySearchTree
     left&.minimum || self
   end
 
+  # Figure out whether there is any way to subclass to_hash
+  # such the @uuid and @key is set in the subclass, that is,
+  # the including class. That would make this a bit cleaner,
+  # it's always nasty having a subclass attribute instance
+  # referenced by the module.
   def to_hash
     {
       uuid: @uuid,
+      key: @key,
       left: left&.to_hash,
       right: right&.to_hash
     }

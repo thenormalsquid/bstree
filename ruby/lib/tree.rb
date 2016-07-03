@@ -45,4 +45,28 @@ class Tree
     @current -= 1
     @max = @max < @current ? @current : @max
   end
+
+  def bfsearch
+    _queue = [root]
+    collector = []
+
+    collector << root.value
+
+    collector << root.left&.value
+    collector << root.right&.value
+
+    collector << root.left&.left&.value
+    collector << root.left&.right&.value
+    collector << root.right&.left&.value
+    collector << root.right&.right&.value
+
+    collector.compact
+  end
+
+  def search_bf queue, collector
+    current = queue.pop
+    collector << current&.value
+    queue.push current&.left
+    queue.push current&.right
+  end
 end
