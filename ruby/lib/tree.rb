@@ -46,27 +46,20 @@ class Tree
     @max = @max < @current ? @current : @max
   end
 
-  def bfsearch
-    _queue = [root]
-    collector = []
-
-    collector << root.value
-
-    collector << root.left&.value
-    collector << root.right&.value
-
-    collector << root.left&.left&.value
-    collector << root.left&.right&.value
-    collector << root.right&.left&.value
-    collector << root.right&.right&.value
-
-    collector.compact
+  def get_next_row(current_row)
+    next_row = []
+    current_row.each do |node|
+      next_row << node.left
+      next_row << node.right
+    end
+    next_row.compact
   end
 
-  def search_bf queue, collector
-    current = queue.pop
-    collector << current&.value
-    queue.push current&.left
-    queue.push current&.right
+  def bfsearch
+    rows = [[root]]
+    until rows.last.empty?
+      rows << get_next_row(rows.last)
+    end
+    rows.flatten.map { |node| node.value }
   end
 end
