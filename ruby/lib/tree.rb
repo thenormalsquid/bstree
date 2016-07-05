@@ -46,6 +46,14 @@ class Tree
     @max = @max < @current ? @current : @max
   end
 
+  def maximum
+    @root.maximum
+  end
+
+  def minimum
+    @root.minimum
+  end
+
   def get_next_row(current_row)
     next_row = []
     current_row.each do |node|

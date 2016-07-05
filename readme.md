@@ -42,7 +42,7 @@ regarded as complete when its associated test passes.
 
 |               | add        | collect    | find       | present?   | depth | destroy | maximum    | minimum    |
 |---            |---         |---         |---         |---         |---    |---      |---         |---         |
-| Ruby          | Done       | Done       | Done       |            | Done  |  N/A    |            |            |
+| Ruby          | Done       | Done       | Done       |            | Done  |  N/A    | 2016-07-05 | 2016-07-05 |
 | Ruby (module) | 2016-06-27 | 2016-06-27 | 2016-06-27 | 2016-07-01 |       |  N/A    | 2016-06-28 | 2016-06-28 |
 | Python        | Done       | Done       | 2016-06-27 |            |       |  N/A    |            |            |
 | Java          |            |            |            |            |       |  N/A    |            |            |
@@ -71,4 +71,12 @@ be written iteratively as well, which is a good exercise for the future.
 | Lua           |            |            |            |
 | Javascript    |            |            |            |
 
+## Notes
 
+The discerning programmer may find much of the code here to be
+over-tested, possibly massively over-tested. This is mostly because I
+use the testing to examine the behavior of the implementation, and
+deepen my understanding of the data structure, rather than proving
+the implementation with necessary and sufficient testing. Writing
+necessary and sufficient tests is an excellent exercise, and a good way
+to get even deeper understanding.

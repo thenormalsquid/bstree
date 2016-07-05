@@ -141,35 +141,39 @@ describe Tree do
     end
   end
 
-  describe 'breadth first search' do
-    it 'performs breadth-first search finds root node' do
+  describe 'instance methods' do
+    before :all do
       node = Node.new(8)
-      tree = Tree.new node
-      expected = [8]
-      expect(tree.bfsearch).to eq expected
+      @tree = Tree.new node
+      @tree.add Node.new(14)
+      @tree.add Node.new(4)
+      @min = Node.new 2
+      @tree.add @min
+      @tree.add Node.new(5)
+      @tree.add Node.new(11)
+      @max = Node.new 21
+      @tree.add @max
+
+      @expected = [8, 4, 14, 2, 5, 11, 21]
     end
 
-    it 'performs breadth-first search finds root node' do
-      node = Node.new(8)
-      tree = Tree.new node
-      tree.add Node.new(14)
-      tree.add Node.new(4)
-      expected = [8, 4, 14]
-      expect(tree.bfsearch).to eq expected
+
+    describe '.maximum' do
+      it 'finds the node with the largest key' do
+        expect(@tree.maximum).to eq @max
+      end
     end
 
-    it 'performs breadth-first search finds root node' do
-      node = Node.new(8)
-      tree = Tree.new node
-      tree.add Node.new(14)
-      tree.add Node.new(4)
-      tree.add Node.new(2)
-      tree.add Node.new(5)
-      tree.add Node.new(11)
-      tree.add Node.new(21)
+    describe '.minimum' do
+      it 'finds the node with the smallest key' do
+        expect(@tree.minimum).to eq @min
+      end
+    end
 
-      expected = [8, 4, 14, 2, 5, 11, 21]
-      expect(tree.bfsearch).to eq expected
+    describe 'breadth first search' do
+      it 'performs breadth-first search finds root node' do
+        expect(@tree.bfsearch).to eq @expected
+      end
     end
   end
 end

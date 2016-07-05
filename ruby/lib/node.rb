@@ -38,6 +38,14 @@ class Node
     key < value ? left&.find(key) : right&.find(key)
   end
 
+  def maximum
+    right&.maximum || self
+  end
+
+  def minimum
+    left&.minimum || self
+  end
+
   def to_a
     [value, @left&.uuid, @right&.uuid]
   end
