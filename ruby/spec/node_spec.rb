@@ -104,4 +104,33 @@ describe Node do
       expect(node1.to_a).to eq expected
     end
   end
+
+  describe '.to_hash' do
+    it 'creates a hash of the tree' do
+      node = Node.new(8)
+      nodel = Node.new(4)
+      noder = Node.new(14)
+      node.add nodel
+      node.add noder
+
+      expected = {
+        value: node.value,
+        uuid: node.uuid,
+        left: {
+          value: nodel.value,
+          uuid: nodel.uuid,
+          left: nil,
+          right: nil
+        },
+        right: {
+          value: noder.value,
+          uuid: noder.uuid,
+          left: nil,
+          right: nil
+        }
+      }
+
+      expect(node.to_hash).to eq expected
+    end
+  end
 end

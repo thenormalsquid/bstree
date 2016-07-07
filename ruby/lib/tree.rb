@@ -54,6 +54,10 @@ class Tree
     @root.minimum
   end
 
+  def to_hash
+    root.to_hash
+  end
+
   def get_next_row(current_row)
     next_row = []
     current_row.each do |node|

@@ -46,6 +46,15 @@ class Node
     left&.minimum || self
   end
 
+  def to_hash
+    {
+      value: value,
+      uuid: uuid,
+      left: left&.to_hash,
+      right: right&.to_hash
+    }
+  end
+
   def to_a
     [value, @left&.uuid, @right&.uuid]
   end
