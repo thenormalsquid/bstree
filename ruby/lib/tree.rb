@@ -58,7 +58,7 @@ class Tree
     root.to_hash
   end
 
-  def get_next_row(current_row)
+  def get_next_row current_row
     next_row = []
     current_row.each do |node|
       next_row << node.left
@@ -69,9 +69,7 @@ class Tree
 
   def bfsearch
     rows = [[root]]
-    until rows.last.empty?
-      rows << get_next_row(rows.last)
-    end
-    rows.flatten.map { |node| node.value }
+    rows << get_next_row(rows.last) until rows.last.empty?
+    rows.flatten.map(&:value)
   end
 end

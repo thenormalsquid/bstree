@@ -149,4 +149,27 @@ describe BinarySearchTree do
       end
     end
   end
+
+  describe 'method overriding' do
+    class Bar
+      require 'securerandom'
+      include BinarySearchTree
+      attr_reader :key, :uuid
+
+      def initialize key
+        @key = key
+        @uuid = SecureRandom.uuid
+      end
+
+      def < _other
+        raise NoMethodError.new "'<' method must be overridden"
+      end
+    end
+
+    it 'fails if comparison operator is not overriden' do
+      # instantiate and test for lack of overriding with module error message
+      bar = Bar.new 9
+      expect { bar.add(Bar.new(5)) }.to raise_error(NoMethodError)
+    end
+  end
 end

@@ -44,10 +44,18 @@ Rosen~\cite[pp. 757-760]{rosen} discusses three uses for binary search trees:
 \item efficiently encoding characters in a bit string.
 \end{enumerate}
 
-\subsection{Collisions}
+\subsection{Collisions or duplicate values}
 
 None the preceding references explicitly discuss collisions.
 
+* The duplicate key can be added to the tree, either silently or with a warning.
+* The duplicate key is not added to the tree, either silently or with a warning.
+
+* In Ruby, does replacing a node in a tree leak memory, or will the deleted node
+get garbage collected? How about Python?
+
+* How to delete in c/c++ such that memory isn't leaked? This should be easier,
+call delete after the node is orphaned.
 
 \section{Persistence}
 
@@ -64,6 +72,31 @@ Does it require a parent pointer?
 
 \item Yaml: how are references handled?
 \end{enumerate}
+
+
+\section{Breadth-first traversal}
+
+Breadth-first traveral can be used for searching, for determining whether a key exists,
+or for writing out the tree in flat format with rows and pointers.
+
+For persistence, we have the following:
+
+\begin{itemize}
+\item At each node we can store pointers to each child.
+\item We can store the start and the stop of each row separately.
+\item We can store an array of arrays, where each of the arrays is
+      one level of the tree.
+\end{itemize}
+
+[
+ [root],
+ [ root.left, root.right],
+ [...]
+]
+
+Can all the pointers be stored in one pass, then process in a second pass,
+or can the nodes be processes as the breadth-first traverse proceeds?
+
 
 
 \section{Containerizing}
