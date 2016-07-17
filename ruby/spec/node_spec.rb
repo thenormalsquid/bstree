@@ -83,6 +83,23 @@ describe Node do
     end
   end
 
+  describe 'present?' do
+    it 'indicates whether a node is present' do
+      root = Node.new 4
+      node2 = Node.new 2
+      node3 = Node.new 3
+      node4 = Node.new 9
+      root.add node2
+      root.add node3
+      root.add node4
+      expect(root.present?(4)).to eq true
+      expect(root.present?(2)).to eq true
+      expect(root.present?(3)).to eq true
+      expect(root.present?(9)).to eq true
+      expect(root.present?(8)).to eq nil
+    end
+  end
+
   describe '.to_a' do
     it 'returns an array of representing the node and children' do
       root = Node.new 3

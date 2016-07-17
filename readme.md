@@ -42,7 +42,7 @@ regarded as complete when its associated test passes.
 
 |               | add        | collect    | find       | present?   | depth | destroy | maximum    | minimum    |
 |---            |---         |---         |---         |---         |---    |---      |---         |---         |
-| Ruby          | Done       | Done       | Done       |            | Done  |  N/A    | 2016-07-05 | 2016-07-05 |
+| Ruby          | Done       | Done       | Done       | 2016-07-17 | Done  |  N/A    | 2016-07-05 | 2016-07-05 |
 | Ruby (module) | 2016-06-27 | 2016-06-27 | 2016-06-27 | 2016-07-01 |       |  N/A    | 2016-06-28 | 2016-06-28 |
 | Python        | Done       | Done       | 2016-06-27 |            |       |  N/A    |            |            |
 | Java          |            |            |            |            |       |  N/A    |            |            |

@@ -38,6 +38,11 @@ class Node
     key < value ? left&.find(key) : right&.find(key)
   end
 
+  def present? key
+    return true if key == value
+    key < value ? left&.present?(key) : right&.present?(key)
+  end
+
   def maximum
     right&.maximum || self
   end
