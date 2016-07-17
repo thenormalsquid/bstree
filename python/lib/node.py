@@ -41,3 +41,15 @@ class Node(object):
         else:
             if self.right is not None:
                 return self.right.find(value)
+
+    def maximum(self):
+        if self.right is None:
+            return self
+        else:
+            return self.right.maximum()
+
+    def minimum(self):
+        if self.left is None:
+            return self
+        else:
+            return self.left.minimum()

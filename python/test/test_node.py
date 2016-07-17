@@ -64,6 +64,21 @@ class TestNode(unittest.TestCase):
         node.add(node_l5)
         assert node.find(33) == node_l2
 
+    def test_maximum(self):
+        root = Node(15)
+        node_l1 = Node(8)
+        node_l2 = Node(33)
+        node_l3 = Node(25)
+        node_l4 = Node(4)
+        node_l5 = Node(9)
+        root.add(node_l1)
+        root.add(node_l2)
+        root.add(node_l3)
+        root.add(node_l4)
+        root.add(node_l5)
+        assert root.maximum() == node_l2
+        assert root.minimum() == node_l4
+
     def tearDown(self):
         # dummy
         self.testing = False
