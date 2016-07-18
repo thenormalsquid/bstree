@@ -141,6 +141,47 @@ describe Tree do
     end
   end
 
+  describe '.full?' do
+    let(:root) { Node.new 100 }
+    let(:tree) { Tree.new root }
+    let(:left) { Node.new 50 }
+    let(:right) { Node.new 150 }
+    let(:l2) { Node.new 25 }
+    let(:l3) { Node.new 75 }
+
+    it 'returns true for node with 0 children' do
+      expect(root.full?).to be true
+    end
+
+    it 'returns true for node with 2 children' do
+      tree.add left
+      tree.add right
+      expect(tree.full?).to be true
+    end
+
+    it 'returns false for a node with only one child' do
+      tree.add left
+      expect(tree.full?).to be nil
+    end
+
+    it 'returns true for tree with 5 nodes' do
+      tree.add left
+      tree.add right
+      tree.add l2
+      tree.add l3
+      expect(tree.full?).to be true
+    end
+
+    it 'returns true for tree with 6 nodes' do
+      tree.add left
+      tree.add right
+      tree.add l2
+      tree.add l3
+      tree.add Node.new 145
+      expect(tree.full?).to be_falsy
+    end
+  end
+
   describe 'instance methods' do
     before :all do
       node = Node.new(8)

@@ -100,6 +100,37 @@ describe Node do
     end
   end
 
+  describe '.full?' do
+    let(:root) { Node.new 100 }
+    let(:left) { Node.new 50 }
+    let(:right) { Node.new 150 }
+    let(:l2) { Node.new 25 }
+    let(:l3) { Node.new 75 }
+
+    it 'returns true for node with 0 children' do
+      expect(root.full?).to be true
+    end
+
+    it 'returns true for node with 2 children' do
+      root.add left
+      root.add right
+      expect(root.full?).to be true
+    end
+
+    it 'returns false for a node with only one child' do
+      root.add left
+      expect(root.full?).to be nil
+    end
+
+    it 'returns true for tree with 5 nodes' do
+      root.add left
+      root.add right
+      root.add l2
+      root.add l3
+      expect(root.full?).to be true
+    end
+  end
+
   describe '.to_a' do
     it 'returns an array of representing the node and children' do
       root = Node.new 3

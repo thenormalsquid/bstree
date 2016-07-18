@@ -46,6 +46,10 @@ class Tree
     @max = @max < @current ? @current : @max
   end
 
+  def full?
+    root.full?
+  end
+
   def maximum
     @root.maximum
   end

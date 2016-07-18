@@ -59,16 +59,16 @@ be written iteratively as well, which is a good exercise for the future.
 
 ### Tree properties
 
-|               | full? | perfect? | complete? | balanced? |
-|---------------|-------|----------|-----------|-----------|
-| Ruby          |       |          |           |           |
-| Ruby (module) |       |          |           |           |
-| Python        |       |          |           |           |
-| Java          |       |          |           |           |
-| C++           |       |          |           |           |
-| C             |       |          |           |           |
-| Lua           |       |          |           |           |
-| Javascript    |       |          |           |           |
+|               | full?      | perfect? | complete? | balanced? |
+|---------------|-------     |----------|-----------|-----------|
+| Ruby          | 2016-07-17 |          |           |           |
+| Ruby (module) |            |          |           |           |
+| Python        |            |          |           |           |
+| Java          |            |          |           |           |
+| C++           |            |          |           |           |
+| C             |            |          |           |           |
+| Lua           |            |          |           |           |
+| Javascript    |            |          |           |           |
 
 
 ### Persistence and serialization
