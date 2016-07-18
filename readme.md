@@ -57,6 +57,19 @@ regarded as complete when its associated test passes.
 Note that all the implementations in the table are recursive. Each method could
 be written iteratively as well, which is a good exercise for the future.
 
+### Tree properties
+
+|               | full? | perfect? | complete? | balanced? |
+|---------------|-------|----------|-----------|-----------|
+| Ruby          |       |          |           |           |
+| Ruby (module) |       |          |           |           |
+| Python        |       |          |           |           |
+| Java          |       |          |           |           |
+| C++           |       |          |           |           |
+| C             |       |          |           |           |
+| Lua           |       |          |           |           |
+| Javascript    |       |          |           |           |
+
 
 ### Persistence and serialization
 

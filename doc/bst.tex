@@ -48,14 +48,16 @@ Rosen~\cite[pp. 757-760]{rosen} discusses three uses for binary search trees:
 
 None the preceding references explicitly discuss collisions.
 
-* The duplicate key can be added to the tree, either silently or with a warning.
-* The duplicate key is not added to the tree, either silently or with a warning.
+\begin{itemize}
+\item The duplicate key can be added to the tree, either silently or with a warning.
+\item The duplicate key is not added to the tree, either silently or with a warning.
 
-* In Ruby, does replacing a node in a tree leak memory, or will the deleted node
+\item In Ruby, does replacing a node in a tree leak memory, or will the deleted node
 get garbage collected? How about Python?
 
-* How to delete in c/c++ such that memory isn't leaked? This should be easier,
+\item How to delete in c/c++ such that memory isn't leaked? This should be easier,
 call delete after the node is orphaned.
+\end{itemize}
 
 \section{Persistence}
 
@@ -107,9 +109,13 @@ or can the nodes be processes as the breadth-first traverse proceeds?
 
 \subsection{Ruby module inclusion}
 
-Not sure if this will work, but it would be cool to have a Ruby module which
-adds binary search tree capability to any object. The methods would have to be
-class methods.
+It's not difficult to encode binary search tree capability into a Ruby module.
+The module provides all the necessary instance binary search tree methods, and
+raises errors when necessary overriding has not been implemented in the
+including class.
+
+The usual caveats about instance variables referenced in modules applies,
+particularly that the including class must define the key for the tree.
 
 \section{References}
 

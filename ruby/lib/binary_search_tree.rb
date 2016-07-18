@@ -2,6 +2,10 @@
 module BinarySearchTree
   attr_accessor :left, :right
 
+  def < _other
+    raise NoMethodError.new "'<' method must be overridden"
+  end
+
   def add node
     if node < self
       left.nil? ? self.left = node : left.add(node)
