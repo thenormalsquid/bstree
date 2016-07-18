@@ -3,7 +3,8 @@
 # export $(CLASSPATH)="/usr/share/java/junit:$(CLASSPATH)"
 
 compile:
-	javac net/is/tree/bstree.java
+	javac src/net/is/tree/bstree.java
+	javac test/net/is/tree/bstree_test.java
 
 test:
 	echo $(CLASSPATH)
