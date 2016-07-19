@@ -148,6 +148,7 @@ describe Tree do
     let(:right) { Node.new 150 }
     let(:l2) { Node.new 25 }
     let(:l3) { Node.new 75 }
+    let(:l4) { Node.new 15 }
 
     it 'returns true for node with 0 children' do
       expect(root.full?).to be true
@@ -172,11 +173,21 @@ describe Tree do
       expect(tree.full?).to be true
     end
 
-    it 'returns true for tree with 6 nodes' do
+    it 'returns nil for tree with 6 nodes' do
       tree.add left
       tree.add right
       tree.add l2
       tree.add l3
+      tree.add Node.new 145
+      expect(tree.full?).to be_falsy
+    end
+
+    it 'returns nil for tree with 6 nodes' do
+      tree.add left
+      tree.add right
+      tree.add l2
+      tree.add l3
+      tree.add l4
       tree.add Node.new 145
       expect(tree.full?).to be_falsy
     end
