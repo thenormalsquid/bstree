@@ -65,6 +65,11 @@ class Node
     }
   end
 
+  def to_json
+    require 'json'
+    to_hash.to_json
+  end
+
   def to_a
     [value, @left&.uuid, @right&.uuid]
   end

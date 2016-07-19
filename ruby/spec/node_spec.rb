@@ -181,4 +181,13 @@ describe Node do
       expect(node.to_hash).to eq expected
     end
   end
+
+  describe '.to_json' do
+    it 'creates a json representation of the node' do
+      node = Node.new(8)
+      allow(node).to receive(:uuid).and_return('uuid')
+      expected = "{\"value\":8,\"uuid\":\"uuid\",\"left\":null,\"right\":null}"
+      expect(node.to_json).to eq expected
+    end
+  end
 end

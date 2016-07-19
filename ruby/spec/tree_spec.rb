@@ -239,6 +239,16 @@ describe Tree do
       end
     end
 
+    describe '.to_json' do
+      it 'creates json representation of tree' do
+        root = Node.new(8)
+        allow(root).to receive(:uuid).and_return('uuid')
+        tree = Tree.new root
+        expected = "{\"value\":8,\"uuid\":\"uuid\",\"left\":null,\"right\":null}"
+        expect(tree.to_json).to eq expected
+      end
+    end
+
     describe '.maximum' do
       it 'finds the node with the largest key' do
         expect(@tree.maximum).to eq @max

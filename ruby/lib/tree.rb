@@ -62,6 +62,10 @@ class Tree
     root.to_hash
   end
 
+  def to_json
+    root.to_json
+  end
+
   def get_next_row current_row
     next_row = []
     current_row.each do |node|
