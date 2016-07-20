@@ -9,12 +9,12 @@ class NodeCsvWriter
 end
 
 class Node
-  attr_reader :left, :right, :uuid
+  attr_accessor :left, :right, :uuid
   attr_accessor :value
 
-  def initialize value = nil
+  def initialize value = nil, uuid = nil
     @value = value
-    @uuid = SecureRandom.uuid
+    @uuid = uuid || SecureRandom.uuid
   end
 
   def < other
@@ -54,6 +54,14 @@ class Node
 
   def minimum
     left&.minimum || self
+  end
+
+  def self.build_from_hash params
+    return nil if params.nil?
+    node = new(params[:value], params[:uuid])
+    node.left = build_from_hash(params[:left])
+    node.right = build_from_hash(params[:right])
+    node
   end
 
   def to_hash
