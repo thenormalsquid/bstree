@@ -34,6 +34,12 @@ class TestTree(unittest.TestCase):
         # http://stackoverflow.com/questions/28879886/python-beginner-where-comes-bound-method-of-object-at-0x0000000005ea
         assert [] == tree.collect()
 
+    def test_height(self):
+        node = Node(8)
+        tree = Tree(node)
+        print tree.height()
+        assert tree.height() == 1
+
     def tearDown(self):
         # dummy
         self.testing = False
