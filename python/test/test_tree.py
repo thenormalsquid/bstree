@@ -37,8 +37,30 @@ class TestTree(unittest.TestCase):
     def test_height(self):
         node = Node(8)
         tree = Tree(node)
-        print tree.height()
+        # print tree.height()
         assert tree.height() == 1
+        node_l1 = Node(4)
+        tree.add(node_l1)
+        # print tree.height()
+        assert tree.height() == 2
+        node_r1 = Node(12)
+        tree.add(node_r1)
+        # print tree.height()
+        assert tree.height() == 2
+        node_l2 = Node(2)
+        tree.add(node_l2)
+        # print tree.height()
+        assert tree.height() == 3
+        node_l3 = Node(1)
+        tree.add(node_l3)
+        # print tree.height()
+        assert tree.height() == 4
+        node_r3 = Node(3)
+        tree.add(node_r3)
+        # print tree.height()
+        assert tree.height() == 4
+
+
 
     def tearDown(self):
         # dummy
