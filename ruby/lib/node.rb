@@ -58,18 +58,18 @@ class Node
 
   def self.build_from_hash params
     return nil if params.nil?
-    node = new(params[:value], params[:uuid])
-    node.left = build_from_hash(params[:left])
-    node.right = build_from_hash(params[:right])
+    node = new(params['value'], params['uuid'])
+    node.left = build_from_hash(params['left'])
+    node.right = build_from_hash(params['right'])
     node
   end
 
   def to_hash
     {
-      value: value,
-      uuid: uuid,
-      left: left&.to_hash,
-      right: right&.to_hash
+      'value' => value,
+      'uuid' => uuid,
+      'left' => left&.to_hash,
+      'right' => right&.to_hash
     }
   end
 

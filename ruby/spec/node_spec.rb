@@ -162,19 +162,19 @@ describe Node do
       node.add noder
 
       expected = {
-        value: node.value,
-        uuid: node.uuid,
-        left: {
-          value: nodel.value,
-          uuid: nodel.uuid,
-          left: nil,
-          right: nil
+        'value' => node.value,
+        'uuid' => node.uuid,
+        'left' => {
+          'value' => nodel.value,
+          'uuid' => nodel.uuid,
+          'left' => nil,
+          'right' => nil
         },
-        right: {
-          value: noder.value,
-          uuid: noder.uuid,
-          left: nil,
-          right: nil
+        'right' => {
+          'value' => noder.value,
+          'uuid' => noder.uuid,
+          'left' => nil,
+          'right' => nil
         }
       }
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require_relative './node'
+require 'pry'
 
 class Tree
   attr_reader :root, :size
@@ -64,6 +65,23 @@ class Tree
 
   def to_json
     root.to_json
+  end
+
+  def to_json_file filename
+    File.open(filename, 'w') do |f|
+      f.write root.to_json
+    end
+  end
+
+  def self.from_json_file(filename)
+    require 'json'
+    file = File.read(filename)
+    hash = JSON.parse(file)
+    from_hash(hash)
+  end
+
+  def self.from_hash(hash)
+    Tree.new(Node.build_from_hash(hash))
   end
 
   def get_next_row current_row

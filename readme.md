@@ -16,11 +16,6 @@ The `Tree` data structure API:
 * `destroy` (c/c++) cleans up memory.
 
 
-## Implementations
-
-As of 2016-05-08, parts of the API have been implemented in Ruby, Python and C++.
-
-
 ## Fun things to do
 
 Here is a list of various exercises and questions pulled from books and
@@ -32,7 +27,7 @@ tree. (Binary search tree is probably much easier than an arbitrary
 binary tree.)
 
 
-## Current state
+## Current implementations
 
 ## Basic functionality
 
@@ -59,30 +54,30 @@ be written iteratively as well, which is a good exercise for the future.
 
 ### Tree properties
 
-|               | full?      | perfect? | complete? | balanced? |
-|---------------|-------     |----------|-----------|-----------|
-| Ruby          | 2016-07-17 |          |           |           |
-| Ruby (module) |            |          |           |           |
-| Python        |            |          |           |           |
-| Java          |            |          |           |           |
-| C++           |            |          |           |           |
-| C             |            |          |           |           |
-| Lua           |            |          |           |           |
-| Javascript    |            |          |           |           |
+|               | full?      | perfect? | complete? | balanced? | size |
+|---------------|-------     |----------|-----------|-----------|---   |
+| Ruby          | 2016-07-17 |          |           |           |      |
+| Ruby (module) |            |          |           |           |      |
+| Python        |            |          |           |           |      |
+| Java          |            |          |           |           |      |
+| C++           |            |          |           |           |      |
+| C             |            |          |           |           |      |
+| Lua           |            |          |           |           |      |
+| Javascript    |            |          |           |           |      |
 
 
 ### Persistence and serialization
 
-|               | json       | relational | yaml       |
-|---            |---         |---         |---         |
-| Ruby          |            |            |            |
-| Ruby (module) |            |            |            |
-| Python        |            |            |            |
-| Java          |            |            |            |
-| C++           |            |            |            |
-| C             |            |            |            |
-| Lua           |            |            |            |
-| Javascript    |            |            |            |
+|               | json       | relational | yaml       | ==     | ===  |
+|---            |---         |---         |---         |---     |---   |
+| Ruby          | 2016-07-23 |            |            |        |      |
+| Ruby (module) |            |            |            |        |      |
+| Python        |            |            |            |        |      |
+| Java          |            |            |            |        |      |
+| C++           |            |            |            |        |      |
+| C             |            |            |            |        |      |
+| Lua           |            |            |            |        |      |
+| Javascript    |            |            |            |        |      |
 
 ## Notes
 

@@ -195,15 +195,15 @@ describe Tree do
 
   describe 'instance methods' do
     before :all do
-      node = Node.new(8)
+      node = Node.new(8, 'uuid8')
       @tree = Tree.new node
-      @tree.add Node.new(14)
-      @tree.add Node.new(4)
-      @min = Node.new 2
+      @tree.add Node.new(14, 'uuid14')
+      @tree.add Node.new(4, 'uuid4')
+      @min = Node.new 2, 'uuid2'
       @tree.add @min
-      @tree.add Node.new(5)
-      @tree.add Node.new(11)
-      @max = Node.new 21
+      @tree.add Node.new(5, 'uuid5')
+      @tree.add Node.new(11, 'uuid11')
+      @max = Node.new 21, 'uuid21'
       @tree.add @max
 
       @expected = [8, 4, 14, 2, 5, 11, 21]
@@ -219,19 +219,19 @@ describe Tree do
         tree.add noder
 
         expected = {
-          value: node.value,
-          uuid: node.uuid,
-          left: {
-            value: nodel.value,
-            uuid: nodel.uuid,
-            left: nil,
-            right: nil
+          'value' => node.value,
+          'uuid' => node.uuid,
+          'left' => {
+            'value' => nodel.value,
+            'uuid' => nodel.uuid,
+            'left' => nil,
+            'right' => nil
           },
-          right: {
-            value: noder.value,
-            uuid: noder.uuid,
-            left: nil,
-            right: nil
+          'right' => {
+            'value' => noder.value,
+            'uuid' => noder.uuid,
+            'left' => nil,
+            'right' => nil
           }
         }
 
@@ -246,6 +246,28 @@ describe Tree do
         tree = Tree.new root
         expected = "{\"value\":8,\"uuid\":\"uuid\",\"left\":null,\"right\":null}"
         expect(tree.to_json).to eq expected
+      end
+    end
+
+    describe '.to_json_file' do
+      it 'writes json to a file' do
+        require 'open3'
+        filename = 'tree_with_nodes.json'
+        @tree.to_json_file "/tmp/#{filename}"
+        diff = "diff /tmp/#{filename} spec/output/json/#{filename}"
+        output, _status = Open3.capture2e(diff)
+        expect(output.empty?).to be true
+      end
+    end
+
+    describe '.from_json_file' do
+      it 'reads from json file' do
+        root = Node.new(8)
+        tree = Tree.new root
+        tree.to_json_file '/tmp/tree.json'
+
+        saved_tree = Tree.from_json_file '/tmp/tree.json'
+        expect(saved_tree.root.uuid).to eq tree.root.uuid
       end
     end
 
