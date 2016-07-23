@@ -10,8 +10,26 @@
 
 using std::string;
 
-
 class TreeTest : public CppUnit::TestCase {
+
+/*
+Node root(25);
+Tree test_tree(&root);
+Node node2(43);
+Node node3(8);
+Node node4(10);
+Node node5(15);
+Node node6(33);
+Node node7(97);
+Node node8(4);
+test_tree.add(&node2);
+test_tree.add(&node3);
+test_tree.add(&node4);
+test_tree.add(&node5);
+test_tree.add(&node6);
+test_tree.add(&node7);
+test_tree.add(&node8);
+*/
 
 public:
   TreeTest( std::string name ) : CppUnit::TestCase( name ) {}
@@ -19,9 +37,9 @@ public:
   void test_instantiation() {
     Spec spec;
     spec.it("Testing Tree instantiaton", DO_SPEC {
-      Node node(1);
-      Tree tree(&node);
-      return (tree.root->value == node.value);
+      Node root(1);
+      Tree tree(&root);
+      return (tree.root->value == root.value);
     });
   }
 
