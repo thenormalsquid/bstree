@@ -109,6 +109,14 @@ describe BinarySearchTree do
       end
     end
 
+    describe '.size' do
+      it 'finds the size on the fly' do
+        expect(@root.size).to eq 9
+        expect(@foo4.size).to eq 3
+        expect(@foo9.size).to eq 1
+      end
+    end
+
     describe '.maximum' do
       it 'finds the node with the largest key' do
         expect(@root.maximum).to eq @foo9

@@ -38,6 +38,18 @@ module BinarySearchTree
     left&.minimum || self
   end
 
+  def size
+    size = 0
+    post_order_traverse { size += 1 }
+    size
+  end
+
+  def post_order_traverse &block
+    left&.post_order_traverse(&block)
+    right&.post_order_traverse(&block)
+    yield
+  end
+
   # Figure out whether there is any way to subclass to_hash
   # such the @uuid and @key is set in the subclass, that is,
   # the including class. That would make this a bit cleaner,
