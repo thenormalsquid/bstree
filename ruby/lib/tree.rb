@@ -73,14 +73,14 @@ class Tree
     end
   end
 
-  def self.from_json_file(filename)
+  def self.from_json_file filename
     require 'json'
     file = File.read(filename)
     hash = JSON.parse(file)
     from_hash(hash)
   end
 
-  def self.from_hash(hash)
+  def self.from_hash hash
     Tree.new(Node.build_from_hash(hash))
   end
 

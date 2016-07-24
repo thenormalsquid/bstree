@@ -30,6 +30,21 @@ module BinarySearchTree
     key < @key ? left&.present?(key) : right&.present?(key)
   end
 
+  # Here's a specific call that recurses on itself to determine if
+  # the node is a binary search tree.
+  def bst?
+    return false if left && left >= self || right && self > right
+    left&.bst?
+    right&.bst?
+    true
+  end
+
+  # Passing a block to a pre_order_traverse works too. This is what
+  # is tested.
+  def bst?
+    pre_order_traverse { (left &.>= self) || (right &.< self) ? false : true }
+  end
+
   def maximum
     right&.maximum || self
   end
@@ -42,6 +57,13 @@ module BinarySearchTree
     size = 0
     post_order_traverse { size += 1 }
     size
+  end
+
+  def pre_order_traverse &block
+    result = yield
+    left&.pre_order_traverse(&block)
+    right&.pre_order_traverse(&block)
+    result
   end
 
   def post_order_traverse &block

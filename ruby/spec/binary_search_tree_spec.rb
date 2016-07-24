@@ -17,6 +17,14 @@ describe BinarySearchTree do
     def < other
       @key < other.key
     end
+
+    def >= other
+      @key >= other.key
+    end
+
+    def > other
+      @key > other.key
+    end
   end
 
   before :each do
@@ -51,6 +59,49 @@ describe BinarySearchTree do
       @root.add(@foo7)
       @root.add(foo8)
       @root.add(@foo9)
+    end
+
+    describe '.bst?' do
+      it 'determines whether a tree is a binary search tree' do
+        expect(@root.bst?).to be true
+      end
+
+      it 'identifies single node as binary search tree' do
+        node = Foo.new(10)
+        expect(node.bst?).to be true
+      end
+
+      it 'identifies root and left node as binary search tree' do
+        node = Foo.new(10)
+        left = Foo.new(5)
+        node.add left
+        expect(node.bst?).to be true
+      end
+
+      it 'identifies root and left node as binary search tree' do
+        node = Foo.new(10)
+        right = Foo.new(15)
+        node.add right
+        expect(node.bst?).to be true
+      end
+
+      it 'identifies three node as binary search tree' do
+        node = Foo.new(10)
+        left = Foo.new(5)
+        right = Foo.new(15)
+        node.add left
+        node.add right
+        expect(node.bst?).to be true
+      end
+
+      it 'identifies three node as not a binary search tree' do
+        node = Foo.new(10)
+        left = Foo.new(5)
+        right = Foo.new(15)
+        node.left = right
+        node.right = left
+        expect(node.bst?).to be false
+      end
     end
 
     describe '.find' do

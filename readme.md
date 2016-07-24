@@ -54,10 +54,10 @@ be written iteratively as well, which is a good exercise for the future.
 
 ### Tree properties
 
-|               | full?      | perfect? | complete? | balanced? | size       |
-|---------------|-------     |----------|-----------|-----------|---         |
-| Ruby          | 2016-07-17 |          |           |           | Done       |
-| Ruby (module) |            |          |           |           | 2016-07-23 |
+|               | full?      | perfect? | complete? | balanced? | bst?       | size       |
+|---------------|-------     |----------|-----------|-----------|---         |---         |
+| Ruby          | 2016-07-17 |          |           |           |            | Done       |
+| Ruby (module) |            |          |           |           | 2016-07-23 | 2016-07-23
 | Python        |            |          |           |           |            |
 | Java          |            |          |           |           |            |
 | C++           |            |          |           |           |            |
