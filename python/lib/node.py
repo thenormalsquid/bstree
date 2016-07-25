@@ -42,6 +42,18 @@ class Node(object):
             if self.right is not None:
                 return self.right.find(value)
 
+    def is_present(self, value):
+
+        if self.value == value:
+            return True
+
+        if value < self.value:
+            if self.left is not None:
+                return self.left.is_present(value)
+        else:
+            if self.right is not None:
+                return self.right.is_present(value)
+
     def maximum(self):
         if self.right is None:
             return self

@@ -32,7 +32,40 @@ class TestTree(unittest.TestCase):
         # Bound method results
         # assert [], tree.collect
         # http://stackoverflow.com/questions/28879886/python-beginner-where-comes-bound-method-of-object-at-0x0000000005ea
-        assert [] == tree.collect()
+        collector = []
+        tree.collect(collector)
+        assert [4, 8] == collector
+
+    def test_find(self):
+        node = Node(15)
+        tree = Tree(node)
+        node_l1 = Node(8)
+        node_l2 = Node(33)
+        node_l3 = Node(25)
+        node_l4 = Node(4)
+        node_l5 = Node(9)
+        tree.add(node_l1)
+        tree.add(node_l2)
+        tree.add(node_l3)
+        tree.add(node_l4)
+        tree.add(node_l5)
+        assert node.find(33) == node_l2
+
+    def test_is_present(self):
+        node = Node(15)
+        tree = Tree(node)
+        node_l1 = Node(8)
+        node_l2 = Node(33)
+        node_l3 = Node(25)
+        node_l4 = Node(4)
+        node_l5 = Node(9)
+        tree.add(node_l1)
+        tree.add(node_l2)
+        tree.add(node_l3)
+        tree.add(node_l4)
+        tree.add(node_l5)
+        assert node.is_present(33) is True
+        assert node.is_present(34) is None
 
     def test_height(self):
         node = Node(8)
@@ -59,8 +92,6 @@ class TestTree(unittest.TestCase):
         tree.add(node_r3)
         # print tree.height()
         assert tree.height() == 4
-
-
 
     def tearDown(self):
         # dummy

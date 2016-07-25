@@ -64,6 +64,21 @@ class TestNode(unittest.TestCase):
         node.add(node_l5)
         assert node.find(33) == node_l2
 
+    def test_is_present(self):
+        node = Node(15)
+        node_l1 = Node(8)
+        node_l2 = Node(33)
+        node_l3 = Node(25)
+        node_l4 = Node(4)
+        node_l5 = Node(9)
+        node.add(node_l1)
+        node.add(node_l2)
+        node.add(node_l3)
+        node.add(node_l4)
+        node.add(node_l5)
+        assert node.is_present(33) is True
+        assert node.is_present(34) is None
+
     def test_maximum(self):
         root = Node(15)
         node_l1 = Node(8)
