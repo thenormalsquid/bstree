@@ -1,7 +1,7 @@
 # Binary search trees
 
 This little repo is part of an ongoing project to compare
-how data structures are implemented in various languages.
+how binary search trees are implemented in various languages.
 
 
 ## Specification
@@ -55,16 +55,16 @@ be written iteratively as well, which is a good exercise for the future.
 
 ### Tree properties
 
-|               | full?      | perfect? | complete? | balanced? | bst?       | size       |
-|---------------|-------     |----------|-----------|-----------|---         |---         |
-| Ruby          | 2016-07-17 |          |           |           |            | Done       |
-| Ruby (module) |            |          |           |           | 2016-07-23 | 2016-07-23
-| Python        |            |          |           |           |            |
-| Java          |            |          |           |           |            |
-| C++           |            |          |           |           |            |
-| C             |            |          |           |           |            |
-| Lua           |            |          |           |           |            |
-| Javascript    |            |          |           |           |            |
+|               | full?      | perfect? | complete? | balanced? | bst?       | size       | successor | predecessor |
+|---------------|-------     |----------|-----------|-----------|---         |---         |---        |---          |
+| Ruby          | 2016-07-17 |          |           |           |            | Done       |           |             |
+| Ruby (module) |            |          |           |           | 2016-07-23 | 2016-07-23 |           |             |
+| Python        |            |          |           |           |            |            |           |             |
+| Java          |            |          |           |           |            |            |           |             |
+| C++           |            |          |           |           |            |            |           |             |
+| C             |            |          |           |           |            |            |           |             |
+| Lua           |            |          |           |           |            |            |           |             |
+| Javascript    |            |          |           |           |            |            |           |             |
 
 
 ### Persistence and serialization
