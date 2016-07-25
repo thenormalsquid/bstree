@@ -25,7 +25,8 @@ class.
 
 * Create a simple data structure to store, subclass `Struct`
 * Add  `node.key` and use value for some associated data object
-* Test for node not present in a tree.
+* (DONE) Test for node not present in a tree.
+* Refactor the comparator specs in `node_spec.rb`
 
 ## References
 

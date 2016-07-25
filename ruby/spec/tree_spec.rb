@@ -141,6 +141,15 @@ describe Tree do
     end
   end
 
+  describe '.bst?' do
+    let(:root) { Node.new 100 }
+    let(:tree) { Tree.new root }
+
+    it 'returns true for binary search tree with 1 node' do
+      expect(tree.bst?).to be true
+    end
+  end
+
   describe '.full?' do
     let(:root) { Node.new 100 }
     let(:tree) { Tree.new root }

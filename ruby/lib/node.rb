@@ -21,6 +21,14 @@ class Node
     @value < other.value
   end
 
+  def >= other
+    @value >= other.value
+  end
+
+  def > other
+    @value > other.value
+  end
+
   def add node
     node < self ? addleft(node) : addright(node)
   end
@@ -46,6 +54,11 @@ class Node
   def full?
     return true if left.nil? && right.nil?
     left&.full? && right&.full? # returns nil instead of false, why?
+  end
+
+  def bst?
+    return false if (left &.>= self) || (right &.< self)
+    true
   end
 
   def maximum

@@ -51,6 +51,10 @@ class Tree
     root.full?
   end
 
+  def bst?
+    root.bst?
+  end
+
   def maximum
     @root.maximum
   end

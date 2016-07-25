@@ -37,6 +37,18 @@ describe Node do
       node2 = Node.new(2)
       expect(node1 < node2).to be true
     end
+
+    it 'compares values with >=' do
+      node1 = Node.new(1)
+      node2 = Node.new(2)
+      expect(node1 >= node2).to be false
+    end
+
+    it 'compares values with >' do
+      node1 = Node.new(1)
+      node2 = Node.new(2)
+      expect(node1 > node2).to be false
+    end
   end
 
   describe '.find' do
@@ -97,6 +109,14 @@ describe Node do
       expect(root.present?(3)).to eq true
       expect(root.present?(9)).to eq true
       expect(root.present?(8)).to eq nil
+    end
+  end
+
+  describe '.bst?' do
+    let(:root) { Node.new 100 }
+
+    it 'returns true for tree with one node' do
+      expect(root.bst?).to be true
     end
   end
 
