@@ -27,6 +27,16 @@ void Node::add_right(Node * node) {
   }
 }
 
+Node * Node::minimum(void) {
+  if (left == NULL) return this;
+  return this->left->minimum();
+}
+
+Node * Node::maximum(void) {
+  if (right == NULL) return this;
+  return this->right->maximum();
+}
+
 std::string
 get_node(void) {
 

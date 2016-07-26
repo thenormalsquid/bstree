@@ -15,8 +15,9 @@ public:
   void test_instantiation() {
     Spec spec;
     spec.it("Testing Node instantiation", DO_SPEC {
-      Node node(1);
-      return (&node != NULL);
+      int value = 1;
+      Node node(value);
+      return (node.value == 1);
     });
   }
 
@@ -48,19 +49,39 @@ public:
     });
   }
 
-  void test_getsome() {
+  void test_maximum() {
     Spec spec;
-    spec.it("Testing Node", DO_SPEC {
-      return (string("node") == get_node());
+    spec.it("Testing Node.maximum", DO_SPEC {
+      Node root(3);
+      Node node2(1);
+      Node node3(2);
+      Node node17(17);
+      root.add(&node2);
+      root.add(&node3);
+      root.add(&node17);
+      return (root.maximum() == &node17);
+    });
+  }
+
+  void test_minimum() {
+    Spec spec;
+    spec.it("Testing Node.minimum", DO_SPEC {
+      Node root(3);
+      Node node2(1);
+      Node node3(2);
+      root.add(&node2);
+      root.add(&node3);
+      return (root.minimum() == &node2);
     });
   }
 
   void runTest() {
-    test_getsome();
     test_instantiation();
     test_left_initialize();
     test_right_initialize();
     test_add();
+    test_maximum();
+    test_minimum();
   }
 };
 

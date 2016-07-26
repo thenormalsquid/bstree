@@ -161,6 +161,34 @@ public:
     });
   }
 
+  void test_maximum() {
+    Spec spec;
+    spec.it("Testing Node.maximum", DO_SPEC {
+      Node root(3);
+      Tree tree(&root);
+      Node node2(1);
+      Node node3(2);
+      Node node17(17);
+      tree.add(&node2);
+      tree.add(&node3);
+      tree.add(&node17);
+      return (tree.maximum() == &node17);
+    });
+  }
+
+  void test_minimum() {
+    Spec spec;
+    spec.it("Testing Node.minimum", DO_SPEC {
+      Node root(3);
+      Tree tree(&root);
+      Node node2(1);
+      Node node3(2);
+      tree.add(&node2);
+      tree.add(&node3);
+      return (tree.minimum() == &node2);
+    });
+  }
+
   // my own edification b/c I reach for new and delete
   void test_unique_ptr(void) {
     Spec spec;
@@ -187,6 +215,8 @@ public:
   void runTest() {
     test_instantiation();
     test_add();
+    test_maximum();
+    test_minimum();
     test_find_root_node();
     test_find_right_node();
     test_find_left_node();

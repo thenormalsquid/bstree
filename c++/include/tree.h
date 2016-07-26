@@ -14,14 +14,14 @@ public:
   void add(Node * node);
   std::vector<int> collect(void);
   Node * find(int);
+  Node * maximum(void);
+  Node * minimum(void);
 
   Node * root;
   std::vector<int> values;
 
 private:
   Node * find_node(int value, Node * node);
-  // Node * find_left(int value, Node * node);
-  // Node * find_right(int value, Node * node);
 
   void collect_values(Node * node);
   void get_left(Node * node);

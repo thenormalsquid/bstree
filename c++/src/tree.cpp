@@ -6,14 +6,17 @@ void Tree::add(Node * node) {
   this->root->add(node);
 }
 
-std::vector<int> Tree::collect() {
-  collect_values(root);
-  return values;
-}
-
 Node * Tree::find(int value) {
   found = false;
   return find_node(value, root);
+}
+
+Node * Tree::maximum(void) {
+  return root->maximum();
+}
+
+Node * Tree::minimum(void) {
+  return root->minimum();
 }
 
 Node * Tree::find_node(int value, Node * node) {
@@ -27,19 +30,10 @@ Node * Tree::find_node(int value, Node * node) {
   }
 }
 
-/*
-Node * Tree::find_left(int value, Node * n) {
-  if (found) return n;
-  if (n->left == NULL) return n;
-  return find_node(value, n->left);
+std::vector<int> Tree::collect() {
+  collect_values(root);
+  return values;
 }
-
-Node * Tree::find_right(int value, Node * n) {
-  if (found) return n;
-  if (n->right == NULL) return n;
-  return find_node(value, n->right);
-}
-*/
 
 void Tree::collect_values(Node * node) {
   get_left(node);

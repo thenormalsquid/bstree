@@ -10,6 +10,9 @@ class Node {
     void add_left(Node * node);
     void add_right(Node * node);
 
+    Node * maximum(void);
+    Node * minimum(void);
+
     int value;
     Node * left;
     Node * right;
