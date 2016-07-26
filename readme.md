@@ -85,7 +85,7 @@ be written iteratively as well, which is a good exercise for the future.
 | C             |            |            |            |        |      |         |
 | Lua           |            |            |            |        |      | N/A     |
 | Javascript    |            |            |            |        |      | N/A     |
-| SQL           |            |            |            |        |      | N/A     |
+| SQL           |            | N/A        |            |        |      | N/A     |
 | Array         |            |            |            |        |      | N/A     |
 
 
