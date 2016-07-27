@@ -48,7 +48,7 @@ regarded as complete when its associated test passes.
 | C             |            |            |            |            |            |         |            |            |
 | Lua           |            |            |            |            |            |         |            |            |
 | Javascript    |            |            |            |            |            |         |            |            |
-| SQL           |            |            |            |            |            |         |            |            |
+| SQL           |            |            | 2016-07-27 | 2016-07-27 |            |         |            |            |
 | Array         |            |            |            |            |            |         |            |            |
 
 
