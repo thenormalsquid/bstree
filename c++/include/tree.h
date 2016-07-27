@@ -17,6 +17,8 @@ public:
   Node * maximum(void);
   Node * minimum(void);
 
+  bool is_present(int value);
+
   Node * root;
   std::vector<int> values;
 

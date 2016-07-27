@@ -49,6 +49,31 @@ public:
     });
   }
 
+  void test_is_present() {
+    Spec spec;
+    spec.it("Testing Node.is_present with 8 nodes", DO_SPEC {
+      Node root(25);
+      Node node2(43);
+      Node node3(8);
+      Node node4(10);
+      Node node5(15);
+      Node node6(33);
+      Node node7(97);
+      Node node8(4);
+      root.add(&node2);
+      root.add(&node3);
+      root.add(&node4);
+      root.add(&node5);
+      root.add(&node6);
+      root.add(&node7);
+      root.add(&node8);
+
+      bool result = root.is_present(43);
+      return (result == true);
+    });
+  }
+
+
   void test_maximum() {
     Spec spec;
     spec.it("Testing Node.maximum", DO_SPEC {
@@ -80,6 +105,7 @@ public:
     test_left_initialize();
     test_right_initialize();
     test_add();
+    test_is_present();
     test_maximum();
     test_minimum();
   }

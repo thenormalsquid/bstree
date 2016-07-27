@@ -115,6 +115,31 @@ public:
     });
   }
 
+  void test_is_present() {
+    Spec spec;
+    spec.it("Testing Tree.is_present with 8 nodes", DO_SPEC {
+      Node node(25);
+      Tree tree(&node);
+      Node node2(43);
+      Node node3(8);
+      Node node4(10);
+      Node node5(15);
+      Node node6(33);
+      Node node7(97);
+      Node node8(4);
+      tree.add(&node2);
+      tree.add(&node3);
+      tree.add(&node4);
+      tree.add(&node5);
+      tree.add(&node6);
+      tree.add(&node7);
+      tree.add(&node8);
+
+      bool result = tree.is_present(43);
+      return (result == true);
+    });
+  }
+
   void test_collect() {
     Spec spec;
     spec.it("Testing Tree.collect", DO_SPEC {
@@ -221,6 +246,7 @@ public:
     test_find_right_node();
     test_find_left_node();
     test_find();
+    test_is_present();
     test_collect();
     // test_unique_ptr();
   }

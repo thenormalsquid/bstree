@@ -27,6 +27,16 @@ void Node::add_right(Node * node) {
   }
 }
 
+bool Node::is_present(int value) {
+  if (this->value == value) return true;
+
+  if (this->left != NULL && this->left->value < value) {
+    return left->is_present(value);
+  } else if (this->right != NULL) {
+    return right->is_present(value);
+  }
+}
+
 Node * Node::minimum(void) {
   if (left == NULL) return this;
   return this->left->minimum();

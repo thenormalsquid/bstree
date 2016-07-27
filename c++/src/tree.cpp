@@ -19,6 +19,10 @@ Node * Tree::minimum(void) {
   return root->minimum();
 }
 
+bool Tree::is_present(int value) {
+  return this->root->is_present(value);
+}
+
 Node * Tree::find_node(int value, Node * node) {
   if (node == NULL) return node;
   if (node->value == value) return node;

@@ -10,6 +10,8 @@ class Node {
     void add_left(Node * node);
     void add_right(Node * node);
 
+    bool is_present(int);
+
     Node * maximum(void);
     Node * minimum(void);
 
