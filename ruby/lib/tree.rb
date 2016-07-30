@@ -15,6 +15,20 @@ class Tree
     @size += 1
   end
 
+  # This is kind of nasty. It turns out that rooting a tree
+  # in some sort of container is both a crutch and a constraint.
+  # The big hassle is the edge case induced by deleted the root
+  # node.
+  def delete key
+    left = @root.left
+    right = @root.right
+    deleted_node = @root.delete key
+    @size -= 1
+    # This is arbitrary, we just pick a side.
+    @root = left || right if deleted_node == @root
+    deleted_node
+  end
+
   def collect
     collector = []
     get_values @root, collector

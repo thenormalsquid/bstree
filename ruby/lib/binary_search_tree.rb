@@ -14,6 +14,28 @@ module BinarySearchTree
     end
   end
 
+  def delete key, parent = nil
+    node_to_delete, parent = find_with_parent key, parent
+    left = node_to_delete.left
+    right = node_to_delete.right
+
+    if parent&.right == node_to_delete
+      parent&.right = right
+      right.add left unless left.nil?
+    else
+      parent&.left = left
+      left.add right unless right.nil?
+    end
+
+    node_to_delete.left = node_to_delete.right = nil
+    node_to_delete
+  end
+
+  def find_with_parent key, parent
+    return [self, parent] if key == @key
+    key < @key ? left&.find_with_parent(key, self) : right&.find_with_parent(key, self)
+  end
+
   def collect collector
     left&.collect collector
     collector.push @key

@@ -11,24 +11,146 @@ describe Node do
     expect(Node.new).not_to be_nil
   end
 
-  it 'adds left node' do
-    node = Node.new 2
-    left_node = Node.new 1
-    node.add left_node
-    expect(node.left).to eq left_node
+  describe '.insert' do
+    it 'inserts left node' do
+      node = Node.new 2
+      left_node = Node.new 1
+      node.add left_node
+      expect(node.left).to eq left_node
+    end
+
+    it 'inserts right node' do
+      node = Node.new 1
+      right_node = Node.new 2
+      node.add right_node
+      expect(node.right).to eq right_node
+    end
   end
 
-  it 'adds right node' do
-    node = Node.new 1
-    right_node = Node.new 2
-    node.add right_node
-    expect(node.right).to eq right_node
-  end
+  describe '.delete' do
+    it 'returns the root node when specified for deletion' do
+      root = Node.new(9)
+      expect(root.delete(9)).to eq root
+      expect(root.bst?).to be true
+      expect(root.left.nil?).to be true
+      expect(root.right.nil?).to be true
+    end
 
-  it 'adds node value' do
-    value = 1
-    node = Node.new(value)
-    expect(node.value).to eq value
+    it 'deletes the right node specified by key' do
+      root = Node.new(9)
+      n14 = Node.new(14)
+      root.add n14
+      expect(root.delete(14)).to eq n14
+      expect(root.bst?).to be true
+      expect(n14.left.nil?).to be true
+      expect(n14.right.nil?).to be true
+    end
+
+    it 'deletes a right node reassiging that nodes child' do
+      root = Node.new(9)
+      n14 = Node.new(14)
+      n23 = Node.new(23)
+      root.add n14
+      root.add n23
+      expect(root.delete(14)).to eq n14
+      expect(root.bst?).to be true
+      expect(n14.left.nil?).to be true
+      expect(n14.right.nil?).to be true
+      expect(root.right).to eq n23
+      # expect(root.size).to eq 2
+    end
+
+    it 'reassigns right subtree on deletion' do
+      root = Node.new(11)
+      n17 = Node.new(17)
+      n19 = Node.new(19)
+      n13 = Node.new(13)
+      n5 = Node.new(5)
+      root.add n17
+      root.add n19
+      root.add n13
+      root.add n5
+      expect(root.delete(17)).to eq n17
+      expect(root.bst?).to be true
+      expect(n17.left.nil?).to be true
+      expect(n17.right.nil?).to be true
+      expect(root.right).to eq n19
+      expect(root.right.left).to eq n13
+    end
+
+    it 'rebuilds subtree after deleting node' do
+      root = Node.new(11)
+      n5 = Node.new(5)
+      root.add n5
+
+      n17 = Node.new(17)
+      n13 = Node.new(13)
+      n41 = Node.new(41)
+      n37 = Node.new(37)
+      n31 = Node.new(31)
+      root.add n17
+      root.add n13
+      root.add n41
+      root.add n37
+      root.add n31
+      expect(root.delete(17)).to eq n17
+      expect(root.bst?).to be true
+      expect(n17.left.nil?).to be true
+      expect(n17.right.nil?).to be true
+      expect(root.right).to eq n41
+      expect(n31.left).to eq n13
+      # delete a leaf node
+      expect(root.delete(13)).to eq n13
+      expect(n31.left).to be nil
+      # expect(root.size).to eq 5
+    end
+
+    it 'promotes left node on deletion' do
+      root = Node.new(11)
+      n5 = Node.new(5)
+      n7 = Node.new(7)
+      n3 = Node.new(3)
+      root.add n5
+      root.add n7
+      root.add n3
+
+      expect(root.delete(5)).to eq n5
+      expect(root.bst?).to be true
+      expect(n5.left.nil?).to be true
+      expect(n5.right.nil?).to be true
+      expect(root.left).to eq n3
+      expect(n3.right).to eq n7
+    end
+
+    it 'deletes the root node correctly' do
+      root = Node.new(11)
+      n5 = Node.new(5)
+      n7 = Node.new(7)
+      n3 = Node.new(3)
+      root.add n5
+      root.add n7
+      root.add n3
+
+      n17 = Node.new(17)
+      n13 = Node.new(13)
+      n41 = Node.new(41)
+      n37 = Node.new(37)
+      n31 = Node.new(31)
+      root.add n17
+      root.add n13
+      root.add n41
+      root.add n37
+      root.add n31
+
+      expect(root.delete(11)).to eq root
+      expect(root.left.nil?).to be true
+      expect(root.right.nil?).to be true
+
+      expect(n5.bst?).to be true
+      expect(n5.left).to eq n3
+      expect(n5.right).to eq n7
+      expect(n7.right).to eq n17
+    end
   end
 
   describe 'comparators' do

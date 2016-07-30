@@ -14,9 +14,7 @@ Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
-    - 'lib/node.rb'
-    - 'lib/tree.rb'
-    - 'lib/binary_search_tree.rb'
+    - 'lib/*.rb'
 
 # Offense count: 8
 # Cop supports --auto-correct.

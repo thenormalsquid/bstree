@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative './tree'
 require_relative './node'
 

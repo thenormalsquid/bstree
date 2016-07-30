@@ -45,6 +45,146 @@ describe Tree do
     end
   end
 
+  describe '.delete' do
+    it 'returns the root node when specified for deletion' do
+      root = Node.new(9)
+      tree = Tree.new root
+      expect(tree.delete(9)).to eq root
+      expect(tree.root.nil?).to be true
+      expect(tree.size).to eq 0
+    end
+
+    it 'deletes the right node specified by key' do
+      root = Node.new(9)
+      tree = Tree.new root
+      n14 = Node.new(14)
+      tree.add n14
+      expect(tree.delete(14)).to eq n14
+      expect(tree.bst?).to be true
+      expect(n14.left.nil?).to be true
+      expect(n14.right.nil?).to be true
+      expect(tree.size).to eq 1
+    end
+
+    it 'deletes a right node reassiging that nodes child' do
+      root = Node.new(9)
+      tree = Tree.new root
+      n14 = Node.new(14)
+      n23 = Node.new(23)
+      tree.add n14
+      tree.add n23
+
+      expect(tree.delete(14)).to eq n14
+      expect(n14.left.nil?).to be true
+      expect(n14.right.nil?).to be true
+      expect(tree.bst?).to be true
+      expect(tree.root.right).to eq n23
+      expect(tree.size).to eq 2
+    end
+
+    it 'reassigns right subtree on deletion' do
+      root = Node.new(11)
+      tree = Tree.new root
+      n17 = Node.new(17)
+      n19 = Node.new(19)
+      n13 = Node.new(13)
+      n5 = Node.new(5)
+      tree.add n17
+      tree.add n19
+      tree.add n13
+      tree.add n5
+
+      expect(tree.delete(17)).to eq n17
+      expect(tree.bst?).to be true
+      expect(n17.left.nil?).to be true
+      expect(n17.right.nil?).to be true
+      expect(tree.root.right).to eq n19
+      expect(tree.root.right.left).to eq n13
+      expect(tree.size).to eq 4
+    end
+
+    it 'rebuilds subtree after deleting node' do
+      root = Node.new(11)
+      tree = Tree.new root
+      n5 = Node.new(5)
+      tree.add n5
+
+      n17 = Node.new(17)
+      n13 = Node.new(13)
+      n41 = Node.new(41)
+      n37 = Node.new(37)
+      n31 = Node.new(31)
+      tree.add n17
+      tree.add n13
+      tree.add n41
+      tree.add n37
+      tree.add n31
+      expect(tree.delete(17)).to eq n17
+      expect(tree.bst?).to be true
+      expect(n17.left.nil?).to be true
+      expect(n17.right.nil?).to be true
+      expect(tree.root.right).to eq n41
+      expect(n31.left).to eq n13
+      expect(tree.size).to eq 6
+      # delete a leaf node
+      expect(tree.delete(13)).to eq n13
+      expect(n31.left).to be nil
+      expect(tree.size).to eq 5
+    end
+
+    it 'promotes left node on deletion' do
+      root = Node.new(11)
+      tree = Tree.new root
+      n5 = Node.new(5)
+      n7 = Node.new(7)
+      n3 = Node.new(3)
+      tree.add n5
+      tree.add n7
+      tree.add n3
+
+      expect(tree.delete(5)).to eq n5
+      expect(tree.bst?).to be true
+      expect(n5.left.nil?).to be true
+      expect(n5.right.nil?).to be true
+      expect(tree.root.left).to eq n3
+      expect(n3.right).to eq n7
+      expect(tree.size).to eq 3
+    end
+
+    it 'deletes the root node correctly' do
+      root = Node.new(11)
+      tree = Tree.new root
+      n5 = Node.new(5)
+      n7 = Node.new(7)
+      n3 = Node.new(3)
+      tree.add n5
+      tree.add n7
+      tree.add n3
+
+      n17 = Node.new(17)
+      n13 = Node.new(13)
+      n41 = Node.new(41)
+      n37 = Node.new(37)
+      n31 = Node.new(31)
+      tree.add n17
+      tree.add n13
+      tree.add n41
+      tree.add n37
+      tree.add n31
+
+      expect(tree.delete(11)).to eq root
+      expect(tree.root).to eq n5
+      expect(root.left.nil?).to be true
+      expect(root.right.nil?).to be true
+
+      expect(n5.bst?).to be true
+      expect(n5.left).to eq n3
+      expect(n5.right).to eq n7
+      expect(n7.right).to eq n17
+      expect(tree.size).to eq 8
+    end
+  end
+
   describe '.find' do
     it 'finds a node with given key' do
       node = Node.new(9)
