@@ -15,9 +15,17 @@ end
 
 function Node:insert(n)
   if n.key < self.key then
-    self.left = n
+    if self.left == nil then
+      self.left = n
+    else
+      self.left:insert(n)
+    end
   else
-    self.right = n
+    if self.right == nil then
+      self.right = n
+    else
+      self.right:insert(n)
+    end
   end
 end
 

@@ -46,7 +46,7 @@ regarded as complete when its associated test passes.
 | Java          | 2016-07-26 |            |            |            |            |         |            |            |
 | C++           | Done       | Done       | Done       | 2016-07-27 |            |         | 2016-07-26 | 2016-07-26 |
 | C             |            |            |            |            |            |         |            |            |
-| Lua           |            |            |            |            |            |         |            |            |
+| Lua           | 2016-07-30 |            |            |            |            |         |            |            |
 | Javascript    |            |            |            |            |            |         |            |            |
 | SQL           |            |            | 2016-07-27 | 2016-07-27 |            |         | 2016-07-28 | 2016-07-28 |
 | Array         |            |            |            |            |            |         |            |            |
