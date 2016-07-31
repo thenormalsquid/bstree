@@ -89,6 +89,27 @@ be written iteratively as well, which is a good exercise for the future.
 | Array         |            |            |            |        |      | N/A     |
 
 
+#### AVL-specific functionality
+
+Implementing these various trees is an interesting engineering problem.
+The initial approach is to inherit from the binary search tree
+implementation, adding and overriding as necessary.
+
+|               | rotations  |
+|---            |---         |
+| Ruby          | 2016-07-31 |
+| Ruby (module) |            |
+| Python        |            |
+| Java          |            |
+| C++           |            |
+| C             |            |
+| Lua           |            |
+| Javascript    |            |
+| SQL           |            |
+| Array         |            |
+
+
+
 ## Notes
 
 The discerning programmer may find much of the code here to be somewhat
