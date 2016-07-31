@@ -52,8 +52,7 @@ module BinarySearchTree
     key < @key ? left&.present?(key) : right&.present?(key)
   end
 
-  # Here's a specific call that recurses on itself to determine if
-  # the node is a binary search tree.
+  # Easy, dumb way to do it.
   def bst?
     return false if left && left >= self || right && self > right
     left&.bst?
@@ -61,8 +60,7 @@ module BinarySearchTree
     true
   end
 
-  # Passing a block to a pre_order_traverse works too. This is what
-  # is tested.
+  # This is what is tested.
   def bst?
     pre_order_traverse { (left &.>= self) || (right &.< self) ? false : true }
   end
