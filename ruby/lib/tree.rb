@@ -5,9 +5,6 @@ require 'pry'
 class Tree
   attr_reader :root, :size
 
-  INCR = 1
-  DECR = -1
-
   def initialize node = nil
     @root = node ? node : Node.new
     @size = 1
@@ -20,7 +17,7 @@ class Tree
 
   # This is kind of nasty. It turns out that rooting a tree
   # in some sort of container is both a crutch and a constraint.
-  # The big hassle is the edge case induced by deleted the root
+  # The big hassle is the edge case induced by deleting the root
   # node.
   def delete key
     left = @root.left
@@ -48,23 +45,8 @@ class Tree
     @root.find key
   end
 
-  # TODO: move this into the node class.
   def depth
-    max = 0
-    current = 0
-    find_depth root do |increment|
-      current += increment
-      max = max < current ? current : max unless increment == INCR
-    end
-    max
-  end
-
-  def find_depth node, &block
-    return if node.nil?
-    yield(INCR)
-    find_depth node.left, &block
-    find_depth node.right, &block
-    yield(DECR)
+    root.depth
   end
 
   def full?

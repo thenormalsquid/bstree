@@ -2,6 +2,9 @@
 module BinarySearchTree
   attr_accessor :left, :right
 
+  INCR = 1
+  DECR = -1
+
   def < _other
     raise NoMethodError.new "'<' method must be overridden"
   end
@@ -30,6 +33,25 @@ module BinarySearchTree
     node_to_delete.left = node_to_delete.right = nil
     node_to_delete
   end
+
+  def depth
+    max = 0
+    current = 0
+    find_depth self do |increment|
+      current += increment
+      max = max < current ? current : max unless increment == INCR
+    end
+    max
+  end
+
+  def find_depth node, &block
+    return if node.nil?
+    yield(INCR)
+    find_depth node.left, &block
+    find_depth node.right, &block
+    yield(DECR)
+  end
+
 
   def find_with_parent key, parent
     return [self, parent] if key == @key

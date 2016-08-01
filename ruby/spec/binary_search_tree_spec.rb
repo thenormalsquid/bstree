@@ -335,6 +335,43 @@ describe BinarySearchTree do
     end
   end
 
+  describe 'depth of tree' do
+    it 'finds the depth of single node tree' do
+      node = Node.new(9)
+      expect(node.depth).to eq 0
+    end
+
+    it 'finds the depth of two node tree with right child' do
+      node = Node.new(9)
+      node.add Node.new(14)
+      expect(node.depth).to eq 1
+    end
+
+    it 'finds the depth of two node tree with left child' do
+      node = Node.new(9)
+      node.add Node.new(4)
+      expect(node.depth).to eq 1
+    end
+
+    it 'finds the depth of three node tree' do
+      node = Node.new(9)
+      node.add Node.new(14)
+      node.add Node.new(4)
+      expect(node.depth).to eq 1
+    end
+
+    it 'finds depth for arbitrary tree' do
+      node = Node.new(9)
+      node.add Node.new(14)
+      node.add Node.new(4)
+      node.add Node.new(23)
+      node.add Node.new(5)
+      node.add Node.new(99)
+      node.add Node.new(78)
+      expect(node.depth).to eq 4
+    end
+  end
+
   describe 'method overriding' do
     class Bar
       require 'securerandom'

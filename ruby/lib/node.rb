@@ -12,6 +12,9 @@ class Node
   attr_accessor :left, :right, :uuid
   attr_accessor :value
 
+  INCR = 1
+  DECR = -1
+
   def initialize value = nil, uuid = nil
     @value = value
     @uuid = uuid || SecureRandom.uuid
@@ -39,6 +42,24 @@ class Node
 
   def addright node
     @right.nil? ? @right = node : @right.add(node)
+  end
+
+  def depth
+    max = 0
+    current = 0
+    find_depth self do |increment|
+      current += increment
+      max = max < current ? current : max unless increment == INCR
+    end
+    max
+  end
+
+  def find_depth node, &block
+    return if node.nil?
+    yield(INCR)
+    find_depth node.left, &block
+    find_depth node.right, &block
+    yield(DECR)
   end
 
   def delete key, parent = nil
