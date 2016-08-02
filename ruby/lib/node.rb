@@ -94,6 +94,12 @@ class Node
     key < value ? left&.present?(key) : right&.present?(key)
   end
 
+  def balanced?
+    left_depth = left&.depth || 0
+    right_depth = right&.depth || 0
+    [-1, 0, 1].include?(left_depth - right_depth)
+  end
+
   def full?
     return true if left.nil? && right.nil?
     left&.full? && right&.full? # returns nil instead of false, why?

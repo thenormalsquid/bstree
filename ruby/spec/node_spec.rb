@@ -217,7 +217,7 @@ describe Node do
     end
   end
 
-  describe 'depth of tree' do
+  describe '.depth' do
     it 'finds the depth of single node tree' do
       node = Node.new(9)
       expect(node.depth).to eq 0
@@ -240,6 +240,14 @@ describe Node do
       node.add Node.new(14)
       node.add Node.new(4)
       expect(node.depth).to eq 1
+    end
+
+    it 'finds the depth of four node tree with two left children' do
+      node = Node.new(9)
+      node.add Node.new(14)
+      node.add Node.new(4)
+      node.add Node.new(2)
+      expect(node.depth).to eq 2
     end
 
     it 'finds depth for arbitrary tree' do
@@ -268,6 +276,57 @@ describe Node do
       expect(root.present?(3)).to eq true
       expect(root.present?(9)).to eq true
       expect(root.present?(8)).to eq nil
+    end
+  end
+
+  describe '.balanced?' do
+    let(:root) { Node.new 100 }
+    let(:left) { Node.new 50 }
+    let(:right) { Node.new 150 }
+    let(:l2) { Node.new 25 }
+    let(:l3) { Node.new 75 }
+    let(:l4) { Node.new 15 }
+
+    it 'returns true for node with 0 children' do
+      expect(root.balanced?).to be true
+    end
+
+    it 'returns true for node with 2 children' do
+      root.add left
+      root.add right
+      expect(root.balanced?).to be true
+    end
+
+    it 'returns true for a node with only one child' do
+      root.add left
+      expect(root.balanced?).to be true
+    end
+
+    it 'returns true for tree with 5 nodes' do
+      root.add left
+      root.add right
+      root.add l2
+      root.add l3
+      expect(root.balanced?).to be true
+    end
+
+    it 'returns nil for tree with 6 nodes' do
+      root.add left
+      root.add right
+      root.add l2
+      root.add l3
+      root.add Node.new 145
+      expect(root.balanced?).to be true
+    end
+
+    it 'returns false for long left subtree' do
+      root.add left
+      root.add right
+      root.add l2
+      root.add l3
+      root.add l4
+      root.add Node.new 5
+      expect(root.balanced?).to be false
     end
   end
 
