@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require_relative './spec_helper'
 require_relative '../lib/node'
 require_relative './nodes'
 
@@ -217,7 +218,17 @@ describe Node do
     end
   end
 
+  # require_relative 'shared_depth_examples'
   describe '.depth' do
+    shared_examples "depth" do
+      it 'finds the depth of single node tree' do
+        node = Node.new(9)
+        expect(node.depth).to eq 0
+      end
+    end
+
+    it_has_behavior 'depth'
+
     it 'finds the depth of single node tree' do
       node = Node.new(9)
       expect(node.depth).to eq 0
