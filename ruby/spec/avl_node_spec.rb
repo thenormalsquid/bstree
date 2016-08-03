@@ -2,8 +2,21 @@
 require_relative '../lib/avl_node'
 
 describe AvlNode do
-  it 'instantiates' do
-    expect(AvlNode.new).not_to be_nil
+  describe '.insert' do
+    let(:root) { AvlNode.new 11 }
+    let(:n3) { AvlNode.new 3 }
+    let(:n5) { AvlNode.new(5) }
+    let(:n7) { AvlNode.new 7 }
+    let(:n11) { AvlNode.new 11 }
+    let(:n13) { AvlNode.new 13 }
+    let(:n17) { AvlNode.new 17 }
+    let(:n19) { AvlNode.new 19 }
+
+    it 'inserts a node and balances' do
+      n11.add n5
+      expect(n5.balanced?).to be true
+      expect(n5.weight).to be 0
+    end
   end
 
   describe 'rotations' do

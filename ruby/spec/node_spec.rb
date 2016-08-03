@@ -6,7 +6,7 @@ require_relative './nodes'
 require 'pry'
 
 describe Node do
-  include Nodes
+  # include Nodes
 
   it 'instantiates' do
     expect(Node.new).not_to be_nil
@@ -461,6 +461,65 @@ describe Node do
       allow(node).to receive(:uuid).and_return('uuid')
       expected = "{\"value\":8,\"uuid\":\"uuid\",\"left\":null,\"right\":null}"
       expect(node.to_json).to eq expected
+    end
+  end
+
+  describe 'various pathological trees' do
+    describe 'trees as linked lists' do
+      let(:n2) { Node.new 2 }
+      let(:n3) { Node.new 3 }
+      let(:n5) { Node.new 5 }
+      let(:n7) { Node.new 7 }
+      let(:n11) { Node.new 11 }
+      let(:n13) { Node.new 13 }
+      let(:n17) { Node.new 17 }
+      let(:n19) { Node.new 19 }
+      let(:n23) { Node.new 23 }
+      let(:n29) { Node.new 29 }
+
+      describe 'only right children' do
+        it 'makes a long right list' do
+          n2.add n3
+          n2.add n5
+          n2.add n7
+          n2.add n11
+          n2.add n13
+          n2.add n17
+          n2.add n19
+          n2.add n23
+          n2.add n29
+          expect(n2.depth).to eq 9
+          expect(n29.depth).to eq 0
+          # expect(n2.pathological?).to be true
+          # expect(n29.pathological?).to be false
+          # expect(n23.pathological?).to be false
+          # expect(n19.pathological?).to be true
+          # expect(n2.degenerate?).to be true
+        end
+      end
+
+      describe 'only left children' do
+        it 'makes a long left list' do
+          n29.add n23
+          n29.add n19
+          n29.add n17
+          n29.add n13
+          n29.add n11
+          n29.add n7
+          n29.add n5
+          n29.add n3
+          n29.add n2
+          expect(n29.depth).to eq 9
+          expect(n2.depth).to eq 0
+          # expect(n29.pathological?).to be true
+          # expect(n5.pathological?).to be true
+          # expect(n3.pathological?).to be false
+          # expect(n29.degenerate?).to be true
+        end
+      end
+
+      describe 'left and right children, alternately aperiodically' do
+      end
     end
   end
 end

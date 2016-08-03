@@ -135,6 +135,27 @@ particularly that the including class must define the key for the tree.
 
 \appendix
 
+\section{Implementation}
 
+
+\subsection{Testing}
+
+Two ways of arranging tests include:
+\begin{enumerate}
+\item Group tests by method or function, ensuring a number of different
+trees pass the method being tested.
+\item Group tests by the tree, ensuring each operation on that particular tree
+executes correctly.
+\end{enumerate}
+
+Traditionally, in Test-Driven Design (TDD), a method test is created with a simple example.
+The method is then implemented as simply as possible to ensure the example passes.
+More complex examples are created, and the method's implementation modified as necessary
+to ensure tests pass.
+
+Grouping tests by data structure examples puts a much larger burden on TDD,
+but provides a different perspective. These tests may be more effective once an
+initial implementation is created. Then, pathological data structures can be
+created and tested in detail.
 
 \end{document}
