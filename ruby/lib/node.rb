@@ -97,7 +97,10 @@ class Node
   def balanced?
     left_depth = left&.depth || 0
     right_depth = right&.depth || 0
-    [-1, 0, 1].include?(left_depth - right_depth)
+    return false unless [-1, 0, 1].include?(left_depth - right_depth)
+    left&.balanced?
+    right&.balanced?
+    true
   end
 
   def full?

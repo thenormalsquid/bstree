@@ -339,6 +339,11 @@ describe Node do
       root.add Node.new 5
       expect(root.balanced?).to be false
     end
+
+    # TODO: add a bunch more examples here, checking node by node
+    # on an unbalanced tree. Actually, all we really need is a single
+    # tree, then each particular part of the tree can be examined for
+    # balance.
   end
 
   describe '.bst?' do
