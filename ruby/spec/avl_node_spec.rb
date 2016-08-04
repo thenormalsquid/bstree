@@ -55,4 +55,70 @@ describe AvlNode do
       expect(n17.size).to eq 5
     end
   end
+
+  describe 'build avl trees from sorted lists' do
+    describe 'trees as linked lists' do
+      let(:n2) { AvlNode.new 2 }
+      let(:n3) { AvlNode.new 3 }
+      let(:n5) { AvlNode.new 5 }
+      let(:n7) { AvlNode.new 7 }
+      let(:n11) { AvlNode.new 11 }
+      let(:n13) { AvlNode.new 13 }
+      let(:n17) { AvlNode.new 17 }
+      let(:n19) { AvlNode.new 19 }
+      let(:n23) { AvlNode.new 23 }
+      let(:n29) { AvlNode.new 29 }
+
+
+      # Check to ensure the rotations are getting called
+      # correctly.
+      #
+      # Consider having insert return the current root.
+      #
+      # expect(n2).to receive(:rotate_ccw).with("correct argument")
+      describe 'only right children' do
+        it 'makes a long right list' do
+          n2.add n3
+          n2.add n5
+          n2.add n7
+          n2.add n11
+          n2.add n13
+          n2.add n17
+          n2.add n19
+          n2.add n23
+          n2.add n29
+          expect(n2.height).to eq 9
+          expect(n29.height).to eq 0
+          # expect(n2.pathological?).to be true
+          # expect(n29.pathological?).to be false
+          # expect(n23.pathological?).to be false
+          # expect(n19.pathological?).to be true
+          # expect(n2.degenerate?).to be true
+        end
+      end
+
+      describe 'only left children' do
+        it 'makes a long left list' do
+          n29.add n23
+          n29.add n19
+          n29.add n17
+          n29.add n13
+          n29.add n11
+          n29.add n7
+          n29.add n5
+          n29.add n3
+          n29.add n2
+          expect(n29.height).to eq 9
+          expect(n2.height).to eq 0
+          # expect(n29.pathological?).to be true
+          # expect(n5.pathological?).to be true
+          # expect(n3.pathological?).to be false
+          # expect(n29.degenerate?).to be true
+        end
+      end
+
+      describe 'left and right children, alternately aperiodically' do
+      end
+    end
+  end
 end

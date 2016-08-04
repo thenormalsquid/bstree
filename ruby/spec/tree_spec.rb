@@ -201,37 +201,37 @@ describe Tree do
     end
   end
 
-  describe 'depth of tree' do
+  describe 'height of tree' do
     # Depth should be incremented when nodes are added,
-    # if the depth is to be considered as an attribute of the tree.
+    # if the height is to be considered as an attribute of the tree.
     # As a virtual attribute (to borrow a notion from Ruby), calling a
-    # tree's depth method triggers a traversal of the entire tree to
-    # find maximum depth. Let's do this first.
-    it 'finds the depth of single node tree' do
+    # tree's height method triggers a traversal of the entire tree to
+    # find maximum height. Let's do this first.
+    it 'finds the height of single node tree' do
       tree = Tree.new Node.new(9)
-      expect(tree.depth).to eq 0
+      expect(tree.height).to eq 0
     end
 
-    it 'finds the depth of two node tree with right child' do
-      tree = Tree.new Node.new(9)
-      tree.add Node.new(14)
-      expect(tree.depth).to eq 1
-    end
-
-    it 'finds the depth of two node tree with left child' do
-      tree = Tree.new Node.new(9)
-      tree.add Node.new(4)
-      expect(tree.depth).to eq 1
-    end
-
-    it 'finds the depth of three node tree' do
+    it 'finds the height of two node tree with right child' do
       tree = Tree.new Node.new(9)
       tree.add Node.new(14)
-      tree.add Node.new(4)
-      expect(tree.depth).to eq 1
+      expect(tree.height).to eq 1
     end
 
-    it 'finds depth for arbitrary tree' do
+    it 'finds the height of two node tree with left child' do
+      tree = Tree.new Node.new(9)
+      tree.add Node.new(4)
+      expect(tree.height).to eq 1
+    end
+
+    it 'finds the height of three node tree' do
+      tree = Tree.new Node.new(9)
+      tree.add Node.new(14)
+      tree.add Node.new(4)
+      expect(tree.height).to eq 1
+    end
+
+    it 'finds height for arbitrary tree' do
       node = Node.new(9)
       tree = Tree.new node
       tree.add Node.new(14)
@@ -240,7 +240,7 @@ describe Tree do
       tree.add Node.new(5)
       tree.add Node.new(99)
       tree.add Node.new(78)
-      expect(tree.depth).to eq 4
+      expect(tree.height).to eq 4
     end
   end
 

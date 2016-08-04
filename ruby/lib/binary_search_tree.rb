@@ -34,21 +34,21 @@ module BinarySearchTree
     node_to_delete
   end
 
-  def depth
+  def height
     max = 0
     current = 0
-    find_depth self do |increment|
+    find_height self do |increment|
       current += increment
       max = max < current ? current : max unless increment == INCR
     end
     max
   end
 
-  def find_depth node, &block
+  def find_height node, &block
     return if node.nil?
     yield(INCR)
-    find_depth node.left, &block
-    find_depth node.right, &block
+    find_height node.left, &block
+    find_height node.right, &block
     yield(DECR)
   end
 
@@ -67,6 +67,19 @@ module BinarySearchTree
   def find key
     return self if @key == key
     key < @key ? left&.find(key) : right&.find(key)
+  end
+
+  def common_parent n1, n2
+    if n1 < n2
+      l = n1
+      r = n2
+    else
+      l = n2
+      r = n1
+    end
+
+    return self if l <= self && self <= r
+    l < self ? left&.common_parent(l, r) : right&.common_parent(l, r)
   end
 
   def present? key

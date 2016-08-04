@@ -44,21 +44,21 @@ class Node
     @right.nil? ? @right = node : @right.add(node)
   end
 
-  def depth
+  def height
     max = 0
     current = 0
-    find_depth self do |increment|
+    find_height self do |increment|
       current += increment
       max = max < current ? current : max unless increment == INCR
     end
     max
   end
 
-  def find_depth node, &block
+  def find_height node, &block
     return if node.nil?
     yield(INCR)
-    find_depth node.left, &block
-    find_depth node.right, &block
+    find_height node.left, &block
+    find_height node.right, &block
     yield(DECR)
   end
 
@@ -95,9 +95,9 @@ class Node
   end
 
   def balanced?
-    left_depth = left&.depth || 0
-    right_depth = right&.depth || 0
-    return false unless [-1, 0, 1].include?(left_depth - right_depth)
+    left_height = left&.height || 0
+    right_height = right&.height || 0
+    return false unless [-1, 0, 1].include?(left_height - right_height)
     left&.balanced?
     right&.balanced?
     true

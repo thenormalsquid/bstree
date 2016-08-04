@@ -25,6 +25,10 @@ describe BinarySearchTree do
     def > other
       @key > other.key
     end
+
+    def <= other
+      @key <= other.key
+    end
   end
 
   before :each do
@@ -335,40 +339,95 @@ describe BinarySearchTree do
     end
   end
 
-  describe 'depth of tree' do
-    it 'finds the depth of single node tree' do
-      node = Node.new(9)
-      expect(node.depth).to eq 0
+  describe '.common_parent' do
+    let(:root) { Foo.new 11 }
+    let(:n5) { Foo.new 5 }
+    let(:n3) { Foo.new 3 }
+    let(:n7) { Foo.new 7 }
+    let(:n13) { Foo.new 13 }
+    let(:n17) { Foo.new 17 }
+    let(:n19) { Foo.new 19 }
+
+    it 'finds the common parent to itself' do
+      expect(root.common_parent(root, root)).to eq root
     end
 
-    it 'finds the depth of two node tree with right child' do
-      node = Node.new(9)
-      node.add Node.new(14)
-      expect(node.depth).to eq 1
+    it 'finds the common parent for direct left and right children' do
+      root.add n5
+      root.add n13
+      expect(root.common_parent(n5, n13)).to eq root
+      expect(root.common_parent(n13, n5)).to eq root
     end
 
-    it 'finds the depth of two node tree with left child' do
-      node = Node.new(9)
-      node.add Node.new(4)
-      expect(node.depth).to eq 1
+    it 'finds common parent for children on left side of root' do
+      root.add n5
+      root.add n7
+      root.add n3
+      expect(root.common_parent(n3, n7)).to eq n5
+      expect(root.common_parent(n7, n3)).to eq n5
     end
 
-    it 'finds the depth of three node tree' do
-      node = Node.new(9)
-      node.add Node.new(14)
-      node.add Node.new(4)
-      expect(node.depth).to eq 1
+    it 'finds common parent for nodes in series' do
+      root.add n5
+      root.add n3
+      expect(root.common_parent(n3, n5)).to eq n5
+      expect(root.common_parent(n5, n3)).to eq n5
     end
 
-    it 'finds depth for arbitrary tree' do
-      node = Node.new(9)
-      node.add Node.new(14)
-      node.add Node.new(4)
-      node.add Node.new(23)
-      node.add Node.new(5)
-      node.add Node.new(99)
-      node.add Node.new(78)
-      expect(node.depth).to eq 4
+    it 'finds common parent for children right of root' do
+      root.add n17
+      root.add n13
+      root.add n19
+      expect(root.common_parent(n13, n19)).to eq n17
+      expect(root.common_parent(n19, n13)).to eq n17
+    end
+
+    it 'finds children either side of root' do
+      root.add n5
+      root.add n7
+      root.add n3
+      root.add n17
+      root.add n13
+      root.add n19
+      expect(root.common_parent(n3, n19)).to eq root
+      expect(root.common_parent(n19, n3)).to eq root
+    end
+  end
+
+  describe 'height of tree' do
+    it 'finds the height of single node tree' do
+      node = Foo.new(9)
+      expect(node.height).to eq 0
+    end
+
+    it 'finds the height of two node tree with right child' do
+      node = Foo.new(9)
+      node.add Foo.new(14)
+      expect(node.height).to eq 1
+    end
+
+    it 'finds the height of two node tree with left child' do
+      node = Foo.new(9)
+      node.add Foo.new(4)
+      expect(node.height).to eq 1
+    end
+
+    it 'finds the height of three node tree' do
+      node = Foo.new(9)
+      node.add Foo.new(14)
+      node.add Foo.new(4)
+      expect(node.height).to eq 1
+    end
+
+    it 'finds height for arbitrary tree' do
+      node = Foo.new(9)
+      node.add Foo.new(14)
+      node.add Foo.new(4)
+      node.add Foo.new(23)
+      node.add Foo.new(5)
+      node.add Foo.new(99)
+      node.add Foo.new(78)
+      expect(node.height).to eq 4
     end
   end
 

@@ -218,50 +218,50 @@ describe Node do
     end
   end
 
-  # require_relative 'shared_depth_examples'
-  describe '.depth' do
-    shared_examples "depth" do
-      it 'finds the depth of single node tree' do
+  # require_relative 'shared_height_examples'
+  describe '.height' do
+    shared_examples "height" do
+      it 'finds the height of single node tree' do
         node = Node.new(9)
-        expect(node.depth).to eq 0
+        expect(node.height).to eq 0
       end
     end
 
-    it_has_behavior 'depth'
+    it_has_behavior 'height'
 
-    it 'finds the depth of single node tree' do
+    it 'finds the height of single node tree' do
       node = Node.new(9)
-      expect(node.depth).to eq 0
+      expect(node.height).to eq 0
     end
 
-    it 'finds the depth of two node tree with right child' do
-      node = Node.new(9)
-      node.add Node.new(14)
-      expect(node.depth).to eq 1
-    end
-
-    it 'finds the depth of two node tree with left child' do
-      node = Node.new(9)
-      node.add Node.new(4)
-      expect(node.depth).to eq 1
-    end
-
-    it 'finds the depth of three node tree' do
+    it 'finds the height of two node tree with right child' do
       node = Node.new(9)
       node.add Node.new(14)
-      node.add Node.new(4)
-      expect(node.depth).to eq 1
+      expect(node.height).to eq 1
     end
 
-    it 'finds the depth of four node tree with two left children' do
+    it 'finds the height of two node tree with left child' do
+      node = Node.new(9)
+      node.add Node.new(4)
+      expect(node.height).to eq 1
+    end
+
+    it 'finds the height of three node tree' do
+      node = Node.new(9)
+      node.add Node.new(14)
+      node.add Node.new(4)
+      expect(node.height).to eq 1
+    end
+
+    it 'finds the height of four node tree with two left children' do
       node = Node.new(9)
       node.add Node.new(14)
       node.add Node.new(4)
       node.add Node.new(2)
-      expect(node.depth).to eq 2
+      expect(node.height).to eq 2
     end
 
-    it 'finds depth for arbitrary tree' do
+    it 'finds height for arbitrary tree' do
       node = Node.new(9)
       node.add Node.new(14)
       node.add Node.new(4)
@@ -269,7 +269,7 @@ describe Node do
       node.add Node.new(5)
       node.add Node.new(99)
       node.add Node.new(78)
-      expect(node.depth).to eq 4
+      expect(node.height).to eq 4
     end
   end
 
@@ -493,8 +493,8 @@ describe Node do
           n2.add n19
           n2.add n23
           n2.add n29
-          expect(n2.depth).to eq 9
-          expect(n29.depth).to eq 0
+          expect(n2.height).to eq 9
+          expect(n29.height).to eq 0
           # expect(n2.pathological?).to be true
           # expect(n29.pathological?).to be false
           # expect(n23.pathological?).to be false
@@ -514,8 +514,8 @@ describe Node do
           n29.add n5
           n29.add n3
           n29.add n2
-          expect(n29.depth).to eq 9
-          expect(n2.depth).to eq 0
+          expect(n29.height).to eq 9
+          expect(n2.height).to eq 0
           # expect(n29.pathological?).to be true
           # expect(n5.pathological?).to be true
           # expect(n3.pathological?).to be false

@@ -45,8 +45,8 @@ class Tree
     @root.find key
   end
 
-  def depth
-    root.depth
+  def height
+    root.height
   end
 
   def full?
