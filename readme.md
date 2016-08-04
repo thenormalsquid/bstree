@@ -73,11 +73,11 @@ be written iteratively as well, which is a good exercise for the future.
 | Array         |            |          |           |            |            |            |           |             |
 
 
-### Persistence and serialization
+### Persistence, serialization, etc.
 
-|               | json       | relational | yaml       | ==     | ===  | destroy |
-|---            |---         |---         |---         |---     |---   |---      |
-| Ruby          | 2016-07-23 |            |            |        |      | N/A     |
+|               | json       | relational | yaml       | ==     | ===  | destroy | common parent |
+|---            |---         |---         |---         |---     |---   |---      |---            |
+| Ruby          | 2016-07-23 |            |            |        |      | N/A     | 2016-08-04    |
 | Ruby (module) |            |            |            |        |      | N/A     |
 | Python        |            |            |            |        |      | N/A     |
 | Java          |            |            |            |        |      | N/A     |
