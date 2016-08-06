@@ -16,7 +16,8 @@ INSERT INTO bst VALUES('node17', 17, 'root', 'node13', 'node19');
 INSERT INTO bst VALUES('node13', 13, 'node17', NULL, NULL);
 INSERT INTO bst VALUES('node19', 19, 'node17', NULL, NULL);
 
--- With UNION ALL
+
+SELECT 'With UNION ALL';
 WITH RECURSIVE
   dfs(label, level) AS (
     VALUES('root', 0)
@@ -27,7 +28,8 @@ WITH RECURSIVE
     )
     SELECT substr('..........',1, level*3) || label FROM dfs;
 
--- Without UNION ALL
+
+select 'Without UNION ALL';
 WITH RECURSIVE
   dfs(label, level) AS (
     VALUES('root', 0)
@@ -39,28 +41,34 @@ WITH RECURSIVE
     SELECT substr('..........',1, level*3) || label FROM dfs;
 
 
+SELECT 'Attempt to find common parent';
+-- This is actually not trivial.
 WITH RECURSIVE
-  dfs(label, level) AS (
-    VALUES('root', 0)
+  dfs(label1, label2, level) AS (
+    -- VALUES('root', 'node19', 0)
+    VALUES('node3', 'node19', 0)
     UNION
-    SELECT bst.label, dfs.level+1
-      FROM bst JOIN dfs ON bst.parent=dfs.label
+    SELECT bst.label, bst.label, dfs.level+1
+      FROM bst JOIN dfs ON bst.parent=dfs.label1 AND bst.parent=dfs.label2
       ORDER BY 2 DESC
     )
-    SELECT substr('..........',1, level*3) || label,level FROM dfs;
+    SELECT substr('..........',1, level*3) || label2,level FROM dfs;
 
 
+-- These are all relatively trivial
 -- find
-SELECT value FROM bst WHERE value = 7;
+-- SELECT value FROM bst WHERE value = 7;
 
 -- present?
-SELECT DISTINCT 1 from bst where value = 7;
-SELECT DISTINCT 1 from bst where value = 700;
+-- SELECT DISTINCT 1 from bst where value = 7;
+-- SELECT DISTINCT 1 from bst where value = 700;
 
 -- maximum
-SELECT * FROM bst ORDER BY value DESC LIMIT 1;
+-- SELECT * FROM bst ORDER BY value DESC LIMIT 1;
 
 -- minimum
-SELECT * FROM bst ORDER BY value ASC LIMIT 1;
+-- SELECT * FROM bst ORDER BY value ASC LIMIT 1;
 
--- SELECT * FROM bst WHERE value
+
+-- SELECT 'collect ascending';
+-- SELECT value FROM bst ORDER BY value ASC;

@@ -29,4 +29,10 @@ function Node:insert(n)
   end
 end
 
+function Node:collect(collector)
+  if self.left then self.left:collect(collector) end
+  collector[#collector + 1] = self.key
+  if self.right then self.right:collect(collector) end
+end
+
 return Node

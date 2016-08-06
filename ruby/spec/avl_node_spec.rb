@@ -12,6 +12,8 @@ describe AvlNode do
     let(:n17) { AvlNode.new 17 }
     let(:n19) { AvlNode.new 19 }
 
+    it 'returns current root on insertion'
+
     it 'inserts a node and balances' do
       n11.add n5
       expect(n5.balanced?).to be true

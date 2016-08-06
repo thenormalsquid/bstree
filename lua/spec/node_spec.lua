@@ -48,4 +48,51 @@ describe("insert nodes", function()
   end)
 end)
 
+describe("collecting values or labels from nodes in order", function()
+  it("collects the value from a single node", function()
+    root = node:new(11)
+    actual = {}
+    root:collect(actual)
+    expected = {11}
+    assert.are.same(expected, actual)
+  end)
 
+  it("collects the value from root and right child", function()
+    root = node:new(11)
+    n17 = node:new(17)
+    root:insert(n17)
+
+    actual = {}
+    root:collect(actual)
+    expected = {11, 17}
+    assert.are.same(expected, actual)
+  end)
+
+  it("collects the value from root and left child", function()
+    root = node:new(11)
+    n7 = node:new(7)
+    root:insert(n7)
+
+    actual = {}
+    root:collect(actual)
+    expected = {7, 11}
+    assert.are.same(expected, actual)
+  end)
+
+  it("collects the values from arbitrary tree", function()
+    root = node:new(11)
+    n17 = node:new(17)
+    n13 = node:new(13)
+    n5 = node:new(5)
+    n7 = node:new(7)
+    root:insert(n17)
+    root:insert(n13)
+    root:insert(n5)
+    root:insert(n7)
+
+    actual = {}
+    root:collect(actual)
+    expected = {5, 7, 11, 13, 17}
+    assert.are.same(expected, actual)
+  end)
+end) 
