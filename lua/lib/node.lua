@@ -29,6 +29,19 @@ function Node:insert(n)
   end
 end
 
+function Node:search(key)
+  if self.key == key then return self end
+
+  if self.left and key < self.key then
+    return self.left:search(key)
+  else
+    if self.right then
+      return self.right:search(key)
+    end
+  end
+  return nil
+end
+
 function Node:collect(collector)
   if self.left then self.left:collect(collector) end
   collector[#collector + 1] = self.key
