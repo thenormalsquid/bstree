@@ -2,6 +2,44 @@
 
 \usepackage{cite}
 
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  % deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  % otherkeywords={*,...},           % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                   % sets default   tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% \language=[Objective]{Caml}
+
+
 \title{Some notes on binary search trees}
 \date{\today}
 \author{David M. Doolin}
@@ -176,8 +214,114 @@ Test driving may induce more tests than are strictly necessary.
 \item arbitrary tree
 \end{enumerate}
 
+\subsection{Search}
+
+Here is the algorithm to find a node in a binary search tree using the key:
+
+\lstset{language={Python}}
+\begin{lstlisting}[frame=single]
+
+def search(self, key):
+    if key == self.key:
+        return self
+
+    if key < self.key:
+        if self.left is not None:
+            self.left.search(key)
+    else:
+        if self.right is not None:
+            self.right.search(key)
+\end{lstlisting}
+
+\subsubsection{Testing search}
+
+Test cases:
+\begin{enumerate}
+\item finds nil with an empty tree
+\item finds a node in a single node tree
+\item finds the left child and right child in two node trees
+\item find leaf node in tree with height greater than 1
+\item finds nil when key is not in the tree
+\end{enumerate}
+
+\subsubsection{Delete}
+
+Delete depends on search, so that will need to be implemented everywhere first.
+
+Write out a plan for implementing delete in java, python, c++ and lua,
+
+\begin{itemize}
+  \item including tree/node interaction, list of trees to work with,
+  \item algorithm writeup in bst doc, etc.
+  \item After implementing and writeup, compare with clr.
+\end{itemize}
+
+\lstset{language={Python}}
+\begin{lstlisting}[frame=single]
+
+def delete(self, key):
+    # delete algorithm
+\end{lstlisting}
+
+
+Test cases:
+\begin{enumerate}
+\item deletes nil with an empty tree
+\item deletes a node in a single node tree
+\item deletes the left child and right child in two node trees
+\item deletes leaf node in tree with height greater than 1
+\item deletes nil when key is not in the tree
+\end{enumerate}
+
+
+\subsubsection{AVL testing}
+
+\paragraph{Insert}
+
+\begin{itemize}
+\item Draw out the cases requiring rotations. This will include 3, 4, 5, and 6
+node examples, but probably no more than 6, possibly no more than 5.
+\item Create a number of nodes.
+\item Build the tree in sorted order starting with the smallest node.
+This will build out the tree from the left, performing right, or ccw, rotations.
+\item As each node is inserted, check the size, weight, balance and which node is currently the root of the tree.
+\item Write an expectation for the rotate\_ccw method to ensure it's called the correct number of times.
+\end{itemize}
+
+Repeat this using the same list in decreasing order to build the tree from the
+right.
+
+Repeat inserting the keys in sorted order so the avl operation maintains
+balance. Write an expectation to ensure no rotations are performed.
 
 
 
+\paragraph{Delete}
+
+Do something similar as above, check
+rotations and balance after deletion.
+
+
+\subsection{Language listings}
+
+\lstset{language=[Objective]{Caml}}
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+open OUnit2;;
+
+let test1 test_ctxt = assert_equal "x" (Foo.unity "x");;
+let test2 test_ctxt = assert_equal 100 (Foo.unity 100);;
+
+(* Name the test cases and group them together *)
+let suite =
+"suite">:::
+ ["test1">:: test1;
+  "test2">:: test2]
+;;
+
+let () =
+  run_test_tt_main suite
+;;
+\end{lstlisting}
 
 \end{document}
