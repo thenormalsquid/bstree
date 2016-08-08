@@ -3,6 +3,10 @@
 This little repo is part of an ongoing project to compare
 how binary search trees are implemented in various languages.
 
+## TODO
+
+* change `add` to `insert`
+* change `find` to `search`
 
 ## Specification
 

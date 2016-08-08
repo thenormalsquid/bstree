@@ -182,6 +182,31 @@ particularly that the including class must define the key for the tree.
 
 \section{Implementation}
 
+\subsection{tree/node interaction}
+
+Trees are abstract data types. This makes trees easy to reason about.
+Implementing a tree requires dealing with a number of subtle issues.
+
+\subsection{Implicit structure}
+
+Given some class, record, structure or whatever language feature which contains
+data and supports function invocation, adding left and right pointers,
+appropriate comparators, and insert and find methods suffices to provide
+dictionary capability to the given language feature. However, trees require a
+root, and managing this root increases the complexity whatever application
+system requires the data sorted into the tree. Provision needs to be made for
+the root changing, or even being deleted.
+
+\subsection{tree container}
+
+Another way to implement trees is to create a tree container which implements
+insert, search, etc. The implementation provided by the tree container could
+implement the functionality itself, or call an implementation provided by
+the node element.
+
+
+
+Sent from my iPhone
 
 \subsection{Testing}
 

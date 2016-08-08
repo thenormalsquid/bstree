@@ -94,6 +94,10 @@ class TestNode(unittest.TestCase):
         assert root.maximum() == node_l2
         assert root.minimum() == node_l4
 
+    # def test_is_bst(self):
+    # def test_size(self):
+    # def test_delete(self):
+
     def tearDown(self):
         # dummy
         self.testing = False
