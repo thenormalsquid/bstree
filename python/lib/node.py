@@ -1,3 +1,5 @@
+import pdb
+
 class Node(object):
 
     def __init__(self, value):
@@ -31,7 +33,6 @@ class Node(object):
                 self.right.add(node)
 
     def find(self, value):
-
         if self.value == value:
             return self
 
@@ -43,7 +44,6 @@ class Node(object):
                 return self.right.find(value)
 
     def is_present(self, value):
-
         if self.value == value:
             return True
 
@@ -53,6 +53,21 @@ class Node(object):
         else:
             if self.right is not None:
                 return self.right.is_present(value)
+
+    def size(self):
+        def get_size(size):
+            # pdb.set_trace()
+            size += 1
+            if self.left is not None:
+                # size += 1
+                gs = self.left.size()
+                size = gs(size)
+            if self.right is not None:
+                # size += 1
+                gs = self.right.size()
+                size = gs(size)
+            return size
+        return get_size
 
     def maximum(self):
         if self.right is None:

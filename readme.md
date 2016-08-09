@@ -42,7 +42,7 @@ This table was created well after the beginning of the project, hence some
 entries simply show "Done" instead of the date completed. Each feature is
 regarded as complete when its associated test passes.
 
-|               | insert     | collect    | find       | present?   | depth      | delete     | maximum    | minimum    |
+|               | insert     | collect    | dfs        | present?   | height     | delete     | maximum    | minimum    |
 |---            |---         |---         |---         |---         |---         |---         |---         |---         |
 | Ruby          | Done       | Done       | Done       | 2016-07-17 | Done       | 2016-07-30 | 2016-07-05 | 2016-07-05 |
 | Ruby (module) | 2016-06-27 | 2016-06-27 | 2016-06-27 | 2016-07-01 | 2016-08-01 | 2016-07-30 | 2016-06-28 | 2016-06-28 |

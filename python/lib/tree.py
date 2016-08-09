@@ -11,13 +11,16 @@ class Tree(object):
         self.root.add(node)
 
     def find(self, value):
-        return self.root
+        return self.root.find(value)
 
     def is_present(self, value):
         return self.root.is_present(value)
 
     def collect(self, collector):
         self.root.collect(collector)
+
+    def size(self):
+        return self.root.size()
 
     def height(self):
         return self.get_height(self.root)

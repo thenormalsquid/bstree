@@ -95,8 +95,51 @@ class TestNode(unittest.TestCase):
         assert root.minimum() == node_l4
 
     # def test_is_bst(self):
-    # def test_size(self):
     # def test_delete(self):
+
+    def test_height_and_size(self):
+        root = Node(8)
+        # assert root.height() == 1
+        # This is a hideous construction, fix it by moving the
+        # details into the Node class.
+        get_size = root.size()
+        print get_size(0)
+        assert get_size(0) == 1
+
+        node_l1 = Node(4)
+        root.add(node_l1)
+        # assert root.height() == 2
+        get_size = root.size()
+        print get_size(0)
+        assert get_size(0) == 2
+
+        node_r1 = Node(12)
+        root.add(node_r1)
+        # assert root.height() == 2
+        get_size = root.size()
+        print get_size(0)
+        assert get_size(0) == 3
+
+        node_l2 = Node(2)
+        root.add(node_l2)
+        # assert root.height() == 3
+        get_size = root.size()
+        print get_size(0)
+        assert get_size(0) == 4
+
+        node_l3 = Node(1)
+        root.add(node_l3)
+        # assert root.height() == 4
+        get_size = root.size()
+        print get_size(0)
+        assert get_size(0) == 5
+
+        node_r3 = Node(3)
+        root.add(node_r3)
+        # assert root.height() == 4
+        get_size = root.size()
+        print get_size(0)
+        assert get_size(0) == 6
 
     def tearDown(self):
         # dummy
