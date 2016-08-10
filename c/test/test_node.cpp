@@ -14,16 +14,19 @@ public:
   InitialTest( std::string name ) : CppUnit::TestCase( name ) {}
 
 
-  void test_getsome() {
+  void test_node_new() {
+    int foo = 1;
 
     Spec spec;
-    spec.it("Testing node", DO_SPEC {
-      return true; //(string("some") == get_some());
+    spec.it("Testing node_new", DO_SPEC {
+      foo = 2;
+      Node * n = node_new(13);
+      return (node_get_key(n) == 13);
     });
   }
 
   void runTest() {
-    //test_getsome();
+    test_node_new();
   }
 };
 

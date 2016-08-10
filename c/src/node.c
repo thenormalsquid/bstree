@@ -1,7 +1,3 @@
-// #ifdef __cplusplus
-// extern "C" {
-// #endif
-
 #include <string.h>
 #include <stdlib.h>
 
@@ -23,8 +19,11 @@ node_new(int key) {
 
 void
 node_delete(Node * n) {
+  memset((void *)n, 0xDD, sizeof(Node));
+  free(n);
 }
 
-// #ifdef __cplusplus
-// }
-// #endif
+int
+node_get_key(Node * n) {
+  return n->key;
+}
