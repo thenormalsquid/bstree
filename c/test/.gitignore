@@ -1,4 +1,6 @@
 initial
+node
+tree
 *.o
 *.gch
 *~

@@ -5,7 +5,7 @@ class Tree(object):
     def __init__(self, node):
         self.root = node
         self.max = 0
-        self.current = 1
+        self.current = 0
 
     def add(self, node):
         self.root.add(node)

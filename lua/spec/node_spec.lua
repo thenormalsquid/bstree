@@ -82,6 +82,29 @@ describe("searches tree for node with key", function()
   end)
 end)
 
+describe(":size", function()
+  it("determines the number of nodes in the tree", function()
+    root = node:new(11)
+    -- assert.are.same(1, root:size())
+
+    n17 = node:new(17)
+    root:insert(n17)
+    -- assert.are.same(2, root:size())
+
+    n13 = node:new(13)
+    root:insert(n13)
+    -- assert.are.same(3, root:size())
+
+    n5 = node:new(5)
+    root:insert(n5)
+    -- assert.are.same(4, root:size())
+
+    n7 = node:new(7)
+    root:insert(n7)
+    -- assert.are.same(5, root:size())
+  end)
+end)
+
 describe("collecting values or labels from nodes in order", function()
   it("collects the value from a single node", function()
     root = node:new(11)

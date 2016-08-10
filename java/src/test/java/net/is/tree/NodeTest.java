@@ -33,6 +33,35 @@ public class NodeTest extends TestCase {
         // assert_equals(root.collect(actual), expected);
     }
 
+    public void testSize() {
+        Node root = new Node(11);
+        //assertEquals(1, root.size());
+
+        Node left = new Node(3);
+        root.insert(left);
+        //assertEquals(2, root.size());
+
+        Node right = new Node(21);
+        root.insert(right);
+        //assertEquals(3, root.size());
+
+        Node n7 = new Node(7);
+        root.insert(n7);
+        //assertEquals(3, root.size());
+
+        Node n5 = new Node(5);
+        root.insert(n5);
+        //assertEquals(3, root.size());
+
+        Node n13 = new Node(13);
+        root.insert(n13);
+        //assertEquals(3, root.size());
+
+        Node n17 = new Node(17);
+        root.insert(n17);
+        //assertEquals(3, root.size());
+    }
+
     public void testInsert() {
         Node root = new Node(11);
         assertEquals(11, root.value);

@@ -9,7 +9,6 @@ from node import *
 class TestTree(unittest.TestCase):
 
     def setUp(self):
-        # dummy
         self.testing = True
 
     def test_init(self):
@@ -69,35 +68,35 @@ class TestTree(unittest.TestCase):
         assert node.is_present(34) is None
 
     def test_height_and_size(self):
-        node = Node(8)
-        tree = Tree(node)
-        assert tree.height() == 1
-        # assert tree.size() == 1
+        root = Node(8)
+        tree = Tree(root)
+        assert tree.height() == 0
+        assert tree.size() == 1
 
         node_l1 = Node(4)
         tree.add(node_l1)
-        assert tree.height() == 2
-        # assert tree.size() == 2
+        assert tree.height() == 1
+        assert tree.size() == 2
 
         node_r1 = Node(12)
         tree.add(node_r1)
-        assert tree.height() == 2
-        # assert tree.size() == 3
+        assert tree.height() == 1
+        assert tree.size() == 3
 
         node_l2 = Node(2)
         tree.add(node_l2)
-        assert tree.height() == 3
-        # assert tree.size() == 4
+        assert tree.height() == 2
+        assert tree.size() == 4
 
         node_l3 = Node(1)
         tree.add(node_l3)
-        assert tree.height() == 4
-        # assert tree.size() == 5
+        assert tree.height() == 3
+        assert tree.size() == 5
 
         node_r3 = Node(3)
         tree.add(node_r3)
-        assert tree.height() == 4
-        # assert tree.size() == 6
+        assert tree.height() == 3
+        assert tree.size() == 6
 
     def tearDown(self):
         # dummy

@@ -165,6 +165,27 @@ public:
     });
   }
 
+  void test_size(void) {
+    Spec spec;
+    spec.it("Testing Tree.size", DO_SPEC {
+      Node node(20);
+      Tree tree(&node);
+      Node node2(43);
+      Node node3(8);
+      Node node4(10);
+      Node node5(15);
+      Node node6(33);
+      Node node7(97);
+      tree.add(&node2);
+      tree.add(&node3);
+      tree.add(&node4);
+      tree.add(&node5);
+      tree.add(&node6);
+      tree.add(&node7);
+      return (tree.root->right->left == &node6);
+    });
+  }
+
   void test_add() {
     Spec spec;
     spec.it("Testing Tree.add", DO_SPEC {
@@ -188,7 +209,7 @@ public:
 
   void test_maximum() {
     Spec spec;
-    spec.it("Testing Node.maximum", DO_SPEC {
+    spec.it("Testing Tree.maximum", DO_SPEC {
       Node root(3);
       Tree tree(&root);
       Node node2(1);
@@ -203,7 +224,7 @@ public:
 
   void test_minimum() {
     Spec spec;
-    spec.it("Testing Node.minimum", DO_SPEC {
+    spec.it("Testing Tree.minimum", DO_SPEC {
       Node root(3);
       Tree tree(&root);
       Node node2(1);
@@ -240,6 +261,7 @@ public:
   void runTest() {
     test_instantiation();
     test_add();
+    //test_size();
     test_maximum();
     test_minimum();
     test_find_root_node();

@@ -48,10 +48,38 @@ public class BSTreeTest extends TestCase {
         //assertEquals(tree.search(17), n17);
     }
 
+
     public void testSize() {
-        // implement this before implementing delete, so that
-        // the size of the tree can be tested after the deletion
-        // is performed.
+        BSTree tree = new BSTree();
+        assertEquals(0, tree.size());
+
+        Node root = new Node(11);
+        tree.insert(root);
+        //assertEquals(1, tree.size());
+
+        Node left = new Node(3);
+        tree.insert(left);
+        //assertEquals(2, tree.size());
+
+        Node right = new Node(21);
+        tree.insert(right);
+        //assertEquals(3, tree.size());
+
+        Node n7 = new Node(7);
+        tree.insert(n7);
+        //assertEquals(3, tree.size());
+
+        Node n5 = new Node(5);
+        tree.insert(n5);
+        //assertEquals(3, tree.size());
+
+        Node n13 = new Node(13);
+        tree.insert(n13);
+        //assertEquals(3, tree.size());
+
+        Node n17 = new Node(17);
+        tree.insert(n17);
+        //assertEquals(3, tree.size());
     }
 
     public void testIsBst() {

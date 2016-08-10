@@ -1,5 +1,3 @@
-import pdb
-
 class Node(object):
 
     def __init__(self, value):
@@ -54,20 +52,21 @@ class Node(object):
             if self.right is not None:
                 return self.right.is_present(value)
 
-    def size(self):
+    def compute_size(self):
         def get_size(size):
-            # pdb.set_trace()
             size += 1
             if self.left is not None:
-                # size += 1
-                gs = self.left.size()
+                gs = self.left.compute_size()
                 size = gs(size)
             if self.right is not None:
-                # size += 1
-                gs = self.right.size()
+                gs = self.right.compute_size()
                 size = gs(size)
             return size
         return get_size
+
+    def size(self):
+        cs = self.compute_size()
+        return cs(0)
 
     def maximum(self):
         if self.right is None:

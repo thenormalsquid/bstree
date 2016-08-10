@@ -3,6 +3,15 @@ package net.is.tree;
 class BSTree {
     public Node root;
 
+    public int size() {
+        if (root == null) {
+          return 0;
+        } else {
+          return 0;
+          //return root.size();
+        }
+    }
+
     public void insert(Node n) {
         if (root == null) {
             root = n;

@@ -31,7 +31,7 @@ public:
 
   void test_right_initialize() {
     Spec spec;
-    spec.it("Testing left node initialize to NULL", DO_SPEC {
+    spec.it("Testing right node initialize to NULL", DO_SPEC {
       Node node(1);
       return (node.right == NULL);
     });
@@ -53,22 +53,24 @@ public:
     Spec spec;
     spec.it("Testing Node.is_present with 8 nodes", DO_SPEC {
       Node root(25);
-      Node node2(43);
-      Node node3(8);
-      Node node4(10);
-      Node node5(15);
-      Node node6(33);
-      Node node7(97);
-      Node node8(4);
-      root.add(&node2);
-      root.add(&node3);
-      root.add(&node4);
-      root.add(&node5);
-      root.add(&node6);
-      root.add(&node7);
+      Node node43(43);
+      Node node8(8);
+      Node node10(10);
+      Node node15(15);
+      Node node33(33);
+      Node node97(97);
+      Node node4(4);
+      root.add(&node43);
       root.add(&node8);
+      root.add(&node10);
+      root.add(&node15);
+      root.add(&node33);
+      root.add(&node97);
+      root.add(&node4);
 
       bool result = root.is_present(43);
+      // TODO: refactor tree building so that other values
+      // can be tested for presence.
       return (result == true);
     });
   }

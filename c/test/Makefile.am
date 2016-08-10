@@ -7,8 +7,9 @@ LDADD = ../src/libautotoolerpp.a
 %.o: %.cpp
 	g++ $(AM_CXXFLAGS) $(AM_CPPFLAGS) -D$*_STANDALONE -c $< $(AM_LDFLAGS)
 
-bin_PROGRAMS = initial
+bin_PROGRAMS = node tree
 
-initial_SOURCES = test_initial.cpp testutils.cpp
+node_SOURCES = test_node.cpp testutils.cpp
+tree_SOURCES = test_tree.cpp testutils.cpp
 
 

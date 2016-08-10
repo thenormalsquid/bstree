@@ -6,7 +6,7 @@ CPPFLAGS = -Wall -Wextra
 AM_CPPFLAGS = -I/usr/local/include -I../include
 
 noinst_LIBRARIES = libautotoolerpp.a
-libautotoolerpp_a_SOURCES = autotoolerpp.cpp
+libautotoolerpp_a_SOURCES = autotoolerpp.cpp node.c
 libautotoolerpp_a_CPPFLAGS = -O0 -pg  -Wall -Wextra -fno-inline $(AM_CPPFLAGS) -DIL_STD -L/usr/local/lib -DNDEBUG -w
 
 

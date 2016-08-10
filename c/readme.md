@@ -1,26 +1,14 @@
-# Autotooler++
+# Binary search tree in c
 
-Template for a small c++ project built with GNU autotools.
+Implementing a binary search tree in c is not an unduly
+difficult project. Implementing one which is properly
+engineered with test code, a useful API, which doesn't
+leak memory is quite another thing.
 
-## Usage
+This is an attempt at that other thing.
 
-This tiny project template has two main uses:
-
-1. Starting point for a major, top level application.
-2. Branch for a c++ implementation within another project.
-
-In the first case, `git clone` as usual, or fork into your
-own top level repo.
-
-In the second case, clone this repo into a desired subdirectory,
-then remove the `.git` directory from the clone, then add
-the c++ directory to your main project. One use case for this
-is when implementing an algorithm in c++ (or c) for wrapping
-with script driver.
 
 ## TODO
 
-* Add in c++ spec
-  * port changes back from tfidf
-  * clean up the compiler warnings on unused params.
-  * create examples for every case, use disambiguator for examples.
+* Stub out header and source files for node and tree, and
+ensure everything compiles, and is reachable by the test harness.
