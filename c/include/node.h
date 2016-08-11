@@ -13,6 +13,10 @@ void   node_delete  (Node * n);
 
 int    node_get_key (Node * n);
 
+Node * left         (Node * n);
+
+Node * right        (Node * n);
+
 #ifdef __cplusplus
 }
 #endif

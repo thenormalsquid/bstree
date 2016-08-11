@@ -31,7 +31,7 @@ void describe_pending(const char * indent, const char * description);
 //#define DO_SPEC [](Description d)->bool
 #define DO_SPEC []()->bool
 #define DO_SPEC_THIS [this](Description d)->bool
-#define DO_SPEC_HANDLE [&](Description d)->bool
+#define DO_SPEC_HANDLE [&]()->bool
 
 class Spec {
 

@@ -8,36 +8,44 @@
 
 using std::string;
 
-class InitialTest : public CppUnit::TestCase {
+class TreeTest : public CppUnit::TestCase {
 
 public:
-  InitialTest( std::string name ) : CppUnit::TestCase( name ) {}
+  TreeTest( std::string name ) : CppUnit::TestCase( name ) {}
 
+  void test_tree_insert() {
+  }
 
-  void test_getsome() {
+  void test_tree_new_and_delete() {
+    Tree * t = tree_new();
+
     Spec spec;
-    spec.it("Testing tree", DO_SPEC {
-      return true; //(string("some") == get_some());
+    spec.it("Testing tree", DO_SPEC_HANDLE {
+      return (t != NULL);
     });
+
+    tree_delete(t);
   }
 
   void runTest() {
-    //test_getsome();
+    test_tree_new_and_delete();
+    test_tree_insert();
   }
 };
 
-void
-test_initial() {
 
-  InitialTest * it = new InitialTest(std::string("initial test"));
-  it->runTest();
-  delete it;
+void
+test_tree() {
+
+  TreeTest * tt = new TreeTest(std::string("initial test"));
+  tt->runTest();
+  delete tt;
 }
 
 
 int
 main(int argc, char ** argv) {
 
-  test_initial();
+  test_tree();
   return 0;
 }

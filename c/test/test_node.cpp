@@ -8,40 +8,43 @@
 
 using std::string;
 
-class InitialTest : public CppUnit::TestCase {
+class NodeTest : public CppUnit::TestCase {
 
 public:
-  InitialTest( std::string name ) : CppUnit::TestCase( name ) {}
+  NodeTest( std::string name ) : CppUnit::TestCase( name ) {}
 
-
-  void test_node_new() {
-    int foo = 1;
-
-    Spec spec;
-    spec.it("Testing node_new", DO_SPEC {
-      foo = 2;
-      Node * n = node_new(13);
-      return (node_get_key(n) == 13);
-    });
+  void test_node_insert() {
   }
 
-  void runTest() {
-    test_node_new();
+  void test_node_new_and_delete() {
+    Node * n = node_new(13);
+
+    Spec spec;
+    spec.it("Testing node_new", DO_SPEC_HANDLE {
+      return (node_get_key(n) == 13);
+    });
+
+    node_delete(n);
+  }
+
+  void run_tests(void) {
+    test_node_new_and_delete();
+    test_node_insert();
   }
 };
 
 void
-test_initial() {
+test_node() {
 
-  InitialTest * it = new InitialTest(std::string("initial test"));
-  it->runTest();
-  delete it;
+  NodeTest * nt = new NodeTest(std::string("initial test"));
+  nt->run_tests();
+  delete nt;
 }
 
 
 int
 main(int argc, char ** argv) {
 
-  test_initial();
+  test_node();
   return 0;
 }
