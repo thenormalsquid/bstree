@@ -7,15 +7,38 @@ extern "C" {
 
 typedef struct _node Node;
 
-Node * node_new     (int key);
+Node * node_new        (int key);
 
-void   node_delete  (Node * n);
+void   node_destroy    (Node * n);
 
-int    node_get_key (Node * n);
+int    node_key        (Node * n);
 
-Node * left         (Node * n);
+void   node_insert     (Node * root,
+                        Node * next);
 
-Node * right        (Node * n);
+Node * node_left       (Node * n);
+
+Node * node_right      (Node * n);
+
+void   node_collect    (void);
+
+void   node_search     (void);
+
+void   node_is_present (void);
+
+void   node_height     (void);
+
+void   node_delete     (void);
+
+void   node_maximum    (void);
+
+void   node_minimum    (void);
+
+void   node_is_full    (void);
+
+void   node_is_bst     (void);
+
+void   node_size       (void);
 
 #ifdef __cplusplus
 }

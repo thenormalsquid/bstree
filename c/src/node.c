@@ -2,18 +2,7 @@
 #include <stdlib.h>
 
 #include <node.h>
-
-// move the definition to private_node.h so that it can be
-// included in the test code.
-// change this to PrivateNode
-struct _node {
-  // Node public; // publically defined in header file, exposes callbacks
-  // for left and right to allow chaining...? Not sure this is possible
-  // to do what I'm thinking of: n->left()->right();
-  int key;
-  Node * left;
-  Node * right;
-};
+#include "node_private.h"
 
 
 Node *
@@ -28,27 +17,86 @@ node_new(int key) {
 
 
 void
-node_delete(Node * n) {
+node_destroy(Node * n) {
   if (n == NULL) return;
 
-  node_delete(n->left);
-  node_delete(n->right);
+  node_destroy(n->left);
+  node_destroy(n->right);
   memset((void *)n, 0xDD, sizeof(Node));
   free(n);
 }
 
 
 int
-node_get_key(Node * n) {
+node_key(Node * n) {
   return n->key;
 }
 
 
-Node * left(Node * n) {
+Node *
+node_left(Node * n) {
   return n->left;
 }
 
 
-Node * right(Node * n) {
+Node *
+node_right(Node * n) {
   return n->right;
+}
+
+void
+node_insert(Node * root, Node * next) {
+  if (next->key < root->key) {
+    if (root->left == NULL) {
+      root->left = next;
+    } else {
+      node_insert(root->left, next);
+    }
+  } else {
+    if (root->right == NULL) {
+      root->right = next;
+    } else {
+      node_insert(root->right, next);
+    }
+  }
+}
+
+void
+node_collect(void) {
+}
+
+void
+node_search(void) {
+}
+
+void
+node_is_present(void) {
+}
+
+void
+node_height(void) {
+}
+
+void
+node_delete(void) {
+}
+
+void
+node_maximum(void) {
+}
+
+void
+node_minimum(void) {
+}
+
+void
+node_is_full(void) {
+}
+
+void
+node_is_bst(void) {
+}
+
+void
+node_size(void) {
 }
