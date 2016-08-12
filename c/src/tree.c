@@ -2,10 +2,11 @@
 #include <stdlib.h>
 
 #include <tree.h>
+#include "tree_private.h"
 
-struct _tree {
-  Node * root;
-};
+//struct _tree {
+//  Node * root;
+//};
 
 Tree *
 tree_new(void) {
@@ -23,7 +24,17 @@ tree_delete(Tree * t) {
 }
 
 void
-tree_insert(Node * n) {
+tree_insert(Tree * t, Node * n) {
+  if (t->root == NULL) {
+    t->root = n;
+  } else {
+    node_insert(t->root, n);
+  }
+}
+
+int
+tree_is_empty(Tree * t) {
+  return t->root == NULL ? TRUE : FALSE;
 }
 
 void
