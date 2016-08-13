@@ -5,6 +5,7 @@
 
 #include <tree.h>
 #include "../src/tree_private.h"
+#include "../src/node_private.h"
 
 
 using std::string;
@@ -53,6 +54,30 @@ public:
       Spec spec;
       spec.it("sets the root node in an empty tree", DO_SPEC_HANDLE {
         return (t->root = root);
+      });
+
+      Node * n7 = node_new(7);
+      spec.it("insert a single node to the left", DO_SPEC_HANDLE {
+        tree_insert(t, n7);
+        return (t->root->left == n7);
+      });
+
+      Node * n21 = node_new(21);
+      spec.it("insert a single node to the right", DO_SPEC_HANDLE {
+        tree_insert(t, n21);
+        return (t->root->right == n21);
+      });
+
+      Node * n17 = node_new(17);
+      spec.it("insert a left node into right subtree", DO_SPEC_HANDLE {
+        tree_insert(t, n17);
+        return (t->root->right->left == n17);
+      });
+
+      Node * n11 = node_new(11);
+      spec.it("insert a right node into left subtree", DO_SPEC_HANDLE {
+        tree_insert(t, n11);
+        return (t->root->left->right == n11);
       });
 
       tree_delete(t);
