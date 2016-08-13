@@ -73,6 +73,8 @@ void
 tree_is_bst(void) {
 }
 
-void
-tree_size(void) {
+int
+tree_size(Tree * t) {
+  if (t->root == NULL) return 0;
+  return node_size(t->root);
 }

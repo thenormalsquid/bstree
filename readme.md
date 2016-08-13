@@ -49,7 +49,7 @@ regarded as complete when its associated test passes.
 | Python        | Done       | Done       | 2016-06-27 | 2016-07-25 | 2016-07-22 |            | 2016-07-17 | 2016-07-17 |
 | Java          | 2016-07-26 |            |            |            |            |            |            |            |
 | C++           | Done       | Done       | Done       | 2016-07-27 |            |            | 2016-07-26 | 2016-07-26 |
-| C             |            |            |            |            |            |            |            |            |
+| C             | 2016-08-13 |            |            |            |            |            |            |            |
 | Lua           | 2016-07-30 | 2016-08-06 |            |            |            |            |            |            |
 | Javascript    |            |            |            |            |            |            |            |            |
 | SQL           |            | 2016-08-05 | 2016-07-27 | 2016-07-27 |            |            | 2016-07-28 | 2016-07-28 |
@@ -70,7 +70,7 @@ be written iteratively as well, which is a good exercise for the future.
 | Python        |            |          |           |            |            |            |           |             |
 | Java          |            |          |           |            |            |            |           |             |
 | C++           |            |          |           |            |            |            |           |             |
-| C             |            |          |           |            |            |            |           |             |
+| C             |            |          |           |            |            | 2016-08-13 |           |             |
 | Lua           |            |          |           |            |            |            |           |             |
 | Javascript    |            |          |           |            |            |            |           |             |
 | SQL           |            |          |           |            |            |            |           |             |
@@ -79,19 +79,24 @@ be written iteratively as well, which is a good exercise for the future.
 
 ### Persistence, serialization, etc.
 
-|               | json       | relational | yaml       | ==     | ===  | destroy | common parent |
-|---            |---         |---         |---         |---     |---   |---      |---            |
-| Ruby          | 2016-07-23 |            |            |        |      | N/A     | 2016-08-04    |
-| Ruby (module) |            |            |            |        |      | N/A     |
-| Python        |            |            |            |        |      | N/A     |
-| Java          |            |            |            |        |      | N/A     |
-| C++           |            |            |            |        |      |         |
-| C             |            |            |            |        |      |         |
-| Lua           |            |            |            |        |      | N/A     |
-| Javascript    |            |            |            |        |      | N/A     |
-| SQL           |            | N/A        |            |        |      | N/A     |
-| Array         |            |            |            |        |      | N/A     |
+|               | json       | relational | yaml       | ==     | ===  | destroy    | common parent |
+|---            |---         |---         |---         |---     |---   |---         |---            |
+| Ruby          | 2016-07-23 |            |            |        |      |            | 2016-08-04    |
+| Ruby (module) |            |            |            |        |      |            |
+| Python        |            |            |            |        |      |            |
+| Java          |            |            |            |        |      |            |
+| C++           |            |            |            |        |      |            |
+| C             |            |            |            |        |      | 2016-08-13 |
+| Lua           |            |            |            |        |      |            |
+| Javascript    |            |            |            |        |      |            |
+| SQL           |            | N/A        |            |        |      |            |
+| Array         |            |            |            |        |      |            |
 
+
+Note: `destroy` for C and C++ means the tree and all the nodes are
+shredded and free'd. (TODO) For the scripting languages and Java, `destroy`
+performs a post-order traversal, setting all the child pointers to
+`NULL`, `nil`, `null` or whatever flavor necessary.
 
 #### AVL-specific functionality
 

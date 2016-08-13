@@ -1,8 +1,30 @@
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include <node.h>
 #include "node_private.h"
+
+/*
+ * State is a private struct used for mimicking "closures"
+ * in plain old vanilla c.
+ */
+typedef struct _state {
+  int size;
+  //int height;
+} State;
+
+
+typedef void (*Callback)(State * state);
+
+void
+post_order_traverse(Node * n, Callback callback, State * state) {
+  // consider if (n == NULL) return;
+
+  if (n->left  != NULL) { post_order_traverse(n->left, callback, state); }
+  if (n->right != NULL) { post_order_traverse(n->right, callback, state); }
+  if (callback != NULL) { callback(state); }
+}
 
 
 Node *
@@ -16,6 +38,9 @@ node_new(int key) {
 }
 
 
+/*
+ * TODO: Reimplement using post_order_traverse.
+ */
 void
 node_destroy(Node * n) {
   if (n == NULL) return;
@@ -98,5 +123,14 @@ node_is_bst(void) {
 }
 
 void
-node_size(void) {
+size_tracker(State * state) {
+  state->size++;
+}
+
+int
+node_size(Node * n) {
+  State state;
+  state.size = 0;
+  post_order_traverse(n, size_tracker, &state);
+  return state.size;
 }

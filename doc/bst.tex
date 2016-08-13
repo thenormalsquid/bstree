@@ -221,12 +221,24 @@ executes correctly.
 Traditionally, in Test-Driven Design (TDD), a method test is created with a simple example.
 The method is then implemented as simply as possible to ensure the example passes.
 More complex examples are created, and the method's implementation modified as necessary
-to ensure tests pass.
+to ensure tests pass. For example, when implementing \tt{insert}, it makes sense
+to write a test specification to check the a node is correctly inserted into an
+empty tree to form the root, another test specification to ensure the inserting
+to the left of root works correctly, to the right of root, and so on. However,
+when implementing, say, \tt{size}, the same sort of procedure follows in test-driven
+development: test the null case, then the cases 1 node, 2 nodes, etc.
+
+Once the data structure is implemented, this TDD process results in a large number
+of redundant tests.
 
 Grouping tests by data structure examples puts a much larger burden on TDD,
 but provides a different perspective. These tests may be more effective once an
 initial implementation is created. Then, pathological data structures can be
 created and tested in detail.
+
+\subsubsection{Insert}
+
+
 
 \subsubsection{Collect}
 

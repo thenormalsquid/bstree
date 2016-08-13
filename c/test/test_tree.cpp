@@ -43,6 +43,47 @@ public:
     }
 
     void test_tree_size(void) {
+      describe_test(INDENT0, "From test_node_size in NodeTest.");
+      Spec spec;
+      Tree * t = tree_new();
+
+      spec.it("size for root node only", DO_SPEC_HANDLE {
+        return (tree_size(t) == 0);
+      });
+
+      Node * root = node_new(13);
+      tree_insert(t, root);
+
+      spec.it("size for tree with root node only", DO_SPEC_HANDLE {
+        return (tree_size(t) == 1);
+      });
+
+      Node * n2 = node_new(2);
+      Node * n3 = node_new(3);
+      Node * n5 = node_new(5);
+      Node * n7 = node_new(7);
+      Node * n11 = node_new(11);
+      Node * n17 = node_new(17);
+      Node * n19 = node_new(19);
+      Node * n23 = node_new(23);
+      Node * n29 = node_new(29);
+
+      node_insert(root, n5);
+      node_insert(root, n7);
+      node_insert(root, n11);
+      node_insert(root, n3);
+      node_insert(root, n2);
+
+      node_insert(root, n19);
+      node_insert(root, n17);
+      node_insert(root, n29);
+      node_insert(root, n23);
+
+      spec.it("size for tree with 9 children", DO_SPEC_HANDLE {
+        return (tree_size(t) == 10);
+      });
+
+      tree_delete(t);
     }
 
     void test_tree_insert(void) {
@@ -120,7 +161,7 @@ public:
       //test_tree_minimum();
       //test_tree_is_full();
       //test_tree_is_bst();
-      //test_tree_size();
+      test_tree_size();
     }
 };
 

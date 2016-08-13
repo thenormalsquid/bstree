@@ -7,6 +7,9 @@ leak memory is quite another thing.
 
 This is an attempt at that other thing.
 
+## TODO
+
+* Run astyle on all the source, headers and tests.
 
 ## Implementation plan
 

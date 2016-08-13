@@ -36,7 +36,7 @@ void   tree_is_full    (void);
 
 void   tree_is_bst     (void);
 
-void   tree_size       (void);
+int    tree_size       (Tree * t);
 
 #ifdef __cplusplus
 }

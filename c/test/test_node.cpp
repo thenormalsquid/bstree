@@ -20,12 +20,11 @@ teardown(void) {
 class NodeTest : public CppUnit::TestCase {
 
 public:
-  NodeTest( std::string name ) : CppUnit::TestCase( name ) {}
+    NodeTest( std::string name ) : CppUnit::TestCase( name ) {}
 
     void test_node_left(void) {
       describe_test(INDENT0, "From test_node_left in NodeTest.");
       Spec spec;
-
       Node * root = node_new(13);
       Node * n11 = node_new(11);
 
@@ -34,14 +33,12 @@ public:
         return (node_left(root) == n11);
       });
 
-      // node_destroy(n11);
       node_destroy(root);
     }
 
     void test_node_right(void) {
       describe_test(INDENT0, "From test_node_right in NodeTest.");
       Spec spec;
-
       Node * root = node_new(13);
       Node * n17 = node_new(17);
 
@@ -50,7 +47,6 @@ public:
         return (node_right(root) == n17);
       });
 
-      // node_destroy(n17);
       node_destroy(root);
     }
 
@@ -96,24 +92,75 @@ public:
     }
 
     void test_node_size(void) {
+      describe_test(INDENT0, "From test_node_size in NodeTest.");
+      Spec spec;
+      Node * root = node_new(13);
+
+      spec.it("size for root node only", DO_SPEC_HANDLE {
+        return (node_size(root) == 1);
+      });
+
+      Node * n2 = node_new(2);
+      Node * n3 = node_new(3);
+      Node * n5 = node_new(5);
+      Node * n7 = node_new(7);
+      Node * n11 = node_new(11);
+      Node * n17 = node_new(17);
+      Node * n19 = node_new(19);
+      Node * n23 = node_new(23);
+      Node * n29 = node_new(29);
+
+      node_insert(root, n5);
+      node_insert(root, n7);
+      node_insert(root, n11);
+      node_insert(root, n3);
+      node_insert(root, n2);
+
+      node_insert(root, n19);
+      node_insert(root, n17);
+      node_insert(root, n29);
+      node_insert(root, n23);
+
+      spec.it("size for root node with 9 children", DO_SPEC_HANDLE {
+        return (node_size(root) == 10);
+      });
+
+      spec.it("size for leaf node only", DO_SPEC_HANDLE {
+        return (node_size(n2) == 1);
+      });
+
+      spec.it("size for left subtree", DO_SPEC_HANDLE {
+        return (node_size(n5) == 5);
+      });
+
+      spec.it("size for right subtree", DO_SPEC_HANDLE {
+        return (node_size(n19) == 4);
+      });
+
+      node_destroy(root);
     }
 
     void test_node_insert(void) {
       describe_test(INDENT0, "From test_node_insert in NodeTest.");
       Spec spec;
       Node * root = node_new(13);
+      //std::cout << "node size: " << node_size(root) << std::endl;
 
       Node * n7 = node_new(7);
       spec.it("insert a single node to the left", DO_SPEC_HANDLE {
         node_insert(root, n7);
         return (root->left == n7);
       });
+      //std::cout << "node size: " << node_size(root) << std::endl;
 
       Node * n21 = node_new(21);
       spec.it("insert a single node to the right", DO_SPEC_HANDLE {
         node_insert(root, n21);
         return (root->right == n21);
       });
+      // std::cout << "root size: " << node_size(root) << std::endl;
+      // std::cout << "n7 size: " << node_size(n7) << std::endl;
+      // std::cout << "n21 size: " << node_size(n21) << std::endl;
 
       Node * n17 = node_new(17);
       spec.it("insert a left node into right subtree", DO_SPEC_HANDLE {
@@ -163,7 +210,7 @@ public:
       //test_node_minimum();
       //test_node_is_full();
       //test_node_is_bst();
-      //test_node_size();
+      test_node_size();
       teardown();
     }
 };
@@ -175,7 +222,6 @@ test_node() {
   nt->run_tests();
   delete nt;
 }
-
 
 int
 main(int argc, char ** argv) {

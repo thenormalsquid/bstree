@@ -38,7 +38,7 @@ void   node_is_full    (void);
 
 void   node_is_bst     (void);
 
-void   node_size       (void);
+int    node_size       (Node * n);
 
 #ifdef __cplusplus
 }
