@@ -1,0 +1,11 @@
+{
+  "name": "bst",
+  "version": "0.0.1",
+  "description": "binary search tree in javascript with node",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha spec"
+  },
+  "author": "dave doolin",
+  "license": "ISC"
+}
