@@ -1,6 +1,9 @@
 package net.is.tree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import static java.util.Arrays.asList;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -14,8 +17,40 @@ public class NodeTest extends TestCase {
     public void testSearch() {
     }
 
+    public void testHeight() {
+        Node root = new Node(11);
+        //assertEquals(9, root.height());
+
+        Node left = new Node(3);
+        root.insert(left);
+        //assertEquals(9, root.height());
+
+        Node right = new Node(21);
+        root.insert(right);
+        //assertEquals(9, root.height());
+
+        Node n7 = new Node(7);
+        root.insert(n7);
+        //assertEquals(9, root.height());
+
+        Node n5 = new Node(5);
+        root.insert(n5);
+        //assertEquals(9, root.height());
+
+        Node n13 = new Node(13);
+        root.insert(n13);
+        //assertEquals(9, root.height());
+
+        Node n17 = new Node(17);
+        root.insert(n17);
+        //assertEquals(9, root.height());
+    }
+
 
     public void testCollect() {
+      List<Integer> ints = Arrays.asList(2, 3, 5, 7, 11, 13, 19);
+      List<Integer> actual = Arrays.asList();
+
       /*
         expected.add(7);
         expected.add(11);
@@ -29,7 +64,7 @@ public class NodeTest extends TestCase {
         root.insert(n13);
         */
 
-        ArrayList<Integer> actual = new ArrayList<Integer>();
+        // ArrayList<Integer> actual = new ArrayList<Integer>();
         // assert_equals(root.collect(actual), expected);
     }
 
@@ -103,7 +138,7 @@ public class NodeTest extends TestCase {
         return new TestSuite( NodeTest.class );
     }
 
-    public void testApp() {
-        assertTrue( true );
-    }
+    //public void testApp() {
+    //    assertTrue( true );
+    //}
 }
