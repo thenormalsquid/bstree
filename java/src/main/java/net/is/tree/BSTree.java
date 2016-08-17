@@ -1,7 +1,18 @@
 package net.is.tree;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import static java.util.Arrays.asList;
+
 class BSTree {
     public Node root;
+
+    public List<Integer> collect() {
+        ArrayList<Integer> actual = new ArrayList<Integer>();
+        this.root.collect(actual);
+        return actual;
+    }
 
     public int size() {
         if (root == null) {

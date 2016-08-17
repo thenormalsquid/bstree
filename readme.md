@@ -8,6 +8,10 @@ how binary search trees are implemented in various languages.
 * change `add` to `insert`
 * change `find` to `search`
 
+* Finish `size`, `search`, `present?`, `height`, `bst?`, `maximum`, `minimum`, `successor` and
+  predecessor` before finishing node `delete`. This will provide a lot
+of extra sanity checking for the `delete` implementation.
+
 ## Specification
 
 The `Tree` data structure API:

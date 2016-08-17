@@ -1,14 +1,16 @@
 package net.is.tree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import static java.util.Arrays.asList;
+
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 public class BSTreeTest extends TestCase {
-
-    public ArrayList<Integer> expected = new ArrayList<Integer>();
 
     /*
      * find a null when empty
@@ -135,7 +137,15 @@ public class BSTreeTest extends TestCase {
       // to the correct children.
     }
 
+
+    // TODO:
+    // * test for empty tree
+    // * test for single node
+    // * test for duplicates
     public void testCollect() {
+        // List<Integer> expected = Arrays.asList(2, 3, 5, 7, 11, 13, 19);
+        ArrayList<Integer> expected = new ArrayList<Integer>();
+
         expected.add(7);
         expected.add(11);
         expected.add(13);
@@ -148,8 +158,9 @@ public class BSTreeTest extends TestCase {
         tree.insert(n7);
         tree.insert(n13);
 
-        ArrayList<Integer> actual = new ArrayList<Integer>();
-        // assert_equals(tree.collect(actual), expected);
+        // List<Integer> actual = Arrays.asList();
+        // ArrayList<Integer> actual = new ArrayList<Integer>();
+        assertEquals(tree.collect(), expected);
     }
 
     public void testInsert() {

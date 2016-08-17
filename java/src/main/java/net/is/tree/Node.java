@@ -1,5 +1,10 @@
 package net.is.tree;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import static java.util.Arrays.asList;
+
 class Node {
     public int value;
     public Node left = null;
@@ -21,6 +26,12 @@ class Node {
               right.insert(node);
             }
         }
+    }
+
+    public void collect(ArrayList<Integer> collector) {
+      if (this.left != null) { this.left.collect(collector); }
+      collector.add(this.value);
+      if (this.right != null) { this.right.collect(collector); }
     }
 
     public Node(int v) {

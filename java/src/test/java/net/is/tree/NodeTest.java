@@ -47,11 +47,12 @@ public class NodeTest extends TestCase {
     }
 
 
+    // TODO:
+    // * test for the single node case
     public void testCollect() {
-      List<Integer> ints = Arrays.asList(2, 3, 5, 7, 11, 13, 19);
-      List<Integer> actual = Arrays.asList();
-
-      /*
+        // List<Integer> ints = Arrays.asList(2, 3, 5, 7, 11, 13, 19);
+        // List<Integer> actual = Arrays.asList();
+        ArrayList<Integer> expected = new ArrayList<Integer>();
         expected.add(7);
         expected.add(11);
         expected.add(13);
@@ -62,10 +63,11 @@ public class NodeTest extends TestCase {
         Node n13 = new Node(13);
         root.insert(n7);
         root.insert(n13);
-        */
 
-        // ArrayList<Integer> actual = new ArrayList<Integer>();
-        // assert_equals(root.collect(actual), expected);
+        ArrayList<Integer> actual = new ArrayList<Integer>();
+        root.collect(actual);
+        // assertEquals(expected, actual);
+        assertEquals(actual, expected);
     }
 
     public void testSize() {
