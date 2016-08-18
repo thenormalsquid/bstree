@@ -46,12 +46,16 @@ public class NodeTest extends TestCase {
         //assertEquals(9, root.height());
     }
 
+    public void testCollectSingleNode() {
+        ArrayList<Integer> expected = new ArrayList<Integer>();
+        expected.add(11);
+        Node root = new Node(11);
+        ArrayList<Integer> actual = new ArrayList<Integer>();
+        root.collect(actual);
+        assertEquals(actual, expected);
+    }
 
-    // TODO:
-    // * test for the single node case
     public void testCollect() {
-        // List<Integer> ints = Arrays.asList(2, 3, 5, 7, 11, 13, 19);
-        // List<Integer> actual = Arrays.asList();
         ArrayList<Integer> expected = new ArrayList<Integer>();
         expected.add(7);
         expected.add(11);
@@ -66,7 +70,6 @@ public class NodeTest extends TestCase {
 
         ArrayList<Integer> actual = new ArrayList<Integer>();
         root.collect(actual);
-        // assertEquals(expected, actual);
         assertEquals(actual, expected);
     }
 

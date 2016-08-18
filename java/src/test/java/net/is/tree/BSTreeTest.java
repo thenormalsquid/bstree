@@ -137,19 +137,25 @@ public class BSTreeTest extends TestCase {
       // to the correct children.
     }
 
-
-    // TODO:
-    // * test for empty tree
-    // * test for single node
-    // * test for duplicates
-    public void testCollect() {
-        // List<Integer> expected = Arrays.asList(2, 3, 5, 7, 11, 13, 19);
+    public void testCollectEmptyTree() {
         ArrayList<Integer> expected = new ArrayList<Integer>();
+        BSTree tree = new BSTree();
+        assertEquals(tree.collect(), expected);
+    }
 
+    public void testCollectSingleNode() {
+        ArrayList<Integer> expected = new ArrayList<Integer>();
+        expected.add(11);
+        Node root = new Node(11);
+        BSTree tree = new BSTree(root);
+        assertEquals(tree.collect(), expected);
+    }
+
+    public void testCollect3() {
+        ArrayList<Integer> expected = new ArrayList<Integer>();
         expected.add(7);
         expected.add(11);
         expected.add(13);
-        assertEquals(expected.size(), 3);
 
         Node root = new Node(11);
         BSTree tree = new BSTree(root);
@@ -158,8 +164,45 @@ public class BSTreeTest extends TestCase {
         tree.insert(n7);
         tree.insert(n13);
 
-        // List<Integer> actual = Arrays.asList();
-        // ArrayList<Integer> actual = new ArrayList<Integer>();
+        assertEquals(tree.collect(), expected);
+    }
+
+    // TODO:
+    // * test for duplicates
+    public void testCollect10() {
+        ArrayList<Integer> expected = new ArrayList<Integer>();
+        expected.add(2);
+        expected.add(3);
+        expected.add(5);
+        expected.add(7);
+        expected.add(11);
+        expected.add(13);
+        expected.add(17);
+        expected.add(19);
+        expected.add(23);
+        expected.add(29);
+
+        Node root = new Node(11);
+        BSTree tree = new BSTree(root);
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        Node n5 = new Node(5);
+        Node n7 = new Node(7);
+        Node n13 = new Node(13);
+        Node n17 = new Node(17);
+        Node n19 = new Node(19);
+        Node n23 = new Node(23);
+        Node n29 = new Node(29);
+        tree.insert(n7);
+        tree.insert(n23);
+        tree.insert(n3);
+        tree.insert(n5);
+        tree.insert(n2);
+        tree.insert(n29);
+        tree.insert(n19);
+        tree.insert(n17);
+        tree.insert(n13);
+
         assertEquals(tree.collect(), expected);
     }
 

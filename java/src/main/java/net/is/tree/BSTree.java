@@ -10,6 +10,7 @@ class BSTree {
 
     public List<Integer> collect() {
         ArrayList<Integer> actual = new ArrayList<Integer>();
+        if (this.root == null) { return actual; }
         this.root.collect(actual);
         return actual;
     }
