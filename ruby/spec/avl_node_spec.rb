@@ -15,7 +15,7 @@ describe AvlNode do
     it 'returns current root on insertion'
 
     it 'inserts a node and balances' do
-      n11.add n5
+      n11.insert n5
       expect(n5.balanced?).to be true
       expect(n5.weight).to be 0
     end
@@ -105,20 +105,20 @@ describe AvlNode do
       # expect(n2).to receive(:rotate_ccw).with("correct argument")
       describe 'only right children' do
         xit 'makes a long right list' do
-          n2.add n3
-          n2.add n5
+          n2.insert n3
+          n2.insert n5
           expect(n2).to receive(:rotate_cw) # .with("correct argument")
           # expect(n2.height).to eq 1
           # expect(n3.height).to eq 0
           # expect(n3.height).to eq 0
           # expect(n2.pathological?).to be false
 
-          # n2.add n11
-          # n2.add n13
-          # n2.add n17
-          # n2.add n19
-          # n2.add n23
-          # n2.add n29
+          # n2.insert n11
+          # n2.insert n13
+          # n2.insert n17
+          # n2.insert n19
+          # n2.insert n23
+          # n2.insert n29
           # expect(n2.height).to eq 9
           # expect(n29.height).to eq 0
           # expect(n2.pathological?).to be true
@@ -131,15 +131,15 @@ describe AvlNode do
 
       describe 'only left children' do
         xit 'makes a long left list' do
-          n29.add n23
-          n29.add n19
-          n29.add n17
-          n29.add n13
-          n29.add n11
-          n29.add n7
-          n29.add n5
-          n29.add n3
-          n29.add n2
+          n29.insert n23
+          n29.insert n19
+          n29.insert n17
+          n29.insert n13
+          n29.insert n11
+          n29.insert n7
+          n29.insert n5
+          n29.insert n3
+          n29.insert n2
           expect(n29.height).to eq 9
           expect(n2.height).to eq 0
           # expect(n29.pathological?).to be true

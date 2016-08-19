@@ -9,7 +9,7 @@ class AvlNode < Node
     @weight = 0
   end
 
-  def add node
+  def insert node
     super
     node < self ? @weight -= 1 : @weight += 1
 
@@ -17,7 +17,7 @@ class AvlNode < Node
     if weight >= 2
       # rotate_cw
     end
-    # super will just add node.
+    # super will just insert node.
     # check the current weights here.
     # the hard thing is understanding that the root
     # node may have to change to ensure balance.

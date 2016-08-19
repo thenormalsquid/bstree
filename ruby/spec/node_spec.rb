@@ -16,14 +16,14 @@ describe Node do
     it 'inserts left node' do
       node = Node.new 2
       left_node = Node.new 1
-      node.add left_node
+      node.insert left_node
       expect(node.left).to eq left_node
     end
 
     it 'inserts right node' do
       node = Node.new 1
       right_node = Node.new 2
-      node.add right_node
+      node.insert right_node
       expect(node.right).to eq right_node
     end
   end
@@ -40,7 +40,7 @@ describe Node do
     it 'deletes the right node specified by key' do
       root = Node.new(9)
       n14 = Node.new(14)
-      root.add n14
+      root.insert n14
       expect(root.delete(14)).to eq n14
       expect(root.bst?).to be true
       expect(n14.left.nil?).to be true
@@ -51,8 +51,8 @@ describe Node do
       root = Node.new(9)
       n14 = Node.new(14)
       n23 = Node.new(23)
-      root.add n14
-      root.add n23
+      root.insert n14
+      root.insert n23
       expect(root.delete(14)).to eq n14
       expect(root.bst?).to be true
       expect(n14.left.nil?).to be true
@@ -67,10 +67,10 @@ describe Node do
       n19 = Node.new(19)
       n13 = Node.new(13)
       n5 = Node.new(5)
-      root.add n17
-      root.add n19
-      root.add n13
-      root.add n5
+      root.insert n17
+      root.insert n19
+      root.insert n13
+      root.insert n5
       expect(root.delete(17)).to eq n17
       expect(root.bst?).to be true
       expect(n17.left.nil?).to be true
@@ -82,18 +82,18 @@ describe Node do
     it 'rebuilds subtree after deleting node' do
       root = Node.new(11)
       n5 = Node.new(5)
-      root.add n5
+      root.insert n5
 
       n17 = Node.new(17)
       n13 = Node.new(13)
       n41 = Node.new(41)
       n37 = Node.new(37)
       n31 = Node.new(31)
-      root.add n17
-      root.add n13
-      root.add n41
-      root.add n37
-      root.add n31
+      root.insert n17
+      root.insert n13
+      root.insert n41
+      root.insert n37
+      root.insert n31
       expect(root.delete(17)).to eq n17
       expect(root.bst?).to be true
       expect(n17.left.nil?).to be true
@@ -111,9 +111,9 @@ describe Node do
       n5 = Node.new(5)
       n7 = Node.new(7)
       n3 = Node.new(3)
-      root.add n5
-      root.add n7
-      root.add n3
+      root.insert n5
+      root.insert n7
+      root.insert n3
 
       expect(root.delete(5)).to eq n5
       expect(root.bst?).to be true
@@ -128,20 +128,20 @@ describe Node do
       n5 = Node.new(5)
       n7 = Node.new(7)
       n3 = Node.new(3)
-      root.add n5
-      root.add n7
-      root.add n3
+      root.insert n5
+      root.insert n7
+      root.insert n3
 
       n17 = Node.new(17)
       n13 = Node.new(13)
       n41 = Node.new(41)
       n37 = Node.new(37)
       n31 = Node.new(31)
-      root.add n17
-      root.add n13
-      root.add n41
-      root.add n37
-      root.add n31
+      root.insert n17
+      root.insert n13
+      root.insert n41
+      root.insert n37
+      root.insert n31
 
       expect(root.delete(11)).to eq root
       expect(root.left.nil?).to be true
@@ -184,7 +184,7 @@ describe Node do
     it 'finds a key on the left' do
       node1 = Node.new 2
       node2 = Node.new 1
-      node1.add node2
+      node1.insert node2
       expect(node1.left).to eq node2
       expect(node1.find(1).object_id).to eq node2.object_id
     end
@@ -192,7 +192,7 @@ describe Node do
     it 'finds a key on the right' do
       node1 = Node.new 1
       node2 = Node.new 2
-      node1.add node2
+      node1.insert node2
       expect(node1.right).to eq node2
       expect(node1.find(2).object_id).to eq node2.object_id
     end
@@ -201,8 +201,8 @@ describe Node do
       node1 = Node.new 2
       node2 = Node.new 4
       node3 = Node.new 3
-      node1.add node2
-      node1.add node3
+      node1.insert node2
+      node1.insert node3
       expect(node1.right.left).to eq node3
       expect(node1.find(3).object_id).to eq node3.object_id
     end
@@ -211,8 +211,8 @@ describe Node do
       node1 = Node.new 4
       node2 = Node.new 2
       node3 = Node.new 3
-      node1.add node2
-      node1.add node3
+      node1.insert node2
+      node1.insert node3
       expect(node1.left.right).to eq node3
       expect(node1.find(3).object_id).to eq node3.object_id
     end
@@ -236,39 +236,39 @@ describe Node do
 
     it 'finds the height of two node tree with right child' do
       node = Node.new(9)
-      node.add Node.new(14)
+      node.insert Node.new(14)
       expect(node.height).to eq 1
     end
 
     it 'finds the height of two node tree with left child' do
       node = Node.new(9)
-      node.add Node.new(4)
+      node.insert Node.new(4)
       expect(node.height).to eq 1
     end
 
     it 'finds the height of three node tree' do
       node = Node.new(9)
-      node.add Node.new(14)
-      node.add Node.new(4)
+      node.insert Node.new(14)
+      node.insert Node.new(4)
       expect(node.height).to eq 1
     end
 
     it 'finds the height of four node tree with two left children' do
       node = Node.new(9)
-      node.add Node.new(14)
-      node.add Node.new(4)
-      node.add Node.new(2)
+      node.insert Node.new(14)
+      node.insert Node.new(4)
+      node.insert Node.new(2)
       expect(node.height).to eq 2
     end
 
     it 'finds height for arbitrary tree' do
       node = Node.new(9)
-      node.add Node.new(14)
-      node.add Node.new(4)
-      node.add Node.new(23)
-      node.add Node.new(5)
-      node.add Node.new(99)
-      node.add Node.new(78)
+      node.insert Node.new(14)
+      node.insert Node.new(4)
+      node.insert Node.new(23)
+      node.insert Node.new(5)
+      node.insert Node.new(99)
+      node.insert Node.new(78)
       expect(node.height).to eq 4
     end
   end
@@ -279,9 +279,9 @@ describe Node do
       node2 = Node.new 2
       node3 = Node.new 3
       node4 = Node.new 9
-      root.add node2
-      root.add node3
-      root.add node4
+      root.insert node2
+      root.insert node3
+      root.insert node4
       expect(root.present?(4)).to eq true
       expect(root.present?(2)).to eq true
       expect(root.present?(3)).to eq true
@@ -303,44 +303,44 @@ describe Node do
     end
 
     it 'returns true for node with 2 children' do
-      root.add left
-      root.add right
+      root.insert left
+      root.insert right
       expect(root.balanced?).to be true
     end
 
     it 'returns true for a node with only one child' do
-      root.add left
+      root.insert left
       expect(root.balanced?).to be true
     end
 
     it 'returns true for tree with 5 nodes' do
-      root.add left
-      root.add right
-      root.add l2
-      root.add l3
+      root.insert left
+      root.insert right
+      root.insert l2
+      root.insert l3
       expect(root.balanced?).to be true
     end
 
     it 'returns nil for tree with 6 nodes' do
-      root.add left
-      root.add right
-      root.add l2
-      root.add l3
-      root.add Node.new 145
+      root.insert left
+      root.insert right
+      root.insert l2
+      root.insert l3
+      root.insert Node.new 145
       expect(root.balanced?).to be true
     end
 
     it 'returns false for long left subtree' do
-      root.add left
-      root.add right
-      root.add l2
-      root.add l3
-      root.add l4
-      root.add Node.new 5
+      root.insert left
+      root.insert right
+      root.insert l2
+      root.insert l3
+      root.insert l4
+      root.insert Node.new 5
       expect(root.balanced?).to be false
     end
 
-    # TODO: add a bunch more examples here, checking node by node
+    # TODO: insert a bunch more examples here, checking node by node
     # on an unbalanced tree. Actually, all we really need is a single
     # tree, then each particular part of the tree can be examined for
     # balance.
@@ -366,21 +366,21 @@ describe Node do
     end
 
     it 'returns true for node with 2 children' do
-      root.add left
-      root.add right
+      root.insert left
+      root.insert right
       expect(root.full?).to be true
     end
 
     it 'returns false for a node with only one child' do
-      root.add left
+      root.insert left
       expect(root.full?).to be nil
     end
 
     it 'returns true for tree with 5 nodes' do
-      root.add left
-      root.add right
-      root.add l2
-      root.add l3
+      root.insert left
+      root.insert right
+      root.insert l2
+      root.insert l3
       expect(root.full?).to be true
     end
   end
@@ -390,8 +390,8 @@ describe Node do
       root = Node.new 3
       left = Node.new 2
       right = Node.new 4
-      root.add left
-      root.add right
+      root.insert left
+      root.insert right
       expected = [root.value, left.uuid, right.uuid]
       expect(root.to_a).to eq expected
     end
@@ -400,8 +400,8 @@ describe Node do
       node1 = Node.new 4
       node2 = Node.new 2
       node3 = Node.new 3
-      node1.add node2
-      node1.add node3
+      node1.insert node2
+      node1.insert node3
       expected = [node1.value, node2.uuid, nil]
       expect(node1.to_a).to eq expected
     end
@@ -412,8 +412,8 @@ describe Node do
       node = Node.new(8)
       nodel = Node.new(4)
       noder = Node.new(14)
-      node.add nodel
-      node.add noder
+      node.insert nodel
+      node.insert noder
 
       expected = {
         'value' => node.value,
@@ -448,8 +448,8 @@ describe Node do
       root = Node.new(8)
       left = Node.new(4)
       right = Node.new(14)
-      root.add left
-      root.add right
+      root.insert left
+      root.insert right
       new_node = Node.build_from_hash root.to_hash
       expect(new_node.uuid).to eq root.uuid
       expect(new_node.value).to eq root.value
@@ -484,15 +484,15 @@ describe Node do
 
       describe 'only right children' do
         it 'makes a long right list' do
-          n2.add n3
-          n2.add n5
-          n2.add n7
-          n2.add n11
-          n2.add n13
-          n2.add n17
-          n2.add n19
-          n2.add n23
-          n2.add n29
+          n2.insert n3
+          n2.insert n5
+          n2.insert n7
+          n2.insert n11
+          n2.insert n13
+          n2.insert n17
+          n2.insert n19
+          n2.insert n23
+          n2.insert n29
           expect(n2.height).to eq 9
           expect(n29.height).to eq 0
           # expect(n2.pathological?).to be true
@@ -505,15 +505,15 @@ describe Node do
 
       describe 'only left children' do
         it 'makes a long left list' do
-          n29.add n23
-          n29.add n19
-          n29.add n17
-          n29.add n13
-          n29.add n11
-          n29.add n7
-          n29.add n5
-          n29.add n3
-          n29.add n2
+          n29.insert n23
+          n29.insert n19
+          n29.insert n17
+          n29.insert n13
+          n29.insert n11
+          n29.insert n7
+          n29.insert n5
+          n29.insert n3
+          n29.insert n2
           expect(n29.height).to eq 9
           expect(n2.height).to eq 0
           # expect(n29.pathological?).to be true

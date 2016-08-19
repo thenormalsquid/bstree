@@ -14,32 +14,32 @@ describe Tree do
   end
 
   describe '.size' do
-    it 'adds a node to the tree with existing root' do
+    it 'inserts a node to the tree with existing root' do
       node = Node.new(1)
       tree = Tree.new node
       node2 = Node.new(2)
-      tree.add node2
+      tree.insert node2
       expect(tree.size).to eq 2
 
       node3 = Node.new(3)
-      tree.add node3
+      tree.insert node3
       expect(tree.size).to eq 3
     end
   end
 
   describe 'tree structure' do
-    it 'adds a node to the tree with existing root' do
+    it 'inserts a node to the tree with existing root' do
       node = Node.new(10)
       tree = Tree.new node
-      tree.add Node.new(2)
+      tree.insert Node.new(2)
       expect(tree.size).to eq 2
       expect(tree.root.left.value).to eq 2
 
-      tree.add Node.new(33)
+      tree.insert Node.new(33)
       expect(tree.size).to eq 3
       expect(tree.root.right.value).to eq 33
 
-      tree.add Node.new(23)
+      tree.insert Node.new(23)
       expect(tree.size).to eq 4
       expect(tree.root.right.left.value).to eq 23
     end
@@ -58,7 +58,7 @@ describe Tree do
       root = Node.new(9)
       tree = Tree.new root
       n14 = Node.new(14)
-      tree.add n14
+      tree.insert n14
       expect(tree.delete(14)).to eq n14
       expect(tree.bst?).to be true
       expect(n14.left.nil?).to be true
@@ -71,8 +71,8 @@ describe Tree do
       tree = Tree.new root
       n14 = Node.new(14)
       n23 = Node.new(23)
-      tree.add n14
-      tree.add n23
+      tree.insert n14
+      tree.insert n23
 
       expect(tree.delete(14)).to eq n14
       expect(n14.left.nil?).to be true
@@ -89,10 +89,10 @@ describe Tree do
       n19 = Node.new(19)
       n13 = Node.new(13)
       n5 = Node.new(5)
-      tree.add n17
-      tree.add n19
-      tree.add n13
-      tree.add n5
+      tree.insert n17
+      tree.insert n19
+      tree.insert n13
+      tree.insert n5
 
       expect(tree.delete(17)).to eq n17
       expect(tree.bst?).to be true
@@ -107,18 +107,18 @@ describe Tree do
       root = Node.new(11)
       tree = Tree.new root
       n5 = Node.new(5)
-      tree.add n5
+      tree.insert n5
 
       n17 = Node.new(17)
       n13 = Node.new(13)
       n41 = Node.new(41)
       n37 = Node.new(37)
       n31 = Node.new(31)
-      tree.add n17
-      tree.add n13
-      tree.add n41
-      tree.add n37
-      tree.add n31
+      tree.insert n17
+      tree.insert n13
+      tree.insert n41
+      tree.insert n37
+      tree.insert n31
       expect(tree.delete(17)).to eq n17
       expect(tree.bst?).to be true
       expect(n17.left.nil?).to be true
@@ -138,9 +138,9 @@ describe Tree do
       n5 = Node.new(5)
       n7 = Node.new(7)
       n3 = Node.new(3)
-      tree.add n5
-      tree.add n7
-      tree.add n3
+      tree.insert n5
+      tree.insert n7
+      tree.insert n3
 
       expect(tree.delete(5)).to eq n5
       expect(tree.bst?).to be true
@@ -157,20 +157,20 @@ describe Tree do
       n5 = Node.new(5)
       n7 = Node.new(7)
       n3 = Node.new(3)
-      tree.add n5
-      tree.add n7
-      tree.add n3
+      tree.insert n5
+      tree.insert n7
+      tree.insert n3
 
       n17 = Node.new(17)
       n13 = Node.new(13)
       n41 = Node.new(41)
       n37 = Node.new(37)
       n31 = Node.new(31)
-      tree.add n17
-      tree.add n13
-      tree.add n41
-      tree.add n37
-      tree.add n31
+      tree.insert n17
+      tree.insert n13
+      tree.insert n41
+      tree.insert n37
+      tree.insert n31
 
       expect(tree.delete(11)).to eq root
       expect(tree.root).to eq n5
@@ -189,20 +189,20 @@ describe Tree do
     it 'finds a node with given key' do
       node = Node.new(9)
       tree = Tree.new node
-      tree.add Node.new(14)
-      tree.add Node.new(4)
-      tree.add Node.new(23)
-      tree.add Node.new(5)
-      tree.add Node.new(99)
+      tree.insert Node.new(14)
+      tree.insert Node.new(4)
+      tree.insert Node.new(23)
+      tree.insert Node.new(5)
+      tree.insert Node.new(99)
       target = Node.new(77)
-      tree.add target
+      tree.insert target
       expect(tree.size).to eq 7
       expect(tree.find(77).object_id).to eq target.object_id
     end
   end
 
   describe 'height of tree' do
-    # Depth should be incremented when nodes are added,
+    # Depth should be incremented when nodes are inserted,
     # if the height is to be considered as an attribute of the tree.
     # As a virtual attribute (to borrow a notion from Ruby), calling a
     # tree's height method triggers a traversal of the entire tree to
@@ -214,32 +214,32 @@ describe Tree do
 
     it 'finds the height of two node tree with right child' do
       tree = Tree.new Node.new(9)
-      tree.add Node.new(14)
+      tree.insert Node.new(14)
       expect(tree.height).to eq 1
     end
 
     it 'finds the height of two node tree with left child' do
       tree = Tree.new Node.new(9)
-      tree.add Node.new(4)
+      tree.insert Node.new(4)
       expect(tree.height).to eq 1
     end
 
     it 'finds the height of three node tree' do
       tree = Tree.new Node.new(9)
-      tree.add Node.new(14)
-      tree.add Node.new(4)
+      tree.insert Node.new(14)
+      tree.insert Node.new(4)
       expect(tree.height).to eq 1
     end
 
     it 'finds height for arbitrary tree' do
       node = Node.new(9)
       tree = Tree.new node
-      tree.add Node.new(14)
-      tree.add Node.new(4)
-      tree.add Node.new(23)
-      tree.add Node.new(5)
-      tree.add Node.new(99)
-      tree.add Node.new(78)
+      tree.insert Node.new(14)
+      tree.insert Node.new(4)
+      tree.insert Node.new(23)
+      tree.insert Node.new(5)
+      tree.insert Node.new(99)
+      tree.insert Node.new(78)
       expect(tree.height).to eq 4
     end
   end
@@ -255,7 +255,7 @@ describe Tree do
     it 'collects node values for left node only' do
       node = Node.new(9)
       tree = Tree.new node
-      tree.add Node.new(4)
+      tree.insert Node.new(4)
       expect(tree.size).to eq 2
       expect(tree.collect).to eq [4, 9]
     end
@@ -263,7 +263,7 @@ describe Tree do
     it 'collects node values for right node only' do
       node = Node.new(9)
       tree = Tree.new node
-      tree.add Node.new(14)
+      tree.insert Node.new(14)
       expect(tree.size).to eq 2
       expect(tree.collect).to eq [9, 14]
     end
@@ -271,11 +271,11 @@ describe Tree do
     it 'collects node values' do
       node = Node.new(1)
       tree = Tree.new node
-      tree.add Node.new(14)
-      tree.add Node.new(4)
-      tree.add Node.new(23)
-      tree.add Node.new(5)
-      tree.add Node.new(99)
+      tree.insert Node.new(14)
+      tree.insert Node.new(4)
+      tree.insert Node.new(23)
+      tree.insert Node.new(5)
+      tree.insert Node.new(99)
       expect(tree.size).to eq 6
       expect(tree.collect).to eq [1, 4, 5, 14, 23, 99]
     end
@@ -304,40 +304,40 @@ describe Tree do
     end
 
     it 'returns true for node with 2 children' do
-      tree.add left
-      tree.add right
+      tree.insert left
+      tree.insert right
       expect(tree.full?).to be true
     end
 
     it 'returns false for a node with only one child' do
-      tree.add left
+      tree.insert left
       expect(tree.full?).to be nil
     end
 
     it 'returns true for tree with 5 nodes' do
-      tree.add left
-      tree.add right
-      tree.add l2
-      tree.add l3
+      tree.insert left
+      tree.insert right
+      tree.insert l2
+      tree.insert l3
       expect(tree.full?).to be true
     end
 
     it 'returns nil for tree with 6 nodes' do
-      tree.add left
-      tree.add right
-      tree.add l2
-      tree.add l3
-      tree.add Node.new 145
+      tree.insert left
+      tree.insert right
+      tree.insert l2
+      tree.insert l3
+      tree.insert Node.new 145
       expect(tree.full?).to be_falsy
     end
 
     it 'returns nil for tree with 6 nodes' do
-      tree.add left
-      tree.add right
-      tree.add l2
-      tree.add l3
-      tree.add l4
-      tree.add Node.new 145
+      tree.insert left
+      tree.insert right
+      tree.insert l2
+      tree.insert l3
+      tree.insert l4
+      tree.insert Node.new 145
       expect(tree.full?).to be_falsy
     end
   end
@@ -346,14 +346,14 @@ describe Tree do
     before :all do
       node = Node.new(8, 'uuid8')
       @tree = Tree.new node
-      @tree.add Node.new(14, 'uuid14')
-      @tree.add Node.new(4, 'uuid4')
+      @tree.insert Node.new(14, 'uuid14')
+      @tree.insert Node.new(4, 'uuid4')
       @min = Node.new 2, 'uuid2'
-      @tree.add @min
-      @tree.add Node.new(5, 'uuid5')
-      @tree.add Node.new(11, 'uuid11')
+      @tree.insert @min
+      @tree.insert Node.new(5, 'uuid5')
+      @tree.insert Node.new(11, 'uuid11')
       @max = Node.new 21, 'uuid21'
-      @tree.add @max
+      @tree.insert @max
 
       @expected = [8, 4, 14, 2, 5, 11, 21]
     end
@@ -364,8 +364,8 @@ describe Tree do
         nodel = Node.new(4)
         noder = Node.new(14)
         tree = Tree.new node
-        tree.add nodel
-        tree.add noder
+        tree.insert nodel
+        tree.insert noder
 
         expected = {
           'value' => node.value,

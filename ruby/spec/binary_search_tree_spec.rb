@@ -55,14 +55,14 @@ describe BinarySearchTree do
       foo8 = Foo.new(27)
       @foo9 = Foo.new(33)
 
-      @root.add(@foo2)
-      @root.add(@foo3)
-      @root.add(@foo4)
-      @root.add(foo5)
-      @root.add(foo6)
-      @root.add(@foo7)
-      @root.add(foo8)
-      @root.add(@foo9)
+      @root.insert(@foo2)
+      @root.insert(@foo3)
+      @root.insert(@foo4)
+      @root.insert(foo5)
+      @root.insert(foo6)
+      @root.insert(@foo7)
+      @root.insert(foo8)
+      @root.insert(@foo9)
     end
 
     describe '.bst?' do
@@ -78,14 +78,14 @@ describe BinarySearchTree do
       it 'identifies root and left node as binary search tree' do
         node = Foo.new(10)
         left = Foo.new(5)
-        node.add left
+        node.insert left
         expect(node.bst?).to be true
       end
 
       it 'identifies root and left node as binary search tree' do
         node = Foo.new(10)
         right = Foo.new(15)
-        node.add right
+        node.insert right
         expect(node.bst?).to be true
       end
 
@@ -93,8 +93,8 @@ describe BinarySearchTree do
         node = Foo.new(10)
         left = Foo.new(5)
         right = Foo.new(15)
-        node.add left
-        node.add right
+        node.insert left
+        node.insert right
         expect(node.bst?).to be true
       end
 
@@ -148,8 +148,8 @@ describe BinarySearchTree do
       end
     end
 
-    describe '.add' do
-      it 'adds a node' do
+    describe '.insert' do
+      it 'inserts a node' do
         expect(@root.right).to eq @foo2
         expect(@root.left).to eq @foo3
         expect(@root.left.left).to eq @foo4
@@ -168,7 +168,7 @@ describe BinarySearchTree do
       it 'deletes the right node specified by key' do
         root = Foo.new(9)
         n14 = Foo.new(14)
-        root.add n14
+        root.insert n14
         expect(root.delete(14)).to eq n14
         expect(root.bst?).to be true
         expect(n14.left.nil?).to be true
@@ -179,8 +179,8 @@ describe BinarySearchTree do
         root = Foo.new(9)
         n14 = Foo.new(14)
         n23 = Foo.new(23)
-        root.add n14
-        root.add n23
+        root.insert n14
+        root.insert n23
         expect(root.delete(14)).to eq n14
         expect(root.bst?).to be true
         expect(n14.left.nil?).to be true
@@ -195,10 +195,10 @@ describe BinarySearchTree do
         n19 = Foo.new(19)
         n13 = Foo.new(13)
         n5 = Foo.new(5)
-        root.add n17
-        root.add n19
-        root.add n13
-        root.add n5
+        root.insert n17
+        root.insert n19
+        root.insert n13
+        root.insert n5
         expect(root.delete(17)).to eq n17
         expect(root.bst?).to be true
         expect(n17.left.nil?).to be true
@@ -210,18 +210,18 @@ describe BinarySearchTree do
       it 'rebuilds subtree after deleting node' do
         root = Foo.new(11)
         n5 = Foo.new(5)
-        root.add n5
+        root.insert n5
 
         n17 = Foo.new(17)
         n13 = Foo.new(13)
         n41 = Foo.new(41)
         n37 = Foo.new(37)
         n31 = Foo.new(31)
-        root.add n17
-        root.add n13
-        root.add n41
-        root.add n37
-        root.add n31
+        root.insert n17
+        root.insert n13
+        root.insert n41
+        root.insert n37
+        root.insert n31
         expect(root.delete(17)).to eq n17
         expect(root.bst?).to be true
         expect(n17.left.nil?).to be true
@@ -239,9 +239,9 @@ describe BinarySearchTree do
         n5 = Foo.new(5)
         n7 = Foo.new(7)
         n3 = Foo.new(3)
-        root.add n5
-        root.add n7
-        root.add n3
+        root.insert n5
+        root.insert n7
+        root.insert n3
 
         expect(root.delete(5)).to eq n5
         expect(root.bst?).to be true
@@ -256,20 +256,20 @@ describe BinarySearchTree do
         n5 = Foo.new(5)
         n7 = Foo.new(7)
         n3 = Foo.new(3)
-        root.add n5
-        root.add n7
-        root.add n3
+        root.insert n5
+        root.insert n7
+        root.insert n3
 
         n17 = Foo.new(17)
         n13 = Foo.new(13)
         n41 = Foo.new(41)
         n37 = Foo.new(37)
         n31 = Foo.new(31)
-        root.add n17
-        root.add n13
-        root.add n41
-        root.add n37
-        root.add n31
+        root.insert n17
+        root.insert n13
+        root.insert n41
+        root.insert n37
+        root.insert n31
 
         expect(root.delete(11)).to eq root
         expect(root.left.nil?).to be true
@@ -315,8 +315,8 @@ describe BinarySearchTree do
         root = Foo.new 10
         n1 = Foo.new 5
         n2 = Foo.new 15
-        root.add n1
-        root.add n2
+        root.insert n1
+        root.insert n2
 
         expected = {
           uuid: root.uuid,
@@ -353,42 +353,42 @@ describe BinarySearchTree do
     end
 
     it 'finds the common parent for direct left and right children' do
-      root.add n5
-      root.add n13
+      root.insert n5
+      root.insert n13
       expect(root.common_parent(n5, n13)).to eq root
       expect(root.common_parent(n13, n5)).to eq root
     end
 
     it 'finds common parent for children on left side of root' do
-      root.add n5
-      root.add n7
-      root.add n3
+      root.insert n5
+      root.insert n7
+      root.insert n3
       expect(root.common_parent(n3, n7)).to eq n5
       expect(root.common_parent(n7, n3)).to eq n5
     end
 
     it 'finds common parent for nodes in series' do
-      root.add n5
-      root.add n3
+      root.insert n5
+      root.insert n3
       expect(root.common_parent(n3, n5)).to eq n5
       expect(root.common_parent(n5, n3)).to eq n5
     end
 
     it 'finds common parent for children right of root' do
-      root.add n17
-      root.add n13
-      root.add n19
+      root.insert n17
+      root.insert n13
+      root.insert n19
       expect(root.common_parent(n13, n19)).to eq n17
       expect(root.common_parent(n19, n13)).to eq n17
     end
 
     it 'finds children either side of root' do
-      root.add n5
-      root.add n7
-      root.add n3
-      root.add n17
-      root.add n13
-      root.add n19
+      root.insert n5
+      root.insert n7
+      root.insert n3
+      root.insert n17
+      root.insert n13
+      root.insert n19
       expect(root.common_parent(n3, n19)).to eq root
       expect(root.common_parent(n19, n3)).to eq root
     end
@@ -402,31 +402,31 @@ describe BinarySearchTree do
 
     it 'finds the height of two node tree with right child' do
       node = Foo.new(9)
-      node.add Foo.new(14)
+      node.insert Foo.new(14)
       expect(node.height).to eq 1
     end
 
     it 'finds the height of two node tree with left child' do
       node = Foo.new(9)
-      node.add Foo.new(4)
+      node.insert Foo.new(4)
       expect(node.height).to eq 1
     end
 
     it 'finds the height of three node tree' do
       node = Foo.new(9)
-      node.add Foo.new(14)
-      node.add Foo.new(4)
+      node.insert Foo.new(14)
+      node.insert Foo.new(4)
       expect(node.height).to eq 1
     end
 
     it 'finds height for arbitrary tree' do
       node = Foo.new(9)
-      node.add Foo.new(14)
-      node.add Foo.new(4)
-      node.add Foo.new(23)
-      node.add Foo.new(5)
-      node.add Foo.new(99)
-      node.add Foo.new(78)
+      node.insert Foo.new(14)
+      node.insert Foo.new(4)
+      node.insert Foo.new(23)
+      node.insert Foo.new(5)
+      node.insert Foo.new(99)
+      node.insert Foo.new(78)
       expect(node.height).to eq 4
     end
   end
@@ -445,7 +445,7 @@ describe BinarySearchTree do
 
     it 'fails if comparison operator is not overriden' do
       bar = Bar.new 9
-      expect { bar.add(Bar.new(5)) }.to raise_error(NoMethodError)
+      expect { bar.insert(Bar.new(5)) }.to raise_error(NoMethodError)
     end
   end
 end

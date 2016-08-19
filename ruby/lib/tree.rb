@@ -10,8 +10,8 @@ class Tree
     @size = 1
   end
 
-  def add node
-    @root.add node
+  def insert node
+    @root.insert node
     @size += 1
   end
 

@@ -5,7 +5,6 @@ how binary search trees are implemented in various languages.
 
 ## TODO
 
-* change `add` to `insert`
 * change `find` to `search`
 
 * Finish `size`, `search`, `present?`, `height`, `bst?`, `maximum`, `minimum`, `successor` and

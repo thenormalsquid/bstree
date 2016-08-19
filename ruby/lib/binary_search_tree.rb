@@ -9,11 +9,11 @@ module BinarySearchTree
     raise NoMethodError.new "'<' method must be overridden"
   end
 
-  def add node
+  def insert node
     if node < self
-      left.nil? ? self.left = node : left.add(node)
+      left.nil? ? self.left = node : left.insert(node)
     else
-      right.nil? ? self.right = node : right.add(node)
+      right.nil? ? self.right = node : right.insert(node)
     end
   end
 
@@ -24,10 +24,10 @@ module BinarySearchTree
 
     if parent&.right == node_to_delete
       parent&.right = right
-      right.add left unless left.nil?
+      right.insert left unless left.nil?
     else
       parent&.left = left
-      left.add right unless right.nil?
+      left.insert right unless right.nil?
     end
 
     node_to_delete.left = node_to_delete.right = nil

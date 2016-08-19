@@ -32,16 +32,16 @@ class Node
     @value > other.value
   end
 
-  def add node
-    node < self ? addleft(node) : addright(node)
+  def insert node
+    node < self ? insertleft(node) : insertright(node)
   end
 
-  def addleft node
-    @left.nil? ? @left = node : @left.add(node)
+  def insertleft node
+    @left.nil? ? @left = node : @left.insert(node)
   end
 
-  def addright node
-    @right.nil? ? @right = node : @right.add(node)
+  def insertright node
+    @right.nil? ? @right = node : @right.insert(node)
   end
 
   def height
@@ -69,10 +69,10 @@ class Node
 
     if parent&.right == node_to_delete
       parent&.right = right
-      right.add left unless left.nil?
+      right.insert left unless left.nil?
     else
       parent&.left = left
-      left.add right unless right.nil?
+      left.insert right unless right.nil?
     end
 
     node_to_delete.left = node_to_delete.right = nil
