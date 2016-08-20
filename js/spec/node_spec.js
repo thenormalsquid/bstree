@@ -4,42 +4,52 @@ var assert = require('assert');
 describe('Node', function() {
   describe('instantiation', function() {
     it('creates a Node', function() {
-      var root = node.new(13);
-      //console.log(root);
+      var root = new node(13);
       assert.equal(13, root.key);
     });
   });
 
   describe('insertion', function() {
-    xit('inserts a left node', function() {
-      var root = node.new(13);
-      var n5 = node.new(5);
+    it('inserts a left node', function() {
+      var root = new node(13);
+      var n5 = new node(6);
       root.insert(n5);
       assert.equal(root.left, n5);
     });
 
-    xit('inserts a right nodes', function() {
-      var root = node.new(13);
-      var n19 = node.new(19);
+    it('inserts a right node', function() {
+      var root = new node(13);
+      var n19 = new node(19);
       root.insert(n19);
       assert.equal(root.right, n19);
     });
 
-    xit('insert first 10 primes', function() {
-      var root = node.new(13);
-      var n7 = node.new(7);
-      var n5 = node.new(5);
-      var n3 = node.new(3);
-      var n2 = node.new(2);
-      var n11 = node.new(11);
-      var n17 = node.new(17);
-      var n19 = node.new(19);
-      var n23 = node.new(23);
-      var n29 = node.new(29);
+    it('insert first 10 primes', function() {
+      var root = new node(13);
+      var n7 = new node(7);
+      var n5 = new node(5);
+      var n3 = new node(3);
+      var n2 = new node(2);
+      var n11 = new node(11);
+      var n17 = new node(17);
+      var n19 = new node(19);
+      var n23 = new node(23);
+      var n29 = new node(29);
       root.insert(n5);
       root.insert(n19);
-      //root.insert(n19).insert(17).insert(n23).insert(n11).insert(n7).insert(n3).insert(n2).insert(n29);
-      assert.equal(root, tree);
+      root.insert(n17);
+      root.insert(n23);
+      root.insert(n11);
+      root.insert(n7);
+      root.insert(n3);
+      root.insert(n2);
+      root.insert(n29);
+      assert.equal(root.left.left, n3);
+      assert.equal(root.left.left.left, n2);
+      assert.equal(root.left.right, n11);
+      assert.equal(root.left.right.left, n7);
+      assert.equal(root.right, n19);
+      assert.equal(root.right.left, n17);
     });
   });
 
