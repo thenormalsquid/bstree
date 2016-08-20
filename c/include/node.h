@@ -20,7 +20,8 @@ Node * node_left       (Node * n);
 
 Node * node_right      (Node * n);
 
-void   node_collect    (void);
+void   node_collect    (Node * n,
+                        void * collector);
 
 void   node_search     (void);
 

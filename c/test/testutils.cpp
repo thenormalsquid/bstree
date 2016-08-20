@@ -38,4 +38,3 @@ void
 describe_fail(const char * indent, const char * description) {
   describe(indent, description, FAILCOLOR);
 }
-

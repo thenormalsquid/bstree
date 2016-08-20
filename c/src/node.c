@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include <node.h>
+#include <collector.h>
 #include "node_private.h"
 
 /*
@@ -11,6 +12,9 @@
  */
 typedef struct _state {
   int size;
+  int current_position;
+  int * values;
+  Node * n;
   //int height;
 } State;
 
@@ -24,6 +28,13 @@ post_order_traverse(Node * n, Callback callback, State * state) {
   if (n->left  != NULL) { post_order_traverse(n->left, callback, state); }
   if (n->right != NULL) { post_order_traverse(n->right, callback, state); }
   if (callback != NULL) { callback(state); }
+}
+
+void
+in_order_traverse(Node * n, Callback callback, State * state) {
+  if (n->left  != NULL) { in_order_traverse(n->left, callback, state); }
+  if (callback != NULL) { state->n = n; callback(state); }
+  if (n->right != NULL) { in_order_traverse(n->right, callback, state); }
 }
 
 
@@ -87,7 +98,28 @@ node_insert(Node * root, Node * next) {
 }
 
 void
-node_collect(void) {
+value_collector(State * state) {
+  state->values[state->current_position] = state->n->key;
+  state->current_position++;
+}
+
+/* The way to do this is send a struct with the memory handling
+ * directly into collect, deal with the memory management from the
+ * calling function.
+ */
+void
+node_collect(Node * n, void * userdata) {
+  Collector * collector = (Collector *) userdata;
+  State state;
+  state.current_position = 0;
+  state.values = (int*)calloc(100, sizeof(int));
+  in_order_traverse(n, value_collector, &state);
+  for (int i = 0; i < state.current_position; i++) {
+    printf("%d ", state.values[i]);
+  }
+  printf("\n");
+
+  free(state.values);
 }
 
 void

@@ -6,6 +6,9 @@ how binary search trees are implemented in various languages.
 ## TODO
 
 * change `find` to `search`
+* handle nodes with duplicate values. Currently, inserting a duplicate
+  node cause a stack overflow. I hope this can be done elegantly, I
+  suspect it will look ugly.
 
 * Finish `size`, `search`, `present?`, `height`, `bst?`, `maximum`, `minimum`, `successor` and
   predecessor` before finishing node `delete`. This will provide a lot

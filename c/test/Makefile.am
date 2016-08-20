@@ -8,9 +8,10 @@ LDADD = ../src/libbst.a
 %.o: %.cpp
 	g++ $(AM_CXXFLAGS) $(AM_CPPFLAGS) -D$*_STANDALONE -c $< $(AM_LDFLAGS)
 
-bin_PROGRAMS = node tree
+bin_PROGRAMS = node tree collector
 
 node_SOURCES = test_node.cpp testutils.cpp
 tree_SOURCES = test_tree.cpp testutils.cpp
+collector_SOURCES = test_collector.cpp testutils.cpp
 
 

@@ -21,6 +21,14 @@ need to find a way to check the result of insertion before, perhaps
 with a private_node.h defining the node struct such that the test
 can access left and right children.
 
+## Collecting keys or values
+
+The initial implementation is using some pseudo-closure trickery
+along with some accessory structs to collect keys from each node
+on in-order traversal. This is pretty brain dead as far as being
+"useful" as a data dictionary, but it does proof the algorithm,
+and could be extended to collected an in-order array or list of
+nodes without a lot of trouble.
 
 ## Deleting nodes
 

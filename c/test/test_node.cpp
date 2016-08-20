@@ -4,6 +4,7 @@
 #include "./testutils.h"
 
 #include <node.h>
+#include <collector.h>
 #include "../src/node_private.h"
 
 using std::string;
@@ -65,6 +66,41 @@ public:
   }
 
   void test_node_collect(void) {
+    describe_test(INDENT0, "From test_node_collect in NodeTest.");
+    Spec spec;
+    Node * root = node_new(13);
+    Node * n17 = node_new(17);
+
+    Node * n2 = node_new(2);
+    Node * n3 = node_new(3);
+    Node * n5 = node_new(5);
+    Node * n7 = node_new(7);
+
+    Collector * expected = collector_new(100);
+    expected->current_position = 0;
+    collector_add(expected, 1);
+    collector_add(expected, 1);
+    collector_add(expected, 1);
+    collector_add(expected, 1);
+    collector_add(expected, 1);
+
+    collector_printf(expected);
+
+    Collector actual;
+    actual.current_position = 0;
+
+    spec.it("array with single element for single node", DO_SPEC_HANDLE {
+      node_insert(root, n17);
+      node_insert(root, n5);
+      node_insert(root, n7);
+      node_insert(root, n2);
+      node_insert(root, n3);
+      node_collect(root, (void*)&actual);
+      return (1);
+    });
+
+    node_destroy(root);
+    collector_destroy(expected);
   }
 
   void test_node_search(void) {
@@ -144,23 +180,18 @@ public:
     describe_test(INDENT0, "From test_node_insert in NodeTest.");
     Spec spec;
     Node * root = node_new(13);
-    //std::cout << "node size: " << node_size(root) << std::endl;
 
     Node * n7 = node_new(7);
     spec.it("insert a single node to the left", DO_SPEC_HANDLE {
       node_insert(root, n7);
       return (root->left == n7);
     });
-    //std::cout << "node size: " << node_size(root) << std::endl;
 
     Node * n21 = node_new(21);
     spec.it("insert a single node to the right", DO_SPEC_HANDLE {
       node_insert(root, n21);
       return (root->right == n21);
     });
-    // std::cout << "root size: " << node_size(root) << std::endl;
-    // std::cout << "n7 size: " << node_size(n7) << std::endl;
-    // std::cout << "n21 size: " << node_size(n21) << std::endl;
 
     Node * n17 = node_new(17);
     spec.it("insert a left node into right subtree", DO_SPEC_HANDLE {
@@ -201,7 +232,7 @@ public:
     test_node_left();
     test_node_right();
     test_node_key();
-    //test_node_collect();
+    test_node_collect();
     //test_node_search();
     //test_node_is_present();
     //test_node_height();
