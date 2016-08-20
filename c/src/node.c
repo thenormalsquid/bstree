@@ -19,7 +19,8 @@ typedef struct _state {
 } State;
 
 
-typedef void (*Callback)(State * state);
+typedef void (*Callback)(Node * n, State * state);
+typedef void (*Callback1)(Node * n, State * state);
 
 void
 post_order_traverse(Node * n, Callback callback, State * state) {
@@ -27,14 +28,14 @@ post_order_traverse(Node * n, Callback callback, State * state) {
 
   if (n->left  != NULL) { post_order_traverse(n->left, callback, state); }
   if (n->right != NULL) { post_order_traverse(n->right, callback, state); }
-  if (callback != NULL) { callback(state); }
+  if (callback != NULL) { callback(n, state); }
 }
 
 void
-in_order_traverse(Node * n, Callback callback, State * state) {
-  if (n->left  != NULL) { in_order_traverse(n->left, callback, state); }
-  if (callback != NULL) { state->n = n; callback(state); }
-  if (n->right != NULL) { in_order_traverse(n->right, callback, state); }
+in_order_traverse(Node * n, Callback1 callback, void * userdata) {
+  if (n->left  != NULL) { in_order_traverse(n->left, callback, userdata); }
+  if (callback != NULL) { callback(n, userdata); }
+  if (n->right != NULL) { in_order_traverse(n->right, callback, userdata); }
 }
 
 
@@ -98,9 +99,10 @@ node_insert(Node * root, Node * next) {
 }
 
 void
-value_collector(State * state) {
-  state->values[state->current_position] = state->n->key;
-  state->current_position++;
+value_collector(Node * n, void * userdata) {
+  Collector * c = (Collector *) userdata;
+  c->values[c->current_position] = n->key;
+  c->current_position++;
 }
 
 /* The way to do this is send a struct with the memory handling
@@ -110,6 +112,9 @@ value_collector(State * state) {
 void
 node_collect(Node * n, void * userdata) {
   Collector * collector = (Collector *) userdata;
+  in_order_traverse(n, value_collector, (void*)collector);
+
+  /*
   State state;
   state.current_position = 0;
   state.values = (int*)calloc(100, sizeof(int));
@@ -120,6 +125,7 @@ node_collect(Node * n, void * userdata) {
   printf("\n");
 
   free(state.values);
+  */
 }
 
 void
@@ -155,7 +161,7 @@ node_is_bst(void) {
 }
 
 void
-size_tracker(State * state) {
+size_tracker(Node * n, State * state) {
   state->size++;
 }
 

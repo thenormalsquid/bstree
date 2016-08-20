@@ -18,7 +18,8 @@ void   tree_insert     (Tree * t,
 
 int    tree_is_empty   (Tree * t);
 
-void   tree_collect    (void);
+void   tree_collect    (Tree * t,
+                        void * c);
 
 void   tree_search     (void);
 

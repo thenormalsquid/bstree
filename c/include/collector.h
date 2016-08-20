@@ -49,6 +49,8 @@ void collector_destroy    (Collector * c);
 
 void collector_printf     (Collector * c);
 
+void collector_reset      (Collector * c);
+
 #ifdef __cplusplus
 }
 #endif

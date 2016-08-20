@@ -4,6 +4,7 @@
 #include "./testutils.h"
 
 #include <tree.h>
+#include <collector.h>
 #include "../src/tree_private.h"
 #include "../src/node_private.h"
 
@@ -16,6 +17,23 @@ public:
   TreeTest( std::string name ) : CppUnit::TestCase( name ) {}
 
   void test_tree_collect(void) {
+    describe_test(INDENT0, "From test_tree_collect in TreeTest.");
+    Spec spec;
+    Tree * t = tree_new();
+    Node * root = node_new(13);
+    tree_insert(t, root);
+    Collector * expected = collector_new(100);
+    Collector * actual = collector_new(100);
+
+    spec.it("array with single element for single node", DO_SPEC_HANDLE {
+      collector_add(expected, 13);
+      tree_collect(t, (void *) actual);
+      return (collector_equals(expected, actual));
+    });
+
+    tree_delete(t);
+    collector_destroy(expected);
+    collector_destroy(actual);
   }
 
   void test_tree_search(void) {
@@ -152,7 +170,7 @@ public:
     test_tree_new_and_delete();
     test_tree_insert();
     test_tree_is_empty();
-    //test_tree_collect();
+    test_tree_collect();
     //test_tree_search();
     //test_tree_is_present();
     //test_tree_height();

@@ -69,38 +69,69 @@ public:
     describe_test(INDENT0, "From test_node_collect in NodeTest.");
     Spec spec;
     Node * root = node_new(13);
-    Node * n17 = node_new(17);
-
-    Node * n2 = node_new(2);
-    Node * n3 = node_new(3);
-    Node * n5 = node_new(5);
-    Node * n7 = node_new(7);
-
     Collector * expected = collector_new(100);
-    expected->current_position = 0;
-    collector_add(expected, 1);
-    collector_add(expected, 1);
-    collector_add(expected, 1);
-    collector_add(expected, 1);
-    collector_add(expected, 1);
-
-    collector_printf(expected);
-
-    Collector actual;
-    actual.current_position = 0;
+    Collector * actual = collector_new(100);
 
     spec.it("array with single element for single node", DO_SPEC_HANDLE {
-      node_insert(root, n17);
+      collector_add(expected, 13);
+      node_collect(root, (void *) actual);
+      return collector_equals(expected, actual) == 1;
+    });
+    collector_reset(actual);
+
+    Node * n17 = node_new(17);
+    node_insert(root, n17);
+    collector_add(expected, 17);
+    spec.it("array with root and right leaf", DO_SPEC_HANDLE {
+        node_collect(root, (void *) actual);
+        return collector_equals(expected, actual) == 1;
+    });
+    collector_reset(actual);
+
+    Node * n3 = node_new(3);
+    node_insert(root, n3);
+    collector_reset(expected);
+    collector_add(expected, 3);
+    collector_add(expected, 13);
+    collector_add(expected, 17);
+    spec.it("array with left and right leaves", DO_SPEC_HANDLE {
+        node_collect(root, actual);
+        return collector_equals(expected, actual) == 1;
+    });
+    collector_reset(actual);
+
+    Node * n2 = node_new(2);
+    Node * n5 = node_new(5);
+    Node * n7 = node_new(7);
+    Node * n11 = node_new(11);
+    Node * n19 = node_new(19);
+    Node * n23 = node_new(23);
+
+    collector_reset(expected);
+    collector_add(expected, 2);
+    collector_add(expected, 3);
+    collector_add(expected, 5);
+    collector_add(expected, 7);
+    collector_add(expected, 11);
+    collector_add(expected, 13);
+    collector_add(expected, 17);
+    collector_add(expected, 19);
+    collector_add(expected, 23);
+
+    spec.it("array with single element for single node", DO_SPEC_HANDLE {
+      node_insert(root, n23);
+      node_insert(root, n19);
       node_insert(root, n5);
       node_insert(root, n7);
+      node_insert(root, n11);
       node_insert(root, n2);
-      node_insert(root, n3);
-      node_collect(root, (void*)&actual);
-      return (1);
+      node_collect(root, (void *) actual);
+      return collector_equals(expected, actual) == 1;
     });
 
     node_destroy(root);
     collector_destroy(expected);
+    collector_destroy(actual);
   }
 
   void test_node_search(void) {

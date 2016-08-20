@@ -6,10 +6,12 @@
 
 int
 collector_equals(Collector * c1, Collector * c2) {
-  if (c1->size != c2->size) return 0;
+  if (c1->size != c2->size) { return 0; }
+  if (c1->current_position != c2->current_position) { return 0; }
+
   for (int i = 0; i<c1->current_position; i++) {
     if (c1->values[i] != c2->values[i]) {
-        return 0;
+      return 0;
     }
   }
   return 1;
@@ -26,6 +28,7 @@ collector_new(size_t size) {
   Collector * c = (Collector *) malloc(sizeof(Collector));
   memset(c, 0xDA, sizeof(Collector));
   c->values = (int *) calloc(size, sizeof(int));
+  c->size = size;
   c->current_position = 0;
   return c;
 }
@@ -36,6 +39,12 @@ collector_destroy(Collector * c) {
   free(c->values);
   memset(c, 0xDD, sizeof(Collector));
   free(c);
+}
+
+void
+collector_reset(Collector * c) {
+  memset(c->values, 0, sizeof(int));
+  c->current_position = 0;
 }
 
 void

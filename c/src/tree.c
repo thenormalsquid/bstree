@@ -38,7 +38,9 @@ tree_is_empty(Tree * t) {
 }
 
 void
-tree_collect(void) {
+tree_collect(Tree * t, void * collector) {
+  if (t->root == NULL) { return; }
+  node_collect(t->root, collector);
 }
 
 void
