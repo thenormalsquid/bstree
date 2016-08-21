@@ -10,6 +10,37 @@ class Node {
     public Node left = null;
     public Node right = null;
 
+    public Node search(int key) {
+      if (this.value == key) { return this; }
+
+      if (key < this.value) {
+        if (this.left != null) {
+          return this.left.search(key);
+        }
+      } else {
+        if (this.right != null) {
+          return this.right.search(key);
+        }
+      }
+      return null;
+    }
+
+    public boolean is_present(int key) {
+      if (this.value == key) { return true; }
+
+      if (key < this.value) {
+        if (this.left != null) {
+          return this.left.is_present(key);
+        }
+      } else {
+        if (this.right != null) {
+          return this.right.is_present(key);
+        }
+      }
+      return false;
+    }
+
+
     // so...wordy...maybe change to ternary with
     // a couple of private calls with ternaries
     public void insert(Node node) {

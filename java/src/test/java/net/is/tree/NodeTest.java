@@ -15,6 +15,40 @@ public class NodeTest extends TestCase {
     public ArrayList<Integer> expected = new ArrayList<Integer>();
 
     public void testSearch() {
+        Node root = new Node(11);
+        assertEquals(root, root.search(11));
+        assertEquals(true, root.is_present(11));
+
+        Node n3 = new Node(3);
+        Node n21 = new Node(21);
+        root.insert(n3);
+        root.insert(n21);
+        assertEquals(n3, root.search(3));
+        assertEquals(true, root.is_present(3));
+        assertEquals(n21, root.search(21));
+        assertEquals(true, root.is_present(21));
+
+        Node n7 = new Node(7);
+        Node n5 = new Node(5);
+        root.insert(n7);
+        root.insert(n5);
+        assertEquals(n7, root.search(7));
+        assertEquals(true, root.is_present(7));
+        assertEquals(n5, root.search(5));
+        assertEquals(true, root.is_present(5));
+
+        Node n13 = new Node(13);
+        Node n17 = new Node(17);
+        root.insert(n17);
+        root.insert(n13);
+        assertEquals(n13, root.search(13));
+        assertEquals(true, root.is_present(13));
+        assertEquals(n17, root.search(17));
+        assertEquals(true, root.is_present(17));
+
+        assertEquals(false, root.is_present(-1));
+        assertEquals(false, root.is_present(0));
+        assertEquals(false, root.is_present(42));
     }
 
     public void testHeight() {

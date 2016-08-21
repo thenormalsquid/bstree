@@ -15,6 +15,18 @@ class BSTree {
         return actual;
     }
 
+    public Node search(int key) {
+      if (root != null) {
+        return root.search(key);
+      }
+      return null;
+    }
+
+    public boolean is_present(int key) {
+      if (root == null) { return false; }
+      return root.is_present(key);
+    }
+
     public int size() {
         if (root == null) {
           return 0;

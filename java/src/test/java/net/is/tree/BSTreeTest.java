@@ -13,41 +13,48 @@ import junit.framework.TestSuite;
 public class BSTreeTest extends TestCase {
 
     /*
-     * find a null when empty
-     * find the root node when only single tree
-     * find a left child
-     * find a right child
+     * Also tests `is_present()`
      */
     public void testSearch() {
-        // Move this to instantiation test below
         BSTree tree = new BSTree();
-        assertEquals(tree.root, null);
 
         Node root = new Node(11);
         tree.insert(root);
-        assertEquals(tree.root, root);
-        // assertEquals(tree.search(11), root);
+        assertEquals(root, tree.search(11));
+        assertEquals(true, tree.is_present(11));
 
         Node n3 = new Node(3);
         Node n21 = new Node(21);
         tree.insert(n3);
         tree.insert(n21);
-        //assertEquals(tree.search(3), n3);
-        //assertEquals(tree.search(21), n21);
+        assertEquals(n3, tree.search(3));
+        assertEquals(true, tree.is_present(3));
+        assertEquals(n21, tree.search(21));
+        assertEquals(true, tree.is_present(21));
 
         // find a leaf node left-right-left
         Node n7 = new Node(7);
         Node n5 = new Node(5);
         tree.insert(n7);
         tree.insert(n5);
-        //assertEquals(tree.search(3), n3);
+        assertEquals(n5, tree.search(5));
+        assertEquals(true, tree.is_present(5));
+        assertEquals(n7, tree.search(7));
+        assertEquals(true, tree.is_present(7));
 
         // find a leaf node right-left-right
         Node n13 = new Node(13);
         Node n17 = new Node(17);
         tree.insert(n13);
         tree.insert(n17);
-        //assertEquals(tree.search(17), n17);
+        assertEquals(n13, tree.search(13));
+        assertEquals(true, tree.is_present(13));
+        assertEquals(n17, tree.search(17));
+        assertEquals(true, tree.is_present(17));
+
+        assertEquals(false, tree.is_present(-1));
+        assertEquals(false, tree.is_present(0));
+        assertEquals(false, tree.is_present(42));
     }
 
     public void testHeight() {
