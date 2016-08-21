@@ -53,6 +53,62 @@ describe('Node', function() {
     });
   });
 
+  describe('collect', function() {
+    it('collects a single node', function() {
+      var root = new node(13);
+      var actual = [];
+      var expected = [13];
+      root.collect(actual);
+      assert.deepEqual(expected, actual);
+    });
+
+    it('collects a left node', function() {
+      var root = new node(13);
+      var n5 = new node(6);
+      root.insert(n5);
+      var actual = [];
+      var expected = [6, 13];
+      root.collect(actual);
+      assert.deepEqual(expected, actual);
+    });
+
+    it('collects a right node', function() {
+      var root = new node(13);
+      var n19 = new node(19);
+      root.insert(n19);
+      var expected = [13, 19];
+      var actual = [];
+      root.collect(actual);
+      assert.deepEqual(expected, actual);
+    });
+
+    it('collects first 10 primes', function() {
+      var root = new node(13);
+      var n7 = new node(7);
+      var n5 = new node(5);
+      var n3 = new node(3);
+      var n2 = new node(2);
+      var n11 = new node(11);
+      var n17 = new node(17);
+      var n19 = new node(19);
+      var n23 = new node(23);
+      var n29 = new node(29);
+      root.insert(n5);
+      root.insert(n19);
+      root.insert(n17);
+      root.insert(n23);
+      root.insert(n11);
+      root.insert(n7);
+      root.insert(n3);
+      root.insert(n2);
+      root.insert(n29);
+      var expected = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
+      var actual = [];
+      root.collect(actual);
+      assert.deepEqual(expected, actual);
+    });
+  });
+
   describe('is_leaf', function() {
     xit('leaf node has no children', function() {
       var root = node.new(13);

@@ -14,4 +14,9 @@ Tree.prototype.is_empty = function () {
   return this.root === null;
 };
 
+Tree.prototype.collect = function(collector) {
+  if (this.root === null) { return; }
+  this.root.collect(collector);
+};
+
 exports.Tree = Tree;

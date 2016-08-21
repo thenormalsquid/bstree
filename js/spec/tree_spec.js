@@ -31,6 +31,40 @@ describe('Tree', function() {
     });
   });
 
+  describe('collect', function() {
+    it('collect empty array from empty tree', function() {
+      var t = new tree();
+      var expected = [];
+      var actual = [];
+      t.collect(actual);
+      assert.deepEqual(expected, actual);
+    });
+
+    it('collects key for root node in single node tree', function() {
+      var t = new tree();
+      var root = new node(13);
+      t.insert(root);
+      var expected = [13];
+      var actual = [];
+      t.collect(actual);
+      assert.deepEqual(expected, actual);
+    });
+
+    it('collects values from a simple 3 node tree', function() {
+      var t = new tree();
+      var root = new node(13);
+      var n5 = new node(5);
+      var n17 = new node(17);
+      t.insert(root);
+      t.insert(n5);
+      t.insert(n17);
+      var expected = [5, 13, 17];
+      var actual = [];
+      t.collect(actual);
+      assert.deepEqual(expected, actual);
+    });
+  });
+
   describe('is_empty', function() {
     it('insert root node into empty tree', function() {
       var t = new tree();
