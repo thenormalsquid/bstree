@@ -23,7 +23,8 @@ Node * node_right      (Node * n);
 void   node_collect    (Node * n,
                         void * collector);
 
-void   node_search     (void);
+Node * node_search     (Node * n,
+                        int key);
 
 void   node_is_present (void);
 

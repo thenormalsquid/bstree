@@ -112,24 +112,19 @@ value_collector(Node * n, void * userdata) {
 void
 node_collect(Node * n, void * userdata) {
   Collector * collector = (Collector *) userdata;
-  in_order_traverse(n, value_collector, (void*)collector);
-
-  /*
-  State state;
-  state.current_position = 0;
-  state.values = (int*)calloc(100, sizeof(int));
-  in_order_traverse(n, value_collector, &state);
-  for (int i = 0; i < state.current_position; i++) {
-    printf("%d ", state.values[i]);
-  }
-  printf("\n");
-
-  free(state.values);
-  */
+  in_order_traverse(n, value_collector, (void *) collector);
 }
 
-void
-node_search(void) {
+Node *
+node_search(Node * n, int key) {
+  if (n->key == key) return n;
+
+  if (key < n->key) {
+    if (n->left != NULL) return node_search(n->left, key);
+  } else {
+    if (n->right != NULL) return node_search(n->right, key);
+  }
+  return NULL;
 }
 
 void

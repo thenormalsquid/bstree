@@ -37,6 +37,55 @@ public:
   }
 
   void test_tree_search(void) {
+    describe_test(INDENT0, "From test_tree_search in NodeTest.");
+    Spec spec;
+    Tree * t = tree_new();
+    Node * root = node_new(13);
+    tree_insert(t, root);
+
+    spec.it("root element finds itself", DO_SPEC_HANDLE {
+      Node * actual = tree_search(t, 13);
+      return actual == root;
+    });
+
+    Node * n17 = node_new(17);
+    tree_insert(t, n17);
+    spec.it("finds a right leaf", DO_SPEC_HANDLE {
+      Node * actual = tree_search(t, 17);
+      return actual == n17;
+    });
+
+    Node * n3 = node_new(3);
+    tree_insert(t, n3);
+    spec.it("finds a left leaf", DO_SPEC_HANDLE {
+      Node * actual = tree_search(t, 3);
+      return actual == n3;
+    });
+
+    Node * n2 = node_new(2);
+    Node * n5 = node_new(5);
+    Node * n7 = node_new(7);
+    Node * n11 = node_new(11);
+    Node * n19 = node_new(19);
+    Node * n23 = node_new(23);
+    tree_insert(t, n23);
+    tree_insert(t, n19);
+    tree_insert(t, n5);
+    tree_insert(t, n7);
+    tree_insert(t, n11);
+    tree_insert(t, n2);
+
+    spec.it("finds node at end", DO_SPEC_HANDLE {
+      Node * actual = tree_search(t, 23);
+      return actual == n23;
+    });
+
+    spec.it("doesn't find value which isn't in tree", DO_SPEC_HANDLE {
+      Node * actual = tree_search(t, -100);
+      return actual == NULL;
+    });
+
+    tree_delete(t);
   }
 
   void test_tree_is_present(void) {
@@ -171,7 +220,7 @@ public:
     test_tree_insert();
     test_tree_is_empty();
     test_tree_collect();
-    //test_tree_search();
+    test_tree_search();
     //test_tree_is_present();
     //test_tree_height();
     //test_tree_destroy();

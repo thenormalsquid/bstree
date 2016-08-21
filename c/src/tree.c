@@ -43,8 +43,10 @@ tree_collect(Tree * t, void * collector) {
   node_collect(t->root, collector);
 }
 
-void
-tree_search(void) {
+Node *
+tree_search(Tree * t, int key) {
+  if (t->root == NULL) return NULL;
+  return node_search(t->root, key);
 }
 
 void

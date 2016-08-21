@@ -21,7 +21,8 @@ int    tree_is_empty   (Tree * t);
 void   tree_collect    (Tree * t,
                         void * c);
 
-void   tree_search     (void);
+Node * tree_search     (Tree * t,
+                        int key);
 
 void   tree_is_present (void);
 
