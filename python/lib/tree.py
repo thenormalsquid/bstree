@@ -22,6 +22,12 @@ class Tree(object):
     def size(self):
         return self.root.size()
 
+    def maximum(self):
+        return self.root.maximum()
+
+    def minimum(self):
+        return self.root.minimum()
+
     def height(self):
         return self.get_height(self.root)
 

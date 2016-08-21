@@ -6,7 +6,7 @@ node = require 'lib/node'
 describe("instantiating trees", function()
   it("instantiates an empty tree", function()
     table = {
-      key = 1,
+      key = nil,
       left = nil,
       right = nil
     }
@@ -60,7 +60,45 @@ describe("searches tree for node with specified key", function()
 end)
 
 describe("collects values in key order", function()
-  pending("returns nil for an empty tree")
+  setup(function()
+    local root = node:new(11)
+    t = tree:new(root)
+  end)
+
+  it("collects the value from a single node", function()
+    actual = {}
+    t:collect(actual)
+    expected = {11}
+    assert.are.same(expected, actual)
+  end)
+
+  it("collects the value from root and right child", function()
+    n17 = node:new(17)
+    t:insert(n17)
+
+    actual = {}
+    t:collect(actual)
+    expected = {11, 17}
+    assert.are.same(expected, actual)
+  end)
+
+  it("collects the value from root and left child", function()
+    n7 = node:new(7)
+    t:insert(n7)
+
+    actual = {}
+    t:collect(actual)
+    expected = {7, 11, 17}
+    assert.are.same(expected, actual)
+  end)
+
+  it("returns nil for an empty tree", function()
+    local t = tree:new(nil)
+    actual = {}
+    t:collect({})
+    assert.are.same({}, actual)
+  end)
+
   pending("return the root for a single node")
   pending("return the left and root for two nodes")
   pending("return the right and root for two nodes")

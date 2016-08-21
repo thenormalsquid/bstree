@@ -431,6 +431,47 @@ describe BinarySearchTree do
     end
   end
 
+  describe 'destroy' do
+    it 'destroys root node' do
+      root = Foo.new(11)
+      root.destroy
+      expect(root.left).to be nil
+      expect(root.right).to be nil
+    end
+
+    it 'destroys 3 node tree' do
+      root = Foo.new 11
+      n7 = Foo.new 7
+      n13 = Foo.new 13
+      root.insert n7
+      root.insert n13
+      root.destroy
+      expect(root.left).to be nil
+      expect(root.right).to be nil
+    end
+
+    it 'destroys 7 node tree' do
+      root = Foo.new 11
+      n7 = Foo.new 7
+      n5 = Foo.new 5
+      n3 = Foo.new 3
+      n13 = Foo.new 13
+      n17 = Foo.new 17
+      n19 = Foo.new 19
+      root.insert n7
+      root.insert n13
+      root.insert n17
+      root.insert n19
+      root.insert n3
+      root.insert n5
+      root.destroy
+      [root, n5, n17, n7, n13, n19, n3].each do |n|
+        expect(n.left).to be nil
+        expect(n.right).to be nil
+      end
+    end
+  end
+
   describe 'method overriding' do
     class Bar
       require 'securerandom'

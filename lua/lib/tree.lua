@@ -8,7 +8,7 @@ local Tree = {}
 -- Don't remember why this function was implemented
 function Tree:empty()
   return {
-    key = 1,
+    key = nil,
     left = nil,
     right = nil
   }
@@ -25,6 +25,11 @@ end
 
 function Tree:insert(node)
   self.root:insert(node)
+end
+
+function Tree:collect(collector)
+  if self.root == nil then return end
+  self.root:collect(collector)
 end
 
 return Tree

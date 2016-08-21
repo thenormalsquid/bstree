@@ -98,6 +98,32 @@ class TestTree(unittest.TestCase):
         assert tree.height() == 3
         assert tree.size() == 6
 
+    def test_maximum_and_minimum(self):
+        root = Node(15)
+        tree = Tree(root)
+        assert tree.maximum() == root
+        assert tree.minimum() == root
+
+        node_l1 = Node(8)
+        tree.add(node_l1)
+        assert tree.maximum() == root
+        assert tree.minimum() == node_l1
+
+        node_l2 = Node(33)
+        node_l3 = Node(25)
+        tree.add(node_l2)
+        tree.add(node_l3)
+        assert root.maximum() == node_l2
+        assert root.minimum() == node_l1
+
+        node_l4 = Node(4)
+        node_l5 = Node(9)
+        tree.add(node_l4)
+        tree.add(node_l5)
+        assert root.maximum() == node_l2
+        assert root.minimum() == node_l4
+
+
     def tearDown(self):
         # dummy
         self.testing = False

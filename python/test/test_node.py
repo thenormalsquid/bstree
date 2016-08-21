@@ -81,14 +81,23 @@ class TestNode(unittest.TestCase):
 
     def test_maximum_and_minimum(self):
         root = Node(15)
+        assert root.maximum() == root
+        assert root.minimum() == root
+
         node_l1 = Node(8)
+        root.add(node_l1)
+        assert root.maximum() == root
+        assert root.minimum() == node_l1
+
         node_l2 = Node(33)
         node_l3 = Node(25)
-        node_l4 = Node(4)
-        node_l5 = Node(9)
-        root.add(node_l1)
         root.add(node_l2)
         root.add(node_l3)
+        assert root.maximum() == node_l2
+        assert root.minimum() == node_l1
+
+        node_l4 = Node(4)
+        node_l5 = Node(9)
         root.add(node_l4)
         root.add(node_l5)
         assert root.maximum() == node_l2

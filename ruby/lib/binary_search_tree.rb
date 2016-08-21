@@ -108,6 +108,12 @@ module BinarySearchTree
     left&.minimum || self
   end
 
+  def destroy
+    post_order_traverse do |node|
+      node.left = nil
+      node.right = nil
+    end
+  end
   def size
     size = 0
     post_order_traverse { size += 1 }
@@ -124,7 +130,7 @@ module BinarySearchTree
   def post_order_traverse &block
     left&.post_order_traverse(&block)
     right&.post_order_traverse(&block)
-    yield
+    yield(self)
   end
 
   # Figure out whether there is any way to subclass to_hash
