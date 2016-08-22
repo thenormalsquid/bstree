@@ -49,8 +49,10 @@ tree_search(Tree * t, int key) {
   return node_search(t->root, key);
 }
 
-void
-tree_is_present(void) {
+int
+tree_is_present(Tree * t, int key) {
+  if (t->root == NULL) return 0;
+  return node_is_present(t->root, key);
 }
 
 void

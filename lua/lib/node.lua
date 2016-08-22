@@ -42,6 +42,19 @@ function Node:search(key)
   return nil
 end
 
+function Node:is_present(key)
+  if self.key == key then return true end
+
+  if self.left and key < self.key then
+    return self.left:is_present(key)
+  else
+    if self.right then
+      return self.right:is_present(key)
+    end
+  end
+  return false
+end
+
 function Node:collect(collector)
   if self.left then self.left:collect(collector) end
   collector[#collector + 1] = self.key

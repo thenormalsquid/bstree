@@ -2,6 +2,12 @@
 
 This little repo is part of an ongoing project to compare
 how binary search trees are implemented in various languages.
+The goal is twofold:
+
+1. Acquire an intuitive sense for how binary trees work.
+2. Investigate a range of engineering techniques for implementing
+   binary trees.
+
 
 ## TODO
 
@@ -49,19 +55,19 @@ implementations for most algorithms.
 
 ### Basic functionality
 
-This table was created well after the beginning of the project, hence some
+This table was after the beginning of the project, hence some
 entries simply show "Done" instead of the date completed. Each feature is
 regarded as complete when its associated test passes.
 
 |               | insert     | collect    | dfs        | present?   | height     | delete     | maximum    | minimum    |
-|---            |---         |---         |---         |---         |---         |---         |---         |---         |
+|---------------|------------|------------|------------|------------|------------|------------|------------|------------|
 | Ruby          | Done       | Done       | Done       | 2016-07-17 | Done       | 2016-07-30 | 2016-07-05 | 2016-07-05 |
 | Ruby (module) | 2016-06-27 | 2016-06-27 | 2016-06-27 | 2016-07-01 | 2016-08-01 | 2016-07-30 | 2016-06-28 | 2016-06-28 |
 | Python        | Done       | Done       | 2016-06-27 | 2016-07-25 | 2016-07-22 |            | 2016-07-17 | 2016-07-17 |
 | Java          | 2016-07-26 | 2016-08-18 | 2016-08-21 | 2016-08-21 |            |            | 2016-08-21 | 2016-08-21 |
 | C++           | Done       | Done       | Done       | 2016-07-27 |            |            | 2016-07-26 | 2016-07-26 |
-| C             | 2016-08-13 | 2016-08-20 | 2016-08-21 |            |            |            |            |            |
-| Lua           | 2016-07-30 | 2016-08-06 |            |            |            |            |            |            |
+| C             | 2016-08-13 | 2016-08-20 | 2016-08-21 | 2016-08-22 |            |            |            |            |
+| Lua           | 2016-07-30 | 2016-08-06 | 2016-08-22 | 2016-08-22 |            |            |            |            |
 | Javascript    | 2016-08-20 | 2016-08-21 |            |            |            |            |            |            |
 | SQL           |            | 2016-08-05 | 2016-07-27 | 2016-07-27 |            |            | 2016-07-28 | 2016-07-28 |
 

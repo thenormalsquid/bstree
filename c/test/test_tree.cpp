@@ -47,12 +47,18 @@ public:
       Node * actual = tree_search(t, 13);
       return actual == root;
     });
+    spec.it("root element is present", DO_SPEC_HANDLE {
+      return tree_is_present(t, 13) == 1;
+    });
 
     Node * n17 = node_new(17);
     tree_insert(t, n17);
     spec.it("finds a right leaf", DO_SPEC_HANDLE {
       Node * actual = tree_search(t, 17);
       return actual == n17;
+    });
+    spec.it("right leaf is present", DO_SPEC_HANDLE {
+      return tree_is_present(t, 17) == 1;
     });
 
     Node * n3 = node_new(3);
@@ -61,6 +67,10 @@ public:
       Node * actual = tree_search(t, 3);
       return actual == n3;
     });
+    spec.it("left leaf is present", DO_SPEC_HANDLE {
+      return tree_is_present(t, 3) == 1;
+    });
+
 
     Node * n2 = node_new(2);
     Node * n5 = node_new(5);
@@ -79,11 +89,19 @@ public:
       Node * actual = tree_search(t, 23);
       return actual == n23;
     });
+    spec.it("finds node at end", DO_SPEC_HANDLE {
+      return tree_is_present(t, 23) == 1;
+    });
+
 
     spec.it("doesn't find value which isn't in tree", DO_SPEC_HANDLE {
       Node * actual = tree_search(t, -100);
       return actual == NULL;
     });
+    spec.it("will not find node which isn't in tree", DO_SPEC_HANDLE {
+      return tree_is_present(t, 123) == 0;
+    });
+
 
     tree_delete(t);
   }

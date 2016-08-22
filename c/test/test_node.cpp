@@ -9,12 +9,19 @@
 
 using std::string;
 
+Node * root;
+Node * n200;
+
+// These are segfaulting.
 void
 setup(void) {
+  n200 = node_new(200);
+  node_insert(root, n200);
 }
 
 void
 teardown(void) {
+  node_destroy(root);
 }
 
 
@@ -142,6 +149,10 @@ public:
       Node * actual = node_search(root, 13);
       return actual == root;
     });
+    spec.it("root element is present by key", DO_SPEC_HANDLE {
+      return node_is_present(root, 13) == 1;
+    });
+
 
     Node * n17 = node_new(17);
     node_insert(root, n17);
@@ -149,6 +160,10 @@ public:
         Node * actual = node_search(root, 17);
         return actual == n17;
     });
+    spec.it("right leaf is present", DO_SPEC_HANDLE {
+      return node_is_present(root, 17) == 1;
+    });
+
 
     Node * n3 = node_new(3);
     node_insert(root, n3);
@@ -156,6 +171,10 @@ public:
       Node * actual = node_search(root, 3);
       return actual == n3;
     });
+    spec.it("left leaf is present", DO_SPEC_HANDLE {
+      return node_is_present(root, 3) == 1;
+    });
+
 
     Node * n2 = node_new(2);
     Node * n5 = node_new(5);
@@ -174,11 +193,18 @@ public:
       Node * actual = node_search(root, 23);
       return actual == n23;
     });
+    spec.it("deeply nested node is present", DO_SPEC_HANDLE {
+      return node_is_present(root, 23) == 1;
+    });
 
     spec.it("doesn't find value which isn't in tree", DO_SPEC_HANDLE {
       Node * actual = node_search(root, -100);
       return actual == NULL;
     });
+    spec.it("key which isn't present in tree is not found", DO_SPEC_HANDLE {
+      return node_is_present(root, -100) == 0;
+    });
+
 
     node_destroy(root);
   }
@@ -303,7 +329,7 @@ public:
   }
 
   void run_tests(void) {
-    setup();
+    //setup();
     test_node_new_and_destroy();
     test_node_insert();
     test_node_left();
@@ -319,7 +345,7 @@ public:
     //test_node_is_full();
     //test_node_is_bst();
     test_node_size();
-    teardown();
+    //teardown();
   }
 };
 

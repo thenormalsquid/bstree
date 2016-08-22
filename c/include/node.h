@@ -26,7 +26,8 @@ void   node_collect    (Node * n,
 Node * node_search     (Node * n,
                         int key);
 
-void   node_is_present (void);
+int    node_is_present (Node * n,
+                        int key);
 
 void   node_height     (void);
 

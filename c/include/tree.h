@@ -24,7 +24,8 @@ void   tree_collect    (Tree * t,
 Node * tree_search     (Tree * t,
                         int key);
 
-void   tree_is_present (void);
+int    tree_is_present (Tree * t,
+                        int key);
 
 void   tree_height     (void);
 

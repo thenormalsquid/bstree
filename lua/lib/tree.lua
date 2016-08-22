@@ -27,6 +27,16 @@ function Tree:insert(node)
   self.root:insert(node)
 end
 
+function Tree:search(key)
+  if self.root == nil then return nil end
+  return self.root:search(key)
+end
+
+function Tree:is_present(key)
+  if self.root == nil then return false end
+  return self.root:is_present(key)
+end
+
 function Tree:collect(collector)
   if self.root == nil then return end
   self.root:collect(collector)

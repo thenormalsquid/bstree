@@ -127,8 +127,16 @@ node_search(Node * n, int key) {
   return NULL;
 }
 
-void
-node_is_present(void) {
+int
+node_is_present(Node * n, int key) {
+  if (n->key == key) return 1;
+
+  if (key < n->key) {
+    if (n->left != NULL) return node_is_present(n->left, key);
+  } else {
+    if (n->right != NULL) return node_is_present(n->right, key);
+  }
+  return 0;
 }
 
 void
