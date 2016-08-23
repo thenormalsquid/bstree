@@ -27,6 +27,27 @@ Node.prototype.insert = function(n) {
   }
 };
 
+Node.prototype.search = function(key) {
+  if (key === this.key) { return this; }
+
+  if (key < this.key) {
+    if (this.left !== null) { return this.left.search(key); }
+  } else {
+    if (this.right !== null) { return this.right.search(key); }
+  }
+}
+
+Node.prototype.is_present = function(key) {
+  if (key === this.key) { return true; }
+
+  if (key < this.key) {
+    if (this.left !== null) { return this.left.is_present(key); }
+  } else {
+    if (this.right !== null) { return this.right.is_present(key); }
+  }
+  return false;
+}
+
 /* TODO: define an in-order traversal function which
  * takes a closure.
  */

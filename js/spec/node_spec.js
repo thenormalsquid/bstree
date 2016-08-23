@@ -3,6 +3,7 @@ var assert = require('assert');
 
 describe('Node', function() {
   describe('instantiation', function() {
+
     it('creates a Node', function() {
       var root = new node(13);
       assert.equal(13, root.key);
@@ -50,6 +51,51 @@ describe('Node', function() {
       assert.equal(root.left.right.left, n7);
       assert.equal(root.right, n19);
       assert.equal(root.right.left, n17);
+    });
+  });
+
+  describe('search and is_present', function() {
+    var root = new node(13);
+    it('finds a single node', function() {
+      assert.equal(root, root.search(13));
+      assert.equal(true, root.is_present(13));
+      assert.equal(false, root.is_present(-500.55));
+    });
+
+    var n5 = new node(5);
+    root.insert(n5);
+    it('finds node to the left', function() {
+      assert.equal(n5, root.search(5));
+      assert.equal(true, root.is_present(5));
+    });
+
+    var n19 = new node(19);
+    root.insert(n19);
+    it('finds node to the right', function() {
+      assert.equal(n19, root.search(19));
+      assert.equal(true, root.is_present(19));
+    });
+
+    it('finds nodes in the tree', function() {
+      var n7 = new node(7);
+      var n3 = new node(3);
+      var n2 = new node(2);
+      var n11 = new node(11);
+      var n17 = new node(17);
+      var n23 = new node(23);
+      var n29 = new node(29);
+      root.insert(n17);
+      root.insert(n23);
+      root.insert(n11);
+      root.insert(n7);
+      root.insert(n3);
+      root.insert(n2);
+      root.insert(n29);
+      assert.equal(n17, root.search(17));
+      assert.equal(true, root.is_present(17));
+      assert.equal(n2, root.search(2));
+      assert.equal(true, root.is_present(2));
+      assert.equal(false, root.is_present(0.000002));
     });
   });
 

@@ -19,4 +19,14 @@ Tree.prototype.collect = function(collector) {
   this.root.collect(collector);
 };
 
+Tree.prototype.search = function(key) {
+  if (this.root === null) { return false; }
+  return this.root.search(key);
+}
+
+Tree.prototype.is_present = function(key) {
+  if (this.root === null) { return false; }
+  return this.root.is_present(key);
+}
+
 exports.Tree = Tree;
