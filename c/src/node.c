@@ -147,12 +147,16 @@ void
 node_delete(void) {
 }
 
-void
-node_maximum(void) {
+Node *
+node_maximum(Node * n) {
+  if (n->right == NULL) { return n; }
+  return node_maximum(n->right);
 }
 
-void
-node_minimum(void) {
+Node *
+node_minimum(Node * n) {
+  if (n->left == NULL) { return n; }
+  return node_minimum(n->left);
 }
 
 void

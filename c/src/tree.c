@@ -63,12 +63,16 @@ void
 tree_destroy(void) {
 }
 
-void
-ree_maximum(void) {
+Node *
+tree_maximum(Tree * t) {
+  if (t->root == NULL) return NULL;
+  return node_maximum(t->root);
 }
 
-void
-tree_minimum(void) {
+Node *
+tree_minimum(Tree * t) {
+  if (t->root == NULL) return NULL;
+  return node_minimum(t->root);
 }
 
 void

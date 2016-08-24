@@ -31,9 +31,9 @@ void   tree_height     (void);
 
 void   tree_destroy    (void);
 
-void   tree_maximum    (void);
+Node * tree_maximum    (Tree * t);
 
-void   tree_minimum    (void);
+Node * tree_minimum    (Tree * t);
 
 void   tree_is_full    (void);
 

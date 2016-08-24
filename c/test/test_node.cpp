@@ -219,6 +219,72 @@ public:
   }
 
   void test_node_maximum(void) {
+    describe_test(INDENT0, "From test_node_max_and_min in NodeTest.");
+    Spec spec;
+    Node * root = node_new(13);
+
+    spec.it("maximum for root node only", DO_SPEC_HANDLE {
+      return (node_maximum(root) == root);
+    });
+
+    spec.it("minimum for root node only", DO_SPEC_HANDLE {
+      return (node_minimum(root) == root);
+    });
+
+    Node * n2 = node_new(2);
+    Node * n3 = node_new(3);
+    Node * n5 = node_new(5);
+    Node * n7 = node_new(7);
+    Node * n11 = node_new(11);
+    Node * n17 = node_new(17);
+    Node * n19 = node_new(19);
+    Node * n23 = node_new(23);
+    Node * n29 = node_new(29);
+
+    node_insert(root, n5);
+    node_insert(root, n7);
+    node_insert(root, n11);
+    node_insert(root, n3);
+    node_insert(root, n2);
+
+    node_insert(root, n19);
+    node_insert(root, n17);
+    node_insert(root, n29);
+    node_insert(root, n23);
+
+    spec.it("maximum for tree with first 10 primes", DO_SPEC_HANDLE {
+      return (node_maximum(root) == n29);
+    });
+
+    spec.it("minimum for tree with first 10 primes", DO_SPEC_HANDLE {
+      return (node_minimum(root) == n2);
+    });
+
+    spec.it("maximum of minimum element", DO_SPEC_HANDLE {
+      return (node_maximum(n2) == n2);
+    });
+
+    spec.it("minimum of minimum element", DO_SPEC_HANDLE {
+      return (node_minimum(n2) == n2);
+    });
+
+    spec.it("maximum for left subtree with key 5", DO_SPEC_HANDLE {
+      return (node_maximum(n5) == n11);
+    });
+
+    spec.it("minimum for left subtree with key 5", DO_SPEC_HANDLE {
+      return (node_minimum(n5) == n2);
+    });
+
+    spec.it("maximum of right subtree with key 19", DO_SPEC_HANDLE {
+      return (node_maximum(n19) == n29);
+    });
+
+    spec.it("minimum of right subtree with key 19", DO_SPEC_HANDLE {
+      return (node_minimum(n19) == n17);
+    });
+
+    node_destroy(root);
   }
 
   void test_node_minimum(void) {
@@ -340,7 +406,7 @@ public:
     //test_node_is_present();
     //test_node_height();
     //test_node_destroy();
-    //test_node_maximum();
+    test_node_maximum();
     //test_node_minimum();
     //test_node_is_full();
     //test_node_is_bst();

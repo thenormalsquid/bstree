@@ -33,9 +33,9 @@ void   node_height     (void);
 
 void   node_delete     (void);
 
-void   node_maximum    (void);
+Node * node_maximum    (Node * n);
 
-void   node_minimum    (void);
+Node * node_minimum    (Node * n);
 
 void   node_is_full    (void);
 

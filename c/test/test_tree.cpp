@@ -116,6 +116,53 @@ public:
   }
 
   void test_tree_maximum(void) {
+    describe_test(INDENT0, "From test_tree_max_and_min in TreeTest.");
+    Spec spec;
+    Tree * tree = tree_new();
+    Node * root = node_new(13);
+    tree_insert(tree, root);
+
+
+    spec.it("maximum for root node only", DO_SPEC_HANDLE {
+      return (tree_maximum(tree) == root);
+    });
+
+    spec.it("minimum for root node only", DO_SPEC_HANDLE {
+      return (tree_minimum(tree) == root);
+    });
+
+    Node * n2 = node_new(2);
+    Node * n3 = node_new(3);
+    Node * n5 = node_new(5);
+    Node * n7 = node_new(7);
+    Node * n11 = node_new(11);
+    Node * n17 = node_new(17);
+    Node * n19 = node_new(19);
+    Node * n23 = node_new(23);
+    Node * n29 = node_new(29);
+
+    tree_insert(tree, n5);
+    tree_insert(tree, n7);
+    tree_insert(tree, n11);
+    tree_insert(tree, n3);
+    tree_insert(tree, n2);
+
+    tree_insert(tree, n19);
+    tree_insert(tree, n17);
+    tree_insert(tree, n29);
+    tree_insert(tree, n23);
+
+    spec.it("maximum for tree with first 10 primes", DO_SPEC_HANDLE {
+      return (tree_maximum(tree) == n29);
+    });
+
+    spec.it("minimum for tree with first 10 primes", DO_SPEC_HANDLE {
+      return (tree_minimum(tree) == n2);
+    });
+
+    // TODO: consider testing a few other nodes, just for fun.
+
+    tree_delete(tree);
   }
 
   void test_tree_minimum(void) {
@@ -242,7 +289,7 @@ public:
     //test_tree_is_present();
     //test_tree_height();
     //test_tree_destroy();
-    //test_tree_maximum();
+    test_tree_maximum();
     //test_tree_minimum();
     //test_tree_is_full();
     //test_tree_is_bst();
