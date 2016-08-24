@@ -89,6 +89,17 @@ public class BSTreeTest extends TestCase {
     }
 
 
+    public void testMaxAndMin() {
+        BSTree tree = new BSTree();
+        assertEquals(null, tree.maximum());
+        assertEquals(null, tree.minimum());
+
+        Node root = new Node(11);
+        tree.insert(root);
+        assertEquals(root, tree.maximum());
+        assertEquals(root, tree.minimum());
+    }
+
     public void testSize() {
         BSTree tree = new BSTree();
         assertEquals(0, tree.size());

@@ -42,4 +42,14 @@ function Tree:collect(collector)
   self.root:collect(collector)
 end
 
+function Tree:maximum()
+  if self.root == nil then return nil end
+  return self.root:maximum()
+end
+
+function Tree:minimum()
+  if self.root == nil then return nil end
+  return self.root:minimum()
+end
+
 return Tree

@@ -10,6 +10,22 @@ class Node {
     public Node left = null;
     public Node right = null;
 
+    public Node maximum() {
+      if (this.right == null) {
+        return this;
+      } else {
+        return this.right.maximum();
+      }
+    }
+
+    public Node minimum() {
+      if (this.left == null) {
+        return this;
+      } else {
+        return this.left.minimum();
+      }
+    }
+
     public Node search(int key) {
       if (this.value == key) { return this; }
 
@@ -39,7 +55,6 @@ class Node {
       }
       return false;
     }
-
 
     // so...wordy...maybe change to ternary with
     // a couple of private calls with ternaries

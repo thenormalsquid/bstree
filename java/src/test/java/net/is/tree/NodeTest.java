@@ -51,6 +51,47 @@ public class NodeTest extends TestCase {
         assertEquals(false, root.is_present(42));
     }
 
+    public void testMaxAndMin() {
+        Node root = new Node(11);
+        assertEquals(root, root.maximum());
+        assertEquals(root, root.minimum());
+
+        Node n3 = new Node(3);
+        root.insert(n3);
+        assertEquals(root, root.maximum());
+        assertEquals(n3, root.minimum());
+
+        Node n21 = new Node(21);
+        root.insert(n21);
+        assertEquals(n21, root.maximum());
+        assertEquals(n3, root.minimum());
+
+        Node n7 = new Node(7);
+        root.insert(n7);
+        assertEquals(n21, root.maximum());
+        assertEquals(n3, root.minimum());
+        assertEquals(n7, n7.maximum());
+        assertEquals(n7, n7.minimum());
+
+
+        Node n5 = new Node(5);
+        root.insert(n5);
+        assertEquals(n7, n7.maximum());
+        assertEquals(n5, n7.minimum());
+
+        Node n17 = new Node(17);
+        root.insert(n17);
+        assertEquals(n21, n21.maximum());
+        assertEquals(n17, n21.minimum());
+
+        Node n13 = new Node(13);
+        Node n19 = new Node(19);
+        root.insert(n13);
+        root.insert(n19);
+        assertEquals(n19, n17.maximum());
+        assertEquals(n13, n17.minimum());
+    }
+
     public void testHeight() {
         Node root = new Node(11);
         //assertEquals(9, root.height());

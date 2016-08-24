@@ -61,4 +61,20 @@ function Node:collect(collector)
   if self.right then self.right:collect(collector) end
 end
 
+function Node:maximum()
+  if (self.right == nil) then
+    return self
+  else
+    return self.right:maximum()
+  end
+end
+
+function Node:minimum()
+  if (self.left == nil) then
+    return self
+  else
+    return self.left:minimum()
+  end
+end
+
 return Node

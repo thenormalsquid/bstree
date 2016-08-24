@@ -8,6 +8,16 @@ import static java.util.Arrays.asList;
 class BSTree {
     public Node root;
 
+    public Node maximum() {
+        if (root == null) { return null; }
+        return root.maximum();
+    }
+
+    public Node minimum() {
+        if (root == null) { return null; }
+        return root.minimum();
+    }
+
     public List<Integer> collect() {
         ArrayList<Integer> actual = new ArrayList<Integer>();
         if (this.root == null) { return actual; }
