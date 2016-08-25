@@ -10,6 +10,35 @@ class Node {
     public Node left = null;
     public Node right = null;
 
+    // TODO: rewrite this to use a lambda if possible
+    private int get_height(int height, int max) {
+      int current = ++height;
+
+      if (this.left != null) { max = this.left.get_height(current, max); }
+      if (this.right != null) { max = this.right.get_height(current, max); }
+      current--;
+      max = current > max ? current : max;
+      return max;
+    }
+
+    public int height() {
+      int height = 0;
+      int max = 0;
+      return get_height(height, max);
+    }
+
+    // TODO: turn this into a lambda and pass to a post-order traversal
+    private int get_size(int size) {
+      if (this.left != null) { size = this.left.get_size(size); }
+      if (this.right != null) { size = this.right.get_size(size); }
+      return ++size;
+    }
+
+    public int size() {
+      int size = 0;
+      return get_size(size);
+    }
+
     public Node maximum() {
       if (this.right == null) {
         return this;

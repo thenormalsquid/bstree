@@ -94,31 +94,33 @@ public class NodeTest extends TestCase {
 
     public void testHeight() {
         Node root = new Node(11);
-        //assertEquals(9, root.height());
+        assertEquals(0, root.height());
 
-        Node left = new Node(3);
-        root.insert(left);
-        //assertEquals(9, root.height());
+        Node n3 = new Node(3);
+        root.insert(n3);
+        assertEquals(1, root.height());
+        assertEquals(0, n3.height());
 
-        Node right = new Node(21);
-        root.insert(right);
-        //assertEquals(9, root.height());
+        Node n21 = new Node(21);
+        root.insert(n21);
+        assertEquals(1, root.height());
+        assertEquals(0, n21.height());
 
         Node n7 = new Node(7);
         root.insert(n7);
-        //assertEquals(9, root.height());
+        assertEquals(2, root.height());
 
         Node n5 = new Node(5);
         root.insert(n5);
-        //assertEquals(9, root.height());
+        assertEquals(3, root.height());
 
         Node n13 = new Node(13);
         root.insert(n13);
-        //assertEquals(9, root.height());
+        assertEquals(3, root.height());
 
         Node n17 = new Node(17);
         root.insert(n17);
-        //assertEquals(9, root.height());
+        assertEquals(3, root.height());
     }
 
     public void testCollectSingleNode() {
@@ -150,31 +152,35 @@ public class NodeTest extends TestCase {
 
     public void testSize() {
         Node root = new Node(11);
-        //assertEquals(1, root.size());
+        assertEquals(1, root.size());
 
         Node left = new Node(3);
         root.insert(left);
-        //assertEquals(2, root.size());
+        assertEquals(2, root.size());
+        assertEquals(1, left.size());
 
-        Node right = new Node(21);
-        root.insert(right);
-        //assertEquals(3, root.size());
+        Node n21 = new Node(21);
+        root.insert(n21);
+        assertEquals(3, root.size());
+        assertEquals(1, n21.size());
 
         Node n7 = new Node(7);
         root.insert(n7);
-        //assertEquals(3, root.size());
+        assertEquals(4, root.size());
+        assertEquals(2, left.size());
 
         Node n5 = new Node(5);
         root.insert(n5);
-        //assertEquals(3, root.size());
+        assertEquals(5, root.size());
 
         Node n13 = new Node(13);
         root.insert(n13);
-        //assertEquals(3, root.size());
+        assertEquals(6, root.size());
 
         Node n17 = new Node(17);
         root.insert(n17);
-        //assertEquals(3, root.size());
+        assertEquals(7, root.size());
+        assertEquals(3, n21.size());
     }
 
     public void testInsert() {

@@ -37,12 +37,16 @@ class BSTree {
       return root.is_present(key);
     }
 
+    public int height() {
+      if (root == null) { return 0; }
+      return root.height();
+    }
+
     public int size() {
         if (root == null) {
           return 0;
         } else {
-          return 0;
-          //return root.size();
+          return root.size();
         }
     }
 
