@@ -29,4 +29,14 @@ Tree.prototype.is_present = function(key) {
   return this.root.is_present(key);
 }
 
+Tree.prototype.maximum = function() {
+  if (this.root === null) { return null; }
+  return this.root.maximum();
+}
+
+Tree.prototype.minimum = function() {
+  if (this.root === null) { return null; }
+  return this.root.minimum();
+}
+
 exports.Tree = Tree;

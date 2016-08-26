@@ -155,6 +155,54 @@ describe('Node', function() {
     });
   });
 
+  describe('maximum and minimum', function() {
+    it('root node is both maximum and minimum', function() {
+      var root = new node(13);
+      assert.equal(root.maximum(), root);
+      assert.equal(root.minimum(), root);
+    });
+
+    it('root maximum with left child minimum', function() {
+      var root = new node(13);
+      var n5 = new node(5);
+      root.insert(n5);
+      assert.equal(root.maximum(), root);
+      assert.equal(root.minimum(), n5);
+    });
+
+    it('root node minimum with right child maximum', function() {
+      var root = new node(13);
+      var n19 = new node(19);
+      root.insert(n19);
+      assert.equal(root.maximum(), n19);
+      assert.equal(root.minimum(), root);
+    });
+
+    it('maximum and minimum for first 10 primes', function() {
+      var root = new node(13);
+      var n7 = new node(7);
+      var n5 = new node(5);
+      var n3 = new node(3);
+      var n2 = new node(2);
+      var n11 = new node(11);
+      var n17 = new node(17);
+      var n19 = new node(19);
+      var n23 = new node(23);
+      var n29 = new node(29);
+      root.insert(n5);
+      root.insert(n19);
+      root.insert(n17);
+      root.insert(n23);
+      root.insert(n11);
+      root.insert(n7);
+      root.insert(n3);
+      root.insert(n2);
+      root.insert(n29);
+      assert.equal(root.maximum(), n29);
+      assert.equal(root.minimum(), n2);
+    });
+  });
+
   describe('is_leaf', function() {
     xit('leaf node has no children', function() {
       var root = node.new(13);

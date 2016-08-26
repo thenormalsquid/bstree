@@ -27,6 +27,16 @@ Node.prototype.insert = function(n) {
   }
 };
 
+Node.prototype.maximum = function() {
+  if (this.right !== null) { return this.right.maximum(); }
+  return this;
+}
+
+Node.prototype.minimum = function() {
+  if (this.left !== null) { return this.left.minimum(); }
+  return this;
+}
+
 Node.prototype.search = function(key) {
   if (key === this.key) { return this; }
 
