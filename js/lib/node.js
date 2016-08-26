@@ -67,5 +67,39 @@ Node.prototype.collect = function(collector) {
   if (this.right !== null) { this.right.collect(collector); }
 };
 
+Node.prototype.post_order_traverse = function(callback) {
+  if (this.left !== null) {  this.left.post_order_traverse(callback); }
+  if (this.right !== null) {this.right.post_order_traverse(callback); }
+  callback();
+}
+
+Node.prototype.size = function() {
+  var size = 0;
+  this.post_order_traverse(function() {
+    size++;
+  });
+  return size;
+}
+
+Node.prototype.height = function() {
+  var height = 0;
+
+  var get_height = function(n, height) {
+    current = height;
+    current++;
+    console.log(current)
+    var max = 0;
+    if (n.left !== null) { max = n.left.get_height(current); }
+    if (n.right !== null) { max = n.right.get_height(current); }
+    current--;
+    console.log(current)
+    max = current > max ? current : max;
+    return max;
+  }
+
+  return get_height(this, height);
+}
+
+
 // exports.Node = new Node();
 exports.Node = Node;

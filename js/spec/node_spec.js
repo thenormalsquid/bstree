@@ -218,35 +218,39 @@ describe('Node', function() {
   });
 
   describe('size', function() {
-    xit('size 0 for empty tree', function() {
-      var root = node.new(13);
-      assert.equal(t.size, 1);
+    it('size 1 for single node tree', function() {
+      var root = new node(13);
+      assert.equal(root.size(), 1);
     });
 
-    xit('size 2 for node with 1 child', function() {
-      var root = node.new(13);
-      var n5 = node.new(n5);
-      root.insert(root);
-      assert.equal(root.size, 2);
+    it('size 2 for node with 1 child', function() {
+      var root = new node(13);
+      var n5 = new node(n5);
+      root.insert(n5);
+      assert.equal(root.size(), 2);
     });
 
-    xit('size 10 for first 10 primes', function() {
-      var t = tree.new();
-      var root = node.new(13);
-      t.insert(root);
-      var n7 = node.new(7);
-      var n5 = node.new(5);
-      var n3 = node.new(3);
-      var n2 = node.new(2);
-      var n11 = node.new(11);
-      var n17 = node.new(17);
-      var n19 = node.new(19);
-      var n23 = node.new(23);
-      var n29 = node.new(29);
-      t.insert(n5);
-      t.insert(n19);
-      //t.insert(n19).insert(17).insert(n23).insert(n11).insert(n7).insert(n3).insert(n2).insert(n29);
-      assert.equal(t.size, 10);
+    it('size 10 for first 10 primes', function() {
+      var root = new node(13);
+      var n7 = new node(7);
+      var n5 = new node(5);
+      var n3 = new node(3);
+      var n2 = new node(2);
+      var n11 = new node(11);
+      var n17 = new node(17);
+      var n19 = new node(19);
+      var n23 = new node(23);
+      var n29 = new node(29);
+      root.insert(n5);
+      root.insert(n19);
+      root.insert(n17);
+      root.insert(n23);
+      root.insert(n11);
+      root.insert(n7);
+      root.insert(n3);
+      root.insert(n2);
+      root.insert(n29);
+      assert.equal(root.size(), 10);
     });
   });
 });
