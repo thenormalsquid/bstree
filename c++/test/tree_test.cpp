@@ -35,8 +35,14 @@ public:
   TreeTest( std::string name ) : CppUnit::TestCase( name ) {}
 
   void test_instantiation() {
+    describe_test(INDENT0, "From test_instantiation in TreeTest.");
     Spec spec;
-    spec.it("Testing Tree instantiaton", DO_SPEC {
+    spec.it("instantiaton without Node", DO_SPEC {
+      Tree tree = Tree();
+      return (tree.root == NULL);
+    });
+
+    spec.it("instantiaton with Node", DO_SPEC {
       Node root(1);
       Tree tree(&root);
       return (tree.root->value == root.value);
@@ -165,29 +171,15 @@ public:
     });
   }
 
-  void test_size(void) {
-    Spec spec;
-    spec.it("Testing Tree.size", DO_SPEC {
-      Node node(20);
-      Tree tree(&node);
-      Node node2(43);
-      Node node3(8);
-      Node node4(10);
-      Node node5(15);
-      Node node6(33);
-      Node node7(97);
-      tree.add(&node2);
-      tree.add(&node3);
-      tree.add(&node4);
-      tree.add(&node5);
-      tree.add(&node6);
-      tree.add(&node7);
-      return (tree.root->right->left == &node6);
-    });
-  }
-
   void test_add() {
     Spec spec;
+    spec.it("add root node to empty tree", DO_SPEC {
+        Tree tree = Tree();
+        Node root(13);
+        tree.add(&root);
+        return (tree.root == &root);
+    });
+
     spec.it("Testing Tree.add", DO_SPEC {
       Node node(20);
       Tree tree(&node);
@@ -208,6 +200,7 @@ public:
   }
 
   void test_maximum() {
+    describe_test(INDENT0, "From test_maximum in TreeTest.");
     Spec spec;
     spec.it("Testing Tree.maximum", DO_SPEC {
       Node root(3);
@@ -223,6 +216,7 @@ public:
   }
 
   void test_minimum() {
+    describe_test(INDENT0, "From test_minimum in TreeTest.");
     Spec spec;
     spec.it("Testing Tree.minimum", DO_SPEC {
       Node root(3);
@@ -232,6 +226,31 @@ public:
       tree.add(&node2);
       tree.add(&node3);
       return (tree.minimum() == &node2);
+    });
+  }
+
+  void test_size() {
+    describe_test(INDENT0, "From test_size in TreeTest.");
+    Spec spec;
+    Node root(11);
+    Tree tree = Tree();
+    Node n2(2);
+
+    spec.it("empty tree is size 0", [&]() {
+      return (tree.size() == 0);
+    });
+
+    tree.add(&root);
+    spec.it("tree with root node only is size 1", [&]() {
+      return (tree.size() == 1);
+    });
+
+    Node n17(17);
+    Node n3(3);
+    tree.add(&n3);
+    tree.add(&n17);
+    spec.it("node with left and right child", [&]() {
+        return (tree.size() == 3);
     });
   }
 
@@ -261,7 +280,7 @@ public:
   void runTest() {
     test_instantiation();
     test_add();
-    //test_size();
+    test_size();
     test_maximum();
     test_minimum();
     test_find_root_node();

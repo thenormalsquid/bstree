@@ -8,6 +8,7 @@
 
 class Tree {
 public:
+  Tree() : root(NULL) {}
   Tree(Node * _root) : root(_root) {}
   // Tree(std::unique_ptr<Node> _root) : root(_root) {}
 
@@ -16,6 +17,7 @@ public:
   Node * find(int);
   Node * maximum(void);
   Node * minimum(void);
+  int size(void);
 
   bool is_present(int value);
 

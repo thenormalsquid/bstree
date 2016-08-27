@@ -35,6 +35,19 @@ bool Node::is_present(int value) {
   } else if (this->right != NULL) {
     return right->is_present(value);
   }
+  return false;
+}
+
+void Node::post_order_traverse(std::function<void (void)> callback) {
+  if (left != NULL) { left->post_order_traverse(callback); }
+  if (right != NULL) { right->post_order_traverse(callback); }
+  callback();
+}
+
+int Node::size(void) {
+  int size = 0;
+  post_order_traverse([&]{ size++; });
+  return size;
 }
 
 Node * Node::minimum(void) {

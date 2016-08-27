@@ -1,7 +1,7 @@
 CC=gcc
 CXX=g++
 
-CPPFLAGS = -Wall -Wextra
+CPPFLAGS = -Wall -Wextra -std=c++14
 
 AM_CPPFLAGS = -I/usr/local/include -I../include
 

@@ -13,15 +13,18 @@ public:
   NodeTest( std::string name ) : CppUnit::TestCase( name ) {}
 
   void test_instantiation() {
+    describe_test(INDENT0, "From test_instantiation in NodeTest.");
     Spec spec;
-    spec.it("Testing Node instantiation", DO_SPEC {
+    // spec.it("Testing Node instantiation", DO_SPEC_HANDLE {
+    spec.it("Testing Node instantiation", [&]()->bool {
       int value = 1;
       Node node(value);
-      return (node.value == 1);
+      return (node.value == value);
     });
   }
 
   void test_left_initialize() {
+    describe_test(INDENT0, "From test_instantiation in NodeTest.");
     Spec spec;
     spec.it("Testing left node initialize to NULL", DO_SPEC {
       Node node(1);
@@ -30,6 +33,7 @@ public:
   }
 
   void test_right_initialize() {
+    describe_test(INDENT0, "From test_instantiation in NodeTest.");
     Spec spec;
     spec.it("Testing right node initialize to NULL", DO_SPEC {
       Node node(1);
@@ -38,6 +42,7 @@ public:
   }
 
   void test_add() {
+    describe_test(INDENT0, "From test_add in NodeTest.");
     Spec spec;
     spec.it("Testing Node.add", DO_SPEC {
       Node node(3);
@@ -50,6 +55,7 @@ public:
   }
 
   void test_is_present() {
+    describe_test(INDENT0, "From test_is_present in NodeTest.");
     Spec spec;
     spec.it("Testing Node.is_present with 8 nodes", DO_SPEC {
       Node root(25);
@@ -75,8 +81,57 @@ public:
     });
   }
 
+  void test_size() {
+    describe_test(INDENT0, "From test_size in NodeTest.");
+    Spec spec;
+    Node root(11);
+
+    spec.it("node size of root node only", [&]() {
+      return (root.size() == 1);
+    });
+
+    Node n17(17);
+    Node n3(3);
+    root.add(&n3);
+    root.add(&n17);
+    spec.it("node with left and right child", [&]() {
+        return (root.size() == 3);
+    });
+
+    Node n2(2);
+    Node n5(5);
+    Node n7(7);
+    Node n13(13);
+    Node n19(19);
+    Node n23(23);
+    Node n29(29);
+    root.add(&n2);
+    root.add(&n5);
+    root.add(&n7);
+    root.add(&n13);
+    root.add(&n19);
+    root.add(&n23);
+    root.add(&n29);
+
+    spec.it("size of tree with first 10 primes is 10", [&]() {
+        return (root.size() == 10);
+    });
+
+    spec.it("size of subtree at max node is 1", [&]() {
+        return (n29.size() == 1);
+    });
+
+    spec.it("size of subtree at minimum node is 1", [&]() {
+        return (n2.size() == 1);
+    });
+
+    spec.it("size of subtree at node with key 5 node is 2", [&]() {
+        return (n5.size() == 2);
+    });
+  }
 
   void test_maximum() {
+    describe_test(INDENT0, "From test_maximum in NodeTest.");
     Spec spec;
     spec.it("Testing Node.maximum", DO_SPEC {
       Node root(3);
@@ -91,6 +146,7 @@ public:
   }
 
   void test_minimum() {
+    describe_test(INDENT0, "From test_minimum in NodeTest.");
     Spec spec;
     spec.it("Testing Node.minimum", DO_SPEC {
       Node root(3);
@@ -108,6 +164,7 @@ public:
     test_right_initialize();
     test_add();
     test_is_present();
+    test_size();
     test_maximum();
     test_minimum();
   }
