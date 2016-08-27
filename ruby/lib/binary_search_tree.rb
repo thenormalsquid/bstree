@@ -53,6 +53,7 @@ module BinarySearchTree
   end
 
 
+  # see if this can be rewritten with `dig` below
   def find_with_parent key, parent
     return [self, parent] if key == @key
     key < @key ? left&.find_with_parent(key, self) : right&.find_with_parent(key, self)
@@ -64,12 +65,9 @@ module BinarySearchTree
     right&.collect collector
   end
 
-  def find key
-    return self if @key == key
-    key < @key ? left&.find(key) : right&.find(key)
-  end
-
+  # TODO: rewrite this using `dig` below
   def common_parent n1, n2
+    # Probably should enforce n1 < n2 with a swap if necessary.
     if n1 < n2
       l = n1
       r = n2
@@ -82,9 +80,31 @@ module BinarySearchTree
     l < self ? left&.common_parent(l, r) : right&.common_parent(l, r)
   end
 
+  def find key
+    return self if @key == key
+    key < @key ? left&.find(key) : right&.find(key)
+  end
+
   def present? key
     return true if key == @key
     key < @key ? left&.present?(key) : right&.present?(key)
+  end
+
+  # abstract finding a particuler node by it's key
+  def dig key, node, &block
+    # yield(self) # yield(self) if @key == key
+    yield(self) if @key == key
+    key < @key ? left&.dig(key, node, &block) : right&.dig(key, node, &block)
+  end
+
+  def find key
+    # dig(key, self) { |n| return n if n.key == key }
+    dig(key, self) { |n| return n } # if n.key == key }
+  end
+
+  def present? key
+    # dig(key, self) { |n| return true if n&.key == key }
+    dig(key, self) { return true } # if n&.key == key }
   end
 
   # Easy, dumb way to do it.
@@ -114,6 +134,7 @@ module BinarySearchTree
       node.right = nil
     end
   end
+
   def size
     size = 0
     post_order_traverse { size += 1 }
