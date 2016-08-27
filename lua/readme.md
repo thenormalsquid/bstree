@@ -5,7 +5,10 @@ favorite data structure.
 
 ## TODO
 
-* Use Tree as a container, with a separate Node element.
-* Add
-* Find
-* Collect
+* (DONE) Use Tree as a container, with a separate Node element.
+* (DONE) Add
+* (DONE) Find
+* (DONE) Collect
+
+* Reduce the size of the test suite to some analytically determined
+  necessary and sufficiant size.

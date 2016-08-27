@@ -42,6 +42,15 @@ function Tree:collect(collector)
   self.root:collect(collector)
 end
 
+function Tree:height()
+  return self.root:height()
+end
+
+function Tree:size()
+  if self.root == nil then return 0 end
+  return self.root:size()
+end
+
 function Tree:maximum()
   if self.root == nil then return nil end
   return self.root:maximum()

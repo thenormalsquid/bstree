@@ -69,6 +69,9 @@ WITH RECURSIVE
 -- minimum
 -- SELECT * FROM bst ORDER BY value ASC LIMIT 1;
 
+-- size
+-- SELECT 'size of tree'
+-- SELECT count(*) from bst;
 
 -- SELECT 'collect ascending';
 -- SELECT value FROM bst ORDER BY value ASC;

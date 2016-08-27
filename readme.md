@@ -11,7 +11,8 @@ The goal is twofold:
 
 ## TODO
 
-* change `find` to `search`
+* change `find` to `search` where applicable
+* change `add` to `insert` where applicable
 * handle nodes with duplicate values. Currently, inserting a duplicate
   node cause a stack overflow. I hope this can be done elegantly, I
   suspect it will look ugly.
@@ -19,6 +20,13 @@ The goal is twofold:
 * Finish `size`, `search`, `present?`, `height`, `bst?`, `maximum`, `minimum`, `successor` and
   predecessor` before finishing node `delete`. This will provide a lot
 of extra sanity checking for the `delete` implementation.
+
+* Develop some sort of plan for reducing tests to minimal size. There
+  should be some analysis or proof techniques for determining the
+  necessary and sufficient conditions for testing recursive code. I
+  don't mind overtesting while learning, it helps build intuitive
+  understanding. But writing too many tests is time I'd rather spend
+  learning more theory or actual implementation.
 
 ## Specification
 
@@ -85,11 +93,11 @@ be written iteratively as well, which is a good exercise for the future.
 | Ruby (module) |            |          |           |            | 2016-07-23 | 2016-07-23 |           |             |
 | Python        |            |          |           |            |            | 2016-08-10 |           |             |
 | Java          |            |          |           |            |            | 2016-08-25 |           |             |
-| C++           |            |          |           |            |            |            |           |             |
+| C++           |            |          |           |            |            | 2016-08-27 |           |             |
 | C             |            |          |           |            |            | 2016-08-13 |           |             |
-| Lua           |            |          |           |            |            |            |           |             |
+| Lua           |            |          |           |            |            | 2016-08-27 |           |             |
 | Javascript    |            |          |           |            |            | 2016-08-26 |           |             |
-| SQL           |            |          |           |            |            |            |           |             |
+| SQL           |            |          |           |            |            | 2016-08-27 |           |             |
 
 
 ### Persistence, serialization, etc.
