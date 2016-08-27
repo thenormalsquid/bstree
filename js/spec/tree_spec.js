@@ -193,6 +193,15 @@ describe('Tree', function() {
     });
   });
 
+  describe('height', function() {
+    it('height 0 for tree with 1 node', function() {
+      var t = new tree();
+      var root = new node(11);
+      t.insert(root);
+      assert.equal(t.height(), 0);
+    });
+  });
+
   describe('size', function() {
     it('size 0 for empty tree', function() {
       var t = new tree();

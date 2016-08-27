@@ -39,6 +39,11 @@ Tree.prototype.minimum = function() {
   return this.root.minimum();
 }
 
+Tree.prototype.height = function() {
+  if (this.root === null) { return 0; }
+  return this.root.height();
+}
+
 Tree.prototype.size = function() {
   if (this.root === null) { return 0; }
   return this.root.size();

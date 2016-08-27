@@ -87,12 +87,16 @@ Node.prototype.height = function() {
   var get_height = function(n, height) {
     current = height;
     current++;
-    console.log(current)
+    // console.log(current)
     var max = 0;
-    if (n.left !== null) { max = n.left.get_height(current); }
-    if (n.right !== null) { max = n.right.get_height(current); }
+    // if (n.left !== null) { max = n.left.get_height(current); }
+    // if (n.right !== null) { max = n.right.get_height(current); }
+
+    if (n.left !== null) { max = get_height(n.left, current); }
+    if (n.right !== null) { max = get_height(n.right, current); }
+
     current--;
-    console.log(current)
+    // console.log(current)
     max = current > max ? current : max;
     return max;
   }

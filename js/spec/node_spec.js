@@ -217,6 +217,71 @@ describe('Node', function() {
     });
   });
 
+  describe('height', function() {
+    it('height of single node tree is 0', function() {
+      var root = new node(11);
+      assert.equal(root.height(), 0);
+    });
+
+    it('height of two node tree is 1', function() {
+      var root = new node(11);
+      var n17 = new node(17);
+      root.insert(n17);
+      assert.equal(root.height(), 1);
+    });
+
+    it('height of balanced three node tree is 1', function() {
+      var root = new node(11);
+      var n17 = new node(17);
+      var n5 = new node(5);
+      root.insert(n17);
+      root.insert(n5);
+      assert.equal(root.height(), 1);
+    });
+
+    it('height of tree with 4 or more nodes is at least 2', function() {
+      var root = new node(11);
+      var n17 = new node(17);
+      var n19 = new node(19);
+      var n5 = new node(5);
+      root.insert(n17);
+      root.insert(n19);
+      root.insert(n5);
+      assert.equal(root.height(), 2);
+    });
+
+    it('various assertions on heights of tree of first 10 primes', function() {
+      var root = new node(13);
+      var n7 = new node(7);
+      var n5 = new node(5);
+      var n3 = new node(3);
+      var n2 = new node(2);
+      var n11 = new node(11);
+      var n17 = new node(17);
+      var n19 = new node(19);
+      var n23 = new node(23);
+      var n29 = new node(29);
+      root.insert(n5);
+      root.insert(n19);
+      root.insert(n17);
+      root.insert(n23);
+      root.insert(n11);
+      root.insert(n7);
+      root.insert(n3);
+      root.insert(n2);
+      root.insert(n29);
+      assert.equal(root.height(), 3);
+      assert.equal(n2.height(), 0);
+      assert.equal(n3.height(), 1);
+      assert.equal(n5.height(), 2);
+      assert.equal(n7.height(), 0);
+      assert.equal(n19.height(), 2);
+      assert.equal(n29.height(), 0);
+      assert.equal(n11.height(), 1);
+      assert.equal(n17.height(), 0);
+    });
+  });
+
   describe('size', function() {
     it('size 1 for single node tree', function() {
       var root = new node(13);

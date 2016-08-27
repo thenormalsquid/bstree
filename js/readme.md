@@ -11,3 +11,6 @@ terribly strong in Javascript, so I'm sure there is a lot of
 room for improvement.
 
 * Rewrite `collect` to invoke an in-order traversal with a callback.
+
+* Clean up tree specs by deferring detailed examples to node spec.
+* Refactor specs, shorten to necessary and sufficient.
