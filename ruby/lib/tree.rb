@@ -57,6 +57,10 @@ class Tree
     root.bst?
   end
 
+  def successor node
+    root.successor node
+  end
+
   def maximum
     @root.maximum
   end

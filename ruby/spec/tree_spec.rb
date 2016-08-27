@@ -185,6 +185,14 @@ describe Tree do
     end
   end
 
+  describe 'successor' do
+    it 'finds successor to root node' do
+      root = Node.new(13)
+      tree = Tree.new(root)
+      expect(tree.successor(root)).to be nil
+    end
+  end
+
   describe '.find' do
     it 'finds a node with given key' do
       node = Node.new(9)

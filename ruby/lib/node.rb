@@ -44,6 +44,22 @@ class Node
     @right.nil? ? @right = node : @right.insert(node)
   end
 
+  def get_successor(node, parent, successor)
+    successor = parent&.left == self ? parent : successor
+    return successor if node == self
+
+    if node < self
+      left&.get_successor(node, self, parent)
+    else
+      right&.get_successor(node, self, successor)
+    end
+  end
+
+  def successor(node)
+    return node.right if node.right
+    return get_successor(node, self, nil)
+  end
+
   def height
     max = 0
     current = 0

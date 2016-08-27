@@ -92,7 +92,7 @@ module BinarySearchTree
 
   # abstract finding a particuler node by it's key
   def dig key, node, &block
-    # yield(self) # yield(self) if @key == key
+    # yield(self)
     yield(self) if @key == key
     key < @key ? left&.dig(key, node, &block) : right&.dig(key, node, &block)
   end
