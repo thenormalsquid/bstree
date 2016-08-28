@@ -30,6 +30,11 @@ int Tree::size(void) {
   return root->size();
 }
 
+int Tree::height(void) {
+  if (root == NULL) return 0;
+  return root->height();
+}
+
 bool Tree::is_present(int value) {
   return this->root->is_present(value);
 }

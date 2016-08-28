@@ -44,6 +44,18 @@ void Node::post_order_traverse(std::function<void (void)> callback) {
   callback();
 }
 
+int Node::get_height(int height, int max) {
+  int current = ++height;
+  if (left != NULL) { max = left->get_height(current, max); }
+  if (right != NULL) { max = right->get_height(current, max); }
+  current--;
+  return current > max ? current : max;
+}
+
+int Node::height(void) {
+  return get_height(0, 0);
+}
+
 int Node::size(void) {
   int size = 0;
   post_order_traverse([&]{ size++; });

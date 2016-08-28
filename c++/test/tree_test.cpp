@@ -216,7 +216,7 @@ public:
   }
 
   void test_minimum() {
-    describe_test(INDENT0, "From test_minimum in TreeTest.");
+    describe_test(INDENT0, "From test_minimum in TreeTest");
     Spec spec;
     spec.it("Testing Tree.minimum", DO_SPEC {
       Node root(3);
@@ -229,8 +229,24 @@ public:
     });
   }
 
+  void test_height() {
+    describe_test(INDENT0, "From test_height in TreeTest");
+    Spec spec;
+    Tree tree = Tree();
+
+    spec.it("size of empty tree is 0", [&]() {
+        return (tree.height() == 0);
+    });
+
+    Node root(13);
+    tree.add(&root);
+    spec.it("height of tree with single node is 0", [&]() {
+        return (tree.height() == 0);
+    });
+  }
+
   void test_size() {
-    describe_test(INDENT0, "From test_size in TreeTest.");
+    describe_test(INDENT0, "From test_size in TreeTest");
     Spec spec;
     Node root(11);
     Tree tree = Tree();
@@ -281,6 +297,7 @@ public:
     test_instantiation();
     test_add();
     test_size();
+    test_height();
     test_maximum();
     test_minimum();
     test_find_root_node();

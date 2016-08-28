@@ -81,6 +81,63 @@ public:
     });
   }
 
+  void test_height() {
+    describe_test(INDENT0, "From test_height in NodeTest");
+    Spec spec;
+    Node root(13);
+    Node n17(17);
+    Node n3(3);
+    Node n2(2);
+    Node n5(5);
+    Node n7(7);
+    Node n11(11);
+    Node n19(19);
+    Node n23(23);
+    Node n29(29);
+
+    root.add(&n5);
+    root.add(&n11);
+    root.add(&n7);
+    root.add(&n3);
+    root.add(&n2);
+    root.add(&n19);
+    root.add(&n17);
+    root.add(&n23);
+    root.add(&n29);
+
+    spec.it("whole tree has height 3", [&]() {
+        return (root.height() == 3);
+    });
+
+    spec.it("leaf node maximum has height 0", [&]() {
+        return (n29.height() == 0);
+    });
+
+    spec.it("leaf node minimum has height 0", [&]() {
+        return (n2.height() == 0);
+    });
+
+    spec.it("root's left child has height 2", [&]() {
+        return (n5.height() == 2);
+    });
+
+    spec.it("root's right child has height 2", [&]() {
+        return (n19.height() == 2);
+    });
+
+    spec.it("n11 has height 1", [&]() {
+        return (n11.height() == 1);
+    });
+
+    spec.it("n3 has height 1", [&]() {
+        return (n3.height() == 1);
+    });
+
+    spec.it("n23 has height 1", [&]() {
+        return (n23.height() == 1);
+    });
+  }
+
   void test_size() {
     describe_test(INDENT0, "From test_size in NodeTest.");
     Spec spec;
@@ -165,6 +222,7 @@ public:
     test_add();
     test_is_present();
     test_size();
+    test_height();
     test_maximum();
     test_minimum();
   }

@@ -5,6 +5,9 @@
 
 class Node {
 
+  private:
+    int get_height(int current, int max);
+
   public:
     Node(int _value) : value(_value), left(NULL), right(NULL) {}
 
@@ -20,13 +23,11 @@ class Node {
     Node * maximum(void);
     Node * minimum(void);
     int size(void);
+    int height(void);
 
     int value;
     Node * left;
     Node * right;
 };
-
-
-// std::string get_node(void);
 
 #endif /* IS_NODE_H */

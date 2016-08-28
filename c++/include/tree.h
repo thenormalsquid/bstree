@@ -18,6 +18,7 @@ public:
   Node * maximum(void);
   Node * minimum(void);
   int size(void);
+  int height(void);
 
   bool is_present(int value);
 
