@@ -29,7 +29,7 @@ Node * node_search     (Node * n,
 int    node_is_present (Node * n,
                         int key);
 
-void   node_height     (void);
+int    node_height     (Node * n);
 
 void   node_delete     (void);
 

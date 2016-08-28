@@ -212,9 +212,6 @@ public:
   void test_node_is_present(void) {
   }
 
-  void test_node_height(void) {
-  }
-
   void test_node_destroy(void) {
   }
 
@@ -294,6 +291,67 @@ public:
   }
 
   void test_node_is_bst(void) {
+  }
+
+  void test_node_height(void) {
+    describe_test(INDENT0, "From test_node_height in NodeTest");
+    Spec spec;
+    Node * root = node_new(13);
+
+    spec.it("height for single root node is 0", [&]() {
+        return (node_height(root) == 0);
+    });
+
+    Node * n2 = node_new(2);
+    Node * n3 = node_new(3);
+    Node * n5 = node_new(5);
+    Node * n7 = node_new(7);
+    Node * n11 = node_new(11);
+    Node * n17 = node_new(17);
+    Node * n19 = node_new(19);
+    Node * n23 = node_new(23);
+    Node * n29 = node_new(29);
+
+    node_insert(root, n5);
+    node_insert(root, n7);
+    node_insert(root, n11);
+    node_insert(root, n3);
+    node_insert(root, n2);
+
+    node_insert(root, n19);
+    node_insert(root, n17);
+    node_insert(root, n23);
+    node_insert(root, n29);
+
+    spec.it("height of tree for first 10 primes", [&]() {
+        return (node_height(root) == 3);
+    });
+
+    spec.it("height of leaf node which is also max is 0", [&]() {
+        return (node_height(n29) == 0);
+    });
+
+    spec.it("height of leaf node which is also min is 0", [&]() {
+        return (node_height(n2) == 0);
+    });
+
+    spec.it("left child of root has height 2", [&]() {
+        return (node_height(n5) == 2);
+    });
+
+    spec.it("right child of root has height 2", [&]() {
+        return (node_height(n19) == 2);
+    });
+
+    spec.it("n3 has one child hence height 1", [&]() {
+        return node_height(n3) == 1;
+    });
+
+    spec.it("n23 has one child hence height 1", [&]() {
+        return node_height(n23) == 1;
+    });
+
+    node_destroy(root);
   }
 
   void test_node_size(void) {
@@ -404,7 +462,7 @@ public:
     test_node_collect();
     test_node_search();
     //test_node_is_present();
-    //test_node_height();
+    test_node_height();
     //test_node_destroy();
     test_node_maximum();
     //test_node_minimum();

@@ -110,13 +110,28 @@ public:
   }
 
   void test_tree_height(void) {
+    describe_test(INDENT0, "From test_tree_height in TreeTest");
+    Spec spec;
+    Tree * tree = tree_new();
+
+    spec.it("empty tree has height 0", [&]() {
+        return tree_height(tree) == 0;
+    });
+
+    Node * root = node_new(13);
+    tree_insert(tree, root);
+    spec.it("tree with only root node has height 0", [&]() {
+        return tree_height(tree) == 0;
+    });
+
+    tree_delete(tree);
   }
 
   void test_tree_destroy(void) {
   }
 
   void test_tree_maximum(void) {
-    describe_test(INDENT0, "From test_tree_max_and_min in TreeTest.");
+    describe_test(INDENT0, "From test_tree_max_and_min in TreeTest");
     Spec spec;
     Tree * tree = tree_new();
     Node * root = node_new(13);
@@ -287,7 +302,7 @@ public:
     test_tree_collect();
     test_tree_search();
     //test_tree_is_present();
-    //test_tree_height();
+    test_tree_height();
     //test_tree_destroy();
     test_tree_maximum();
     //test_tree_minimum();

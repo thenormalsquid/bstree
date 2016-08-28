@@ -139,8 +139,19 @@ node_is_present(Node * n, int key) {
   return 0;
 }
 
-void
-node_height(void) {
+// TODO: use size_t instead
+int
+get_height(Node * n, int height, int max) {
+  int current = ++height;
+  if (n->left != NULL) { max = get_height(n->left, current, max); }
+  if (n->right != NULL) { max = get_height(n->right, current, max); }
+  current--;
+  return current > max ? current : max;
+}
+
+int
+node_height(Node * n) {
+  return get_height(n, 0, 0);
 }
 
 void

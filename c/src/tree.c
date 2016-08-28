@@ -55,8 +55,10 @@ tree_is_present(Tree * t, int key) {
   return node_is_present(t->root, key);
 }
 
-void
-tree_height(void) {
+int
+tree_height(Tree * t) {
+  if (t->root == NULL) return 0;
+  return node_height(t->root);
 }
 
 void

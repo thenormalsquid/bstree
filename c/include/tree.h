@@ -27,7 +27,7 @@ Node * tree_search     (Tree * t,
 int    tree_is_present (Tree * t,
                         int key);
 
-void   tree_height     (void);
+int    tree_height     (Tree * t);
 
 void   tree_destroy    (void);
 
