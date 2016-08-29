@@ -44,21 +44,43 @@ class Node
     @right.nil? ? @right = node : @right.insert(node)
   end
 
-  def get_successor(node, parent, successor)
-    successor = parent&.left == self ? parent : successor
-    return successor if node == self
+  def dig search_key, &block
+    yield(self)
+    search_key < @value ? left&.dig(search_key, &block) : right&.dig(search_key, &block)
+  end
 
-    if node < self
-      left&.get_successor(node, self, parent)
-    else
-      right&.get_successor(node, self, successor)
+  def successor node
+    if right
+      return right.maximum
     end
+
+    # binding.pry
+    successor = nil
+    parent = self
+    search_key = node.value
+    successor = self
+
+    dig(search_key) do |n|
+      # return if search_key == self.value
+      if parent&.left == n
+        puts "left n #{n.value}"
+        successor = successor &.> parent ? successor : parent
+        puts "left successor: #{successor&.value}"
+      end
+
+      if parent&.right == n
+        puts "right n #{n.value}"
+        # binding.pry
+        successor = successor < parent ? parent : successor
+        puts "right successor: #{successor&.value}"
+      end
+      parent = n
+    end
+
+    puts "successor: #{successor&.value}"
+    successor
   end
 
-  def successor(node)
-    return node.right if node.right
-    return get_successor(node, self, nil)
-  end
 
   def height
     max = 0

@@ -189,7 +189,7 @@ describe Tree do
     it 'finds successor to root node' do
       root = Node.new(13)
       tree = Tree.new(root)
-      expect(tree.successor(root)).to be nil
+      expect(tree.successor(root)).to be root
     end
   end
 

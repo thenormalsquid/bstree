@@ -98,6 +98,30 @@ O'Rourke~\cite{orourke:j1998}.
 Manber~\cite[p. 87, Ex. 4.8]{manber:u1989} provides an interesting exercise:
 show the AVL tree formed by inserting the ordered sequence $[1, 2, \ldots, 20]$.
 
+\subsection{Maximum and minimum}
+
+
+The maximum function written in Ruby:
+\lstset{language={Ruby}}
+\begin{lstlisting}[frame=single]
+def maximum:
+  self&.maximum || self
+end
+\end{lstlisting}
+
+
+\subsection{Successor and predecessor}
+
+For an ordered list of values $x_i \in [x_0, x_1,\ldots,x_k]$, the successor of
+$x_i$ is $x_{i+1}$, the predecessor $x_{i-1}$.
+
+Cormen et al.~\cite[p. 248-249]{cormen:th:1990} provide a succinct algorithm for
+determining the successor given each node is linked to its parent.
+
+A decision has to made regarding the definition of minimum and maximum
+elements in the tree. The choices are having the relevant successor or
+predecessors of such elements either be nil or be the node.
+
 \subsection{Collisions or duplicate values}
 
 None the preceding references explicitly discuss collisions.
@@ -204,9 +228,6 @@ insert, search, etc. The implementation provided by the tree container could
 implement the functionality itself, or call an implementation provided by
 the node element.
 
-
-
-Sent from my iPhone
 
 \subsection{Testing}
 

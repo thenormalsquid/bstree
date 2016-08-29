@@ -90,21 +90,17 @@ module BinarySearchTree
     key < @key ? left&.present?(key) : right&.present?(key)
   end
 
-  # abstract finding a particuler node by it's key
-  def dig key, node, &block
-    # yield(self)
-    yield(self) if @key == key
-    key < @key ? left&.dig(key, node, &block) : right&.dig(key, node, &block)
+  def dig key, &block
+    yield(self)
+    key < @key ? left&.dig(key, &block) : right&.dig(key, &block)
   end
 
   def find key
-    # dig(key, self) { |n| return n if n.key == key }
-    dig(key, self) { |n| return n } # if n.key == key }
+    dig(key) { |n| return n if n.key == key }
   end
 
   def present? key
-    # dig(key, self) { |n| return true if n&.key == key }
-    dig(key, self) { return true } # if n&.key == key }
+    dig(key) { |n| return true if n.key == key }
   end
 
   # Easy, dumb way to do it.
