@@ -302,7 +302,7 @@ describe Node do
 
   # require_relative 'shared_height_examples'
   describe '.height' do
-    shared_examples "height" do
+    shared_examples 'height' do
       it 'finds the height of single node tree' do
         node = Node.new(9)
         expect(node.height).to eq 0
@@ -546,7 +546,7 @@ describe Node do
     it 'creates a json representation of the node' do
       node = Node.new(8)
       allow(node).to receive(:uuid).and_return('uuid')
-      expected = "{\"value\":8,\"uuid\":\"uuid\",\"left\":null,\"right\":null}"
+      expected = '{"value":8,"uuid":"uuid","left":null,"right":null}'
       expect(node.to_json).to eq expected
     end
   end

@@ -43,9 +43,9 @@ describe BinarySearchTree do
 
   describe 'algorithm methods' do
     before :all do
-      @expected = [2, 3, 4, 5, 8, 10, 20, 27, 33]
+      @expected = [2, 3, 4, 5, 8, 11, 20, 27, 33]
 
-      @root = Foo.new(10)
+      @root = Foo.new(11)
       @foo2 = Foo.new(20)
       @foo3 = Foo.new(5)
       @foo4 = Foo.new(2)
@@ -71,26 +71,26 @@ describe BinarySearchTree do
       end
 
       it 'identifies single node as binary search tree' do
-        node = Foo.new(10)
+        node = Foo.new(11)
         expect(node.bst?).to be true
       end
 
       it 'identifies root and left node as binary search tree' do
-        node = Foo.new(10)
+        node = Foo.new(11)
         left = Foo.new(5)
         node.insert left
         expect(node.bst?).to be true
       end
 
       it 'identifies root and left node as binary search tree' do
-        node = Foo.new(10)
+        node = Foo.new(11)
         right = Foo.new(15)
         node.insert right
         expect(node.bst?).to be true
       end
 
       it 'identifies three node as binary search tree' do
-        node = Foo.new(10)
+        node = Foo.new(11)
         left = Foo.new(5)
         right = Foo.new(15)
         node.insert left
@@ -99,9 +99,9 @@ describe BinarySearchTree do
       end
 
       it 'identifies three node as not a binary search tree' do
-        node = Foo.new(10)
-        left = Foo.new(5)
-        right = Foo.new(15)
+        node = Foo.new 11
+        left = Foo.new 5
+        right = Foo.new 15
         node.left = right
         node.right = left
         expect(node.bst?).to be false
@@ -110,7 +110,7 @@ describe BinarySearchTree do
 
     describe '.find' do
       it 'finds the root node using the key' do
-        expect(@root.find(10)).to eq @root
+        expect(@root.find(11)).to eq @root
       end
 
       it 'finds the root.left node using the key' do
@@ -128,7 +128,7 @@ describe BinarySearchTree do
 
     describe '.present?' do
       it 'finds the root node using the key' do
-        expect(@root.present?(10)).to eq true
+        expect(@root.present?(11)).to eq true
       end
 
       it 'finds the root.left node using the key' do
@@ -158,7 +158,7 @@ describe BinarySearchTree do
 
     describe '.delete' do
       it 'returns the root node when specified for deletion' do
-        root = Foo.new(9)
+        root = Foo.new 9
         expect(root.delete(9)).to eq root
         expect(root.bst?).to be true
         expect(root.left.nil?).to be true
@@ -166,8 +166,8 @@ describe BinarySearchTree do
       end
 
       it 'deletes the right node specified by key' do
-        root = Foo.new(9)
-        n14 = Foo.new(14)
+        root = Foo.new 9
+        n14 = Foo.new 14
         root.insert n14
         expect(root.delete(14)).to eq n14
         expect(root.bst?).to be true
@@ -235,10 +235,10 @@ describe BinarySearchTree do
       end
 
       it 'promotes left node on deletion' do
-        root = Foo.new(11)
-        n5 = Foo.new(5)
-        n7 = Foo.new(7)
-        n3 = Foo.new(3)
+        root = Foo.new 11
+        n5 = Foo.new 5
+        n7 = Foo.new 7
+        n3 = Foo.new 3
         root.insert n5
         root.insert n7
         root.insert n3
@@ -252,19 +252,19 @@ describe BinarySearchTree do
       end
 
       it 'deletes the root node correctly' do
-        root = Foo.new(11)
-        n5 = Foo.new(5)
-        n7 = Foo.new(7)
-        n3 = Foo.new(3)
+        root = Foo.new 11
+        n5 = Foo.new 5
+        n7 = Foo.new 7
+        n3 = Foo.new 3
         root.insert n5
         root.insert n7
         root.insert n3
 
-        n17 = Foo.new(17)
-        n13 = Foo.new(13)
-        n41 = Foo.new(41)
-        n37 = Foo.new(37)
-        n31 = Foo.new(31)
+        n17 = Foo.new 17
+        n13 = Foo.new 13
+        n41 = Foo.new 41
+        n37 = Foo.new 37
+        n31 = Foo.new 31
         root.insert n17
         root.insert n13
         root.insert n41
@@ -308,6 +308,17 @@ describe BinarySearchTree do
       it 'finds the node with the smallest key' do
         expect(@root.minimum).to eq @foo4
       end
+    end
+
+    describe '.successor' do
+      let(:root) { Foo.new 13 }
+      let(:n11) { Foo.new 11 }
+
+      before do
+        root.insert n11
+      end
+
+      it 'root finds the successor to itself is itself'
     end
 
     describe '.to_hash' do

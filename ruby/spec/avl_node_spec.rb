@@ -40,7 +40,7 @@ describe AvlNode do
       n5 = AvlNode.new 5
       n3 = AvlNode.new 3
       root.insert n5
-      root.insert n3 
+      root.insert n3
       root.rotate_cw
       expect(n5.right).to eq root
       expect(n5.left).to eq n3
@@ -95,7 +95,6 @@ describe AvlNode do
       let(:n19) { AvlNode.new 19 }
       let(:n23) { AvlNode.new 23 }
       let(:n29) { AvlNode.new 29 }
-
 
       # Check to ensure the rotations are getting called
       # correctly.

@@ -401,7 +401,7 @@ describe Tree do
         root = Node.new(8)
         allow(root).to receive(:uuid).and_return('uuid')
         tree = Tree.new root
-        expected = "{\"value\":8,\"uuid\":\"uuid\",\"left\":null,\"right\":null}"
+        expected = '{"value":8,"uuid":"uuid","left":null,"right":null}'
         expect(tree.to_json).to eq expected
       end
     end
