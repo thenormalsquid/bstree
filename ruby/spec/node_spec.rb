@@ -188,7 +188,7 @@ describe Node do
       expect(root.successor(n17)).to be n17
     end
 
-    xit 'successor of node with only left child is nil' do
+    it 'successor of node with only left child is nil' do
       root = Node.new(11)
       n5 = Node.new(5)
       root.insert(n5)
@@ -196,7 +196,7 @@ describe Node do
       expect(root.successor(n5)).to eq root
     end
 
-    xit 'successor' do
+    it 'successors in short pathological subtree' do
       root = Node.new(17)
       n5 = Node.new(5)
       n7 = Node.new(7)
@@ -206,22 +206,24 @@ describe Node do
       root.insert(n7)
       root.insert(n11)
       root.insert(n13)
+      expect(root.successor(n5)).to be n7
+      expect(root.successor(n7)).to be n11
+      expect(root.successor(n11)).to be n13
       expect(root.successor(n13)).to be root
     end
 
-    xit 'finds a successor which is to the right then left' do
+    it 'finds a successor which is to the right then left' do
       root = Node.new 17
       n29 = Node.new 29
       n23 = Node.new 23
       root.insert n29
       root.insert n23
-      # binding.pry
       expect(root.successor(root)).to eq n23
       expect(root.successor(n23)).to eq n29
       expect(root.successor(n29)).to be n29
     end
 
-    xit 'finds various successors in a tree with some pathological subtrees' do
+    it 'finds various successors in a tree with some pathological subtrees' do
       root = Node.new 17
       n2 = Node.new 2
       n3 = Node.new 3
@@ -243,9 +245,14 @@ describe Node do
       root.insert n5
       root.insert n2
 
-      # expect(root.successor(n13)).to eq root
-      # expect(root.successor(root)).to eq n19
       expect(root.successor(n2)).to eq n3
+      expect(root.successor(n3)).to eq n5
+      expect(root.successor(n3)).to eq n5
+      expect(root.successor(n5)).to eq n7
+      expect(root.successor(n7)).to eq n11
+      expect(root.successor(n11)).to eq n13
+      expect(root.successor(n13)).to eq root
+      expect(root.successor(root)).to eq n19
     end
   end
 

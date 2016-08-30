@@ -44,44 +44,32 @@ class Node
     @right.nil? ? @right = node : @right.insert(node)
   end
 
-  def dig search_key, &block
-    yield(self)
-    search_key < @value ? left&.dig(search_key, &block) : right&.dig(search_key, &block)
+  def get_successor(node, parent, successor)
+    successor = parent&.left == self ? parent : successor
+
+    # return right.nil? ? successor : right.minimum if node == self
+
+    if node == self
+      if right
+        return right.minimum
+      else
+        return successor
+      end
+    end
+
+    if node < self
+      left&.get_successor(node, self, successor)
+    else
+      right&.get_successor(node, self, successor)
+    end
   end
 
   def successor node
-    if right
-      return right.maximum
-    end
-
-    # binding.pry
-    successor = nil
-    parent = self
-    search_key = node.value
-    successor = self
-
-    dig(search_key) do |n|
-      # return if search_key == self.value
-      if parent&.left == n
-        puts "left n #{n.value}"
-        successor = successor &.> parent ? successor : parent
-        puts "left successor: #{successor&.value}"
-      end
-
-      if parent&.right == n
-        puts "right n #{n.value}"
-        # binding.pry
-        successor = successor < parent ? parent : successor
-        puts "right successor: #{successor&.value}"
-      end
-      parent = n
-    end
-
-    puts "successor: #{successor&.value}"
-    successor
+    return get_successor(node, self, node)
   end
 
 
+  # TODO: refactor this to not pass itself
   def height
     max = 0
     current = 0
@@ -92,6 +80,8 @@ class Node
     max
   end
 
+  # See above, use left&.find_height and right&.find_height
+  # This should reduce the line count by 1 and arguments by 1, worthy
   def find_height node, &block
     return if node.nil?
     yield(INCR)
