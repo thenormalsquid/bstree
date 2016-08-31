@@ -46,16 +46,7 @@ class Node
 
   def get_successor(node, parent, successor)
     successor = parent&.left == self ? parent : successor
-
-    # return right.nil? ? successor : right.minimum if node == self
-
-    if node == self
-      if right
-        return right.minimum
-      else
-        return successor
-      end
-    end
+    return right.nil? ? successor : right.minimum if node == self
 
     if node < self
       left&.get_successor(node, self, successor)
@@ -68,27 +59,14 @@ class Node
     return get_successor(node, self, node)
   end
 
+  def self.max(l, r)
+    l > r ? l : r
+  end
 
-  # TODO: refactor this to not pass itself
   def height
-    max = 0
-    current = 0
-    find_height self do |increment|
-      current += increment
-      max = max < current ? current : max unless increment == INCR
-    end
-    max
+    self.class.max(left&.height || -1, right&.height || -1) + 1
   end
 
-  # See above, use left&.find_height and right&.find_height
-  # This should reduce the line count by 1 and arguments by 1, worthy
-  def find_height node, &block
-    return if node.nil?
-    yield(INCR)
-    find_height node.left, &block
-    find_height node.right, &block
-    yield(DECR)
-  end
 
   def delete key, parent = nil
     node_to_delete, parent = find_with_parent key, parent
