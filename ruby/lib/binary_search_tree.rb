@@ -34,24 +34,13 @@ module BinarySearchTree
     node_to_delete
   end
 
+  def self.max l, r
+    l > r ? l : r
+  end
+
   def height
-    max = 0
-    current = 0
-    find_height self do |increment|
-      current += increment
-      max = max < current ? current : max unless increment == INCR
-    end
-    max
+    BinarySearchTree.max(left&.height || -1, right&.height || -1) + 1
   end
-
-  def find_height node, &block
-    return if node.nil?
-    yield(INCR)
-    find_height node.left, &block
-    find_height node.right, &block
-    yield(DECR)
-  end
-
 
   # see if this can be rewritten with `dig` below
   def find_with_parent key, parent
