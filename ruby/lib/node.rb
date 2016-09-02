@@ -44,29 +44,28 @@ class Node
     @right.nil? ? @right = node : @right.insert(node)
   end
 
-  def get_successor(node, parent, successor)
+  def get_successor node, parent, successor
     successor = parent&.left == self ? parent : successor
     return right.nil? ? successor : right.minimum if node == self
 
     if node < self
-      left&.get_successor(node, self, successor)
+      left&.get_successor node, self, successor
     else
-      right&.get_successor(node, self, successor)
+      right&.get_successor node, self, successor
     end
   end
 
   def successor node
-    return get_successor(node, self, node)
+    get_successor node, self, node
   end
 
-  def self.max(l, r)
+  def self.max l, r
     l > r ? l : r
   end
 
   def height
     self.class.max(left&.height || -1, right&.height || -1) + 1
   end
-
 
   def delete key, parent = nil
     node_to_delete, parent = find_with_parent key, parent
@@ -115,7 +114,7 @@ class Node
   end
 
   def bst?
-    return false if (left &.>= self) || (right &.< self)
+    return false if (left&.>= self) || (right&.< self)
     true
   end
 

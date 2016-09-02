@@ -283,10 +283,12 @@ describe BinarySearchTree do
     end
 
     describe '.collect' do
+      let(:expected) { [2, 3, 4, 5, 8, 11, 20, 27, 33] }
+
       it 'collects list of keys in correct order' do
         collector = []
         @root.collect(collector)
-        expect(collector).to eq @expected
+        expect(collector).to eq expected
       end
     end
 
@@ -313,12 +315,19 @@ describe BinarySearchTree do
     describe '.successor' do
       let(:root) { Foo.new 13 }
       let(:n11) { Foo.new 11 }
+      let(:n23) { Foo.new 23 }
 
       before do
         root.insert n11
       end
 
-      it 'root finds the successor to itself is itself'
+      it 'root finds the successor to itself is itself' do
+        expect(root.successor(root)).to eq root
+      end
+
+      it 'root is successor to left child' do
+        expect(root.successor(n11)).to eq root
+      end
     end
 
     describe '.to_hash' do

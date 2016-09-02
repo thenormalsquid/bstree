@@ -17,6 +17,27 @@ module BinarySearchTree
     end
   end
 
+  def get_successor node, parent, successor
+    successor = parent&.left == node ? parent : successor
+
+    if node == self
+      if node.right
+        return node.right.maximum
+      end
+        return successor
+    end
+
+    if node < self
+       left&.get_successor node, self, successor
+    else
+       right&.get_successor node, self, successor
+    end
+  end
+
+  def successor node
+    get_successor node, self, node
+  end
+
   def delete key, parent = nil
     node_to_delete, parent = find_with_parent key, parent
     left = node_to_delete.left
@@ -41,7 +62,7 @@ module BinarySearchTree
   def height
     BinarySearchTree.max(left&.height || -1, right&.height || -1) + 1
   end
-
+ 
   # see if this can be rewritten with `dig` below
   def find_with_parent key, parent
     return [self, parent] if key == @key

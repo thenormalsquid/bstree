@@ -16,6 +16,11 @@ Style/Documentation:
     - 'test/**/*'
     - 'lib/*.rb'
 
+ClassLength:
+  Max: 100
+  Exclude:
+    - lib/node.rb
+
 # Offense count: 8
 # Cop supports --auto-correct.
 # Configuration parameters: SupportedStyles.
