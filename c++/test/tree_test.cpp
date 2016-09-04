@@ -199,6 +199,16 @@ public:
     });
   }
 
+  void test_successor(void) {
+    describe_test(INDENT0, "From test_successor in TreeTest.");
+    Spec spec;
+    spec.it("Testing Tree.successor", DO_SPEC {
+      Node root(17);
+      Tree tree(&root);
+      return tree.successor(&root) == &root;
+    });
+  }
+
   void test_maximum() {
     describe_test(INDENT0, "From test_maximum in TreeTest.");
     Spec spec;
@@ -298,6 +308,7 @@ public:
     test_add();
     test_size();
     test_height();
+    test_successor();
     test_maximum();
     test_minimum();
     test_find_root_node();

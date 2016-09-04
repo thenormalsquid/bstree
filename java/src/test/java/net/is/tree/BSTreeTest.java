@@ -12,6 +12,13 @@ import junit.framework.TestSuite;
 
 public class BSTreeTest extends TestCase {
 
+    public void testSuccessor() {
+        BSTree tree = new BSTree();
+        Node root = new Node(11);
+        tree.insert(root);
+        assertEquals(root, tree.successor(root));
+    }
+
     /*
      * Also tests `is_present()`
      */

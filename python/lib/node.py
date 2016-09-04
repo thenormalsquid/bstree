@@ -68,6 +68,28 @@ class Node(object):
         cs = self.compute_size()
         return cs(0)
 
+    def get_successor(self, node, parent, successor):
+        if parent.left is not None:
+            if parent.left.value == self.value:
+                successor = parent
+
+        if node.value == self.value:
+            if node.right is not None:
+                return node.right.minimum()
+            else:
+                return successor
+
+        if node.value < self.value:
+            if self.left is not None:
+                return self.left.get_successor(node, self, successor)
+        else:
+            if self.right is not None:
+                return self.right.get_successor(node, self, successor)
+
+
+    def successor(self, node):
+        return self.get_successor(node, self, node)
+
     def maximum(self):
         if self.right is None:
             return self

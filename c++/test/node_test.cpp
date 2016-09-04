@@ -81,6 +81,58 @@ public:
     });
   }
 
+  void test_successor() {
+    describe_test(INDENT0, "From test_successor in NodeTest");
+    Spec spec;
+    Node root(17);
+    Node n13(13);
+    Node n3(3);
+    Node n2(2);
+    Node n5(5);
+    Node n7(7);
+    Node n11(11);
+    Node n19(19);
+    Node n23(23);
+    Node n29(29);
+
+    root.add(&n5);
+    root.add(&n3);
+    root.add(&n2);
+
+    root.add(&n7);
+    root.add(&n11);
+    root.add(&n13);
+
+    root.add(&n23);
+    root.add(&n19);
+    root.add(&n29);
+
+    spec.it("root node successor", [&]() {
+        return root.successor(&root) == &n19;
+    });
+
+    spec.it("right side minimum", [&]() {
+        return root.successor(&n19) == &n23;
+    });
+
+    spec.it("maximum is own successor", [&]() {
+        return root.successor(&n29) == &n29;
+    });
+
+    spec.it("successors down the left side", [&]() {
+        return root.successor(&n2) == &n3
+            && root.successor(&n3) == &n5
+            && root.successor(&n5) == &n7;
+    });
+
+    spec.it("successors down the first left's right branch", [&]() {
+        return root.successor(&n7) == &n11
+            && root.successor(&n11) == &n13
+            && root.successor(&n13) == &root;
+    });
+  }
+
+
   void test_height() {
     describe_test(INDENT0, "From test_height in NodeTest");
     Spec spec;
@@ -223,6 +275,7 @@ public:
     test_is_present();
     test_size();
     test_height();
+    test_successor();
     test_maximum();
     test_minimum();
   }

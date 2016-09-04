@@ -123,6 +123,10 @@ class TestTree(unittest.TestCase):
         assert root.maximum() == node_l2
         assert root.minimum() == node_l4
 
+    def test_successor(self):
+        root = Node(17)
+        tree = Tree(root)
+        assert tree.successor(root) == root
 
     def tearDown(self):
         # dummy

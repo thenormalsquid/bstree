@@ -35,6 +35,11 @@ int Tree::height(void) {
   return root->height();
 }
 
+Node * Tree::successor(Node * node) {
+  if (root == NULL) return NULL;
+  return root->successor(node);
+}
+
 bool Tree::is_present(int value) {
   return this->root->is_present(value);
 }

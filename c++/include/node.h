@@ -7,6 +7,7 @@ class Node {
 
   private:
     int get_height(int current, int max);
+    Node * get_successor(Node * node, Node * parent, Node * successor);
 
   public:
     Node(int _value) : value(_value), left(NULL), right(NULL) {}
@@ -20,6 +21,7 @@ class Node {
 
     bool is_present(int);
 
+    Node * successor(Node * n);
     Node * maximum(void);
     Node * minimum(void);
     int size(void);

@@ -18,7 +18,7 @@ The goal is twofold:
   suspect it will look ugly.
 
 * Finish `size`, `search`, `present?`, `height`, `bst?`, `maximum`, `minimum`, `successor` and
-  predecessor` before finishing node `delete`. This will provide a lot
+  `predecessor` before finishing node `delete`. This will provide a lot
 of extra sanity checking for the `delete` implementation.
 
 * Develop some sort of plan for reducing tests to minimal size. There
@@ -87,17 +87,17 @@ be written iteratively as well, which is a good exercise for the future.
 
 ### Tree properties
 
-|               | full?      | perfect? | complete? | balanced?  | bst?       | size       | successor | predecessor |
-|---------------|------------|----------|-----------|------------|------------|------------|-----------|-------------|
-| Ruby          | 2016-07-17 |          |           |            | 2016-07-25 | Done       |           |             |
-| Ruby (module) |            |          |           |            | 2016-07-23 | 2016-07-23 |           |             |
-| Python        |            |          |           |            |            | 2016-08-10 |           |             |
-| Java          |            |          |           |            |            | 2016-08-25 |           |             |
-| C++           |            |          |           |            |            | 2016-08-27 |           |             |
-| C             |            |          |           |            |            | 2016-08-13 |           |             |
-| Lua           |            |          |           |            |            | 2016-08-27 |           |             |
-| Javascript    |            |          |           |            |            | 2016-08-26 |           |             |
-| SQL           |            |          |           |            |            | 2016-08-27 |           |             |
+|               | full?      | perfect? | complete? | balanced?  | bst?       | size       | successor  | predecessor |
+|---------------|------------|----------|-----------|------------|------------|------------|------------|-------------|
+| Ruby          | 2016-07-17 |          |           |            | 2016-07-25 | Done       | 2016-08-29 |             |
+| Ruby (module) |            |          |           |            | 2016-07-23 | 2016-07-23 | 2016-09-02 |             |
+| Python        |            |          |           |            |            | 2016-08-10 | 2016-09-03 |             |
+| Java          |            |          |           |            |            | 2016-08-25 | 2016-09-03 |             |
+| C++           |            |          |           |            |            | 2016-08-27 |            |             |
+| C             |            |          |           |            |            | 2016-08-13 |            |             |
+| Lua           |            |          |           |            |            | 2016-08-27 |            |             |
+| Javascript    |            |          |           |            |            | 2016-08-26 |            |             |
+| SQL           |            |          |           |            |            | 2016-08-27 |            |             |
 
 
 ### Persistence, serialization, etc.

@@ -10,6 +10,30 @@ class Node {
     public Node left = null;
     public Node right = null;
 
+    private Node get_successor(Node node, Node parent, Node successor) {
+      if (parent.left != null && parent.left == this) {
+        successor = parent;
+      }
+
+      if (node == this) {
+        if (node.right != null) {
+          return node.right.minimum();
+        } else {
+          return successor;
+        }
+      }
+
+      if (node.value < this.value) {
+        return left.get_successor(node, this, successor);
+      } else {
+        return right.get_successor(node, this, successor);
+      }
+    }
+
+    public Node successor(Node node) {
+      return get_successor(node, this, node);
+    }
+
     // TODO: rewrite this to use a lambda if possible
     private int get_height(int height, int max) {
       int current = ++height;

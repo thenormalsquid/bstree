@@ -38,6 +38,32 @@ bool Node::is_present(int value) {
   return false;
 }
 
+Node * Node::get_successor(Node * node, Node * parent, Node * successor) {
+  if (parent->left != NULL && parent->left == this) { successor = parent; }
+
+  if (this == node) {
+    if (this->right != NULL) {
+      return this->right->minimum();
+    } else {
+      return successor;
+    }
+  }
+
+  if (node->value < this->value) {
+    if (this->left != NULL) {
+      return this->left->get_successor(node, this, successor);
+    }
+  } else {
+    if (this->right != NULL) {
+      return this->right->get_successor(node, this, successor);
+    }
+  }
+}
+
+Node * Node::successor(Node * node) {
+  return get_successor(node, this, node);
+}
+
 void Node::post_order_traverse(std::function<void (void)> callback) {
   if (left != NULL) { left->post_order_traverse(callback); }
   if (right != NULL) { right->post_order_traverse(callback); }

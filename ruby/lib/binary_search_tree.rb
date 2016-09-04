@@ -18,14 +18,8 @@ module BinarySearchTree
   end
 
   def get_successor node, parent, successor
-    successor = parent&.left == node ? parent : successor
-
-    if node == self
-      if node.right
-        return node.right.maximum
-      end
-        return successor
-    end
+    successor = parent if parent&.left == self
+    return right.nil? ? successor : right.minimum if node == self
 
     if node < self
        left&.get_successor node, self, successor
@@ -62,7 +56,7 @@ module BinarySearchTree
   def height
     BinarySearchTree.max(left&.height || -1, right&.height || -1) + 1
   end
- 
+
   # see if this can be rewritten with `dig` below
   def find_with_parent key, parent
     return [self, parent] if key == @key
@@ -122,6 +116,7 @@ module BinarySearchTree
   end
 
   # This is what is tested.
+  # CLR Chapter 14, p. ???
   def bst?
     pre_order_traverse { (left &.>= self) || (right &.< self) ? false : true }
   end

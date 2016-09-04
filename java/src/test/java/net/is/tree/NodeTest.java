@@ -14,6 +14,46 @@ public class NodeTest extends TestCase {
     public Node root;
     public ArrayList<Integer> expected = new ArrayList<Integer>();
 
+    public void testSuccessor() {
+        Node root = new Node(17);
+        assertEquals(root, root.successor(root));
+
+        Node n23 = new Node(23);
+        root.insert(n23);
+        assertEquals(n23, root.successor(root));
+        assertEquals(n23, root.successor(n23));
+
+        Node n29 = new Node(29);
+        root.insert(n29);
+        assertEquals(n29, root.successor(n23));
+        assertEquals(n29, n23.successor(n23));
+        assertEquals(n29, n29.successor(n29));
+
+        Node n19 = new Node(19);
+        root.insert(n19);
+        assertEquals(n23, root.successor(n19));
+
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        Node n5 = new Node(5);
+        Node n7 = new Node(7);
+        Node n11 = new Node(11);
+        Node n13 = new Node(13);
+        root.insert(n5);
+        root.insert(n3);
+        root.insert(n2);
+        assertEquals(n3, root.successor(n2));
+        assertEquals(n5, root.successor(n3));
+
+        root.insert(n7);
+        root.insert(n11);
+        root.insert(n13);
+        assertEquals(n7, root.successor(n5));
+        assertEquals(n11, root.successor(n7));
+        assertEquals(n13, root.successor(n11));
+        assertEquals(root, root.successor(n13));
+    }
+
     public void testSearch() {
         Node root = new Node(11);
         assertEquals(root, root.search(11));

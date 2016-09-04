@@ -138,6 +138,38 @@ class TestNode(unittest.TestCase):
         # assert root.height() == 4
         assert root.size() == 6
 
+    def test_successor(self):
+        root = Node(17)
+        n23 = Node(23)
+        n2 = Node(2)
+        n3 = Node(3)
+        n5 = Node(5)
+        n7 = Node(7)
+        n11 = Node(11)
+        n13 = Node(13)
+        n19 = Node(19)
+        n23 = Node(23)
+        n29 = Node(29)
+        root.add(n5)
+        root.add(n23)
+        root.add(n7)
+        root.add(n3)
+        root.add(n2)
+        root.add(n11)
+        root.add(n13)
+        root.add(n29)
+        root.add(n19)
+        assert root.successor(n5) == n7
+        assert root.successor(n7) == n11
+        assert root.successor(n11) == n13
+        assert root.successor(n13) == root
+        assert root.successor(root) == n19
+        assert root.successor(n29) == n29
+        assert root.successor(n19) == n23
+        assert n23.successor(n23) == n29
+        assert root.successor(n3) == n5
+        assert root.successor(n2) == n3
+
     def tearDown(self):
         self.testing = False
 

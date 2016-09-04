@@ -313,21 +313,54 @@ describe BinarySearchTree do
     end
 
     describe '.successor' do
-      let(:root) { Foo.new 13 }
-      let(:n11) { Foo.new 11 }
+      let(:root) { Foo.new 17 }
+      let(:n5) { Foo.new 5 }
       let(:n23) { Foo.new 23 }
+      let(:n2) { Foo.new 2 }
+      let(:n3) { Foo.new 3 }
+      let(:n7) { Foo.new 7 }
+      let(:n11) { Foo.new 11 }
+      let(:n13) { Foo.new 13 }
+      let(:n19) { Foo.new 19 }
+      let(:n29) { Foo.new 29 }
 
       before do
+        root.insert n5
+        root.insert n23
+        root.insert n7
         root.insert n11
-      end
+        root.insert n13
+        root.insert n3
+        root.insert n2
+        root.insert n19
+        root.insert n29
+       end
 
-      it 'root finds the successor to itself is itself' do
-        expect(root.successor(root)).to eq root
+      it 'successors to root and right side' do
+        expect(root.successor(root)).to eq n19
+        expect(n23.successor(n23)).to eq n29
+        expect(n19.successor(n19)).to eq n19
+        expect(root.successor(n19)).to eq n23
+        expect(root.successor(n23)).to eq n29
       end
 
       it 'root is successor to left child' do
-        expect(root.successor(n11)).to eq root
+        expect(root.successor(n5)).to eq n7
+        expect(n5.successor(n5)).to eq n7
       end
+
+      it 'works down the left side' do
+        expect(root.successor(n3)).to eq n5
+        expect(root.successor(n2)).to eq n3
+      end
+
+      it 'finds a deep left right node' do
+        expect(root.successor(n7)).to be n11
+        expect(root.successor(n11)).to be n13
+        expect(n13.successor(n13)).to be n13
+        expect(root.successor(n13)).to be root
+      end
+
     end
 
     describe '.to_hash' do

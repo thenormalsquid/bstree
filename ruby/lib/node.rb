@@ -45,7 +45,7 @@ class Node
   end
 
   def get_successor node, parent, successor
-    successor = parent&.left == self ? parent : successor
+    successor = parent if parent&.left == self
     return right.nil? ? successor : right.minimum if node == self
 
     if node < self
