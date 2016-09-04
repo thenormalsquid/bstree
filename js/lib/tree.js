@@ -39,6 +39,11 @@ Tree.prototype.minimum = function() {
   return this.root.minimum();
 }
 
+Tree.prototype.successor = function(node) {
+  if (this.root === null) { return null; }
+  return this.root.successor(node);
+}
+
 Tree.prototype.height = function() {
   if (this.root === null) { return 0; }
   return this.root.height();

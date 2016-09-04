@@ -81,6 +81,32 @@ Node.prototype.size = function() {
   return size;
 }
 
+Node.prototype.successor = function(node) {
+  var get_successor = function(self, node, parent, successor) {
+    if (parent.left !== null && parent.left === self) successor = parent;
+
+    if (node === self) {
+      if (self.right !== null) {
+        return self.right.minimum();
+      } else {
+        return successor;
+      }
+    }
+
+    if (node.key < self.key) {
+      if (self.left !== null) {
+        return get_successor(self.left, node, self, successor);
+      }
+    } else {
+      if (self.right !== null) {
+        return get_successor(self.right, node, self, successor);
+      }
+    }
+  }
+
+  return get_successor(this, node, this, node);
+}
+
 Node.prototype.height = function() {
   var height = 0;
 

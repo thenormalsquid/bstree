@@ -202,6 +202,15 @@ describe('Tree', function() {
     });
   });
 
+  describe('successor', function() {
+    it('correctly invokes successor', function() {
+      var t = new tree();
+      var root = new node(17);
+      t.insert(root);
+      assert.equal(t.successor(root), root);
+    });
+  });
+
   describe('size', function() {
     it('size 0 for empty tree', function() {
       var t = new tree();

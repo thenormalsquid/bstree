@@ -217,6 +217,49 @@ describe('Node', function() {
     });
   });
 
+  describe('successor', function() {
+    it('finds successors to nodes in a tree', function() {
+      var root = new node(17);
+      assert.equal(root.successor(root), root);
+
+      var n23 = new node(23);
+      root.insert(n23);
+      assert.equal(root.successor(root), n23);
+
+      var n19 = new node(19);
+      var n29 = new node(29);
+      root.insert(n19);
+      root.insert(n29);
+      assert.equal(root.successor(root), n19);
+      assert.equal(root.successor(n19), n23);
+      assert.equal(root.successor(n23), n29);
+      assert.equal(n29.successor(n29), n29);
+      assert.equal(n19.successor(n19), n19);
+
+      var n2 = new node(2);
+      var n3 = new node(3);
+      var n5 = new node(5);
+      root.insert(n5);
+      root.insert(n3);
+      root.insert(n2);
+      assert.equal(root.successor(n2), n3);
+      assert.equal(root.successor(n3), n5);
+      assert.equal(root.successor(n5), root);
+
+      var n7 = new node(7);
+      var n11 = new node(11);
+      var n13 = new node(13);
+      root.insert(n7);
+      root.insert(n11);
+      root.insert(n13);
+      assert.equal(root.successor(n5), n7);
+      assert.equal(root.successor(n7), n11);
+      assert.equal(root.successor(n11), n13);
+      assert.equal(root.successor(n13), root);
+      assert.equal(n13.successor(n13), n13);
+    });
+  });
+
   describe('height', function() {
     it('height of single node tree is 0', function() {
       var root = new node(11);
