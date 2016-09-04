@@ -42,6 +42,11 @@ function Tree:collect(collector)
   self.root:collect(collector)
 end
 
+function Tree:successor(node)
+  if self.root == nil then return end
+  return self.root:successor(node)
+end
+
 function Tree:height()
   return self.root:height()
 end

@@ -55,6 +55,32 @@ function Node:is_present(key)
   return false
 end
 
+function Node:get_successor(node, parent, successor)
+  if parent.left and parent.left == self then successor = parent end
+
+  if self == node then
+    if self.right then
+      return self.right:minimum()
+    else
+      return successor
+    end
+  end
+
+  if node.key < self.key then
+    if self.left then
+      return self.left:get_successor(node, self, successor)
+    end
+  else
+    if self.right then
+      return self.right:get_successor(node, self, successor)
+    end
+  end
+end
+
+function Node:successor(node)
+  return self:get_successor(node, self, node)
+end
+
 function Node:collect(collector)
   if self.left then self.left:collect(collector) end
   collector[#collector + 1] = self.key
