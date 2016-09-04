@@ -205,7 +205,6 @@ public:
       return node_is_present(root, -100) == 0;
     });
 
-
     node_destroy(root);
   }
 
@@ -213,6 +212,59 @@ public:
   }
 
   void test_node_destroy(void) {
+  }
+
+  void test_node_successor(void) {
+    describe_test(INDENT0, "From test_node_successor in NodeTest.");
+    Spec spec;
+    Node * root = node_new(17);
+
+    spec.it("successor for root node only", DO_SPEC_HANDLE {
+      return (node_successor(root, root) == root);
+    });
+
+    Node * n2 = node_new(2);
+    Node * n3 = node_new(3);
+    Node * n5 = node_new(5);
+    Node * n7 = node_new(7);
+    Node * n11 = node_new(11);
+    Node * n13 = node_new(13);
+    Node * n19 = node_new(19);
+    Node * n23 = node_new(23);
+    Node * n29 = node_new(29);
+
+    node_insert(root, n5);
+    node_insert(root, n7);
+    node_insert(root, n3);
+    node_insert(root, n2);
+
+    spec.it("successors up from the minimum", DO_SPEC_HANDLE {
+        return node_successor(root, n2) == n3
+            && node_successor(root, n3) == n5
+            && node_successor(root, n5) == n7;
+    });
+
+    node_insert(root, n11);
+    node_insert(root, n13);
+
+    spec.it("left into pathological right subtree", DO_SPEC_HANDLE {
+        return node_successor(root, n7) == n11
+            && node_successor(root, n11) == n13
+            && node_successor(root, n13) == root;
+    });
+
+    node_insert(root, n23);
+    node_insert(root, n19);
+    node_insert(root, n29);
+
+    spec.it("right side successors", DO_SPEC_HANDLE {
+        return node_successor(root, n23) == n29
+            && node_successor(root, n19) == n23
+            && node_successor(root, n29) == n29
+            && node_successor(n23, n19)  == n23;
+    });
+
+    node_destroy(root);
   }
 
   void test_node_maximum(void) {
@@ -464,11 +516,13 @@ public:
     //test_node_is_present();
     test_node_height();
     //test_node_destroy();
+    test_node_minimum();
     test_node_maximum();
     //test_node_minimum();
     //test_node_is_full();
     //test_node_is_bst();
     test_node_size();
+    test_node_successor();
     //teardown();
   }
 };

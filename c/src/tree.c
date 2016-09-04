@@ -66,6 +66,12 @@ tree_destroy(void) {
 }
 
 Node *
+tree_successor(Tree * tree, Node * node) {
+  if (tree->root == NULL) return NULL;
+  return node_successor(tree->root, node);
+}
+
+Node *
 tree_maximum(Tree * t) {
   if (t->root == NULL) return NULL;
   return node_maximum(t->root);

@@ -31,6 +31,9 @@ int    tree_height     (Tree * t);
 
 void   tree_destroy    (void);
 
+Node * tree_successor  (Tree * t,
+                        Node *);
+
 Node * tree_maximum    (Tree * t);
 
 Node * tree_minimum    (Tree * t);

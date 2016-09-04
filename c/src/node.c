@@ -19,6 +19,8 @@ typedef struct _state {
 } State;
 
 
+// Clean this up and whereever State is used,
+// cast it to void * userdata
 typedef void (*Callback)(Node * n, State * state);
 typedef void (*Callback1)(Node * n, State * state);
 
@@ -152,6 +154,35 @@ get_height(Node * n, int height, int max) {
 int
 node_height(Node * n) {
   return get_height(n, 0, 0);
+}
+
+Node *
+get_successor(Node * this, Node * node, Node * parent, Node * successor) {
+  if (parent->left == this) successor = parent;
+
+  if (this == node) {
+    if (this->right != NULL) {
+      return node_minimum(this->right);
+    } else {
+      return successor;
+    }
+  }
+
+  if (node->key < this->key) {
+    if (this->left != NULL) {
+      return get_successor(this->left, node, this, successor);
+    }
+  } else {
+    if (this->right != NULL) {
+      return get_successor(this->right, node, this, successor);
+    }
+  }
+  return NULL;
+}
+
+Node *
+node_successor(Node * this, Node * node) {
+  return get_successor(this, node, this, node);
 }
 
 void

@@ -33,6 +33,9 @@ int    node_height     (Node * n);
 
 void   node_delete     (void);
 
+Node * node_successor  (Node * root,
+                        Node * node);
+
 Node * node_maximum    (Node * n);
 
 Node * node_minimum    (Node * n);

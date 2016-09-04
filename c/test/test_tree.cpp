@@ -180,7 +180,16 @@ public:
     tree_delete(tree);
   }
 
-  void test_tree_minimum(void) {
+  void test_tree_successor(void) {
+    describe_test(INDENT0, "From test_tree_successor in TreeTest.");
+    Spec spec;
+    Tree * t = tree_new();
+    Node * root = node_new(13);
+    tree_insert(t, root);
+
+    spec.it("root of tree with single node is own successor", DO_SPEC_HANDLE {
+        return tree_successor(t, root) == root;
+    });
   }
 
   void test_tree_is_full(void) {
@@ -190,7 +199,7 @@ public:
   }
 
   void test_tree_size(void) {
-    describe_test(INDENT0, "From test_node_size in NodeTest.");
+    describe_test(INDENT0, "From test_tree_size in TreeTest.");
     Spec spec;
     Tree * t = tree_new();
 
@@ -305,7 +314,7 @@ public:
     test_tree_height();
     //test_tree_destroy();
     test_tree_maximum();
-    //test_tree_minimum();
+    test_tree_successor();
     //test_tree_is_full();
     //test_tree_is_bst();
     test_tree_size();
