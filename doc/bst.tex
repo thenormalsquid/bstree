@@ -420,6 +420,28 @@ let () =
 ;;
 \end{lstlisting}
 
+\section{Selected exercises and problems}
+
+
+\subsection{CLR}
+
+\subsubsection{Problem 3-4: Number of different binary trees}
+
+The goal of this problem is to determine the number of binary
+trees possible given $n$ nodes.
+
+\paragraph{Part a} For $b_0 = 1$ and $n \geq 1$,
+
+\[
+b_n = \sum_{k=0}^{n-1} b_kb_{n-1-k}.
+\]
+
+Let's do some examples, starting with $n = 1$, giving $k = 0$:
+
+\begin{itemize}
+\item [$k=0$] $b_0 = 1, b_1$
+\end{itemize}
+
 \section{Tikz}
 
 % \href{http://www.texample.net/tikz/examples/merge-sort-recursion-tree/}{From texample.net}
