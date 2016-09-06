@@ -319,7 +319,7 @@ describe Tree do
 
     it 'returns false for a node with only one child' do
       tree.insert left
-      expect(tree.full?).to be nil
+      expect(tree.full?).to be false # nil
     end
 
     it 'returns true for tree with 5 nodes' do

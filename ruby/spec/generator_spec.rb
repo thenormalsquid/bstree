@@ -15,7 +15,7 @@ describe Generator do
     tree2 = Generator.tree2
     expect(tree2.size).to eq 2
     expect(tree2.bst?).to be true
-    expect(tree2.full?).to be nil
+    expect(tree2.full?).to be false # nil
     # expect(tree.pathological??).to be false
   end
 
@@ -31,7 +31,7 @@ describe Generator do
     tree = Generator.tree4
     expect(tree.size).to eq 3
     expect(tree.bst?).to be true
-    expect(tree.full?).to be nil
+    expect(tree.full?).to be false # nil
     # expect(tree.pathological??).to be true
   end
 
@@ -39,7 +39,7 @@ describe Generator do
     tree = Generator.tree5
     expect(tree.size).to eq 3
     expect(tree.bst?).to be true
-    expect(tree.full?).to be nil
+    expect(tree.full?).to be false # nil
     # expect(tree.pathological??).to be true
   end
 
@@ -71,7 +71,7 @@ describe Generator do
     tree = Generator.tree9
     expect(tree.size).to eq 7
     expect(tree.bst?).to be true
-    expect(tree.full?).to be nil
+    expect(tree.full?).to be false # nil
     # expect(tree.pathological??).to be true
   end
 
@@ -79,7 +79,7 @@ describe Generator do
     tree = Generator.tree10
     expect(tree.size).to eq 10
     expect(tree.bst?).to be true
-    expect(tree.full?).to be nil
+    expect(tree.full?).to be false # nil
     # expect(tree.pathological??).to be true
   end
 end
