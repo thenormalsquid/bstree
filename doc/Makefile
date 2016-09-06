@@ -13,7 +13,7 @@ TEXFILES = $(wildcard ../*.tex)
 
 ZIPS = bst.zip
 
-PDFS = bst.pdf
+PDFS = bst.pdf examples.pdf
 
 pdfs: $(PDFS)
 
