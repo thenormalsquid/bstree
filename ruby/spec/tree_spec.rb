@@ -205,7 +205,7 @@ describe Tree do
       target = Node.new(77)
       tree.insert target
       expect(tree.size).to eq 7
-      expect(tree.find(77).object_id).to eq target.object_id
+      expect(tree.search(77).object_id).to eq target.object_id
     end
   end
 

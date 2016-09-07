@@ -41,7 +41,7 @@ class Tree
     get_values node.right, collector if node.right
   end
 
-  def find key
+  def search key
     @root.find key
   end
 
