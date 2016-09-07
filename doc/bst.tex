@@ -211,6 +211,20 @@ particularly that the including class must define the key for the tree.
 
 \section{Implementation}
 
+Implementing binary search trees is superficially very easy. Nevertheless,
+a number of design decisions must be made.
+
+\subsection{Handling null/NULL/nil/etc}
+
+Key to any BST algorithm is the notion that leaf nodes are represented
+by empty leaf nodes. Empty nodes have no key, no value, and need not be
+instantiated. They must, however, be denoted in some way, which is
+usually accomplished by setting the relevant child pointers (left and
+right) to whatever the programming language regards as a ``non-value.''
+For example, in C and C++ this is {\tt NULL}, in Python {\tt None}.
+
+(It would be possible to define a global external node.)
+
 \subsection{tree/node interaction}
 
 Trees are abstract data types. This makes trees easy to reason about.
