@@ -174,6 +174,10 @@ describe Node do
     end
   end
 
+  describe 'predecessor' do
+    it 'finds predecessors correctly'
+  end
+
   describe 'successor' do
     it 'successor of single node is nil' do
       n11 = Node.new 11
