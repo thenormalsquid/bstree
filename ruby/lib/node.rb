@@ -44,6 +44,14 @@ class Node
     @right.nil? ? @right = node : @right.insert(node)
   end
 
+  def get_predecessor node, parent, predecessor
+    predecessor = parent if parent&.right == self
+  end
+
+  def predecessor node
+    get_predecessor node, self, node
+  end
+
   def get_successor node, parent, successor
     successor = parent if parent&.left == self
     return right.nil? ? successor : right.minimum if node == self

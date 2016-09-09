@@ -175,7 +175,10 @@ describe Node do
   end
 
   describe 'predecessor' do
-    it 'finds predecessors correctly'
+    it 'finds predecessors correctly' do
+      root = Node.new 17
+      expect(root.predecessor(root)).to eq root
+    end
   end
 
   describe 'successor' do
