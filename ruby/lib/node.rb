@@ -46,6 +46,13 @@ class Node
 
   def get_predecessor node, parent, predecessor
     predecessor = parent if parent&.right == self
+    return left.nil? ? predecessor : left.maximum if node == self
+
+    if node < self
+      left&.get_predecessor node, self, predecessor
+    else
+      right&.get_predecessor node, self, predecessor
+    end
   end
 
   def predecessor node

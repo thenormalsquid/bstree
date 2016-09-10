@@ -178,6 +178,10 @@ describe Node do
     it 'finds predecessors correctly' do
       root = Node.new 17
       expect(root.predecessor(root)).to eq root
+
+      n5 = Node.new 5
+      root.insert n5
+      expect(root.predecessor(root)).to eq n5
     end
   end
 
