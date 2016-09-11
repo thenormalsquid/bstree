@@ -182,6 +182,36 @@ describe Node do
       n5 = Node.new 5
       root.insert n5
       expect(root.predecessor(root)).to eq n5
+      expect(n5.predecessor(n5)).to eq n5
+
+      n2 = Node.new 2
+      n3 = Node.new 3
+      n7 = Node.new 7
+      n11 = Node.new 11
+      n13 = Node.new 13
+      root.insert n3
+      root.insert n2
+      expect(root.predecessor(n5)).to eq n3
+      expect(root.predecessor(n3)).to eq n2
+
+      root.insert n7
+      root.insert n11
+      root.insert n13
+      expect(root.predecessor(root)).to eq n13
+      expect(root.predecessor(n13)).to eq n11
+      expect(root.predecessor(n11)).to eq n7
+      expect(root.predecessor(n7)).to eq n5
+
+      n19 = Node.new 19
+      n23 = Node.new 23
+      n29 = Node.new 29
+      root.insert n23
+      root.insert n29
+      root.insert n19
+      expect(root.predecessor(n19)).to eq root
+      expect(root.predecessor(n23)).to eq n19
+      expect(root.predecessor(n29)).to eq n23
+      expect(n19.predecessor(n19)).to eq n19
     end
   end
 
