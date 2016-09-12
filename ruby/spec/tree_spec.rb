@@ -187,9 +187,17 @@ describe Tree do
 
   describe 'successor' do
     it 'finds successor to root node' do
-      root = Node.new(13)
-      tree = Tree.new(root)
+      root = Node.new 13
+      tree = Tree.new root
       expect(tree.successor(root)).to be root
+    end
+  end
+
+  describe 'predecessor' do
+    it 'finds predecessor to root node' do
+      root = Node.new 17
+      tree = Tree.new root
+      expect(tree.predecessor(root)).to eq root
     end
   end
 

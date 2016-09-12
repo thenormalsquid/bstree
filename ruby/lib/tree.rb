@@ -61,6 +61,10 @@ class Tree
     root.successor node
   end
 
+  def predecessor node
+    root.predecessor node
+  end
+
   def maximum
     @root.maximum
   end

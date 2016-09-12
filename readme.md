@@ -89,7 +89,7 @@ be written iteratively as well, which is a good exercise for the future.
 
 |               | full?      | perfect? | complete? | balanced?  | bst?       | size       | successor  | predecessor |
 |---------------|------------|----------|-----------|------------|------------|------------|------------|-------------|
-| Ruby          | 2016-07-17 |          |           |            | 2016-07-25 | Done       | 2016-08-29 |             |
+| Ruby          | 2016-07-17 |          |           |            | 2016-07-25 | Done       | 2016-08-29 | 2016-09-12  |
 | Ruby (module) |            |          |           |            | 2016-07-23 | 2016-07-23 | 2016-09-02 |             |
 | Python        |            |          |           |            |            | 2016-08-10 | 2016-09-03 |             |
 | Java          |            |          |           |            |            | 2016-08-25 | 2016-09-03 |             |
