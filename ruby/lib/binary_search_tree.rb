@@ -32,6 +32,21 @@ module BinarySearchTree
     get_successor node, self, node
   end
 
+  def get_predecessor node, parent, predecessor
+    predecessor = parent if parent&.right == self
+    return left.nil? ? predecessor : left.maximum if node == self
+
+    if node < self
+      left&.get_predecessor node, self, predecessor
+    else
+      right&.get_predecessor node, self, predecessor
+    end
+  end
+
+  def predecessor node
+    get_predecessor node, self, node
+  end
+
   def delete key, parent = nil
     node_to_delete, parent = find_with_parent key, parent
     left = node_to_delete.left

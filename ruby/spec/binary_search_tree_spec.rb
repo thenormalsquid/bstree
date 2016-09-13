@@ -312,7 +312,7 @@ describe BinarySearchTree do
       end
     end
 
-    describe '.successor' do
+    describe '.successor and .predecessor' do
       let(:root) { Foo.new 17 }
       let(:n5) { Foo.new 5 }
       let(:n23) { Foo.new 23 }
@@ -336,31 +336,55 @@ describe BinarySearchTree do
         root.insert n29
        end
 
-      it 'successors to root and right side' do
-        expect(root.successor(root)).to eq n19
-        expect(n23.successor(n23)).to eq n29
-        expect(n19.successor(n19)).to eq n19
-        expect(root.successor(n19)).to eq n23
-        expect(root.successor(n23)).to eq n29
+      describe '.predecessor' do
+        it 'finds predecessor around root' do
+          expect(root.predecessor(root)).to eq n13
+          expect(root.predecessor(n19)).to eq root
+        end
+
+        it 'predecessors down left side' do
+          expect(root.predecessor(n2)).to eq n2
+          expect(root.predecessor(n3)).to eq n2
+          expect(root.predecessor(n5)).to eq n3
+          expect(root.predecessor(n7)).to eq n5
+          expect(root.predecessor(n11)).to eq n7
+          expect(root.predecessor(n13)).to eq n11
+        end
+
+        it 'predecessors down right side' do
+          expect(root.predecessor(n29)).to eq n23
+          expect(root.predecessor(n23)).to eq n19
+          expect(n23.predecessor(n23)).to eq n19
+          expect(n19.predecessor(n19)).to eq n19
+        end
       end
 
-      it 'root is successor to left child' do
-        expect(root.successor(n5)).to eq n7
-        expect(n5.successor(n5)).to eq n7
-      end
+      describe '.successor' do
+        it 'successors to root and right side' do
+          expect(root.successor(root)).to eq n19
+          expect(n23.successor(n23)).to eq n29
+          expect(n19.successor(n19)).to eq n19
+          expect(root.successor(n19)).to eq n23
+          expect(root.successor(n23)).to eq n29
+        end
 
-      it 'works down the left side' do
-        expect(root.successor(n3)).to eq n5
-        expect(root.successor(n2)).to eq n3
-      end
+        it 'root is successor to left child' do
+          expect(root.successor(n5)).to eq n7
+          expect(n5.successor(n5)).to eq n7
+        end
 
-      it 'finds a deep left right node' do
-        expect(root.successor(n7)).to be n11
-        expect(root.successor(n11)).to be n13
-        expect(n13.successor(n13)).to be n13
-        expect(root.successor(n13)).to be root
-      end
+        it 'works down the left side' do
+          expect(root.successor(n3)).to eq n5
+          expect(root.successor(n2)).to eq n3
+        end
 
+        it 'finds a deep left right node' do
+          expect(root.successor(n7)).to be n11
+          expect(root.successor(n11)).to be n13
+          expect(n13.successor(n13)).to be n13
+          expect(root.successor(n13)).to be root
+        end
+      end
     end
 
     describe '.to_hash' do
