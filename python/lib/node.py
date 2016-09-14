@@ -90,6 +90,27 @@ class Node(object):
     def successor(self, node):
         return self.get_successor(node, self, node)
 
+    def get_predecessor(self, node, parent, predecessor):
+        if parent.right is not None:
+            if parent.right.value == self.value:
+                predecessor = parent
+
+        if node.value == self.value:
+            if node.left is not None:
+                return node.left.maximum()
+            else:
+                return predecessor
+
+        if node.value < self.value:
+            if self.left is not None:
+                return self.left.get_predecessor(node, self, predecessor)
+        else:
+            if self.right is not None:
+                return self.right.get_predecessor(node, self, predecessor)
+
+    def predecessor(self, node):
+        return self.get_predecessor(node, self, node)
+
     def maximum(self):
         if self.right is None:
             return self

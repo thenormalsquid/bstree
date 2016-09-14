@@ -160,15 +160,35 @@ class TestNode(unittest.TestCase):
         root.add(n29)
         root.add(n19)
         assert root.successor(n5) == n7
+        assert root.predecessor(n7) == n5
+
         assert root.successor(n7) == n11
+        assert root.predecessor(n11) == n7
+
         assert root.successor(n11) == n13
+        assert root.predecessor(n13) == n11
+
         assert root.successor(n13) == root
+        assert root.predecessor(root) == n13
+
         assert root.successor(root) == n19
+        assert root.predecessor(n19) == root
+
         assert root.successor(n29) == n29
+        assert root.predecessor(n29) == n23
+
         assert root.successor(n19) == n23
+        assert root.predecessor(n23) == n19
+
         assert n23.successor(n23) == n29
+        assert n23.predecessor(n23) == n19
+
         assert root.successor(n3) == n5
+        assert root.predecessor(n5) == n3
+
         assert root.successor(n2) == n3
+        assert root.predecessor(n3) == n2
+        assert n2.predecessor(n2) == n2
 
     def tearDown(self):
         self.testing = False
