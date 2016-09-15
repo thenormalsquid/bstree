@@ -3,7 +3,7 @@
 #include <tree.h>
 
 void Tree::add(Node * node) {
-  if (root == NULL) {
+  if (root == nullptr) {
     root = node;
     return;
   }
@@ -11,32 +11,32 @@ void Tree::add(Node * node) {
 }
 
 Node * Tree::find(int value) {
-  if (root == NULL) return NULL;
+  if (root == nullptr) return nullptr;
   return find_node(value, root);
 }
 
 Node * Tree::maximum(void) {
-  if (root == NULL) return NULL;
+  if (root == nullptr) return nullptr;
   return root->maximum();
 }
 
 Node * Tree::minimum(void) {
-  if (root == NULL) return NULL;
+  if (root == nullptr) return nullptr;
   return root->minimum();
 }
 
 int Tree::size(void) {
-  if (root == NULL) return 0;
+  if (root == nullptr) return 0;
   return root->size();
 }
 
 int Tree::height(void) {
-  if (root == NULL) return 0;
+  if (root == nullptr) return 0;
   return root->height();
 }
 
 Node * Tree::successor(Node * node) {
-  if (root == NULL) return NULL;
+  if (root == nullptr) return nullptr;
   return root->successor(node);
 }
 
@@ -46,15 +46,15 @@ bool Tree::is_present(int value) {
 
 // TODO: move the guts of this method to Node class
 Node * Tree::find_node(int value, Node * node) {
-  if (node == NULL) return node;
+  if (node == nullptr) return node;
   if (node->value == value) return node;
 
-  if (node->left != NULL && value < node->value) {
+  if (node->left != nullptr && value < node->value) {
     return find_node(value, node->left);
-  } else if (node->right != NULL) {
+  } else if (node->right != nullptr) {
     return find_node(value, node->right);
   }
-  return NULL;
+  return nullptr;
 }
 
 std::vector<int> Tree::collect() {
@@ -70,7 +70,7 @@ void Tree::collect_values(Node * node) {
 }
 
 void Tree::get_left(Node * node) {
-  if (node->left == NULL) {
+  if (node->left == nullptr) {
     return;
   } else {
     collect_values(node->left);
@@ -78,7 +78,7 @@ void Tree::get_left(Node * node) {
 }
 
 void Tree::get_right(Node * node) {
-  if (node->right == NULL) {
+  if (node->right == nullptr) {
     return;
   } else {
     collect_values(node->right);

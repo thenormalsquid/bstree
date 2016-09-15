@@ -10,7 +10,7 @@ class Node {
     Node * get_successor(Node * node, Node * parent, Node * successor);
 
   public:
-    Node(int _value) : value(_value), left(NULL), right(NULL) {}
+    Node(int _value) : value(_value), left(nullptr), right(nullptr) {}
 
     // void post_order_traverse(std::function<void (const Node&)> callback);
     void post_order_traverse(std::function<void (void)> callback);

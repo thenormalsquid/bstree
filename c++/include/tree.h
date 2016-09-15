@@ -8,7 +8,7 @@
 
 class Tree {
 public:
-  Tree() : root(NULL) {}
+  Tree() : root(nullptr) {}
   Tree(Node * _root) : root(_root) {}
   // Tree(std::unique_ptr<Node> _root) : root(_root) {}
 

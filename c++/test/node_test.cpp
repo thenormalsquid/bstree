@@ -26,18 +26,18 @@ public:
   void test_left_initialize() {
     describe_test(INDENT0, "From test_instantiation in NodeTest.");
     Spec spec;
-    spec.it("Testing left node initialize to NULL", DO_SPEC {
+    spec.it("Testing left node initialize to nullptr", DO_SPEC {
       Node node(1);
-      return (node.left == NULL);
+      return (node.left == nullptr);
     });
   }
 
   void test_right_initialize() {
     describe_test(INDENT0, "From test_instantiation in NodeTest.");
     Spec spec;
-    spec.it("Testing right node initialize to NULL", DO_SPEC {
+    spec.it("Testing right node initialize to nullptr", DO_SPEC {
       Node node(1);
-      return (node.right == NULL);
+      return (node.right == nullptr);
     });
   }
 

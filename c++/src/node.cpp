@@ -12,7 +12,7 @@ void Node::add(Node * node) {
 }
 
 void Node::add_left(Node * node) {
-  if (this->left == NULL) {
+  if (this->left == nullptr) {
     this->left = node;
   } else {
     left->add(node);
@@ -20,7 +20,7 @@ void Node::add_left(Node * node) {
 }
 
 void Node::add_right(Node * node) {
-  if (this->right == NULL) {
+  if (this->right == nullptr) {
     this->right = node;
   } else {
     right->add(node);
@@ -30,19 +30,19 @@ void Node::add_right(Node * node) {
 bool Node::is_present(int value) {
   if (this->value == value) return true;
 
-  if (this->left != NULL && value < this->left->value) {
+  if (this->left != nullptr && value < this->left->value) {
     return left->is_present(value);
-  } else if (this->right != NULL) {
+  } else if (this->right != nullptr) {
     return right->is_present(value);
   }
   return false;
 }
 
 Node * Node::get_successor(Node * node, Node * parent, Node * successor) {
-  if (parent->left != NULL && parent->left == this) { successor = parent; }
+  if (parent->left != nullptr && parent->left == this) { successor = parent; }
 
   if (this == node) {
-    if (this->right != NULL) {
+    if (this->right != nullptr) {
       return this->right->minimum();
     } else {
       return successor;
@@ -50,11 +50,11 @@ Node * Node::get_successor(Node * node, Node * parent, Node * successor) {
   }
 
   if (node->value < this->value) {
-    if (this->left != NULL) {
+    if (this->left != nullptr) {
       return this->left->get_successor(node, this, successor);
     }
   } else {
-    if (this->right != NULL) {
+    if (this->right != nullptr) {
       return this->right->get_successor(node, this, successor);
     }
   }
@@ -65,15 +65,15 @@ Node * Node::successor(Node * node) {
 }
 
 void Node::post_order_traverse(std::function<void (void)> callback) {
-  if (left != NULL) { left->post_order_traverse(callback); }
-  if (right != NULL) { right->post_order_traverse(callback); }
+  if (left != nullptr) { left->post_order_traverse(callback); }
+  if (right != nullptr) { right->post_order_traverse(callback); }
   callback();
 }
 
 int Node::get_height(int height, int max) {
   int current = ++height;
-  if (left != NULL) { max = left->get_height(current, max); }
-  if (right != NULL) { max = right->get_height(current, max); }
+  if (left != nullptr) { max = left->get_height(current, max); }
+  if (right != nullptr) { max = right->get_height(current, max); }
   current--;
   return current > max ? current : max;
 }
@@ -89,12 +89,12 @@ int Node::size(void) {
 }
 
 Node * Node::minimum(void) {
-  if (left == NULL) return this;
+  if (left == nullptr) return this;
   return this->left->minimum();
 }
 
 Node * Node::maximum(void) {
-  if (right == NULL) return this;
+  if (right == nullptr) return this;
   return this->right->maximum();
 }
 

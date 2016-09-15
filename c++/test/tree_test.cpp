@@ -39,7 +39,7 @@ public:
     Spec spec;
     spec.it("instantiaton without Node", DO_SPEC {
       Tree tree = Tree();
-      return (tree.root == NULL);
+      return (tree.root == nullptr);
     });
 
     spec.it("instantiaton with Node", DO_SPEC {
@@ -94,7 +94,7 @@ public:
     });
   }
 
-  //TODO: add test for NULL node indicating key not found.
+  //TODO: add test for nullptr node indicating key not found.
 
   void test_find() {
     Spec spec;
