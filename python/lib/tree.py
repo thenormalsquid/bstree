@@ -34,6 +34,9 @@ class Tree(object):
     def successor(self, node):
         return self.root.successor(node)
 
+    def predecessor(self, node):
+        return self.root.predecessor(node)
+
     def get_height(self, node):
         if node is None:
             return self.current
