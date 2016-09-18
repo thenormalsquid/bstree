@@ -125,7 +125,39 @@ determining the successor given each node is linked to its parent.
 
 A decision has to made regarding the definition of minimum and maximum
 elements in the tree. The choices are having the relevant successor or
-predecessors of such elements either be nil or be the node.
+predecessors of such elements either be nil or be the node. For this implementation,
+maximum nodes are their own successors and minimum nodes are their
+own predecessors.
+
+Here's an implementation in Python. The nodes do not have a parent
+pointer, so the parent must be passed along the recursion, along with
+the correct predecessor.
+
+\lstset{language={Python}}
+\begin{lstlisting}[frame=single]
+def get_predecessor(self, node, parent, predecessor):
+    if parent.right == self:
+        predecessor = parent
+
+    if node.key == self.key:
+        if self.left is not None:
+            return self.left.minimum()
+    else:
+        return predecessor
+
+    if node.key < self.key:
+        if self.left is not None:
+            return self.left.get_predecessor(node, self, predecessor)
+    else:
+        if self.right is not None:
+            return self.right.get_predecessor(node, self, predecessor)
+
+def predecessor(self, node):
+    return get_predecessor(node, self, node)
+\end{lstlisting}
+
+Implementing {\tt successor} is easy, use right for left, and find the
+maximum where predecessor finds the minimum.
 
 \subsection{Collisions or duplicate values}
 
