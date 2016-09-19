@@ -64,6 +64,41 @@ Node * Node::successor(Node * node) {
   return get_successor(node, this, node);
 }
 
+Node * Node::get_predecessor(Node * node, Node * parent, Node * predecessor) {
+  std::cout << "this value " << this->value << std::endl;
+  std::cout << "node value " << node->value << std::endl;
+  std::cout << "parent value " << parent->value << std::endl;
+  std::cout << "predecessor before " << predecessor->value << std::endl;
+  if (parent->right != nullptr && parent->right == this) { predecessor = parent; }
+  std::cout << "predecessor after " << predecessor->value << std::endl;
+
+  if (this == node) {
+    if (this->left != nullptr) {
+      //std::cout << "maximum " << this->value << std::endl;
+      std::cout << "maximum " << std::endl;
+      return this->left->maximum();
+    } else {
+      std::cout << "predecessor to return" << predecessor->value << std::endl;
+      return predecessor;
+    }
+  }
+
+  if (node->value < this->value) {
+    if (node->left != nullptr) {
+      return this->left->get_predecessor(node, this, predecessor);
+    }
+  } else {
+    if (node->right != nullptr) {
+      return this->right->get_predecessor(node, this, predecessor);
+    }
+  }
+}
+
+Node * Node::predecessor(Node * node) {
+  std::cout << "root value " << this->value << std::endl;
+  return get_predecessor(node, this, node);
+}
+
 void Node::post_order_traverse(std::function<void (void)> callback) {
   if (left != nullptr) { left->post_order_traverse(callback); }
   if (right != nullptr) { right->post_order_traverse(callback); }

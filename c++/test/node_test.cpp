@@ -81,8 +81,8 @@ public:
     });
   }
 
-  void test_successor() {
-    describe_test(INDENT0, "From test_successor in NodeTest");
+  void test_successor_and_predecessor() {
+    describe_test(INDENT0, "From test_successor_and_predecessor in NodeTest");
     Spec spec;
     Node root(17);
     Node n13(13);
@@ -111,18 +111,39 @@ public:
         return root.successor(&root) == &n19;
     });
 
+    spec.it("root node predecessor", [&]() {
+        return root.predecessor(&root) == &n13;
+    });
+
     spec.it("right side minimum", [&]() {
         return root.successor(&n19) == &n23;
+    });
+
+    spec.xit("left side maximum", [&]() {
+        //std::cout << root.predecessor(&n13)->value << std::endl;
+        return root.predecessor(&n13) == &n11;
     });
 
     spec.it("maximum is own successor", [&]() {
         return root.successor(&n29) == &n29;
     });
 
+    spec.it("minimum is own predecessor", [&]() {
+        return root.predecessor(&n2) == &n2;
+    });
+
     spec.it("successors down the left side", [&]() {
         return root.successor(&n2) == &n3
             && root.successor(&n3) == &n5
             && root.successor(&n5) == &n7;
+    });
+
+    spec.it("predecessors down the left side", [&]() {
+        std::cout << root.predecessor(&n7)->value << std::endl;
+        return //root.predecessor(&n3) == &n2
+            //&& root.predecessor(&n5) == &n3
+            //&&
+            root.predecessor(&n7) == &n5;
     });
 
     spec.it("successors down the first left's right branch", [&]() {
@@ -275,7 +296,7 @@ public:
     test_is_present();
     test_size();
     test_height();
-    test_successor();
+    test_successor_and_predecessor();
     test_maximum();
     test_minimum();
   }
