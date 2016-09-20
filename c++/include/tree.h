@@ -16,6 +16,7 @@ public:
   std::vector<int> collect(void);
   Node * find(int);
   Node * successor(Node * n);
+  Node * predecessor(Node * n);
   Node * maximum(void);
   Node * minimum(void);
   int size(void);

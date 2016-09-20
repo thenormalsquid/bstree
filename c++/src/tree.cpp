@@ -40,6 +40,11 @@ Node * Tree::successor(Node * node) {
   return root->successor(node);
 }
 
+Node * Tree::predecessor(Node * node) {
+  if (root == nullptr) return nullptr;
+  return root->predecessor(node);
+}
+
 bool Tree::is_present(int value) {
   return this->root->is_present(value);
 }

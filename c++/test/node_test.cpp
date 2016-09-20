@@ -119,8 +119,7 @@ public:
         return root.successor(&n19) == &n23;
     });
 
-    spec.xit("left side maximum", [&]() {
-        //std::cout << root.predecessor(&n13)->value << std::endl;
+    spec.it("left side maximum", [&]() {
         return root.predecessor(&n13) == &n11;
     });
 
@@ -139,17 +138,21 @@ public:
     });
 
     spec.it("predecessors down the left side", [&]() {
-        std::cout << root.predecessor(&n7)->value << std::endl;
-        return //root.predecessor(&n3) == &n2
-            //&& root.predecessor(&n5) == &n3
-            //&&
-            root.predecessor(&n7) == &n5;
+        return root.predecessor(&n3) == &n2
+            && root.predecessor(&n5) == &n3
+            && root.predecessor(&n7) == &n5;
     });
 
     spec.it("successors down the first left's right branch", [&]() {
         return root.successor(&n7) == &n11
             && root.successor(&n11) == &n13
             && root.successor(&n13) == &root;
+    });
+
+    spec.it("predecessors down the first right's left branch", [&]() {
+        return root.predecessor(&n19) == &root
+            && root.predecessor(&n23) == &n19
+            && root.predecessor(&n29) == &n23;
     });
   }
 
