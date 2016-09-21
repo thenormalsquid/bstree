@@ -10,6 +10,39 @@ class Node {
     public Node left = null;
     public Node right = null;
 
+    private Node get_predecessor(Node node, Node parent, Node predecessor) {
+      //if (parent.right != null && parent.right == this) { parent = predecessor; }
+      if (parent.right == this) {
+        System.out.println("reassign predecessor");
+        predecessor = parent;
+      }
+
+      if (node == this) {
+        System.out.println("found the node");
+        if (left != null) {
+          return left.minimum();
+        } else {
+          return predecessor;
+        }
+      }
+
+      if (node.value < this.value) {
+        if (left != null) {
+          return left.get_predecessor(node, this, predecessor);
+        }
+      } else {
+        if (right != null) {
+System.out.println("going right...");
+          return right.get_predecessor(node, this, predecessor);
+        }
+      }
+      return null;
+    }
+
+    public Node predecessor(Node node) {
+      return get_predecessor(node, this, node);
+    }
+
     private Node get_successor(Node node, Node parent, Node successor) {
       if (parent.left != null && parent.left == this) {
         successor = parent;

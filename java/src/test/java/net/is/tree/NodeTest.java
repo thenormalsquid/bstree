@@ -17,21 +17,27 @@ public class NodeTest extends TestCase {
     public void testSuccessor() {
         Node root = new Node(17);
         assertEquals(root, root.successor(root));
+        // assertEquals(root, root.predecessor(root));
 
         Node n23 = new Node(23);
         root.insert(n23);
         assertEquals(n23, root.successor(root));
+        // assertEquals(root, root.predecessor(n23));
         assertEquals(n23, root.successor(n23));
 
         Node n29 = new Node(29);
         root.insert(n29);
         assertEquals(n29, root.successor(n23));
+        // assertEquals(n23, root.predecessor(n29));
         assertEquals(n29, n23.successor(n23));
+        // assertEquals(n23, n23.predecessor(n29));
         assertEquals(n29, n29.successor(n29));
+        // assertEquals(n29, n29.predecessor(n29));
 
         Node n19 = new Node(19);
         root.insert(n19);
         assertEquals(n23, root.successor(n19));
+        // assertEquals(n19, root.predecessor(n23));
 
         Node n2 = new Node(2);
         Node n3 = new Node(3);
@@ -43,15 +49,25 @@ public class NodeTest extends TestCase {
         root.insert(n3);
         root.insert(n2);
         assertEquals(n3, root.successor(n2));
+        // assertEquals(n2, root.predecessor(n3));
         assertEquals(n5, root.successor(n3));
+        System.out.println("predecessor: " + root.predecessor(n5).value);
+        assertEquals(n3, root.predecessor(n5));
 
         root.insert(n7);
         root.insert(n11);
         root.insert(n13);
         assertEquals(n7, root.successor(n5));
+        assertEquals(n5, root.predecessor(n7));
+
         assertEquals(n11, root.successor(n7));
+        assertEquals(n7, root.predecessor(n11));
+
         assertEquals(n13, root.successor(n11));
+        assertEquals(n11, root.predecessor(n13));
+
         assertEquals(root, root.successor(n13));
+        // assertEquals(n13, root.predecessor(root));
     }
 
     public void testSearch() {

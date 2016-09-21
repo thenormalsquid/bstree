@@ -18,6 +18,11 @@ class BSTree {
         return root.minimum();
     }
 
+    public Node predecessor(Node node) {
+      if (root == null) { return null; }
+      return root.predecessor(node);
+    }
+
     public Node successor(Node node) {
       if (root == null) { return null; }
       return root.successor(node);
