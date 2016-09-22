@@ -185,6 +185,34 @@ node_successor(Node * this, Node * node) {
   return get_successor(this, node, this, node);
 }
 
+Node *
+get_predecessor(Node * this, Node * node, Node * parent, Node * predecessor) {
+  if (parent->right == this) { predecessor = parent; }
+
+  if (this == node) {
+    if (this->left != NULL) {
+      return node_maximum(this->left);
+    } else {
+      return predecessor;
+    }
+  }
+
+  if (node->key < this->key) {
+    if (this->left != NULL) {
+      return get_predecessor(this->left, node, this, predecessor);
+    }
+  } else {
+    if (this->right != NULL) {
+      return get_predecessor(this->right, node, this, predecessor);
+    }
+  }
+}
+
+Node *
+node_predecessor(Node * this, Node * node) {
+  return get_predecessor(this, node, this, node);
+}
+
 void
 node_delete(void) {
 }

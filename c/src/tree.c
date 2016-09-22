@@ -72,6 +72,12 @@ tree_successor(Tree * tree, Node * node) {
 }
 
 Node *
+tree_predecessor(Tree * tree, Node * node) {
+  if (tree->root == NULL) return NULL;
+  return node_predecessor(tree->root, node);
+}
+
+Node *
 tree_maximum(Tree * t) {
   if (t->root == NULL) return NULL;
   return node_maximum(t->root);

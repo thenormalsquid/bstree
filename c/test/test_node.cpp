@@ -223,6 +223,10 @@ public:
       return (node_successor(root, root) == root);
     });
 
+    spec.it("predecessor for root node only", DO_SPEC_HANDLE {
+      return node_predecessor(root, root) == root;
+    });
+
     Node * n2 = node_new(2);
     Node * n3 = node_new(3);
     Node * n5 = node_new(5);
@@ -244,13 +248,25 @@ public:
             && node_successor(root, n5) == n7;
     });
 
+    spec .it("predecessors down left side", DO_SPEC_HANDLE {
+        return node_predecessor(root, n3) == n2
+            && node_predecessor(root, n5) == n3
+            && node_predecessor(root, n7) == n5;
+    });
+
     node_insert(root, n11);
     node_insert(root, n13);
 
-    spec.it("left into pathological right subtree", DO_SPEC_HANDLE {
+    spec.it("successors left into pathological right subtree", DO_SPEC_HANDLE {
         return node_successor(root, n7) == n11
             && node_successor(root, n11) == n13
             && node_successor(root, n13) == root;
+    });
+
+    spec.it("predecessors left into pathological right subtree", DO_SPEC_HANDLE {
+        return node_predecessor(root, n11) == n7
+            && node_predecessor(root, n13) == n11
+            && node_predecessor(root, root) == n13;
     });
 
     node_insert(root, n23);
@@ -262,6 +278,13 @@ public:
             && node_successor(root, n19) == n23
             && node_successor(root, n29) == n29
             && node_successor(n23, n19)  == n23;
+    });
+
+    spec.it("right side predecessors", DO_SPEC_HANDLE {
+        return node_predecessor(root, n29) == n23
+            && node_predecessor(root, n23) == n19
+            && node_predecessor(root, n29) == n23
+            && node_predecessor(n23, n23)  == n19;
     });
 
     node_destroy(root);

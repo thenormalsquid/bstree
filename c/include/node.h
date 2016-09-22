@@ -7,44 +7,47 @@ extern "C" {
 
 typedef struct _node Node;
 
-Node * node_new        (int key);
+Node * node_new         (int key);
 
-void   node_destroy    (Node * n);
+void   node_destroy     (Node * n);
 
-int    node_key        (Node * n);
+int    node_key         (Node * n);
 
-void   node_insert     (Node * root,
-                        Node * next);
+void   node_insert      (Node * root,
+                         Node * next);
 
-Node * node_left       (Node * n);
+Node * node_left        (Node * n);
 
-Node * node_right      (Node * n);
+Node * node_right       (Node * n);
 
-void   node_collect    (Node * n,
-                        void * collector);
+void   node_collect     (Node * n,
+                         void * collector);
 
-Node * node_search     (Node * n,
-                        int key);
+Node * node_search      (Node * n,
+                         int key);
 
-int    node_is_present (Node * n,
-                        int key);
+int    node_is_present  (Node * n,
+                         int key);
 
-int    node_height     (Node * n);
+int    node_height      (Node * n);
 
-void   node_delete     (void);
+void   node_delete      (void);
 
-Node * node_successor  (Node * root,
-                        Node * node);
+Node * node_successor   (Node * root,
+                         Node * node);
 
-Node * node_maximum    (Node * n);
+Node * node_predecessor (Node * root,
+                         Node * node);
 
-Node * node_minimum    (Node * n);
+Node * node_maximum     (Node * n);
 
-void   node_is_full    (void);
+Node * node_minimum     (Node * n);
 
-void   node_is_bst     (void);
+void   node_is_full     (void);
 
-int    node_size       (Node * n);
+void   node_is_bst      (void);
+
+int    node_size        (Node * n);
 
 #ifdef __cplusplus
 }

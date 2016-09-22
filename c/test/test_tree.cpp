@@ -192,6 +192,18 @@ public:
     });
   }
 
+  void test_tree_predecessor(void) {
+    describe_test(INDENT0, "From test_tree_predecessor in TreeTest.");
+    Spec spec;
+    Tree * t = tree_new();
+    Node * root = node_new(13);
+    tree_insert(t, root);
+
+    spec.it("root of tree with single node is own predecessor", DO_SPEC_HANDLE {
+        return tree_predecessor(t, root) == root;
+    });
+  }
+
   void test_tree_is_full(void) {
   }
 
@@ -315,6 +327,7 @@ public:
     //test_tree_destroy();
     test_tree_maximum();
     test_tree_successor();
+    test_tree_predecessor();
     //test_tree_is_full();
     //test_tree_is_bst();
     test_tree_size();
