@@ -11,32 +11,21 @@ class Node {
     public Node right = null;
 
     private Node get_predecessor(Node node, Node parent, Node predecessor) {
-      //if (parent.right != null && parent.right == this) { parent = predecessor; }
-      if (parent.right == this) {
-        System.out.println("reassign predecessor");
-        predecessor = parent;
-      }
+      if (parent.right == this) { predecessor = parent; }
 
       if (node == this) {
-        System.out.println("found the node");
         if (left != null) {
-          return left.minimum();
+          return left.maximum();
         } else {
           return predecessor;
         }
       }
 
       if (node.value < this.value) {
-        if (left != null) {
-          return left.get_predecessor(node, this, predecessor);
-        }
+        return left.get_predecessor(node, this, predecessor);
       } else {
-        if (right != null) {
-System.out.println("going right...");
-          return right.get_predecessor(node, this, predecessor);
-        }
+        return right.get_predecessor(node, this, predecessor);
       }
-      return null;
     }
 
     public Node predecessor(Node node) {
