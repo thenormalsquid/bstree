@@ -157,10 +157,11 @@ describe(":height", function()
   end)
 end)
 
-describe(":successor", function()
-  it("finds the successors for various subtrees", function()
+describe(":successor and :predecessor", function()
+  it("finds the successors and predecessors for various subtrees", function()
     local root = node:new(17)
     assert.are.same(root, root:successor(root))
+    assert.are.same(root, root:predecessor(root))
 
     local n23 = node:new(23)
     local n19 = node:new(19)
@@ -169,8 +170,13 @@ describe(":successor", function()
     root:insert(n19)
     root:insert(n29)
     assert.are.same(n19, root:successor(root))
+    assert.are.same(root, root:predecessor(n19))
+
     assert.are.same(n29, root:successor(n29))
+    assert.are.same(n23, root:predecessor(n29))
+
     assert.are.same(n23, root:successor(n19))
+    assert.are.same(n19, root:predecessor(n23))
 
     local n2 = node:new(2)
     local n3 = node:new(3)
@@ -183,15 +189,25 @@ describe(":successor", function()
     root:insert(n3)
     root:insert(n2)
     assert.are.same(n3, root:successor(n2))
+    assert.are.same(n2, root:predecessor(n3))
+
     assert.are.same(n5, root:successor(n3))
+    assert.are.same(n3, root:predecessor(n5))
 
     root:insert(n7)
     root:insert(n11)
     root:insert(n13)
     assert.are.same(n7, root:successor(n5))
+    assert.are.same(n5, root:predecessor(n7))
+
     assert.are.same(n11, root:successor(n7))
+    assert.are.same(n7, root:predecessor(n11))
+
     assert.are.same(n13, root:successor(n11))
+    assert.are.same(n11, root:predecessor(n13))
+
     assert.are.same(root, root:successor(n13))
+    assert.are.same(n13, root:predecessor(root))
   end)
 end)
 

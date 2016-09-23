@@ -81,6 +81,32 @@ function Node:successor(node)
   return self:get_successor(node, self, node)
 end
 
+function Node:get_predecessor(node, parent, predecessor)
+  if parent.right == self then predecessor = parent end
+
+  if node == self then
+    if self.left then
+      return self.left:maximum()
+    else
+      return predecessor
+    end
+  end
+
+  if node.key < self.key then
+    if self.left then
+      return self.left:get_predecessor(node, self, predecessor)
+    end
+  else
+    if self.right then
+      return self.right:get_predecessor(node, self, predecessor)
+    end
+  end
+end
+
+function Node:predecessor(node)
+  return self:get_predecessor(node, self, node)
+end
+
 function Node:collect(collector)
   if self.left then self.left:collect(collector) end
   collector[#collector + 1] = self.key
