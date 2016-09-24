@@ -42,28 +42,26 @@ describe BinarySearchTree do
   end
 
   describe 'algorithm methods' do
-    let(:expected) { [2, 3, 4, 5, 7, 11, 20, 27, 33] }
+    let(:expected) { [2, 3, 5, 7, 11, 13, 23, 29] }
 
     before :all do
       @root = Foo.new(11)
 
       @foo2 = Foo.new(2)
       foo3 = Foo.new(3)
-      foo4 = Foo.new(4)
       @foo5 = Foo.new(5)
       @foo7 = Foo.new(7)
-      @foo20 = Foo.new(20)
-      foo27 = Foo.new(27)
-      @foo33 = Foo.new(33)
+      @foo13 = Foo.new(13)
+      foo23 = Foo.new(23)
+      @foo29 = Foo.new(29)
 
-      @root.insert(@foo20)
+      @root.insert(@foo13)
       @root.insert(@foo5)
       @root.insert(@foo2)
       @root.insert(foo3)
-      @root.insert(foo4)
       @root.insert(@foo7)
-      @root.insert(foo27)
-      @root.insert(@foo33)
+      @root.insert(foo23)
+      @root.insert(@foo29)
     end
 
     describe '.bst?' do
@@ -128,7 +126,7 @@ describe BinarySearchTree do
       end
 
       it 'finds the root.right node using the key' do
-        expect(@root.find(20)).to eq @root.right
+        expect(@root.find(13)).to eq @root.right
       end
 
       it 'finds an arbitrary node using the key' do
@@ -146,7 +144,7 @@ describe BinarySearchTree do
       end
 
       it 'finds the root.right node using the key' do
-        expect(@root.present?(20)).to eq true
+        expect(@root.present?(13)).to eq true
       end
 
       it 'finds an arbitrary node using the key' do
@@ -160,7 +158,7 @@ describe BinarySearchTree do
 
     describe '.insert' do
       it 'inserts a node' do
-        expect(@root.right).to eq @foo20
+        expect(@root.right).to eq @foo13
         expect(@root.left).to eq @foo5
         expect(@root.left.left).to eq @foo2
       end
@@ -302,15 +300,15 @@ describe BinarySearchTree do
 
     describe '.size' do
       it 'finds the size on the fly' do
-        expect(@root.size).to eq 9
-        expect(@foo2.size).to eq 3
-        expect(@foo33.size).to eq 1
+        expect(@root.size).to eq 8
+        expect(@foo2.size).to eq 2
+        expect(@foo29.size).to eq 1
       end
     end
 
     describe '.maximum' do
       it 'finds the node with the largest key' do
-        expect(@root.maximum).to eq @foo33
+        expect(@root.maximum).to eq @foo29
       end
     end
 
