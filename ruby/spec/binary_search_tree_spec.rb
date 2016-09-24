@@ -37,32 +37,33 @@ describe BinarySearchTree do
     end
   end
 
-  it 'instatiates included in a class' do
+  it 'instantiates included in a class' do
     expect(@bst).to_not be nil
   end
 
   describe 'algorithm methods' do
+    let(:expected) { [2, 3, 4, 5, 7, 11, 20, 27, 33] }
+
     before :all do
-      @expected = [2, 3, 4, 5, 8, 11, 20, 27, 33]
-
       @root = Foo.new(11)
-      @foo2 = Foo.new(20)
-      @foo3 = Foo.new(5)
-      @foo4 = Foo.new(2)
-      foo5 = Foo.new(3)
-      foo6 = Foo.new(4)
-      @foo7 = Foo.new(8)
-      foo8 = Foo.new(27)
-      @foo9 = Foo.new(33)
 
+      @foo2 = Foo.new(2)
+      foo3 = Foo.new(3)
+      foo4 = Foo.new(4)
+      @foo5 = Foo.new(5)
+      @foo7 = Foo.new(7)
+      @foo20 = Foo.new(20)
+      foo27 = Foo.new(27)
+      @foo33 = Foo.new(33)
+
+      @root.insert(@foo20)
+      @root.insert(@foo5)
       @root.insert(@foo2)
-      @root.insert(@foo3)
-      @root.insert(@foo4)
-      @root.insert(foo5)
-      @root.insert(foo6)
+      @root.insert(foo3)
+      @root.insert(foo4)
       @root.insert(@foo7)
-      @root.insert(foo8)
-      @root.insert(@foo9)
+      @root.insert(foo27)
+      @root.insert(@foo33)
     end
 
     describe '.bst?' do
@@ -106,6 +107,15 @@ describe BinarySearchTree do
         node.right = left
         expect(node.bst?).to be false
       end
+
+      it 'finds bst violation with wrongly inserted nodes' do
+        root = Foo.new(17)
+        n20 = Foo.new(20)
+        n20.insert(Foo.new(1))
+        n20.insert(Foo.new(100))
+        expect(n20.bst?).to be true
+        # expect(root.bst?).to be false
+      end
     end
 
     describe '.find' do
@@ -122,7 +132,7 @@ describe BinarySearchTree do
       end
 
       it 'finds an arbitrary node using the key' do
-        expect(@root.find(8)).to eq @foo7
+        expect(@root.find(7)).to eq @foo7
       end
     end
 
@@ -140,7 +150,7 @@ describe BinarySearchTree do
       end
 
       it 'finds an arbitrary node using the key' do
-        expect(@root.present?(8)).to eq true
+        expect(@root.present?(7)).to eq true
       end
 
       it 'does not find an arbitrary node when the key is not present' do
@@ -150,9 +160,9 @@ describe BinarySearchTree do
 
     describe '.insert' do
       it 'inserts a node' do
-        expect(@root.right).to eq @foo2
-        expect(@root.left).to eq @foo3
-        expect(@root.left.left).to eq @foo4
+        expect(@root.right).to eq @foo20
+        expect(@root.left).to eq @foo5
+        expect(@root.left.left).to eq @foo2
       end
     end
 
@@ -283,8 +293,6 @@ describe BinarySearchTree do
     end
 
     describe '.collect' do
-      let(:expected) { [2, 3, 4, 5, 8, 11, 20, 27, 33] }
-
       it 'collects list of keys in correct order' do
         collector = []
         @root.collect(collector)
@@ -295,20 +303,20 @@ describe BinarySearchTree do
     describe '.size' do
       it 'finds the size on the fly' do
         expect(@root.size).to eq 9
-        expect(@foo4.size).to eq 3
-        expect(@foo9.size).to eq 1
+        expect(@foo2.size).to eq 3
+        expect(@foo33.size).to eq 1
       end
     end
 
     describe '.maximum' do
       it 'finds the node with the largest key' do
-        expect(@root.maximum).to eq @foo9
+        expect(@root.maximum).to eq @foo33
       end
     end
 
     describe '.minimum' do
       it 'finds the node with the smallest key' do
-        expect(@root.minimum).to eq @foo4
+        expect(@root.minimum).to eq @foo2
       end
     end
 
