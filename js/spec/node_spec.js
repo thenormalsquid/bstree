@@ -217,23 +217,33 @@ describe('Node', function() {
     });
   });
 
-  describe('successor', function() {
+  describe('successor and predecessor', function() {
     it('finds successors to nodes in a tree', function() {
       var root = new node(17);
       assert.equal(root.successor(root), root);
+      assert.equal(root.predecessor(root), root);
 
       var n23 = new node(23);
       root.insert(n23);
       assert.equal(root.successor(root), n23);
+      assert.equal(root.predecessor(n23), root);
 
       var n19 = new node(19);
       var n29 = new node(29);
       root.insert(n19);
       root.insert(n29);
       assert.equal(root.successor(root), n19);
+      assert.equal(root.predecessor(n19), root);
+
       assert.equal(root.successor(n19), n23);
+      assert.equal(root.predecessor(n23), n19);
+
       assert.equal(root.successor(n23), n29);
+      assert.equal(root.predecessor(n29), n23);
+
       assert.equal(n29.successor(n29), n29);
+      assert.equal(n29.predecessor(n29), n29);
+
       assert.equal(n19.successor(n19), n19);
 
       var n2 = new node(2);
@@ -243,8 +253,13 @@ describe('Node', function() {
       root.insert(n3);
       root.insert(n2);
       assert.equal(root.successor(n2), n3);
+      assert.equal(root.predecessor(n3), n2);
+
       assert.equal(root.successor(n3), n5);
+      assert.equal(root.predecessor(n5), n3);
+
       assert.equal(root.successor(n5), root);
+      assert.equal(root.predecessor(root), n5);
 
       var n7 = new node(7);
       var n11 = new node(11);
@@ -253,10 +268,19 @@ describe('Node', function() {
       root.insert(n11);
       root.insert(n13);
       assert.equal(root.successor(n5), n7);
+      assert.equal(root.predecessor(n7), n5);
+
       assert.equal(root.successor(n7), n11);
+      assert.equal(root.predecessor(n11), n7);
+
       assert.equal(root.successor(n11), n13);
+      assert.equal(root.predecessor(n13), n11);
+
       assert.equal(root.successor(n13), root);
+      assert.equal(root.predecessor(root), n13);
+
       assert.equal(n13.successor(n13), n13);
+      assert.equal(n13.predecessor(n13), n13);
     });
   });
 

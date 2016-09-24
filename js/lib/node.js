@@ -107,6 +107,32 @@ Node.prototype.successor = function(node) {
   return get_successor(this, node, this, node);
 }
 
+Node.prototype.predecessor = function(node) {
+  var get_predecessor = function(self, node, parent, predecessor) {
+    if (parent.right !== null && parent.right === self) { predecessor = parent; }
+
+    if (node === self) {
+      if (self.left !== null) {
+        return self.left.maximum();
+      } else {
+        return predecessor;
+      }
+    }
+
+    if (node.key < self.key) {
+      if (self.left !== null) {
+        return get_predecessor(self.left, node, self, predecessor);
+      }
+    } else {
+      if (self.right !== null) {
+        return get_predecessor(self.right, node, self, predecessor);
+      }
+    }
+  }
+
+  return get_predecessor(this, node, this, node);
+}
+
 Node.prototype.height = function() {
   var height = 0;
 
