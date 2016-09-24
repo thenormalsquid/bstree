@@ -122,18 +122,14 @@ module BinarySearchTree
     dig(key) { |n| return true if n.key == key }
   end
 
-  # Easy, dumb way to do it.
+  # Also see CLR Chapter 14, p. 245
   def bst?
-    return false if left && left >= self || right && self > right
-    left&.bst?
-    right&.bst?
-    true
-  end
-
-  # This is what is tested.
-  # CLR Chapter 14, p. ???
-  def bst?
-    pre_order_traverse { (left &.>= self) || (right &.< self) ? false : true }
+    minimum = -1000
+    in_order_traverse do |node|
+      return false if minimum >= node.key
+      minimum = node.key
+      true
+    end
   end
 
   def maximum
@@ -155,6 +151,13 @@ module BinarySearchTree
     size = 0
     post_order_traverse { size += 1 }
     size
+  end
+
+  def in_order_traverse &block
+    left&.in_order_traverse(&block)
+    result = yield(self)
+    right&.in_order_traverse(&block)
+    result
   end
 
   def pre_order_traverse &block

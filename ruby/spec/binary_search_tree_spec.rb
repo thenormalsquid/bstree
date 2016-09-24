@@ -109,10 +109,11 @@ describe BinarySearchTree do
       it 'finds bst violation with wrongly inserted nodes' do
         root = Foo.new(17)
         n20 = Foo.new(20)
+        root.insert n20
         n20.insert(Foo.new(1))
         n20.insert(Foo.new(100))
         expect(n20.bst?).to be true
-        # expect(root.bst?).to be false
+        expect(root.bst?).to be false
       end
     end
 
