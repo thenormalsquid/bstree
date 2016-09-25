@@ -470,10 +470,23 @@ describe Node do
   end
 
   describe '.bst?' do
-    let(:root) { Node.new 100 }
+    let(:root) { Node.new 17 }
 
     it 'returns true for tree with one node' do
       expect(root.bst?).to be true
+
+      n5 = Node.new 5
+      n23 = Node.new 23
+      root.insert n5
+      root.insert n23
+      expect(root.bst?).to be true
+
+      n7 = Node.new 7
+      n29 = Node.new 29
+      n23.insert n7
+      n23.insert n29
+      expect(n23.bst?).to be true
+      expect(root.bst?).to be false
     end
   end
 

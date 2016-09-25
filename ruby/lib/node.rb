@@ -129,8 +129,12 @@ class Node
   end
 
   def bst?
-    return false if (left&.>= self) || (right&.< self)
-    true
+    minimum = -10000 # fixme
+    in_order_traverse do |node|
+      return false if minimum >= node.value
+      minimum = node.value
+      true
+    end
   end
 
   def maximum
@@ -139,6 +143,13 @@ class Node
 
   def minimum
     left&.minimum || self
+  end
+
+  def in_order_traverse &block
+    left&.in_order_traverse(&block)
+    result = yield(self)
+    right&.in_order_traverse(&block)
+    result
   end
 
   def self.build_from_hash params
