@@ -103,7 +103,23 @@ class TestNode(unittest.TestCase):
         assert root.maximum() == node_l2
         assert root.minimum() == node_l4
 
-    # def test_is_bst(self):
+    def test_is_bst(self):
+        root = Node(17)
+        assert root.is_bst(0) is True
+
+        n5 = Node(5)
+        root.add(n5)
+        assert root.is_bst(0) == True
+
+        n23 = Node(23)
+        root.add(n23)
+        assert root.is_bst(0) == True
+
+        n14 = Node(14)
+        n23.add(n14)
+        assert n23.is_bst(0) == True
+        assert root.is_bst(0) == False
+
     # def test_delete(self):
 
     def test_height_and_size(self):
@@ -138,7 +154,7 @@ class TestNode(unittest.TestCase):
         # assert root.height() == 4
         assert root.size() == 6
 
-    def test_successor(self):
+    def test_successor_and_predecessor(self):
         root = Node(17)
         n23 = Node(23)
         n2 = Node(2)

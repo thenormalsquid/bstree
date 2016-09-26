@@ -111,6 +111,22 @@ class Node(object):
     def predecessor(self, node):
         return self.get_predecessor(node, self, node)
 
+    def is_bst(self, minimum):
+        if self.left is not None:
+            return self.left.is_bst(minimum)
+
+        print minimum
+        if minimum >= self.value:
+            return False
+
+        minimum = self.value
+
+        print minimum
+
+        if self.right is not None:
+            return self.right.is_bst(minimum)
+        return True
+
     def maximum(self):
         if self.right is None:
             return self
