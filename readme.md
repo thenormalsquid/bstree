@@ -11,6 +11,7 @@ The goal is twofold:
 
 ## TODO
 
+* implement diameter algorithm
 * change `find` to `search` where applicable
 * change `add` to `insert` where applicable
 * handle nodes with duplicate values. Currently, inserting a duplicate

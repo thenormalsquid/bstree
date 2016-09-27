@@ -253,16 +253,18 @@ by empty leaf nodes. Empty nodes have no key, no value, and need not be
 instantiated. They must, however, be denoted in some way, which is
 usually accomplished by setting the relevant child pointers (left and
 right) to whatever the programming language regards as a ``non-value.''
-For example, in C and C++ this is {\tt NULL}, in Python {\tt None}.
+For example, in C this is {\tt NULL}, in C++ {\tt nullptr}, in Python {\tt None}.
 
 (It would be possible to define a global external node.)
 
-\subsection{tree/node interaction}
+\subsection{Tree/Node interaction}
 
 Trees are abstract data types. This makes trees easy to reason about.
 Implementing a tree requires dealing with a number of subtle issues.
+Since Trees are usually described in terms of the Nodes comprising
+the Tree, some thought about differentiating Trees and Nodes is in order.
 
-\subsection{Implicit structure}
+\subsubsection{Implicit structure}
 
 Given some class, record, structure or whatever language feature which contains
 data and supports function invocation, adding left and right pointers,
@@ -272,7 +274,7 @@ root, and managing this root increases the complexity whatever application
 system requires the data sorted into the tree. Provision needs to be made for
 the root changing, or even being deleted.
 
-\subsection{tree container}
+\subsubsection{Tree container}
 
 Another way to implement trees is to create a tree container which implements
 insert, search, etc. The implementation provided by the tree container could
@@ -418,6 +420,17 @@ Test cases:
 
 \subsubsection{AVL testing}
 
+Some links for AVL trees:
+
+\begin{itemize}
+\item  \href{http://adtinfo.org/libavl.html/Step-3-in-AVL-Insertion.html}{%
+http://adtinfo.org/libavl.html/Step-3-in-AVL-Insertion.html}
+\item \href{http://eniac.cs.qc.cuny.edu/andrew/csci700-11/lecture7.pdf}{%
+http://eniac.cs.qc.cuny.edu/andrew/csci700-11/lecture7.pdf}
+\item \href{http://software.ucv.ro/~mburicea/lab6ASD.pdf}{%
+http://software.ucv.ro/~mburicea/lab6ASD.pdf}
+\end{itemize}
+
 \paragraph{Insert}
 
 \begin{itemize}
@@ -443,6 +456,15 @@ balance. Write an expectation to ensure no rotations are performed.
 Do something similar as above, check
 rotations and balance after deletion.
 
+
+\subsubsection{RB testing}
+
+Some links for RB trees:
+
+\begin{itemize}
+\item \href{http://eniac.cs.qc.cuny.edu/andrew/csci700-11/lecture8.pdf}{%
+http://eniac.cs.qc.cuny.edu/andrew/csci700-11/lecture8.pdf}
+\end{itemize}
 
 \subsection{Language listings}
 
