@@ -117,21 +117,21 @@ describe BinarySearchTree do
       end
     end
 
-    describe '.find' do
+    describe '.search' do
       it 'finds the root node using the key' do
-        expect(@root.find(11)).to eq @root
+        expect(@root.search(11)).to eq @root
       end
 
       it 'finds the root.left node using the key' do
-        expect(@root.find(5)).to eq @root.left
+        expect(@root.search(5)).to eq @root.left
       end
 
       it 'finds the root.right node using the key' do
-        expect(@root.find(13)).to eq @root.right
+        expect(@root.search(13)).to eq @root.right
       end
 
       it 'finds an arbitrary node using the key' do
-        expect(@root.find(7)).to eq @foo7
+        expect(@root.search(7)).to eq @foo7
       end
     end
 

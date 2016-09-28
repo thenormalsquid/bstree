@@ -48,7 +48,7 @@ module BinarySearchTree
   end
 
   def delete key, parent = nil
-    node_to_delete, parent = find_with_parent key, parent
+    node_to_delete, parent = search_with_parent key, parent
     left = node_to_delete.left
     right = node_to_delete.right
 
@@ -73,9 +73,9 @@ module BinarySearchTree
   end
 
   # see if this can be rewritten with `dig` below
-  def find_with_parent key, parent
+  def search_with_parent key, parent
     return [self, parent] if key == @key
-    key < @key ? left&.find_with_parent(key, self) : right&.find_with_parent(key, self)
+    key < @key ? left&.search_with_parent(key, self) : right&.search_with_parent(key, self)
   end
 
   def collect collector
@@ -99,9 +99,9 @@ module BinarySearchTree
     l < self ? left&.common_parent(l, r) : right&.common_parent(l, r)
   end
 
-  def find key
+  def search key
     return self if @key == key
-    key < @key ? left&.find(key) : right&.find(key)
+    key < @key ? left&.search(key) : right&.search(key)
   end
 
   def present? key
@@ -114,7 +114,7 @@ module BinarySearchTree
     key < @key ? left&.dig(key, &block) : right&.dig(key, &block)
   end
 
-  def find key
+  def search key
     dig(key) { |n| return n if n.key == key }
   end
 

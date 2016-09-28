@@ -33,6 +33,6 @@ class.
 * [Wikipedia](https://en.wikipedia.org/wiki/Binary_search_tree), because
   there's no shame in simply getting started however which way, and
   Wikipedia is free for everyone.
-* [CLR]() Gold standard.
-* [Skienna](), a very useful reference with readable exposition and a
-  unique slant.
+* [CLR](https://www.amazon.com/Introduction-Algorithms-3rd-MIT-Press/dp/0262033844/) Gold standard.
+* [Skienna](https://www.amazon.com/Algorithm-Design-Manual-Steven-Skiena/dp/B00B8139Z8/),
+a very useful reference with readable exposition and a unique slant.

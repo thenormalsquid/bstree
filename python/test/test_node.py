@@ -24,26 +24,26 @@ class TestNode(unittest.TestCase):
         node_l2 = Node(33)
         node_l3 = Node(25)
         node_l4 = Node(4)
-        node.add(node_l1)
-        node.add(node_l2)
-        node.add(node_l3)
-        node.add(node_l4)
+        node.insert(node_l1)
+        node.insert(node_l2)
+        node.insert(node_l3)
+        node.insert(node_l4)
         collector = []
         node.collect(collector)
         assert collector == [4, 8, 15, 25, 33]
 
-    def test_add(self):
+    def test_insert(self):
         node = Node(15)
         node_l1 = Node(8)
         node_l2 = Node(33)
         node_l3 = Node(25)
         node_l4 = Node(4)
         node_l5 = Node(9)
-        node.add(node_l1)
-        node.add(node_l2)
-        node.add(node_l3)
-        node.add(node_l4)
-        node.add(node_l5)
+        node.insert(node_l1)
+        node.insert(node_l2)
+        node.insert(node_l3)
+        node.insert(node_l4)
+        node.insert(node_l5)
         assert node.left == node_l1
         assert node.right == node_l2
         assert node.right.left == node_l3
@@ -57,11 +57,11 @@ class TestNode(unittest.TestCase):
         node_l3 = Node(25)
         node_l4 = Node(4)
         node_l5 = Node(9)
-        node.add(node_l1)
-        node.add(node_l2)
-        node.add(node_l3)
-        node.add(node_l4)
-        node.add(node_l5)
+        node.insert(node_l1)
+        node.insert(node_l2)
+        node.insert(node_l3)
+        node.insert(node_l4)
+        node.insert(node_l5)
         assert node.find(33) == node_l2
 
     def test_is_present(self):
@@ -71,11 +71,11 @@ class TestNode(unittest.TestCase):
         node_l3 = Node(25)
         node_l4 = Node(4)
         node_l5 = Node(9)
-        node.add(node_l1)
-        node.add(node_l2)
-        node.add(node_l3)
-        node.add(node_l4)
-        node.add(node_l5)
+        node.insert(node_l1)
+        node.insert(node_l2)
+        node.insert(node_l3)
+        node.insert(node_l4)
+        node.insert(node_l5)
         assert node.is_present(33) is True
         assert node.is_present(34) is None
 
@@ -85,21 +85,21 @@ class TestNode(unittest.TestCase):
         assert root.minimum() == root
 
         node_l1 = Node(8)
-        root.add(node_l1)
+        root.insert(node_l1)
         assert root.maximum() == root
         assert root.minimum() == node_l1
 
         node_l2 = Node(33)
         node_l3 = Node(25)
-        root.add(node_l2)
-        root.add(node_l3)
+        root.insert(node_l2)
+        root.insert(node_l3)
         assert root.maximum() == node_l2
         assert root.minimum() == node_l1
 
         node_l4 = Node(4)
         node_l5 = Node(9)
-        root.add(node_l4)
-        root.add(node_l5)
+        root.insert(node_l4)
+        root.insert(node_l5)
         assert root.maximum() == node_l2
         assert root.minimum() == node_l4
 
@@ -108,15 +108,15 @@ class TestNode(unittest.TestCase):
         assert root.is_bst(0) is True
 
         n5 = Node(5)
-        root.add(n5)
+        root.insert(n5)
         assert root.is_bst(0) == True
 
         n23 = Node(23)
-        root.add(n23)
+        root.insert(n23)
         assert root.is_bst(0) == True
 
         n14 = Node(14)
-        n23.add(n14)
+        n23.insert(n14)
         assert n23.is_bst(0) == True
         assert root.is_bst(0) == False
 
@@ -128,29 +128,29 @@ class TestNode(unittest.TestCase):
         assert root.size() == 1
 
         node_l1 = Node(4)
-        root.add(node_l1)
+        root.insert(node_l1)
         # assert root.height() == 2
         assert root.size() == 2
 
         node_r1 = Node(12)
-        root.add(node_r1)
+        root.insert(node_r1)
         # assert root.height() == 2
         assert root.size() == 3
 
         node_l2 = Node(2)
-        root.add(node_l2)
+        root.insert(node_l2)
         # assert root.height() == 3
         assert root.size() == 4
         assert node_l1.size() == 2
         assert node_l2.size() == 1
 
         node_l3 = Node(1)
-        root.add(node_l3)
+        root.insert(node_l3)
         # assert root.height() == 4
         assert root.size() == 5
 
         node_r3 = Node(3)
-        root.add(node_r3)
+        root.insert(node_r3)
         # assert root.height() == 4
         assert root.size() == 6
 
@@ -166,15 +166,15 @@ class TestNode(unittest.TestCase):
         n19 = Node(19)
         n23 = Node(23)
         n29 = Node(29)
-        root.add(n5)
-        root.add(n23)
-        root.add(n7)
-        root.add(n3)
-        root.add(n2)
-        root.add(n11)
-        root.add(n13)
-        root.add(n29)
-        root.add(n19)
+        root.insert(n5)
+        root.insert(n23)
+        root.insert(n7)
+        root.insert(n3)
+        root.insert(n2)
+        root.insert(n11)
+        root.insert(n13)
+        root.insert(n29)
+        root.insert(n19)
         assert root.successor(n5) == n7
         assert root.predecessor(n7) == n5
 

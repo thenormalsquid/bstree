@@ -7,8 +7,8 @@ class Tree(object):
         self.max = 0
         self.current = 0
 
-    def add(self, node):
-        self.root.add(node)
+    def insert(self, node):
+        self.root.insert(node)
 
     def find(self, value):
         return self.root.find(value)

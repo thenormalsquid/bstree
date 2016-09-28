@@ -18,17 +18,17 @@ class Node(object):
         else:
             self.right.collect(collector)
 
-    def add(self, node):
+    def insert(self, node):
         if node.value < self.value:
             if self.left is None:
                 self.left = node
             else:
-                self.left.add(node)
+                self.left.insert(node)
         else:
             if self.right is None:
                 self.right = node
             else:
-                self.right.add(node)
+                self.right.insert(node)
 
     def find(self, value):
         if self.value == value:
