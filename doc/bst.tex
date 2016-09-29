@@ -103,19 +103,43 @@ O'Rourke~\cite{orourke:j1998}.
 Manber~\cite[p. 87, Ex. 4.8]{manber:u1989} provides an interesting exercise:
 show the AVL tree formed by inserting the ordered sequence $[1, 2, \ldots, 20]$.
 
-\subsection{Maximum and minimum}
+\section{The Binary Search Tree}
+
+Two main ideas:
+
+\begin{enumerate}
+\item Operations for manipulating BSTs;
+\item intrinsic properties of BSTs.
+\end{enumerate}
+
+Operations include:
+
+\begin{itemize}
+\item insert node
+\item depth-first search
+\item breadth-first search
+\item node presence
+\item delete node
+\item node successor and predecessor
+\end{itemize}
+
+Properties include:
+
+\begin{itemize}
+\item height
+\item depth
+\item maximum key
+\item minimum key
+\item size
+\item diameter
+\item class (full, perfect, complete, balanced, etc.)
+\end{itemize}
 
 
-The maximum function written in Ruby:
-\lstset{language={Ruby}}
-\begin{lstlisting}[frame=single]
-def maximum:
-  self&.maximum || self
-end
-\end{lstlisting}
+\subsection{Operating on the BST}
 
 
-\subsection{Successor and predecessor}
+\subsubsection{Successor and predecessor}
 
 For an ordered list of values $x_i \in [x_0, x_1,\ldots,x_k]$, the successor of
 $x_i$ is $x_{i+1}$, the predecessor $x_{i-1}$.
@@ -158,6 +182,27 @@ def predecessor(self, node):
 
 Implementing {\tt successor} is easy, use right for left, and find the
 maximum where predecessor finds the minimum.
+
+
+
+\subsection{Properties of BST}
+
+
+\subsubsection{Maximum and minimum}
+
+Maximum and minimum elements of binary search trees are probably the easiest
+algorithms to both understand and implement. The maximum is the right-most
+node, the minimum the left-most, finding either means traversing the tree
+to the appropriate leaf, and returning that node which has no children.
+
+The maximum function written in Ruby is particularly elegant,
+we take advantage of Ruby 2.3.x's ``safe navigation'' operator {\tt \&}:
+\lstset{language={Ruby}}
+\begin{lstlisting}[frame=single]
+def maximum:
+  self&.maximum || self
+end
+\end{lstlisting}
 
 \subsection{Collisions or duplicate values}
 
