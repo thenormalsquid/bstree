@@ -105,20 +105,20 @@ class TestNode(unittest.TestCase):
 
     def test_is_bst(self):
         root = Node(17)
-        assert root.is_bst(0) is True
+        assert root.is_bst() is True
 
         n5 = Node(5)
         root.insert(n5)
-        assert root.is_bst(0) == True
+        assert root.is_bst() == True
 
         n23 = Node(23)
         root.insert(n23)
-        assert root.is_bst(0) == True
+        assert root.is_bst() == True
 
         n14 = Node(14)
         n23.insert(n14)
-        assert n23.is_bst(0) == True
-        assert root.is_bst(0) == False
+        assert n23.is_bst() == True
+        assert root.is_bst() == False
 
     # def test_delete(self):
 

@@ -111,21 +111,26 @@ class Node(object):
     def predecessor(self, node):
         return self.get_predecessor(node, self, node)
 
-    def is_bst(self, minimum):
+    # TODO: refactor this to work with a generic in_order_traverse
+    def is_bst(self, minimum=-1000, result=True):
+        # print "self.value: %s" % self.value
         if self.left is not None:
-            return self.left.is_bst(minimum)
+            result = self.left.is_bst(minimum, result)
 
-        print minimum
+        # print "minimum before checking: %s" % minimum
         if minimum >= self.value:
-            return False
+            result = False
+            # print "result: %s" % result
+            return result
 
         minimum = self.value
-
-        print minimum
+        # print "minimum after checking: %s" % minimum
 
         if self.right is not None:
-            return self.right.is_bst(minimum)
-        return True
+            result = self.right.is_bst(minimum, result)
+
+        return result
+
 
     def maximum(self):
         if self.right is None:

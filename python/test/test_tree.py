@@ -123,6 +123,11 @@ class TestTree(unittest.TestCase):
         assert root.maximum() == node_l2
         assert root.minimum() == node_l4
 
+    def test_is_bst(self):
+        root = Node(17)
+        tree = Tree(root)
+        assert tree.is_bst() == True
+
     def test_successor_and_predecessor(self):
         root = Node(17)
         tree = Tree(root)

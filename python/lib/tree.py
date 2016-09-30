@@ -28,6 +28,9 @@ class Tree(object):
     def minimum(self):
         return self.root.minimum()
 
+    def is_bst(self):
+        return self.root.is_bst()
+
     def height(self):
         return self.get_height(self.root)
 
