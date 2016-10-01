@@ -56,6 +56,12 @@ tree_is_present(Tree * t, int key) {
 }
 
 int
+tree_is_bst(Tree * t) {
+  if (t->root == NULL) return 1;
+  return node_is_bst(t->root);
+}
+
+int
 tree_height(Tree * t) {
   if (t->root == NULL) return 0;
   return node_height(t->root);
@@ -91,10 +97,6 @@ tree_minimum(Tree * t) {
 
 void
 tree_is_full(void) {
-}
-
-void
-tree_is_bst(void) {
 }
 
 int

@@ -45,7 +45,7 @@ Node * node_minimum     (Node * n);
 
 void   node_is_full     (void);
 
-void   node_is_bst      (void);
+int    node_is_bst      (Node * n);
 
 int    node_size        (Node * n);
 

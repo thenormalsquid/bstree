@@ -208,6 +208,15 @@ public:
   }
 
   void test_tree_is_bst(void) {
+    describe_test(INDENT0, "From test_tree_is_bst in TreeTest.");
+    Spec spec;
+    Tree * t = tree_new();
+    Node * root = node_new(17);
+    tree_insert(t, root);
+
+    spec.it("tree with single node is bst", DO_SPEC_HANDLE {
+        return tree_is_bst(t) == 1;
+    });
   }
 
   void test_tree_size(void) {
@@ -329,7 +338,7 @@ public:
     test_tree_successor();
     test_tree_predecessor();
     //test_tree_is_full();
-    //test_tree_is_bst();
+    test_tree_is_bst();
     test_tree_size();
   }
 };

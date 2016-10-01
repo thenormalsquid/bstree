@@ -366,6 +366,29 @@ public:
   }
 
   void test_node_is_bst(void) {
+    describe_test(INDENT0, "From test_node_is_bst in NodeTest");
+    Spec spec;
+    Node * root = node_new(17);
+
+    spec.it("single node tree is bst", [&]() {
+        return node_is_bst(root) == 1;
+    });
+
+    Node * n5 = node_new(5);
+    Node * n23 = node_new(23);
+    node_insert(root, n5);
+    node_insert(root, n23);
+
+    spec.it("three node tree is bst", [&]() {
+        return node_is_bst(root) == 1;
+    });
+
+    Node * n14 = node_new(14);
+    node_insert(n23, n14);
+    spec.it("out of order subtree is not bst from root", [&]() {
+        return node_is_bst(n23) == 1
+            && node_is_bst(root) == 0;
+    });
   }
 
   void test_node_height(void) {
@@ -543,9 +566,9 @@ public:
     test_node_maximum();
     //test_node_minimum();
     //test_node_is_full();
-    //test_node_is_bst();
     test_node_size();
     test_node_successor();
+    test_node_is_bst();
     //teardown();
   }
 };

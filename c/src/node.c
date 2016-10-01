@@ -22,7 +22,7 @@ typedef struct _state {
 // Clean this up and whereever State is used,
 // cast it to void * userdata
 typedef void (*Callback)(Node * n, State * state);
-typedef void (*Callback1)(Node * n, State * state);
+typedef void (*Callback1)(Node * n, void * userdata);
 
 void
 post_order_traverse(Node * n, Callback callback, State * state) {
@@ -233,8 +233,30 @@ void
 node_is_full(void) {
 }
 
+typedef struct _bst_data {
+  int result;
+  int minimum;
+} bst_data;
+
 void
-node_is_bst(void) {
+check_minimum(Node * n, void * userdata) {
+  bst_data * data = (bst_data *)userdata;
+  if (data->minimum >= n->key) { data->result = 0; }
+  data->minimum = n->key;
+}
+
+int
+node_is_bst(Node * node) {
+  int result = 1;
+
+  bst_data * userdata = (bst_data*)malloc(sizeof(bst_data));
+  userdata->result = 1;
+  userdata-> minimum = -10000;
+
+  in_order_traverse(node, check_minimum, (void *)userdata);
+  result = userdata->result;
+  free(userdata);
+  return result;
 }
 
 void

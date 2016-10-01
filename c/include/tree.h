@@ -43,7 +43,7 @@ Node * tree_minimum     (Tree * t);
 
 void   tree_is_full     (void);
 
-void   tree_is_bst      (void);
+int    tree_is_bst      (Tree * t);
 
 int    tree_size        (Tree * t);
 
