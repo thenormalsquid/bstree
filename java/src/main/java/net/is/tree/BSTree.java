@@ -8,6 +8,11 @@ import static java.util.Arrays.asList;
 class BSTree {
     public Node root;
 
+    public boolean is_bst() {
+      if (root == null) { return true; }
+      return root.is_bst();
+    }
+
     public Node maximum() {
         if (root == null) { return null; }
         return root.maximum();

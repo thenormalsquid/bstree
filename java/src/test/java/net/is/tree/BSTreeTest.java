@@ -12,6 +12,13 @@ import junit.framework.TestSuite;
 
 public class BSTreeTest extends TestCase {
 
+    public void testIsBst() {
+      BSTree tree = new BSTree();
+      Node root = new Node(17);
+      tree.insert(root);
+      assertEquals(true, tree.is_bst());
+    }
+
     public void testPredecessor() {
       BSTree tree = new BSTree();
       Node root = new Node(17);
@@ -121,10 +128,6 @@ public class BSTreeTest extends TestCase {
         Node n7 = new Node(7);
         tree.insert(n7);
         assertEquals(4, tree.size());
-    }
-
-    public void testIsBst() {
-      // handy check to ensure that delete works correctly.
     }
 
     /*

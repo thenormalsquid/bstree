@@ -85,6 +85,20 @@ class Node {
       return get_size(size);
     }
 
+    private boolean get_is_bst(int minimum, boolean result) {
+      if (this.left != null) { result = this.left.get_is_bst(minimum, result); }
+      if (minimum >= this.value) {
+        result = false;
+      }
+      minimum = this.value;
+      if (this.right != null) { result = this.right.get_is_bst(minimum, result); }
+      return result;
+    }
+
+    public boolean is_bst() {
+      return get_is_bst(-10000, true);
+    }
+
     public Node maximum() {
       if (this.right == null) {
         return this;

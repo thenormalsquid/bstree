@@ -14,6 +14,25 @@ public class NodeTest extends TestCase {
     public Node root;
     public ArrayList<Integer> expected = new ArrayList<Integer>();
 
+    public void testIsBst() {
+      Node root = new Node(17);
+      assertEquals(true, root.is_bst());
+
+      Node n5 = new Node(5);
+      Node n23 = new Node(23);
+      root.insert(n5);
+      root.insert(n23);
+      assertEquals(true, root.is_bst());
+
+      Node n15 = new Node(15);
+      Node n29 = new Node(29);
+      n23.insert(n29);
+      assertEquals(true, root.is_bst());
+      n23.insert(n15);
+      assertEquals(true, n23.is_bst());
+      assertEquals(false, root.is_bst());
+    }
+
     public void testSuccessorAndPredecessor() {
         Node root = new Node(17);
         assertEquals(root, root.successor(root));
