@@ -94,7 +94,7 @@ be written iteratively as well, which is a good exercise for the future.
 | Ruby (module) |            |          |           |            | 2016-09-24 | 2016-07-23 | 2016-09-02 | 2016-09-13  |
 | Python        |            |          |           |            | 2016-09-30 | 2016-08-10 | 2016-09-03 | 2016-09-14  |
 | Java          |            |          |           |            | 2016-10-01 | 2016-08-25 | 2016-09-03 | 2016-09-21  |
-| C++           |            |          |           |            |            | 2016-08-27 | 2016-09-03 | 2016-09-20  |
+| C++           |            |          |           |            | 2016-10-01 | 2016-08-27 | 2016-09-03 | 2016-09-20  |
 | C             |            |          |           |            |            | 2016-08-13 | 2016-09-04 | 2016-09-22  |
 | Lua           |            |          |           |            |            | 2016-08-27 | 2016-09-04 | 2016-09-23  |
 | Javascript    |            |          |           |            |            | 2016-08-26 | 2016-09-04 | 2016-09-24  |
@@ -103,17 +103,17 @@ be written iteratively as well, which is a good exercise for the future.
 
 ### Persistence, serialization, etc.
 
-|               | json       | relational | yaml       | ==     | ===  | destroy    | common parent |
-|---            |---         |---         |---         |---     |---   |---         |---            |
-| Ruby          | 2016-07-23 |            |            |        |      |            | 2016-08-04    |
-| Ruby (module) |            |            |            |        |      | 2016-08-20 |
-| Python        |            |            |            |        |      |            |
-| Java          |            |            |            |        |      |            |
-| C++           |            |            |            |        |      |            |
-| C             |            |            |            |        |      | 2016-08-13 |
-| Lua           |            |            |            |        |      |            |
-| Javascript    |            |            |            |        |      |            |
-| SQL           |            | N/A        |            |        |      |            |
+|               | json       | relational | yaml       | ==     | ===  | destroy    | common parent | degrees of separation |
+|---------------|------------|------------|------------|--------|------|------------|---------------|-----------------------|
+| Ruby          | 2016-07-23 |            |            |        |      |            | 2016-08-04    |                       |
+| Ruby (module) |            |            |            |        |      | 2016-08-20 |               |                       |
+| Python        |            |            |            |        |      |            |               |                       |
+| Java          |            |            |            |        |      |            |               |                       |
+| C++           |            |            |            |        |      |            |               |                       |
+| C             |            |            |            |        |      | 2016-08-13 |               |                       |
+| Lua           |            |            |            |        |      |            |               |                       |
+| Javascript    |            |            |            |        |      |            |               |                       |
+| SQL           |            | N/A        |            |        |      |            |               |                       |
 
 
 Note: `destroy` for C and C++ means the tree and all the nodes are

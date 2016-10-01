@@ -45,6 +45,11 @@ Node * Tree::predecessor(Node * node) {
   return root->predecessor(node);
 }
 
+bool Tree::is_bst() {
+  if (this->root == nullptr) { return true; }
+  return this->root->is_bst();
+}
+
 bool Tree::is_present(int value) {
   return this->root->is_present(value);
 }

@@ -7,6 +7,7 @@ class Node {
 
   private:
     int get_height(int current, int max);
+    bool get_is_bst(int minimum, bool result);
     Node * get_successor(Node * node, Node * parent, Node * successor);
     Node * get_predecessor(Node * node, Node * parent, Node * successor);
 
@@ -26,6 +27,7 @@ class Node {
     Node * predecessor(Node * n);
     Node * maximum(void);
     Node * minimum(void);
+    bool is_bst(void);
     int size(void);
     int height(void);
 

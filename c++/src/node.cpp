@@ -27,6 +27,18 @@ void Node::add_right(Node * node) {
   }
 }
 
+bool Node::get_is_bst(int minimum, bool result) {
+  if (this->left != nullptr) { result = this->left->get_is_bst(minimum, result); }
+  if (minimum >= this->value) { return false; }
+  minimum = this->value;
+  if (this->right != nullptr) { result = this->right->get_is_bst(minimum, result); }
+  return result;
+}
+
+bool Node::is_bst() {
+  return get_is_bst(-10000, true);
+}
+
 bool Node::is_present(int value) {
   if (this->value == value) return true;
 

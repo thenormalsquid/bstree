@@ -8,6 +8,12 @@ But it's such a simple elegant thing, and c++11/14 is so much nicer than
 it used to be, it's inspiring to go back and revisit this simple data
 structure.
 
+### About the c++ in this repo...
+
+It's a mishmash of styles to be sure, and certainly reflects
+sensibilities developed using scripting languages such as Ruby
+and Python.
+
 ## TODO
 
 * (DONE) Extend `Tree` to add nodes`
@@ -24,3 +30,4 @@ structure.
   tree is freed. This will force me to brush up on my c++ pointer juju.
   Apparently raw pointers (`new`, `delete`) are out. Not sure this will
   be relevant using smart pointers.
+* `s/add/insert/g`

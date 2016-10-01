@@ -54,6 +54,32 @@ public:
     });
   }
 
+  void test_is_bst(void) {
+    describe_test(INDENT0, "From test_is_bst in NodeTest.");
+    Spec spec;
+    Node root(17);
+
+    //spec.it("Single root node is a binary search tree", DO_SPEC_HANDLE {
+    spec.it("Single root node is a binary search tree", [&]()->bool {
+        return root.is_bst() == true;
+    });
+
+    Node n5(5);
+    Node n23(23);
+    root.add(&n5);
+    root.add(&n23);
+    spec.it("three node tree is bst", [&]()->bool {
+        return root.is_bst() == true;
+    });
+
+    Node n14(14);
+    n23.add(&n14);
+    spec.it("adding a wrong node internally renders bst false", [&]()->bool {
+        return n23.is_bst() == true
+            && root.is_bst() == false;
+    });
+  }
+
   void test_is_present() {
     describe_test(INDENT0, "From test_is_present in NodeTest.");
     Spec spec;
@@ -302,6 +328,7 @@ public:
     test_successor_and_predecessor();
     test_maximum();
     test_minimum();
+    test_is_bst();
   }
 };
 

@@ -19,6 +19,7 @@ public:
   Node * predecessor(Node * n);
   Node * maximum(void);
   Node * minimum(void);
+  bool is_bst(void);
   int size(void);
   int height(void);
 

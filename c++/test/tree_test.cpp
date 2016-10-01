@@ -290,6 +290,18 @@ public:
     });
   }
 
+  void test_is_bst(void) {
+    describe_test(INDENT0, "From test_is_bst in TreeTest");
+    Spec spec;
+    Tree tree = Tree();
+    Node root = Node(17);
+    tree.add(&root);
+
+    spec.it("tree with single node is bst", [&]() {
+        return tree.is_bst() == true;
+    });
+  }
+
   // my own edification b/c I reach for new and delete
   void test_unique_ptr(void) {
     Spec spec;
@@ -328,6 +340,7 @@ public:
     test_find();
     test_is_present();
     test_collect();
+    test_is_bst();
     // test_unique_ptr();
   }
 };
