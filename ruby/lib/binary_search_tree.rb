@@ -99,16 +99,6 @@ module BinarySearchTree
     l < self ? left&.common_parent(l, r) : right&.common_parent(l, r)
   end
 
-  def search key
-    return self if @key == key
-    key < @key ? left&.search(key) : right&.search(key)
-  end
-
-  def present? key
-    return true if key == @key
-    key < @key ? left&.present?(key) : right&.present?(key)
-  end
-
   def dig key, &block
     yield(self)
     key < @key ? left&.dig(key, &block) : right&.dig(key, &block)

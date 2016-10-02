@@ -82,8 +82,8 @@ class Tree
   end
 
   def to_json_file filename
-    File.open(filename, 'w') do |f|
-      f.write root.to_json
+    File.open(filename, 'w') do |file|
+      file.write root.to_json
     end
   end
 
