@@ -211,6 +211,25 @@ describe('Tree', function() {
     });
   });
 
+  describe('predecessor', function() {
+    it('correctly invokes predecessor', function() {
+      var t = new tree();
+      var root = new node(17);
+      t.insert(root);
+      assert.equal(t.predecessor(root), root);
+    });
+  });
+
+  describe('is_bst', function() {
+    it('determines a single node is a BST', function() {
+      var t = new tree();
+      var root = new node(17);
+      assert.equal(t.is_bst(), true);
+      t.insert(root);
+      assert.equal(t.is_bst(), true);
+    });
+  });
+
   describe('size', function() {
     it('size 0 for empty tree', function() {
       var t = new tree();

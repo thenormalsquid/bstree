@@ -156,6 +156,22 @@ Node.prototype.height = function() {
   return get_height(this, height);
 }
 
+Node.prototype.is_bst = function() {
+  var in_order_traverse = function(n, callback) {
+    if (n.left !== null) { in_order_traverse(n.left, callback); }
+    callback(n);
+    if (n.right !== null) { in_order_traverse(n.right, callback); }
+  }
+
+  var result = true;
+  var minimum = -10000;
+  in_order_traverse(this, function(node) {
+    if (minimum >= node.key) { result = false; }
+    minimum = node.key;
+  });
+  return result;
+}
+
 
 // exports.Node = new Node();
 exports.Node = Node;

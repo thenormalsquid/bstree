@@ -205,15 +205,35 @@ describe('Node', function() {
 
   describe('is_leaf', function() {
     xit('leaf node has no children', function() {
-      var root = node.new(13);
-      assert.equal(t.is_leaf, true);
+      var root = new node(13);
+      assert.equal(root.is_leaf, true);
     });
 
     xit('insert child node onto leaf', function() {
-      var root = node.new(13);
-      var n11 = node.new(11);
+      var root = new node(13);
+      var n11 = new node(11);
       root.insert(n11);
-      assert.equal(t.is_leaf, false);
+      assert.equal(root.is_leaf, false);
+    });
+  });
+
+  describe('is_bst', function() {
+    it('determines single node is BST', function() {
+      var root = new node(17);
+      assert.equal(root.is_bst(), true);
+    });
+
+    it('BST subtree does not imply whole tree is BST', function() {
+      var root = new node(17);
+      var n5 = new node(5);
+      var n23 = new node(23);
+      root.insert(n5);
+      root.insert(n23);
+      assert.equal(root.is_bst(), true);
+      var n14 = new node(14);
+      n23.insert(n14);
+      assert.equal(n23.is_bst(), true);
+      assert.equal(root.is_bst(), false);
     });
   });
 

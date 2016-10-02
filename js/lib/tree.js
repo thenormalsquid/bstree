@@ -44,6 +44,16 @@ Tree.prototype.successor = function(node) {
   return this.root.successor(node);
 }
 
+Tree.prototype.predecessor = function(node) {
+  if (this.root === null) { return null; }
+  return this.root.predecessor(node);
+}
+
+Tree.prototype.is_bst = function() {
+  if (this.root === null) { return true; }
+  return this.root.is_bst();
+}
+
 Tree.prototype.height = function() {
   if (this.root === null) { return 0; }
   return this.root.height();
