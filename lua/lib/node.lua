@@ -119,6 +119,12 @@ function Node:post_order_traverse(callback)
   callback()
 end
 
+function Node:in_order_traverse(callback)
+  if self.left then self.left:in_order_traverse(callback) end
+  callback(self)
+  if self.right then self.right:in_order_traverse(callback) end
+end
+
 function Node:get_height(height, max)
   current = height + 1
   if self.left then max = self.left:get_height(current, max) end
@@ -130,6 +136,18 @@ end
 
 function Node:height()
   return self:get_height(0, 0)
+end
+
+function Node:is_bst()
+  local result = true
+  local minimum = -10000
+  self:in_order_traverse(function(node)
+    if minimum >= node.key then
+      result = false
+    end
+    minimum = node.key
+  end)
+  return result
 end
 
 function Node:size()

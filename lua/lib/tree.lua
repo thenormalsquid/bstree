@@ -52,6 +52,11 @@ function Tree:predecessor(node)
   return self.root:predecessor(node)
 end
 
+function Tree:is_bst()
+  if self.root == nil then return true end
+  return self.root:is_bst()
+end
+
 function Tree:height()
   return self.root:height()
 end
