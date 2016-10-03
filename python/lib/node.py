@@ -131,7 +131,6 @@ class Node(object):
 
         return result
 
-
     def maximum(self):
         if self.right is None:
             return self

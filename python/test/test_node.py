@@ -120,7 +120,12 @@ class TestNode(unittest.TestCase):
         assert n23.is_bst() == True
         assert root.is_bst() == False
 
-    # def test_delete(self):
+    def test_delete(self):
+        root = Node(17)
+        n5 = Node(5)
+        n23 = Node(23)
+        root.insert(n5)
+        root.insert(n23)
 
     def test_height_and_size(self):
         root = Node(8)

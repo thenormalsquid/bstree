@@ -9,6 +9,15 @@ The goal is twofold:
    binary trees.
 
 
+## Disclaimer
+
+In the unlikely chance you have stumbled into this repo, please
+note that all the code, exercises, problems and the like are
+quite likely to be wrong. _None of this material is vetted_.
+I find (and correct) mistakes and falsehoods regularly.
+If you use it for homework or interview questions, you are quite likely
+to be wrong.
+
 ## TODO
 
 * implement diameter algorithm

@@ -40,6 +40,38 @@ class Tree(object):
     def predecessor(self, node):
         return self.root.predecessor(node)
 
+    # algorithm originally taken from CLR p. 253
+    # parent pointers are part of CLR's definition of
+    # node in BST.
+    def clr_delete(T, z):
+        if z.left is None or z.right is None:
+            y = z
+        else:
+            y = z.successor(z)
+
+        if y.left is not None:
+            x = y.left
+        else:
+            x = y.right
+
+        if x is not None:
+            x.p = y.p # p is link to parent node
+
+        if y.p is None:
+            T.root = x
+        else:
+            if y == y.p.left:
+                y.p.left = x
+            else:
+                y.p.right = x
+
+        if y != z:
+            z.key = y.key
+
+        return y
+
+
+    # TODO: move the logic into the Node class
     def get_height(self, node):
         if node is None:
             return self.current

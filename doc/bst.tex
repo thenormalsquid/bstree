@@ -277,19 +277,62 @@ including class.
 The usual caveats about instance variables referenced in modules applies,
 particularly that the including class must define the key for the tree.
 
-\section{References}
+\section{Summary}
+
+
+\subsection{Links}
+
+\begin{itemize}
+\item \href{http://aofa.cs.princeton.edu/60trees/}{http://aofa.cs.princeton.edu/60trees/}
+\item \href{https://en.m.wikipedia.org/wiki/Stern-Brocot\_tree}{https://en.m.wikipedia.org/wiki/Stern-Brocot\_tree}
+\item \href{https://en.m.wikipedia.org/wiki/Day-Stout-Warren\_algorithm}{%
+https://en.m.wikipedia.org/wiki/Day-Stout-Warren\_algorithm}
+\item \href{https://en.m.wikipedia.org/wiki/Tango\_tree}{https://en.m.wikipedia.org/wiki/Tango\_tree}
+\item \href{https://en.wikipedia.org/wiki/Geometry\_of\_binary\_search\_trees}{%
+https://en.wikipedia.org/wiki/Geometry\_of\_binary\_search\_trees}
+\end{itemize}
+
+
+% \section{References}
 
 \bibliography{references}{}
 \bibliographystyle{plain}
 
-\section{Summary}
 
 \appendix
 
 \section{Implementation}
 
 Implementing binary search trees is superficially very easy. Nevertheless,
-a number of design decisions must be made.
+a number of design decisions must be made. There is also the challenge of
+implementing any algorithm well.
+
+One of the gaols of this exercise is to implement binary search trees in multiple
+programming languages, including languages with which the author is either
+minimally competent, or unfamiliar. Expertise is acquired by hard work and
+learning from mistakes, and the faster those mistakes are exposed, the
+faster expertise may be approached.
+
+In general, the various implementations were developed following this
+pattern:
+
+\begin{enumerate}
+\item Install a minimal development environment for each language, focusing on
+application structure where testing is supported. Languages without a workable
+testing framework have not (and likely will not) be used.
+\item Implement a simple, working binary search tree using test driven development.
+The initial implementation will be massively over-tested, a consequence of
+test-driving each method's implementation.
+\item The test suite now provides regression protection, allowing simplistic
+method implementations to be iteratively refined, with the goal being production-quality
+code indistinguishable from professionally and idiomatically implemented code
+for each programming language. This refinement may take more than a single iteration.
+\end{enumerate}
+
+For example, the {\tt is\_bst} function implemented in Java used a helper
+method on the first iteration. A better way to implement might be to pass
+a closure to a generic {\tt in\_order\_traverse} function, similar to how
+the Ruby {\tt bst?} implementation works.
 
 \subsection{Handling null/NULL/nil/etc}
 
@@ -432,6 +475,14 @@ Test cases:
 
 Delete depends on search, so that will need to be implemented everywhere first.
 
+There are three cases for the node to delete:
+
+\begin{enumerate}
+\item node has no children
+\item node has one child
+\item node has two children
+\end{enumerate}
+
 Other functions which are helpful for implementing delete correctly
 are bst?, depth and size. These functions can all be used in the testing
 code.
@@ -445,12 +496,76 @@ Write out a plan for implementing delete in java, python, c++ and lua,
   \item After implementing and writeup, compare with clr.
 \end{itemize}
 
+Cormen et al.~\cite[p. 253]{cormen:th:1990} provide an implementation of
+delete at the tree level. Advantages of this algorithm explicit root node
+deletion, and successor copying may improve the tree's balance.
+However, it assumes that the node to delete is
+given (rather than providing a key and serching for the node), and that
+each node other than the root node has a link to its parent node.
+
 \lstset{language={Python}}
 \begin{lstlisting}[frame=single]
+# Python implementation of delete, from CLR p. 253
+def delete(T, z):
+  if z.left is None or z.right is None:
+      y = z
+  else:
+      y = z.successor(z)
 
-def delete(self, key):
-    # delete algorithm
+  if y.left is not None:
+      x = y.left
+  else:
+      x = y.right
+
+  if x is not None:
+      x.p = y.p # p is link to parent node
+
+  if y.p is None:
+      T.root = x
+  else:
+      if y == y.p.left:
+          y.p.left = x
+      else:
+          y.p.right = x
+
+  if y != z:
+      z.key = y.key
+
+  return y
+
 \end{lstlisting}
+
+
+Here is an alternate delete algorithm in given in Ruby,
+where the key provided instead of the node.
+It does not require nodes to have parent links, the
+parent is found along with the node. A disadvantage of
+this scheme is dealing with a deleted root node. Any
+enclosing tree container will have to update the
+root node externally to this algorithm. Another, less
+obvious disadvantage is this algorithm won't improve
+the balance of the tree.
+
+\lstset{language={Ruby}}
+\begin{lstlisting}[frame=single]
+def delete key, parent = nil
+  node_to_delete, parent = search_with_parent key, parent
+  left = node_to_delete.left
+  right = node_to_delete.right
+
+  if parent&.right == node_to_delete
+    parent&.right = right
+    right.insert left unless left.nil?
+  else
+    parent&.left = left
+    left.insert right unless right.nil?
+  end
+
+  node_to_delete.left = node_to_delete.right = nil
+  node_to_delete
+end
+\end{lstlisting}
+
 
 
 Test cases:
