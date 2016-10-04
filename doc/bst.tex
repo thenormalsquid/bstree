@@ -502,6 +502,9 @@ deletion, and successor copying may improve the tree's balance.
 However, it assumes that the node to delete is
 given (rather than providing a key and serching for the node), and that
 each node other than the root node has a link to its parent node.
+Also, copying data such as the kay and whatever value(s) are associated
+with the node is required. The number if {\tt if} statements also make
+the logic difficult to see-at-a-glance.
 
 \lstset{language={Python}}
 \begin{lstlisting}[frame=single]
