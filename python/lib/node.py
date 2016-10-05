@@ -1,7 +1,7 @@
 class Node(object):
 
-    def __init__(self, value):
-        self.value = value
+    def __init__(self, key):
+        self.key = key
         self.left = None
         self.right = None
 
@@ -11,7 +11,7 @@ class Node(object):
         else:
             self.left.collect(collector)
 
-        collector.append(self.value)
+        collector.append(self.key)
 
         if self.right is None:
             pass
@@ -19,7 +19,7 @@ class Node(object):
             self.right.collect(collector)
 
     def insert(self, node):
-        if node.value < self.value:
+        if node.key < self.key:
             if self.left is None:
                 self.left = node
             else:
@@ -30,27 +30,29 @@ class Node(object):
             else:
                 self.right.insert(node)
 
-    def find(self, value):
-        if self.value == value:
+    def find(self, key):
+        if self.key == key:
             return self
 
-        if value < self.value:
+        if key < self.key:
             if self.left is not None:
-                return self.left.find(value)
+                return self.left.find(key)
         else:
             if self.right is not None:
-                return self.right.find(value)
+                return self.right.find(key)
 
-    def is_present(self, value):
-        if self.value == value:
+    # TODO: add find_with_parent here, to support delete
+
+    def is_present(self, key):
+        if self.key == key:
             return True
 
-        if value < self.value:
+        if key < self.key:
             if self.left is not None:
-                return self.left.is_present(value)
+                return self.left.is_present(key)
         else:
             if self.right is not None:
-                return self.right.is_present(value)
+                return self.right.is_present(key)
 
     def compute_size(self):
         def get_size(size):
@@ -70,16 +72,16 @@ class Node(object):
 
     def get_successor(self, node, parent, successor):
         if parent.left is not None:
-            if parent.left.value == self.value:
+            if parent.left.key == self.key:
                 successor = parent
 
-        if node.value == self.value:
+        if node.key == self.key:
             if node.right is not None:
                 return node.right.minimum()
             else:
                 return successor
 
-        if node.value < self.value:
+        if node.key < self.key:
             if self.left is not None:
                 return self.left.get_successor(node, self, successor)
         else:
@@ -92,16 +94,16 @@ class Node(object):
 
     def get_predecessor(self, node, parent, predecessor):
         if parent.right is not None:
-            if parent.right.value == self.value:
+            if parent.right.key == self.key:
                 predecessor = parent
 
-        if node.value == self.value:
+        if node.key == self.key:
             if node.left is not None:
                 return node.left.maximum()
             else:
                 return predecessor
 
-        if node.value < self.value:
+        if node.key < self.key:
             if self.left is not None:
                 return self.left.get_predecessor(node, self, predecessor)
         else:
@@ -113,17 +115,17 @@ class Node(object):
 
     # TODO: refactor this to work with a generic in_order_traverse
     def is_bst(self, minimum=-1000, result=True):
-        # print "self.value: %s" % self.value
+        # print "self.key: %s" % self.key
         if self.left is not None:
             result = self.left.is_bst(minimum, result)
 
         # print "minimum before checking: %s" % minimum
-        if minimum >= self.value:
+        if minimum >= self.key:
             result = False
             # print "result: %s" % result
             return result
 
-        minimum = self.value
+        minimum = self.key
         # print "minimum after checking: %s" % minimum
 
         if self.right is not None:
