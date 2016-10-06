@@ -51,18 +51,21 @@ class TestNode(unittest.TestCase):
         assert node.left.right == node_l5
 
     def test_find(self):
-        node = Node(15)
+        root = Node(15)
         node_l1 = Node(8)
         node_l2 = Node(33)
         node_l3 = Node(25)
         node_l4 = Node(4)
         node_l5 = Node(9)
-        node.insert(node_l1)
-        node.insert(node_l2)
-        node.insert(node_l3)
-        node.insert(node_l4)
-        node.insert(node_l5)
-        assert node.find(33) == node_l2
+        root.insert(node_l1)
+        root.insert(node_l2)
+        root.insert(node_l3)
+        root.insert(node_l4)
+        root.insert(node_l5)
+        assert root.find(33) == node_l2
+        n, p = root.find_with_parent(8)
+        assert n == node_l1
+        assert p == root
 
     def test_is_present(self):
         node = Node(15)
@@ -126,6 +129,8 @@ class TestNode(unittest.TestCase):
         n23 = Node(23)
         root.insert(n5)
         root.insert(n23)
+        result = root.clr_delete(n23)
+        assert result == n23
 
     def test_height_and_size(self):
         root = Node(8)

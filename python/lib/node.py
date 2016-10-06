@@ -4,6 +4,14 @@ class Node(object):
         self.key = key
         self.left = None
         self.right = None
+        # p is pointer to parent node. The goal of this class is
+        # to implement as much as possible without an explicit reference
+        # to the parent node. However, some algorithms require the
+        # parent node (e.g., clr), so it's defined as a member here to
+        # be used for implementations of those algorithms. Hopefully,
+        # better algorithms can be derived and the parent pointer
+        # elmininated from this class.
+        self.p = None
 
     def collect(self, collector):
         if self.left is None:
@@ -41,7 +49,18 @@ class Node(object):
             if self.right is not None:
                 return self.right.find(key)
 
-    # TODO: add find_with_parent here, to support delete
+    def find_with_parent(self, key, parent=None):
+        print "in find_with_parent, key: %d" % key
+        if self.key == key:
+            return self, parent
+
+        if key < self.key:
+            if self.left is not None:
+                return self.left.find_with_parent(key, self)
+        else:
+            if self.right is not None:
+                return self.right.find_with_parent(key, self)
+
 
     def is_present(self, key):
         if self.key == key:
@@ -115,23 +134,51 @@ class Node(object):
 
     # TODO: refactor this to work with a generic in_order_traverse
     def is_bst(self, minimum=-1000, result=True):
-        # print "self.key: %s" % self.key
         if self.left is not None:
             result = self.left.is_bst(minimum, result)
 
-        # print "minimum before checking: %s" % minimum
         if minimum >= self.key:
             result = False
-            # print "result: %s" % result
             return result
 
         minimum = self.key
-        # print "minimum after checking: %s" % minimum
 
         if self.right is not None:
             result = self.right.is_bst(minimum, result)
 
         return result
+
+    # algorithm originally taken from CLR p. 253
+    # parent pointers are part of CLR's definition of
+    # node in BST.
+    def clr_delete(T, node):
+        z, p = T.root.find_with_parent(node)
+
+        if z.left is None or z.right is None:
+            y = z
+        else:
+            y = z.successor(z)
+
+        if y.left is not None:
+            x = y.left
+        else:
+            x = y.right
+
+        if x is not None:
+            x.p = y.p # p is link to parent node
+
+        if y.p is None:
+            T.root = x
+        else:
+            if y == y.p.left:
+                y.p.left = x
+            else:
+                y.p.right = x
+
+        if y != z:
+            z.key = y.key
+
+        return y
 
     def maximum(self):
         if self.right is None:

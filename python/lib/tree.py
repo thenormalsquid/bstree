@@ -43,7 +43,11 @@ class Tree(object):
     # algorithm originally taken from CLR p. 253
     # parent pointers are part of CLR's definition of
     # node in BST.
-    def clr_delete(T, z):
+    def clr_delete(T, node):
+        print T
+        print node
+        z, p = T.root.find_with_parent(node.key)
+
         if z.left is None or z.right is None:
             y = z
         else:
