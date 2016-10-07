@@ -134,18 +134,6 @@ class TestTree(unittest.TestCase):
         assert tree.successor(root) == root
         assert tree.predecessor(root) == root
 
-    def test_delete(self):
-        root = Node(17)
-        tree = Tree(root)
-        n5 = Node(5)
-        n23 = Node(23)
-        tree.insert(n5)
-        tree.insert(n23)
-        result = tree.clr_delete(n23)
-        assert result == n23
-
-
-
     def tearDown(self):
         # dummy
         self.testing = False

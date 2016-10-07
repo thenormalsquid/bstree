@@ -46,22 +46,29 @@ class Tree(object):
     def clr_delete(T, node):
         print T
         print node
+        print node.key
         z, p = T.root.find_with_parent(node.key)
+        print z
+        print p
 
         if z.left is None or z.right is None:
             y = z
         else:
-            y = z.successor(z)
+            y = T.root.successor(z)
+            print "from root successor: %d" % y.key
 
         if y.left is not None:
             x = y.left
         else:
+            print "x = y.right"
             x = y.right
 
         if x is not None:
             x.p = y.p # p is link to parent node
 
         if y.p is None:
+            print "y.p is None"
+            print x
             T.root = x
         else:
             if y == y.p.left:
