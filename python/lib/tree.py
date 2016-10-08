@@ -54,10 +54,10 @@ class Tree(object):
 
         z = T.root.find(node.key)
 
-        if z.left is None or z.right is None:
-            node_to_delete = z
-        else:
+        if z.left and z.right:
             node_to_delete = T.root.successor(z)
+        else:
+            node_to_delete = z
 
         if node_to_delete.left:
             x = node_to_delete.left
