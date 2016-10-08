@@ -56,6 +56,7 @@ class Tree(object):
 
         if z.left and z.right:
             node_to_delete = self.root.successor(z)
+            z.key = node_to_delete.key
         else:
             node_to_delete = z
 
@@ -64,7 +65,7 @@ class Tree(object):
         else:
             x = node_to_delete.right
 
-        if x is not None:
+        if x:
             # TODO: This line works with x.p, needs to be better tested
             x.p = node_to_delete.parent
             # x.parent = node_to_delete.parent
@@ -76,9 +77,6 @@ class Tree(object):
                 node_to_delete.parent.left = x
             else:
                 node_to_delete.parent.right = x
-
-        if node_to_delete != z:
-            z.key = node_to_delete.key
 
         return node_to_delete
 
