@@ -11,6 +11,7 @@ module BinarySearchTree
 
   def insert node
     if node < self
+      # TODO: is there a clean, spiffy way to set the parent node here?
       left.nil? ? self.left = node : left.insert(node)
     else
       right.nil? ? self.right = node : right.insert(node)

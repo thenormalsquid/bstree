@@ -29,11 +29,13 @@ class Node(object):
     def insert(self, node):
         if node.key < self.key:
             if self.left is None:
+                node.p = self
                 self.left = node
             else:
                 self.left.insert(node)
         else:
             if self.right is None:
+                node.p = self
                 self.right = node
             else:
                 self.right.insert(node)

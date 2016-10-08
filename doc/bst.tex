@@ -263,6 +263,57 @@ or can the nodes be processes as the breadth-first traverse proceeds?
 
 \section{Containerizing}
 
+\subsection{Tree/Node interaction}
+
+Trees are abstract data types. This makes trees easy to reason about.
+Implementing a tree requires dealing with a number of subtle issues.
+Since Trees are usually described in terms of the Nodes comprising
+the Tree, some thought about differentiating Trees and Nodes is in order.
+
+\subsubsection{Implicit structure}
+
+Given some class, record, structure or whatever language feature which contains
+data and supports function invocation, adding left and right pointers,
+appropriate comparators, and insert and find methods suffices to provide
+dictionary capability to the given language feature. However, trees require a
+root, and managing this root increases the complexity whatever application
+system requires the data sorted into the tree. Provision needs to be made for
+the root changing, or even being deleted.
+
+\subsubsection{Tree container}
+
+Another way to implement trees is to create a tree container which implements
+insert, search, etc. The implementation provided by the tree container could
+implement the functionality itself, or call an implementation provided by
+the node element.
+
+\subsubsection{The BST Node}
+
+By definition, each node in a binary searcg tree contains a left child and
+a right child, either or both of which may be nil.
+
+Some operations on binary search trees, such as {\tt delete}, require
+the node's parent as well as its children. The parent to any node can also
+be stored as a reference or pointer, or the parent can be determined at
+runtime.
+
+Storing parent pointers is easy. When inserting a node as a child, set that
+node's parent pointer to the inserting node.
+
+Determining parent pointers at runtime is not conceptually much more difficult:
+keep track of the parent at each node by passing the current node to the
+recursive calls. Two disadvantages of this include longer argument lists
+for recursive calls, and either returning both node and parent when necessary.
+For languages which do not allow multiple return values, one of the arguments
+will have to capture the state change for access by the calling method.
+In theory, this is straightforward. From an engineering standpoint, requiring
+both a return value and an argument state change violates the principle of
+least astonishment.
+
+Passing both node and parent back through the argument list is a pretty good
+case for adding the parent node directly to the Node data structure.
+
+
 \subsection{C++ templating}
 
 \subsection{C struct inclusion}
@@ -344,31 +395,6 @@ right) to whatever the programming language regards as a ``non-value.''
 For example, in C this is {\tt NULL}, in C++ {\tt nullptr}, in Python {\tt None}.
 
 (It would be possible to define a global external node.)
-
-\subsection{Tree/Node interaction}
-
-Trees are abstract data types. This makes trees easy to reason about.
-Implementing a tree requires dealing with a number of subtle issues.
-Since Trees are usually described in terms of the Nodes comprising
-the Tree, some thought about differentiating Trees and Nodes is in order.
-
-\subsubsection{Implicit structure}
-
-Given some class, record, structure or whatever language feature which contains
-data and supports function invocation, adding left and right pointers,
-appropriate comparators, and insert and find methods suffices to provide
-dictionary capability to the given language feature. However, trees require a
-root, and managing this root increases the complexity whatever application
-system requires the data sorted into the tree. Provision needs to be made for
-the root changing, or even being deleted.
-
-\subsubsection{Tree container}
-
-Another way to implement trees is to create a tree container which implements
-insert, search, etc. The implementation provided by the tree container could
-implement the functionality itself, or call an implementation provided by
-the node element.
-
 
 \subsection{Testing}
 
@@ -497,8 +523,10 @@ Write out a plan for implementing delete in java, python, c++ and lua,
 \end{itemize}
 
 Cormen et al.~\cite[p. 253]{cormen:th:1990} provide an implementation of
-delete at the tree level. Advantages of this algorithm explicit root node
-deletion, and successor copying may improve the tree's balance.
+delete at the tree level. Advantages of this algorithm include explicit root node
+deletion, and approximately retaining the tree's balance by using the deleted
+node's successor.
+
 However, it assumes that the node to delete is
 given (rather than providing a key and serching for the node), and that
 each node other than the root node has a link to its parent node.
@@ -538,6 +566,14 @@ def delete(T, z):
 
 \end{lstlisting}
 
+Note that the returned node ({\tt y}) may or may not be the node
+which was deleted. When the node to delete has two children, the
+attributes of its successor node are copied into that node, and the
+successor node is returned. While there is no impact at run time,
+and copying attributes is arguably less complex than managing links
+if moving a successor node, test cases must account for the discrepancy
+in assertions. That is, removing a leaf node will return that leaf node,
+for which an assertion may be written.
 
 Here is an alternate delete algorithm in given in Ruby,
 where the key provided instead of the node.

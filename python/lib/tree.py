@@ -19,6 +19,11 @@ class Tree(object):
     def collect(self, collector):
         self.root.collect(collector)
 
+    def to_a(self):
+        collector = []
+        self.collect(collector)
+        return collector
+
     def size(self):
         return self.root.size()
 
@@ -40,35 +45,62 @@ class Tree(object):
     def predecessor(self, node):
         return self.root.predecessor(node)
 
-    # algorithm originally taken from CLR p. 253
-    # parent pointers are part of CLR's definition of
-    # node in BST.
+    # Refactored and renamed from CLR. The CLR code is very
+    # difficult to follow as it has a lot of conditional statements
+    # and single letter temporary nodes (x, y, z).
     def clr_delete(T, node):
-        print T
-        print node
-        print node.key
-        z, p = T.root.find_with_parent(node.key)
-        print z
-        print p
+        # for sanity checking as method is refactored
+        return T.clr_delete_original(node)
+
+        z = T.root.find(node.key)
 
         if z.left is None or z.right is None:
             y = z
         else:
             y = T.root.successor(z)
-            print "from root successor: %d" % y.key
 
-        if y.left is not None:
+        if y.left:
             x = y.left
         else:
-            print "x = y.right"
             x = y.right
 
         if x is not None:
-            x.p = y.p # p is link to parent node
+            x.p = y.p
 
         if y.p is None:
-            print "y.p is None"
-            print x
+            T.root = x
+        else:
+            if y == y.p.left:
+                y.p.left = x
+            else:
+                y.p.right = x
+
+        if y != z:
+            z.key = y.key
+
+        return y
+
+
+    # algorithm originally taken from CLR p. 253
+    # parent pointers are part of CLR's definition of
+    # node in BST.
+    def clr_delete_original(T, node):
+        z = T.root.find(node.key)
+
+        if z.left is None or z.right is None:
+            y = z
+        else:
+            y = T.root.successor(z)
+
+        if y.left:
+            x = y.left
+        else:
+            x = y.right
+
+        if x is not None:
+            x.p = y.p
+
+        if y.p is None:
             T.root = x
         else:
             if y == y.p.left:
