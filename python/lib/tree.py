@@ -48,14 +48,14 @@ class Tree(object):
     # Refactored and renamed from CLR. The CLR code is very
     # difficult to follow as it has a lot of conditional statements
     # and single letter temporary nodes (x, y, z).
-    def clr_delete(T, node):
+    def clr_delete(self, node):
         # for sanity checking as delete method is refactored
         # return T.clr_delete_original(node)
 
-        z = T.root.find(node.key)
+        z = self.root.find(node.key)
 
         if z.left and z.right:
-            node_to_delete = T.root.successor(z)
+            node_to_delete = self.root.successor(z)
         else:
             node_to_delete = z
 
@@ -68,7 +68,7 @@ class Tree(object):
             x.p = node_to_delete.p
 
         if node_to_delete.p is None:
-            T.root = x
+            self.root = x
         else:
             if node_to_delete == node_to_delete.p.left:
                 node_to_delete.p.left = x
