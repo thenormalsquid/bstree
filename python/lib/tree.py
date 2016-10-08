@@ -50,7 +50,7 @@ class Tree(object):
     # and single letter temporary nodes (x, y, z).
     def clr_delete(self, node):
         # for sanity checking as delete method is refactored
-        # return T.clr_delete_original(node)
+        # return self.clr_delete_original(node)
 
         z = self.root.find(node.key)
 
@@ -65,15 +65,17 @@ class Tree(object):
             x = node_to_delete.right
 
         if x is not None:
-            x.p = node_to_delete.p
+            # TODO: This line works with x.p, needs to be better tested
+            x.p = node_to_delete.parent
+            # x.parent = node_to_delete.parent
 
-        if node_to_delete.p is None:
+        if node_to_delete.parent is None:
             self.root = x
         else:
-            if node_to_delete == node_to_delete.p.left:
-                node_to_delete.p.left = x
+            if node_to_delete == node_to_delete.parent.left:
+                node_to_delete.parent.left = x
             else:
-                node_to_delete.p.right = x
+                node_to_delete.parent.right = x
 
         if node_to_delete != z:
             z.key = node_to_delete.key
@@ -83,7 +85,9 @@ class Tree(object):
 
     # algorithm originally taken from CLR p. 253
     # parent pointers are part of CLR's definition of
-    # node in BST.
+    # node in BST. The names have been mostly kept the
+    # same, however, 'parent' is used instead of 'p' for
+    # better readability in refactored delete implementation.
     def clr_delete_original(T, node):
         z = T.root.find(node.key)
 
@@ -98,15 +102,15 @@ class Tree(object):
             x = y.right
 
         if x is not None:
-            x.p = y.p
+            x.parent = y.parent
 
-        if y.p is None:
+        if y.parent is None:
             T.root = x
         else:
-            if y == y.p.left:
-                y.p.left = x
+            if y == y.parent.left:
+                y.parent.left = x
             else:
-                y.p.right = x
+                y.parent.right = x
 
         if y != z:
             z.key = y.key

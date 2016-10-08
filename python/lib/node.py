@@ -11,7 +11,8 @@ class Node(object):
         # be used for implementations of those algorithms. Hopefully,
         # better algorithms can be derived and the parent pointer
         # elmininated from this class.
-        self.p = None
+        # UPDATE: changing, s/p/parent/ for better readability.
+        self.parent = None
 
     def collect(self, collector):
         if self.left is None:
@@ -29,13 +30,13 @@ class Node(object):
     def insert(self, node):
         if node.key < self.key:
             if self.left is None:
-                node.p = self
+                node.parent = self
                 self.left = node
             else:
                 self.left.insert(node)
         else:
             if self.right is None:
-                node.p = self
+                node.parent = self
                 self.right = node
             else:
                 self.right.insert(node)
