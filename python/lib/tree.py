@@ -67,16 +67,18 @@ class Tree(object):
 
         if x:
             # TODO: This line works with x.p, needs to be better tested
+            # Try deleting x or x.p sucessively to figure out exactly
+            # how it works.
             x.p = node_to_delete.parent
             # x.parent = node_to_delete.parent
 
-        if node_to_delete.parent is None:
-            self.root = x
-        else:
+        if node_to_delete.parent:
             if node_to_delete == node_to_delete.parent.left:
                 node_to_delete.parent.left = x
             else:
                 node_to_delete.parent.right = x
+        else:
+            self.root = x
 
         return node_to_delete
 
