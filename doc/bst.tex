@@ -1,5 +1,6 @@
 \documentclass{article}
 
+\usepackage{amsmath}
 \usepackage{fancybox}
 \usepackage{tikz}
 
@@ -318,6 +319,8 @@ case for adding the parent node directly to the Node data structure.
 
 \subsection{C struct inclusion}
 
+\paragraph{private headers}
+
 \subsection{Ruby module inclusion}
 
 It's not difficult to encode binary search tree capability into a Ruby module.
@@ -614,6 +617,7 @@ Test cases:
 \item deletes the left child and right child in two node trees
 \item deletes leaf node in tree with height greater than 1
 \item deletes nil when key is not in the tree
+\item deletes the entire tree node-by-node
 \end{enumerate}
 
 
@@ -708,6 +712,90 @@ Let's do some examples, starting with $n = 1$, giving $k = 0$:
 \begin{itemize}
 \item [$k=0$] $b_0 = 1, b_1$
 \end{itemize}
+
+\subsubsection{b.} Let $B(x)$ be the generating function
+
+\begin{equation}
+B(x) = \sum_{n=0}^{\infty}b_nx^n.
+\end{equation}
+
+Show that $B(x) = xB(x)^2 + 1$, and
+
+\begin{equation}
+B(x) = \frac{1}{2x}(1-\sqrt{1-4x}).
+\end{equation}
+
+
+First, a short detour into generating functions.
+
+\subsubsection{Detour into generating functions}
+
+This example is taken from Corman et al.~\cite[p. 74]{cormen:th:1990}
+Problem 4-6.
+
+\begin{align}
+F(z) & = \sum_{i=0}^{\infty} F_ix^i\\
+\label{eqn:fibonacci_opsgf}
+     & = 0 + z + x^2 + 2z^3 + 3z^4 + 5z^5 + 8z^6 + 13z^7 + 21z^8+\cdots
+\end{align}
+
+This is inconvenient for a closed form solution, so we need to do a bit of
+manipulation. First, multiply both sides by $Z$:
+
+\begin{equation}
+\label{eqn:zfibonacci_opsgf}
+zF(z) = z^2 + x^3 + 2z^4 + 3z^5 + 5z^6 + 8z^7 + 13z^8 + 21z^9+\cdots
+\end{equation}
+
+Now subtract~\ref{eqn:zfibonacci_opsgf} from~\ref{eqn:fibonacci_opsgf} to
+obtain
+
+\begin{align}
+F(z) - zF(z) & = z + z^3 + z^4 + 2z^5 + 3z^6 +\cdots\\
+        F(z) & = z + zF(z) + z^2(0 + z + z^2 + 2Z^3 + 3z^4 +\cdots)\\
+             & = z + zF(z) + z^zF(z).
+\end{align}
+
+
+\subsubsection{Detour into partial fraction expansion}
+
+The idea of partial fraction expansion is to reduce some
+complicated ratio of functions into a sum of simpler functions.
+Practical uses include analytic solutions for differential equations
+using the Laplace Transform~\cite[p. 347]{nagle:rk1989}, and simplifying
+generating functions, as will done for deriving a formula for the
+$nth$ Catalan number.
+
+Here's a simple example:
+
+\begin{equation}
+\frac{-4x-10}{x^2+4x+3} = \frac{A}{x+1} + \frac{B}{x+3}
+\end{equation}
+
+Solving for $A$ and $B$ can be done using a system of linear equations,
+or, in this case, simply assuming the values $x = -1$ and $x = -5$
+to solve for $A$ and $B$ respectively. Either technique results in $A = -3$ and
+$B = -1$:
+\begin{equation}
+\frac{-4x-10}{x^2+4x+3} = \frac{-3}{x+1} + \frac{-1}{x+3},
+\end{equation}
+which can of course be verified by summing the right hand side.
+
+
+\subsubsection{Detour into Taylor series}
+
+Cormen et al.~\cite[p. 262]{cormen:th:1990} gives Taylor Series definition as
+(there is an error in the edition cited here, see the Errata for clarification):
+
+\begin{equation}
+f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(a)}{k!}(x-a)^k,
+\end{equation}
+
+and suggests expanding the radical term in the generation function
+$\sqrt{1-4x}$ around $0$.
+
+{\bf TODO: write out a few derivatives of the radical to construct
+the Taylor Series.}
 
 \section{Tikz}
 
