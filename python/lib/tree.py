@@ -1,3 +1,4 @@
+import json
 from node import *
 
 class Tree(object):
@@ -50,9 +51,11 @@ class Tree(object):
     # and single letter temporary nodes (x, y, z).
     def clr_delete(self, node):
         # for sanity checking as delete method is refactored
-        # return self.clr_delete_original(node)
+        return self.clr_delete_original(node)
 
-        z = self.root.find(node.key)
+        # z = self.root.find(node.key)
+
+        z = node
 
         if z.left and z.right:
             node_to_delete = self.root.successor(z)
@@ -69,8 +72,8 @@ class Tree(object):
             # TODO: This line works with x.p, needs to be better tested
             # Try deleting x or x.p sucessively to figure out exactly
             # how it works.
-            x.p = node_to_delete.parent
-            # x.parent = node_to_delete.parent
+            # x.p = node_to_delete.parent
+            x.parent = node_to_delete.parent
 
         if node_to_delete.parent:
             if node_to_delete == node_to_delete.parent.left:
@@ -88,9 +91,7 @@ class Tree(object):
     # node in BST. The names have been mostly kept the
     # same, however, 'parent' is used instead of 'p' for
     # better readability in refactored delete implementation.
-    def clr_delete_original(T, node):
-        z = T.root.find(node.key)
-
+    def clr_delete_original(T, z):
         if z.left is None or z.right is None:
             y = z
         else:
@@ -117,6 +118,8 @@ class Tree(object):
 
         return y
 
+    def to_json(self):
+        print json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
 
     # TODO: move the logic into the Node class
     def get_height(self, node):
