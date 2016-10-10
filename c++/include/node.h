@@ -17,9 +17,9 @@ class Node {
     // void post_order_traverse(std::function<void (const Node&)> callback);
     void post_order_traverse(std::function<void (void)> callback);
 
-    void add(Node * node);
-    void add_left(Node * node);
-    void add_right(Node * node);
+    void insert(Node * node);
+    void insert_left(Node * node);
+    void insert_right(Node * node);
 
     bool is_present(int);
 

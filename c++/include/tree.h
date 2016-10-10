@@ -12,7 +12,7 @@ public:
   Tree(Node * _root) : root(_root) {}
   // Tree(std::unique_ptr<Node> _root) : root(_root) {}
 
-  void add(Node * node);
+  void insert(Node * node);
   std::vector<int> collect(void);
   Node * find(int);
   Node * successor(Node * n);

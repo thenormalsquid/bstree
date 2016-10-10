@@ -2,12 +2,12 @@
 #include <string>
 #include <tree.h>
 
-void Tree::add(Node * node) {
+void Tree::insert(Node * node) {
   if (root == nullptr) {
     root = node;
     return;
   }
-  this->root->add(node);
+  this->root->insert(node);
 }
 
 Node * Tree::find(int value) {

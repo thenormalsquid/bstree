@@ -41,15 +41,15 @@ public:
     });
   }
 
-  void test_add() {
-    describe_test(INDENT0, "From test_add in NodeTest.");
+  void test_insert() {
+    describe_test(INDENT0, "From test_insert in NodeTest.");
     Spec spec;
-    spec.it("Testing Node.add", DO_SPEC {
+    spec.it("Testing Node.insert", DO_SPEC {
       Node node(3);
       Node node2(1);
       Node node3(2);
-      node.add(&node2);
-      node.add(&node3);
+      node.insert(&node2);
+      node.insert(&node3);
       return (node.left->right->value == 2);
     });
   }
@@ -66,15 +66,15 @@ public:
 
     Node n5(5);
     Node n23(23);
-    root.add(&n5);
-    root.add(&n23);
+    root.insert(&n5);
+    root.insert(&n23);
     spec.it("three node tree is bst", [&]()->bool {
         return root.is_bst() == true;
     });
 
     Node n14(14);
-    n23.add(&n14);
-    spec.it("adding a wrong node internally renders bst false", [&]()->bool {
+    n23.insert(&n14);
+    spec.it("inserting a wrong node internally renders bst false", [&]()->bool {
         return n23.is_bst() == true
             && root.is_bst() == false;
     });
@@ -92,13 +92,13 @@ public:
       Node node33(33);
       Node node97(97);
       Node node4(4);
-      root.add(&node43);
-      root.add(&node8);
-      root.add(&node10);
-      root.add(&node15);
-      root.add(&node33);
-      root.add(&node97);
-      root.add(&node4);
+      root.insert(&node43);
+      root.insert(&node8);
+      root.insert(&node10);
+      root.insert(&node15);
+      root.insert(&node33);
+      root.insert(&node97);
+      root.insert(&node4);
 
       bool result = root.is_present(43);
       // TODO: refactor tree building so that other values
@@ -121,17 +121,17 @@ public:
     Node n23(23);
     Node n29(29);
 
-    root.add(&n5);
-    root.add(&n3);
-    root.add(&n2);
+    root.insert(&n5);
+    root.insert(&n3);
+    root.insert(&n2);
 
-    root.add(&n7);
-    root.add(&n11);
-    root.add(&n13);
+    root.insert(&n7);
+    root.insert(&n11);
+    root.insert(&n13);
 
-    root.add(&n23);
-    root.add(&n19);
-    root.add(&n29);
+    root.insert(&n23);
+    root.insert(&n19);
+    root.insert(&n29);
 
     spec.it("root node successor", [&]() {
         return root.successor(&root) == &n19;
@@ -197,15 +197,15 @@ public:
     Node n23(23);
     Node n29(29);
 
-    root.add(&n5);
-    root.add(&n11);
-    root.add(&n7);
-    root.add(&n3);
-    root.add(&n2);
-    root.add(&n19);
-    root.add(&n17);
-    root.add(&n23);
-    root.add(&n29);
+    root.insert(&n5);
+    root.insert(&n11);
+    root.insert(&n7);
+    root.insert(&n3);
+    root.insert(&n2);
+    root.insert(&n19);
+    root.insert(&n17);
+    root.insert(&n23);
+    root.insert(&n29);
 
     spec.it("whole tree has height 3", [&]() {
         return (root.height() == 3);
@@ -251,8 +251,8 @@ public:
 
     Node n17(17);
     Node n3(3);
-    root.add(&n3);
-    root.add(&n17);
+    root.insert(&n3);
+    root.insert(&n17);
     spec.it("node with left and right child", [&]() {
         return (root.size() == 3);
     });
@@ -264,13 +264,13 @@ public:
     Node n19(19);
     Node n23(23);
     Node n29(29);
-    root.add(&n2);
-    root.add(&n5);
-    root.add(&n7);
-    root.add(&n13);
-    root.add(&n19);
-    root.add(&n23);
-    root.add(&n29);
+    root.insert(&n2);
+    root.insert(&n5);
+    root.insert(&n7);
+    root.insert(&n13);
+    root.insert(&n19);
+    root.insert(&n23);
+    root.insert(&n29);
 
     spec.it("size of tree with first 10 primes is 10", [&]() {
         return (root.size() == 10);
@@ -297,9 +297,9 @@ public:
       Node node2(1);
       Node node3(2);
       Node node17(17);
-      root.add(&node2);
-      root.add(&node3);
-      root.add(&node17);
+      root.insert(&node2);
+      root.insert(&node3);
+      root.insert(&node17);
       return (root.maximum() == &node17);
     });
   }
@@ -311,8 +311,8 @@ public:
       Node root(3);
       Node node2(1);
       Node node3(2);
-      root.add(&node2);
-      root.add(&node3);
+      root.insert(&node2);
+      root.insert(&node3);
       return (root.minimum() == &node2);
     });
   }
@@ -321,7 +321,7 @@ public:
     test_instantiation();
     test_left_initialize();
     test_right_initialize();
-    test_add();
+    test_insert();
     test_is_present();
     test_size();
     test_height();

@@ -3,27 +3,27 @@
 #include <cstdlib>
 #include <node.h>
 
-void Node::add(Node * node) {
+void Node::insert(Node * node) {
   if (node->value < this->value) {
-    add_left(node);
+    insert_left(node);
   } else {
-    add_right(node);
+    insert_right(node);
   }
 }
 
-void Node::add_left(Node * node) {
+void Node::insert_left(Node * node) {
   if (this->left == nullptr) {
     this->left = node;
   } else {
-    left->add(node);
+    left->insert(node);
   }
 }
 
-void Node::add_right(Node * node) {
+void Node::insert_right(Node * node) {
   if (this->right == nullptr) {
     this->right = node;
   } else {
-    right->add(node);
+    right->insert(node);
   }
 }
 

@@ -22,13 +22,13 @@ Node node5(15);
 Node node6(33);
 Node node7(97);
 Node node8(4);
-test_tree.add(&node2);
-test_tree.add(&node3);
-test_tree.add(&node4);
-test_tree.add(&node5);
-test_tree.add(&node6);
-test_tree.add(&node7);
-test_tree.add(&node8);
+test_tree.insert(&node2);
+test_tree.insert(&node3);
+test_tree.insert(&node4);
+test_tree.insert(&node5);
+test_tree.insert(&node6);
+test_tree.insert(&node7);
+test_tree.insert(&node8);
 */
 
 public:
@@ -56,8 +56,8 @@ public:
       Tree tree(&node);
       Node node2(43);
       Node node3(8);
-      tree.add(&node2);
-      tree.add(&node3);
+      tree.insert(&node2);
+      tree.insert(&node3);
 
       Node * n = tree.find(43);
       return (n->value == node2.value);
@@ -71,8 +71,8 @@ public:
       Tree tree(&node);
       Node node2(43);
       Node node3(8);
-      tree.add(&node2);
-      tree.add(&node3);
+      tree.insert(&node2);
+      tree.insert(&node3);
 
       Node * n = tree.find(8);
       return (n->value == node3.value);
@@ -86,8 +86,8 @@ public:
       Tree tree(&node);
       Node node2(43);
       Node node3(8);
-      tree.add(&node2);
-      tree.add(&node3);
+      tree.insert(&node2);
+      tree.insert(&node3);
 
       Node * n = tree.find(25);
       return (n->value == node.value);
@@ -108,13 +108,13 @@ public:
       Node node6(33);
       Node node7(97);
       Node node8(4);
-      tree.add(&node2);
-      tree.add(&node3);
-      tree.add(&node4);
-      tree.add(&node5);
-      tree.add(&node6);
-      tree.add(&node7);
-      tree.add(&node8);
+      tree.insert(&node2);
+      tree.insert(&node3);
+      tree.insert(&node4);
+      tree.insert(&node5);
+      tree.insert(&node6);
+      tree.insert(&node7);
+      tree.insert(&node8);
 
       Node * n = tree.find(43);
       return (n->value == node2.value);
@@ -133,13 +133,13 @@ public:
       Node node6(33);
       Node node7(97);
       Node node8(4);
-      tree.add(&node2);
-      tree.add(&node3);
-      tree.add(&node4);
-      tree.add(&node5);
-      tree.add(&node6);
-      tree.add(&node7);
-      tree.add(&node8);
+      tree.insert(&node2);
+      tree.insert(&node3);
+      tree.insert(&node4);
+      tree.insert(&node5);
+      tree.insert(&node6);
+      tree.insert(&node7);
+      tree.insert(&node8);
 
       bool result = tree.is_present(43);
       return (result == true);
@@ -159,28 +159,28 @@ public:
       Node node6(33);
       Node node7(97);
       Node node8(4);
-      tree.add(&node2);
-      tree.add(&node3);
-      tree.add(&node4);
-      tree.add(&node5);
-      tree.add(&node6);
-      tree.add(&node7);
-      tree.add(&node8);
+      tree.insert(&node2);
+      tree.insert(&node3);
+      tree.insert(&node4);
+      tree.insert(&node5);
+      tree.insert(&node6);
+      tree.insert(&node7);
+      tree.insert(&node8);
       std::vector<int> a2 = tree.collect();
       return (a1 == a2);
     });
   }
 
-  void test_add() {
+  void test_insert() {
     Spec spec;
-    spec.it("add root node to empty tree", DO_SPEC {
+    spec.it("insert root node to empty tree", DO_SPEC {
         Tree tree = Tree();
         Node root(13);
-        tree.add(&root);
+        tree.insert(&root);
         return (tree.root == &root);
     });
 
-    spec.it("Testing Tree.add", DO_SPEC {
+    spec.it("Testing Tree.insert", DO_SPEC {
       Node node(20);
       Tree tree(&node);
       Node node2(43);
@@ -189,12 +189,12 @@ public:
       Node node5(15);
       Node node6(33);
       Node node7(97);
-      tree.add(&node2);
-      tree.add(&node3);
-      tree.add(&node4);
-      tree.add(&node5);
-      tree.add(&node6);
-      tree.add(&node7);
+      tree.insert(&node2);
+      tree.insert(&node3);
+      tree.insert(&node4);
+      tree.insert(&node5);
+      tree.insert(&node6);
+      tree.insert(&node7);
       return (tree.root->right->left == &node6);
     });
   }
@@ -228,9 +228,9 @@ public:
       Node node2(1);
       Node node3(2);
       Node node17(17);
-      tree.add(&node2);
-      tree.add(&node3);
-      tree.add(&node17);
+      tree.insert(&node2);
+      tree.insert(&node3);
+      tree.insert(&node17);
       return (tree.maximum() == &node17);
     });
   }
@@ -243,8 +243,8 @@ public:
       Tree tree(&root);
       Node node2(1);
       Node node3(2);
-      tree.add(&node2);
-      tree.add(&node3);
+      tree.insert(&node2);
+      tree.insert(&node3);
       return (tree.minimum() == &node2);
     });
   }
@@ -259,7 +259,7 @@ public:
     });
 
     Node root(13);
-    tree.add(&root);
+    tree.insert(&root);
     spec.it("height of tree with single node is 0", [&]() {
         return (tree.height() == 0);
     });
@@ -276,15 +276,15 @@ public:
       return (tree.size() == 0);
     });
 
-    tree.add(&root);
+    tree.insert(&root);
     spec.it("tree with root node only is size 1", [&]() {
       return (tree.size() == 1);
     });
 
     Node n17(17);
     Node n3(3);
-    tree.add(&n3);
-    tree.add(&n17);
+    tree.insert(&n3);
+    tree.insert(&n17);
     spec.it("node with left and right child", [&]() {
         return (tree.size() == 3);
     });
@@ -295,7 +295,7 @@ public:
     Spec spec;
     Tree tree = Tree();
     Node root = Node(17);
-    tree.add(&root);
+    tree.insert(&root);
 
     spec.it("tree with single node is bst", [&]() {
         return tree.is_bst() == true;
@@ -305,7 +305,7 @@ public:
   // my own edification b/c I reach for new and delete
   void test_unique_ptr(void) {
     Spec spec;
-    spec.it("Testing Tree.add", DO_SPEC {
+    spec.it("Testing Tree.insert", DO_SPEC {
       // std::unique_ptr<Node> node(new Node(20));
       Node node(20);
       Tree tree(&node);
@@ -315,19 +315,19 @@ public:
       Node node5(15);
       Node node6(33);
       Node node7(97);
-      tree.add(&node2);
-      tree.add(&node3);
-      tree.add(&node4);
-      tree.add(&node5);
-      tree.add(&node6);
-      tree.add(&node7);
+      tree.insert(&node2);
+      tree.insert(&node3);
+      tree.insert(&node4);
+      tree.insert(&node5);
+      tree.insert(&node6);
+      tree.insert(&node7);
       return (tree.root->right->left == &node6);
     });
   }
 
   void runTest() {
     test_instantiation();
-    test_add();
+    test_insert();
     test_size();
     test_height();
     test_successor();
