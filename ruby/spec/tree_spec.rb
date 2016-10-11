@@ -33,15 +33,15 @@ describe Tree do
       tree = Tree.new node
       tree.insert Node.new(2)
       expect(tree.size).to eq 2
-      expect(tree.root.left.value).to eq 2
+      expect(tree.root.left.key).to eq 2
 
       tree.insert Node.new(33)
       expect(tree.size).to eq 3
-      expect(tree.root.right.value).to eq 33
+      expect(tree.root.right.key).to eq 33
 
       tree.insert Node.new(23)
       expect(tree.size).to eq 4
-      expect(tree.root.right.left.value).to eq 23
+      expect(tree.root.right.left.key).to eq 23
     end
   end
 
@@ -260,15 +260,15 @@ describe Tree do
     end
   end
 
-  describe 'collect node values with in-order traversal' do
-    it 'collects node values for single node' do
+  describe 'collect node keys with in-order traversal' do
+    it 'collects node keys for single node' do
       node = Node.new(9)
       tree = Tree.new node
       expect(tree.size).to eq 1
       expect(tree.collect).to eq [9]
     end
 
-    it 'collects node values for left node only' do
+    it 'collects node keys for left node only' do
       node = Node.new(9)
       tree = Tree.new node
       tree.insert Node.new(4)
@@ -276,7 +276,7 @@ describe Tree do
       expect(tree.collect).to eq [4, 9]
     end
 
-    it 'collects node values for right node only' do
+    it 'collects node keys for right node only' do
       node = Node.new(9)
       tree = Tree.new node
       tree.insert Node.new(14)
@@ -284,7 +284,7 @@ describe Tree do
       expect(tree.collect).to eq [9, 14]
     end
 
-    it 'collects node values' do
+    it 'collects node keys' do
       node = Node.new(1)
       tree = Tree.new node
       tree.insert Node.new(14)
@@ -384,16 +384,16 @@ describe Tree do
         tree.insert noder
 
         expected = {
-          'value' => node.value,
+          'key' => node.key,
           'uuid' => node.uuid,
           'left' => {
-            'value' => nodel.value,
+            'key' => nodel.key,
             'uuid' => nodel.uuid,
             'left' => nil,
             'right' => nil
           },
           'right' => {
-            'value' => noder.value,
+            'key' => noder.key,
             'uuid' => noder.uuid,
             'left' => nil,
             'right' => nil
@@ -409,7 +409,7 @@ describe Tree do
         root = Node.new(8)
         allow(root).to receive(:uuid).and_return('uuid')
         tree = Tree.new root
-        expected = '{"value":8,"uuid":"uuid","left":null,"right":null}'
+        expected = '{"key":8,"uuid":"uuid","left":null,"right":null}'
         expect(tree.to_json).to eq expected
       end
     end

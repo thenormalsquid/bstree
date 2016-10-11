@@ -31,14 +31,14 @@ class Tree
 
   def collect
     collector = []
-    get_values @root, collector
+    get_keys @root, collector
     collector
   end
 
-  def get_values node, collector
-    get_values node.left, collector if node.left
-    collector << node.value
-    get_values node.right, collector if node.right
+  def get_keys node, collector
+    get_keys node.left, collector if node.left
+    collector << node.key
+    get_keys node.right, collector if node.right
   end
 
   def search key
@@ -110,6 +110,6 @@ class Tree
   def bfsearch
     rows = [[root]]
     rows << get_next_row(rows.last) until rows.last.empty?
-    rows.flatten.map(&:value)
+    rows.flatten.map(&:key)
   end
 end
