@@ -155,19 +155,19 @@ describe Node do
   end
 
   describe 'comparators' do
-    it 'compares values with <' do
+    it 'compares keys with <' do
       node1 = Node.new(1)
       node2 = Node.new(2)
       expect(node1 < node2).to be true
     end
 
-    it 'compares values with >=' do
+    it 'compares keys with >=' do
       node1 = Node.new(1)
       node2 = Node.new(2)
       expect(node1 >= node2).to be false
     end
 
-    it 'compares values with >' do
+    it 'compares keys with >' do
       node1 = Node.new(1)
       node2 = Node.new(2)
       expect(node1 > node2).to be false
@@ -528,7 +528,7 @@ describe Node do
       right = Node.new 4
       root.insert left
       root.insert right
-      expected = [root.value, left.uuid, right.uuid]
+      expected = [root.key, left.uuid, right.uuid]
       expect(root.to_a).to eq expected
     end
 
@@ -538,7 +538,7 @@ describe Node do
       node3 = Node.new 3
       node1.insert node2
       node1.insert node3
-      expected = [node1.value, node2.uuid, nil]
+      expected = [node1.key, node2.uuid, nil]
       expect(node1.to_a).to eq expected
     end
   end
@@ -552,16 +552,16 @@ describe Node do
       node.insert noder
 
       expected = {
-        'value' => node.value,
+        'key' => node.key,
         'uuid' => node.uuid,
         'left' => {
-          'value' => nodel.value,
+          'key' => nodel.key,
           'uuid' => nodel.uuid,
           'left' => nil,
           'right' => nil
         },
         'right' => {
-          'value' => noder.value,
+          'key' => noder.key,
           'uuid' => noder.uuid,
           'left' => nil,
           'right' => nil
@@ -577,7 +577,7 @@ describe Node do
       node = Node.new(8)
       new_node = Node.build_from_hash node.to_hash
       expect(new_node.uuid).to eq node.uuid
-      expect(new_node.value).to eq node.value
+      expect(new_node.key).to eq node.key
     end
 
     it 'builds a tree from a root node nested hashes' do
@@ -588,11 +588,11 @@ describe Node do
       root.insert right
       new_node = Node.build_from_hash root.to_hash
       expect(new_node.uuid).to eq root.uuid
-      expect(new_node.value).to eq root.value
+      expect(new_node.key).to eq root.key
       expect(new_node.left.uuid).to eq left.uuid
-      expect(new_node.left.value).to eq left.value
+      expect(new_node.left.key).to eq left.key
       expect(new_node.right.uuid).to eq right.uuid
-      expect(new_node.right.value).to eq right.value
+      expect(new_node.right.key).to eq right.key
     end
   end
 
@@ -600,7 +600,7 @@ describe Node do
     it 'creates a json representation of the node' do
       node = Node.new(8)
       allow(node).to receive(:uuid).and_return('uuid')
-      expected = '{"value":8,"uuid":"uuid","left":null,"right":null}'
+      expected = '{"key":8,"uuid":"uuid","left":null,"right":null}'
       expect(node.to_json).to eq expected
     end
   end

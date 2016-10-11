@@ -4,32 +4,32 @@ require 'csv'
 
 class NodeCsvWriter
   def initialize node
-    [node.value, node.left.uuid, node.right.uuid]
+    [node.key, node.left.uuid, node.right.uuid]
   end
 end
 
 class Node
   attr_accessor :left, :right, :uuid
-  attr_accessor :value
+  attr_accessor :key
 
   INCR = 1
   DECR = -1
 
-  def initialize value = nil, uuid = nil
-    @value = value
+  def initialize key = nil, uuid = nil
+    @key = key
     @uuid = uuid || SecureRandom.uuid
   end
 
   def < other
-    @value < other.value
+    @key < other.key
   end
 
   def >= other
-    @value >= other.value
+    @key >= other.key
   end
 
   def > other
-    @value > other.value
+    @key > other.key
   end
 
   def insert node
@@ -100,18 +100,18 @@ class Node
   end
 
   def find_with_parent key, parent
-    return [self, parent] if key == value
-    key < value ? left&.find_with_parent(key, self) : right&.find_with_parent(key, self)
+    return [self, parent] if key == @key
+    key < @key ? left&.find_with_parent(key, self) : right&.find_with_parent(key, self)
   end
 
   def find key
-    return self if key == value
-    key < value ? left&.find(key) : right&.find(key)
+    return self if key == @key
+    key < @key ? left&.find(key) : right&.find(key)
   end
 
   def present? key
-    return true if key == value
-    key < value ? left&.present?(key) : right&.present?(key)
+    return true if key == @key
+    key < @key ? left&.present?(key) : right&.present?(key)
   end
 
   def balanced?
@@ -131,8 +131,8 @@ class Node
   def bst?
     minimum = -10000 # fixme
     in_order_traverse do |node|
-      return false if minimum >= node.value
-      minimum = node.value
+      return false if minimum >= node.key
+      minimum = node.key
       true
     end
   end
@@ -154,7 +154,7 @@ class Node
 
   def self.build_from_hash params
     return nil if params.nil?
-    node = new(params['value'], params['uuid'])
+    node = new(params['key'], params['uuid'])
     node.left = build_from_hash(params['left'])
     node.right = build_from_hash(params['right'])
     node
@@ -162,7 +162,7 @@ class Node
 
   def to_hash
     {
-      'value' => value,
+      'key' => key,
       'uuid' => uuid,
       'left' => left&.to_hash,
       'right' => right&.to_hash
@@ -175,6 +175,6 @@ class Node
   end
 
   def to_a
-    [value, @left&.uuid, @right&.uuid]
+    [key, @left&.uuid, @right&.uuid]
   end
 end
