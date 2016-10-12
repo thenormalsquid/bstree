@@ -10,9 +10,9 @@ void Tree::insert(Node * node) {
   this->root->insert(node);
 }
 
-Node * Tree::find(int value) {
+Node * Tree::find(int key) {
   if (root == nullptr) return nullptr;
-  return find_node(value, root);
+  return find_node(key, root);
 }
 
 Node * Tree::maximum(void) {
@@ -50,32 +50,32 @@ bool Tree::is_bst() {
   return this->root->is_bst();
 }
 
-bool Tree::is_present(int value) {
-  return this->root->is_present(value);
+bool Tree::is_present(int key) {
+  return this->root->is_present(key);
 }
 
 // TODO: move the guts of this method to Node class
-Node * Tree::find_node(int value, Node * node) {
+Node * Tree::find_node(int key, Node * node) {
   if (node == nullptr) return node;
-  if (node->value == value) return node;
+  if (node->key == key) return node;
 
-  if (node->left != nullptr && value < node->value) {
-    return find_node(value, node->left);
+  if (node->left != nullptr && key < node->key) {
+    return find_node(key, node->left);
   } else if (node->right != nullptr) {
-    return find_node(value, node->right);
+    return find_node(key, node->right);
   }
   return nullptr;
 }
 
 std::vector<int> Tree::collect() {
-  collect_values(root);
-  return values;
+  collect_keys(root);
+  return keys;
 }
 
 // TODO: move to Node class
-void Tree::collect_values(Node * node) {
+void Tree::collect_keys(Node * node) {
   get_left(node);
-  values.push_back(node->value);
+  keys.push_back(node->key);
   get_right(node);
 }
 
@@ -83,7 +83,7 @@ void Tree::get_left(Node * node) {
   if (node->left == nullptr) {
     return;
   } else {
-    collect_values(node->left);
+    collect_keys(node->left);
   }
 }
 
@@ -91,6 +91,6 @@ void Tree::get_right(Node * node) {
   if (node->right == nullptr) {
     return;
   } else {
-    collect_values(node->right);
+    collect_keys(node->right);
   }
 }
