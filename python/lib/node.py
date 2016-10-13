@@ -1,5 +1,4 @@
 class Node(object):
-
     def __init__(self, key):
         self.key = key
         self.left = None
@@ -13,6 +12,24 @@ class Node(object):
         # elmininated from this class.
         # UPDATE: changing, s/p/parent/ for better readability.
         self.parent = None
+
+    def max(self, left, right):
+        if left > right:
+            return left
+        else:
+            return right
+
+    def height(self):
+        if self.left is not None and self.right is not None:
+            return self.max(self.left.height(), self.right.height()) + 1
+
+        if self.left is None and self.right is not None:
+            return self.max(0, self.right.height()) + 1
+
+        if self.left is not None and self.right is None:
+            return self.max(self.left.height(), 0) + 1
+
+        return 1
 
     def collect(self, collector):
         if self.left is None:
@@ -53,7 +70,7 @@ class Node(object):
                 return self.right.find(key)
 
     def find_with_parent(self, key, parent=None):
-        print "in find_with_parent, key: %d" % key
+        # print "in find_with_parent, key: %d" % key
         if self.key == key:
             return self, parent
 

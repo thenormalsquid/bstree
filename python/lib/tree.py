@@ -123,6 +123,13 @@ class Tree(object):
 
     # TODO: move the logic into the Node class
     def get_height(self, node):
+
+        if self.root is None:
+            return 0
+        else:
+            return self.root.height()
+
+        # What's below can be deleted.
         if node is None:
             return self.current
 
