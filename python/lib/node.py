@@ -29,7 +29,7 @@ class Node(object):
         if self.left is not None and self.right is None:
             return self.max(self.left.height(), 0) + 1
 
-        return 1
+        return 0
 
     def collect(self, collector):
         if self.left is None:
