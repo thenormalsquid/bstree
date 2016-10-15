@@ -23,15 +23,15 @@ public:
   int size(void);
   int height(void);
 
-  bool is_present(int value);
+  bool is_present(int key);
 
   Node * root;
-  std::vector<int> values;
+  std::vector<int> keys;
 
 private:
-  Node * find_node(int value, Node * node);
+  Node * find_node(int key, Node * node);
 
-  void collect_values(Node * node);
+  void collect_keys(Node * node);
   void get_left(Node * node);
   void get_right(Node * node);
 

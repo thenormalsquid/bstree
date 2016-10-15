@@ -4,7 +4,7 @@
 #include <node.h>
 
 void Node::insert(Node * node) {
-  if (node->value < this->value) {
+  if (node->key < this->key) {
     insert_left(node);
   } else {
     insert_right(node);
@@ -29,8 +29,8 @@ void Node::insert_right(Node * node) {
 
 bool Node::get_is_bst(int minimum, bool result) {
   if (this->left != nullptr) { result = this->left->get_is_bst(minimum, result); }
-  if (minimum >= this->value) { return false; }
-  minimum = this->value;
+  if (minimum >= this->key) { return false; }
+  minimum = this->key;
   if (this->right != nullptr) { result = this->right->get_is_bst(minimum, result); }
   return result;
 }
@@ -39,13 +39,13 @@ bool Node::is_bst() {
   return get_is_bst(-10000, true);
 }
 
-bool Node::is_present(int value) {
-  if (this->value == value) return true;
+bool Node::is_present(int key) {
+  if (this->key == key) return true;
 
-  if (this->left != nullptr && value < this->left->value) {
-    return left->is_present(value);
+  if (this->left != nullptr && key < this->left->key) {
+    return left->is_present(key);
   } else if (this->right != nullptr) {
-    return right->is_present(value);
+    return right->is_present(key);
   }
   return false;
 }
@@ -61,7 +61,7 @@ Node * Node::get_successor(Node * node, Node * parent, Node * successor) {
     }
   }
 
-  if (node->value < this->value) {
+  if (node->key < this->key) {
     if (this->left != nullptr) {
       return this->left->get_successor(node, this, successor);
     }
@@ -87,7 +87,7 @@ Node * Node::get_predecessor(Node * node, Node * parent, Node * predecessor) {
     }
   }
 
-  if (node->value < this->value) {
+  if (node->key < this->key) {
     if (this->left != nullptr) {
       return this->left->get_predecessor(node, this, predecessor);
     }

@@ -134,34 +134,34 @@ class TestNode(unittest.TestCase):
 
     def test_height_and_size(self):
         root = Node(8)
-        # assert root.height() == 1
+        assert root.height() == 0
         assert root.size() == 1
 
         node_l1 = Node(4)
         root.insert(node_l1)
-        # assert root.height() == 2
+        assert root.height() == 1
         assert root.size() == 2
 
         node_r1 = Node(12)
         root.insert(node_r1)
-        # assert root.height() == 2
+        assert root.height() == 1
         assert root.size() == 3
 
         node_l2 = Node(2)
         root.insert(node_l2)
-        # assert root.height() == 3
+        assert root.height() == 2
         assert root.size() == 4
         assert node_l1.size() == 2
         assert node_l2.size() == 1
 
         node_l3 = Node(1)
         root.insert(node_l3)
-        # assert root.height() == 4
+        assert root.height() == 3
         assert root.size() == 5
 
         node_r3 = Node(3)
         root.insert(node_r3)
-        # assert root.height() == 4
+        assert root.height() == 3
         assert root.size() == 6
 
     def test_successor_and_predecessor(self):

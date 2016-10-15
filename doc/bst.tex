@@ -618,6 +618,7 @@ Test cases:
 \item deletes leaf node in tree with height greater than 1
 \item deletes nil when key is not in the tree
 \item deletes the entire tree node-by-node
+\item deleted node has key, left and right set to nil
 \end{enumerate}
 
 
@@ -752,8 +753,9 @@ obtain
 
 \begin{align}
 F(z) - zF(z) & = z + z^3 + z^4 + 2z^5 + 3z^6 +\cdots\\
-        F(z) & = z + zF(z) + z^2(0 + z + z^2 + 2Z^3 + 3z^4 +\cdots)\\
-             & = z + zF(z) + z^zF(z).
+F(z) - zF(z) & = z + z^2(0 + z + z^2 + 2Z^3 + 3z^4 +\cdots)\\
+             & = z + z^2F(z)\\
+        F(z) & = \frac{z}{1-z-z^2}.
 \end{align}
 
 

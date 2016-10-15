@@ -17,9 +17,9 @@ public:
     Spec spec;
     // spec.it("Testing Node instantiation", DO_SPEC_HANDLE {
     spec.it("Testing Node instantiation", [&]()->bool {
-      int value = 1;
-      Node node(value);
-      return (node.value == value);
+      int key = 1;
+      Node node(key);
+      return (node.key == key);
     });
   }
 
@@ -50,7 +50,7 @@ public:
       Node node3(2);
       node.insert(&node2);
       node.insert(&node3);
-      return (node.left->right->value == 2);
+      return (node.left->right->key == 2);
     });
   }
 
@@ -101,7 +101,7 @@ public:
       root.insert(&node4);
 
       bool result = root.is_present(43);
-      // TODO: refactor tree building so that other values
+      // TODO: refactor tree building so that other keys
       // can be tested for presence.
       return (result == true);
     });

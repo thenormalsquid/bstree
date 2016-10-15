@@ -45,7 +45,7 @@ public:
     spec.it("instantiaton with Node", DO_SPEC {
       Node root(1);
       Tree tree(&root);
-      return (tree.root->value == root.value);
+      return (tree.root->key == root.key);
     });
   }
 
@@ -60,7 +60,7 @@ public:
       tree.insert(&node3);
 
       Node * n = tree.find(43);
-      return (n->value == node2.value);
+      return (n->key == node2.key);
     });
   }
 
@@ -75,7 +75,7 @@ public:
       tree.insert(&node3);
 
       Node * n = tree.find(8);
-      return (n->value == node3.value);
+      return (n->key == node3.key);
     });
   }
 
@@ -90,7 +90,7 @@ public:
       tree.insert(&node3);
 
       Node * n = tree.find(25);
-      return (n->value == node.value);
+      return (n->key == node.key);
     });
   }
 
@@ -117,7 +117,7 @@ public:
       tree.insert(&node8);
 
       Node * n = tree.find(43);
-      return (n->value == node2.value);
+      return (n->key == node2.key);
     });
   }
 
