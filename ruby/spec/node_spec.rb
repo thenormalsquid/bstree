@@ -28,6 +28,13 @@ describe Node do
     end
   end
 
+  describe 'list_keys' do
+    it 'collects key from single node' do
+      node = Node.new 17
+      expect(node.list_keys).to eq [17]
+    end
+  end
+
   describe '.delete' do
     it 'returns the root node when specified for deletion' do
       root = Node.new(9)

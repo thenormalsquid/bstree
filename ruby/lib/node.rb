@@ -145,6 +145,14 @@ class Node
     left&.minimum || self
   end
 
+  def collect collector
+    in_order_traverse { |node| collector << node.key }
+  end
+
+  def list_keys
+    collect []
+  end
+
   def in_order_traverse &block
     left&.in_order_traverse(&block)
     result = yield(self)
