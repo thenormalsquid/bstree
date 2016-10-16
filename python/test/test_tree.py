@@ -75,35 +75,34 @@ class TestTree(unittest.TestCase):
         assert node.is_present(33) is True
         assert node.is_present(34) is None
 
-    def test_height_and_size(self):
-        root = Node(8)
+    def test_height(self):
+        root = Node(17)
         tree = Tree(root)
         assert tree.height() == 0
+
+    def test_size(self):
+        root = Node(8)
+        tree = Tree(root)
         assert tree.size() == 1
 
         node_l1 = Node(4)
         tree.insert(node_l1)
-        assert tree.height() == 1
         assert tree.size() == 2
 
         node_r1 = Node(12)
         tree.insert(node_r1)
-        assert tree.height() == 1
         assert tree.size() == 3
 
         node_l2 = Node(2)
         tree.insert(node_l2)
-        assert tree.height() == 2
         assert tree.size() == 4
 
         node_l3 = Node(1)
         tree.insert(node_l3)
-        assert tree.height() == 3
         assert tree.size() == 5
 
         node_r3 = Node(3)
         tree.insert(node_r3)
-        assert tree.height() == 3
         assert tree.size() == 6
 
     def test_maximum_and_minimum(self):

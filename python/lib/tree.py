@@ -21,6 +21,8 @@ class Tree(object):
     def collect(self, collector):
         self.root.collect(collector)
 
+    # TODO: rename to list_keys() and move functionality
+    # to the node class.
     def to_a(self):
         collector = []
         self.collect(collector)
@@ -39,7 +41,9 @@ class Tree(object):
         return self.root.is_bst()
 
     def height(self):
-        return self.get_height(self.root)
+        if self.root is None:
+            return 0
+        return self.root.height()
 
     def successor(self, node):
         return self.root.successor(node)
@@ -47,12 +51,12 @@ class Tree(object):
     def predecessor(self, node):
         return self.root.predecessor(node)
 
-    # Refactored and renamed from CLR. The CLR code is very
+    # Refactored and renamed from CLR. The CLR code is a little
     # difficult to follow as it has a lot of conditional statements
     # and single letter temporary nodes (x, y, z).
     def clr_delete(self, node):
         # for sanity checking as delete method is refactored
-        return self.clr_delete_original(node)
+        # return self.clr_delete_original(node)
 
         # z = self.root.find(node.key)
 
