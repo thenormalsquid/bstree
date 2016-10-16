@@ -16,6 +16,12 @@ class TestTree(unittest.TestCase):
         tree = Tree(node)
         assert tree.root == node
 
+    def test_is_empty(self):
+        root = Node(17)
+        tree = Tree(root)
+        tree.root = None
+        assert tree.is_empty()
+
     def test_insert(self):
         root = Node(17)
         tree = Tree(root)

@@ -6,6 +6,9 @@ class Tree(object):
     def __init__(self, node):
         self.root = node
 
+    def is_empty(self):
+        return bool(self.root is None)
+
     def insert(self, node):
         self.root.insert(node)
 
