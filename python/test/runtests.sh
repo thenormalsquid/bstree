@@ -2,5 +2,6 @@
 
 for i in test_*.py
 do
-./$i
+  echo $i
+  ./$i
 done

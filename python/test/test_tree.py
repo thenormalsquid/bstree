@@ -17,11 +17,13 @@ class TestTree(unittest.TestCase):
         assert tree.root == node
 
     def test_insert(self):
-        node = Node(8)
-        tree = Tree(node)
-        node_l1 = Node(4)
-        tree.insert(node_l1)
-        assert tree.root.left == node_l1
+        root = Node(17)
+        tree = Tree(root)
+        n5 = Node(5)
+        tree.insert(n5)
+        assert tree.root.left == n5
+        assert tree.root.left == n5
+        assert tree.root.right is None
 
     def test_collect(self):
         node = Node(8)

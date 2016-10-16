@@ -57,6 +57,7 @@ class Tree(object):
 
         if z.left and z.right:
             node_to_delete = self.root.successor(z)
+            # This is where to swap the nodes
             z.key = node_to_delete.key
         else:
             node_to_delete = z
@@ -117,10 +118,5 @@ class Tree(object):
         return y
 
     def to_json(self):
-        print json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
-
-    def get_height(self, node):
-        if self.root is None:
-            return 0
-        else:
-            return self.root.height()
+        return True
+        # print json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
