@@ -9,7 +9,7 @@ class NodeCsvWriter
 end
 
 class Node
-  attr_accessor :left, :right, :uuid
+  attr_accessor :parent, :left, :right, :uuid
   attr_accessor :key
 
   INCR = 1
@@ -33,15 +33,25 @@ class Node
   end
 
   def insert node
-    node < self ? insertleft(node) : insertright(node)
+    node < self ? insert_left(node) : insert_right(node)
   end
 
-  def insertleft node
-    @left.nil? ? @left = node : @left.insert(node)
+  def insert_left node
+    if @left.nil?
+      node.parent = self
+      @left = node
+    else
+      @left.insert(node)
+    end
   end
 
-  def insertright node
-    @right.nil? ? @right = node : @right.insert(node)
+  def insert_right node
+    if @right.nil?
+      node.parent = self
+      @right = node
+    else
+      @right.insert(node)
+    end
   end
 
   def get_predecessor node, parent, predecessor
@@ -79,6 +89,7 @@ class Node
   end
 
   def height
+    raise if left && left == self || right && right == self # stack overflow
     self.class.max(left&.height || -1, right&.height || -1) + 1
   end
 
