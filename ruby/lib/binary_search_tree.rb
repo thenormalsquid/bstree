@@ -80,9 +80,12 @@ module BinarySearchTree
   end
 
   def collect collector
-    left&.collect collector
-    collector.push @key
-    right&.collect collector
+    in_order_traverse { |node| collector.push node.key }
+    collector
+  end
+
+  def list_keys
+    collect []
   end
 
   # TODO: rewrite this using `dig` below

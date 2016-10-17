@@ -299,6 +299,12 @@ describe BinarySearchTree do
       end
     end
 
+    describe 'list_keys' do
+      it 'lists the keys in correct order' do
+        expect(@root.list_keys).to eq expected
+      end
+    end
+
     describe '.size' do
       it 'finds the size on the fly' do
         expect(@root.size).to eq 8
