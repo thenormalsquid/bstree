@@ -65,7 +65,7 @@ describe Node do
       expect(n14.left.nil?).to be true
       expect(n14.right.nil?).to be true
       expect(root.right).to eq n23
-      # expect(root.size).to eq 2
+      expect(root.size).to eq 2
     end
 
     it 'reassigns right subtree on deletion' do
@@ -110,7 +110,7 @@ describe Node do
       # delete a leaf node
       expect(root.delete(13)).to eq n13
       expect(n31.left).to be nil
-      # expect(root.size).to eq 5
+      expect(root.size).to eq 5
     end
 
     it 'promotes left node on deletion' do
@@ -349,31 +349,35 @@ describe Node do
   end
 
   # require_relative 'shared_height_examples'
-  describe '.height' do
+  describe '.height and size' do
     shared_examples 'height' do
       it 'finds the height of single node tree' do
-        node = Node.new(9)
-        expect(node.height).to eq 0
+        root = Node.new(9)
+        expect(root.height).to eq 0
+        expect(root.size).to eq 1
       end
     end
 
     it_has_behavior 'height'
 
     it 'finds the height of single node tree' do
-      node = Node.new(9)
-      expect(node.height).to eq 0
+      root = Node.new(9)
+      expect(root.height).to eq 0
+      expect(root.size).to eq 1
     end
 
     it 'finds the height of two node tree with right child' do
       node = Node.new(9)
       node.insert Node.new(14)
       expect(node.height).to eq 1
+      expect(node.size).to eq 2
     end
 
     it 'finds the height of two node tree with left child' do
       node = Node.new(9)
       node.insert Node.new(4)
       expect(node.height).to eq 1
+      expect(node.size).to eq 2
     end
 
     it 'finds the height of three node tree' do
@@ -381,6 +385,7 @@ describe Node do
       node.insert Node.new(14)
       node.insert Node.new(4)
       expect(node.height).to eq 1
+      expect(node.size).to eq 3
     end
 
     it 'finds the height of four node tree with two left children' do
@@ -389,6 +394,7 @@ describe Node do
       node.insert Node.new(4)
       node.insert Node.new(2)
       expect(node.height).to eq 2
+      expect(node.size).to eq 4
     end
 
     it 'finds height for arbitrary tree' do
@@ -400,6 +406,7 @@ describe Node do
       node.insert Node.new(99)
       node.insert Node.new(78)
       expect(node.height).to eq 4
+      expect(node.size).to eq 7
     end
   end
 

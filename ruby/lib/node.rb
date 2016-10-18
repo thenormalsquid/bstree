@@ -164,10 +164,29 @@ class Node
     collect []
   end
 
+  def size
+    size = 0
+    post_order_traverse { size += 1 }
+    size
+  end
+
   def in_order_traverse &block
     left&.in_order_traverse(&block)
     result = yield(self)
     right&.in_order_traverse(&block)
+    result
+  end
+
+  def post_order_traverse &block
+    left&.post_order_traverse(&block)
+    right&.post_order_traverse(&block)
+    yield(self)
+  end
+
+  def pre_order_traverse &block
+    result = yield(self)
+    left&.pre_order_traverse(&block)
+    right&.pre_order_traverse(&block)
     result
   end
 
