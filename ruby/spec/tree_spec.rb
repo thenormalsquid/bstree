@@ -120,12 +120,13 @@ describe Tree do
     end
   end
 
-  describe 'collect node keys with in-order traversal' do
+  describe 'collect and list keys with in-order traversal' do
     it 'collects node keys for single node' do
       node = Node.new(9)
       tree = Tree.new node
       expect(tree.size).to eq 1
-      expect(tree.collect).to eq [9]
+      expect(tree.collect([])).to eq [9]
+      expect(tree.list_keys).to eq [9]
     end
 
     it 'collects node keys for left node only' do
@@ -133,7 +134,8 @@ describe Tree do
       tree = Tree.new node
       tree.insert Node.new(4)
       expect(tree.size).to eq 2
-      expect(tree.collect).to eq [4, 9]
+      expect(tree.collect([])).to eq [4, 9]
+      expect(tree.list_keys).to eq [4, 9]
     end
 
     it 'collects node keys for right node only' do
@@ -141,7 +143,8 @@ describe Tree do
       tree = Tree.new node
       tree.insert Node.new(14)
       expect(tree.size).to eq 2
-      expect(tree.collect).to eq [9, 14]
+      expect(tree.collect([])).to eq [9, 14]
+      expect(tree.list_keys).to eq [9, 14]
     end
 
     it 'collects node keys' do
@@ -153,7 +156,8 @@ describe Tree do
       tree.insert Node.new(5)
       tree.insert Node.new(99)
       expect(tree.size).to eq 6
-      expect(tree.collect).to eq [1, 4, 5, 14, 23, 99]
+      expect(tree.collect([])).to eq [1, 4, 5, 14, 23, 99]
+      expect(tree.list_keys).to eq [1, 4, 5, 14, 23, 99]
     end
   end
 

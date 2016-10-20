@@ -33,6 +33,18 @@ describe Node do
       node = Node.new 17
       expect(node.list_keys).to eq [17]
     end
+
+    it 'collect keys from several nodes' do
+      root = Node.new 17
+      root.insert Node.new 5
+      expect(root.list_keys).to eq [5, 17]
+      root.insert Node.new 23
+      expect(root.list_keys).to eq [5, 17, 23]
+      root.insert Node.new 3
+      expect(root.list_keys).to eq [3, 5, 17, 23]
+      root.insert Node.new 7
+      expect(root.list_keys).to eq [3, 5, 7, 17, 23]
+    end
   end
 
   describe '.delete' do

@@ -126,21 +126,11 @@ class Tree
   end
 
   def list_keys
-    collect
+    root&.list_keys or []
   end
 
-  def collect
-    collector = []
-    get_keys @root, collector
-    collector
-  end
-
-  def get_keys node, collector
-    raise if self == node.left
-    get_keys node.left, collector if node.left
-    collector << node.key
-    raise if self == node.right
-    get_keys node.right, collector if node.right
+  def collect collector
+    root&.collect [] || []
   end
 
   def search key
