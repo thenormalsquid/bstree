@@ -31,6 +31,11 @@ class Node(object):
 
         return 0
 
+    def list_keys(self):
+        collector = []
+        self.collect(collector)
+        return collector
+
     def collect(self, collector):
         if self.left is None:
             pass

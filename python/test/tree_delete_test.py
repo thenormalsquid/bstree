@@ -51,7 +51,7 @@ class TestTreeDelete(unittest.TestCase):
         assert tree.root.key == 23
         assert tree.root == root
         assert tree.is_bst() is True
-        assert tree.to_a() == [5, 23]
+        assert tree.list_keys() == [5, 23]
         assert tree.size() == 2
 
     def test_delete_right_leaf(self):
@@ -65,7 +65,7 @@ class TestTreeDelete(unittest.TestCase):
         assert result == n5
         assert tree.size() == 2
         assert tree.is_bst() is True
-        assert tree.to_a() == [17, 23]
+        assert tree.list_keys() == [17, 23]
 
     def test_delete_left_leaf(self):
         root = Node(17)
@@ -78,7 +78,7 @@ class TestTreeDelete(unittest.TestCase):
         assert result == n23
         assert tree.size() == 2
         assert tree.is_bst() is True
-        assert tree.to_a() == [5, 17]
+        assert tree.list_keys() == [5, 17]
 
 
     def test_delete_minimum(self):
@@ -106,7 +106,7 @@ class TestTreeDelete(unittest.TestCase):
         assert result == n2
         assert tree.size() == 9
         assert tree.is_bst() is True
-        assert tree.to_a() == [3, 5, 7, 11, 13, 17, 19, 23, 29]
+        assert tree.list_keys() == [3, 5, 7, 11, 13, 17, 19, 23, 29]
 
     def test_delete_maximum(self):
         root = Node(17)
@@ -133,7 +133,7 @@ class TestTreeDelete(unittest.TestCase):
         assert result == n29
         assert tree.size() == 9
         assert tree.is_bst() is True
-        assert tree.to_a() == [2, 3, 5, 7, 11, 13, 17, 19, 23]
+        assert tree.list_keys() == [2, 3, 5, 7, 11, 13, 17, 19, 23]
 
     def test_delete_left_singly_linked(self):
         root = Node(17)
@@ -160,7 +160,7 @@ class TestTreeDelete(unittest.TestCase):
         assert result == n7
         assert tree.size() == 9
         assert tree.is_bst() is True
-        assert tree.to_a() == [2, 3, 5, 11, 13, 17, 19, 23, 29]
+        assert tree.list_keys() == [2, 3, 5, 11, 13, 17, 19, 23, 29]
 
     def test_delete_right_internal(self):
         root = Node(17)
@@ -187,7 +187,7 @@ class TestTreeDelete(unittest.TestCase):
         assert result == n29
         assert tree.size() == 9
         assert tree.is_bst() is True
-        assert tree.to_a() == [2, 3, 5, 7, 11, 13, 17, 19, 29]
+        assert tree.list_keys() == [2, 3, 5, 7, 11, 13, 17, 19, 29]
 
 
     def test_delete_left_internal(self):
@@ -215,7 +215,7 @@ class TestTreeDelete(unittest.TestCase):
         assert result == n7
         assert tree.size() == 9
         assert tree.is_bst() is True
-        assert tree.to_a() == [2, 3, 7, 11, 13, 17, 19, 23, 29]
+        assert tree.list_keys() == [2, 3, 7, 11, 13, 17, 19, 23, 29]
 
     def test_delete_entire_tree(self):
         root = Node(17)
@@ -250,7 +250,7 @@ class TestTreeDelete(unittest.TestCase):
         assert n5.key == 7
         assert tree.size() == 9
         assert tree.is_bst() is True
-        assert tree.to_a() == [2, 3, 7, 11, 13, 17, 19, 23, 29]
+        assert tree.list_keys() == [2, 3, 7, 11, 13, 17, 19, 23, 29]
         tree.to_json()
         # We have a problem here using delete with a node argument:
         # nodes with two children swap values with the successor, which

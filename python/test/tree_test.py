@@ -31,6 +31,11 @@ class TestTree(unittest.TestCase):
         assert tree.root.left == n5
         assert tree.root.right is None
 
+    def test_list_keys(self):
+        root = Node(17)
+        tree = Tree(root)
+        assert tree.list_keys() == [17]
+
     def test_collect(self):
         node = Node(8)
         tree = Tree(node)

@@ -18,15 +18,14 @@ class Tree(object):
     def is_present(self, value):
         return self.root.is_present(value)
 
+    def list_keys(self):
+        if self.root is None:
+            return []
+        else:
+            return self.root.list_keys()
+
     def collect(self, collector):
         self.root.collect(collector)
-
-    # TODO: rename to list_keys() and move functionality
-    # to the node class.
-    def to_a(self):
-        collector = []
-        self.collect(collector)
-        return collector
 
     def size(self):
         return self.root.size()

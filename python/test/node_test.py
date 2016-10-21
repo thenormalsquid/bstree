@@ -32,6 +32,11 @@ class TestNode(unittest.TestCase):
         node.collect(collector)
         assert collector == [4, 8, 15, 25, 33]
 
+    def list_keys(self):
+        root = Node(17)
+        assert root.list_keys() == [17]
+
+
     def test_insert(self):
         node = Node(15)
         node_l1 = Node(8)
