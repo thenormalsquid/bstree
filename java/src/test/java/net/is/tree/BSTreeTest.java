@@ -220,7 +220,7 @@ public class BSTreeTest extends TestCase {
     public void testInsert() {
         Node root = new Node(11);
         BSTree tree = new BSTree(root);
-        assertEquals(11, tree.root.value);
+        assertEquals(11, tree.root.key);
 
         Node left = new Node(7);
         Node right = new Node(13);
@@ -240,7 +240,7 @@ public class BSTreeTest extends TestCase {
     public void testInstantiation() {
       Node root = new Node(11);
       BSTree tree = new BSTree(root);
-      assertEquals(11, tree.root.value);
+      assertEquals(11, tree.root.key);
     }
 
     public BSTreeTest( String testName ) {

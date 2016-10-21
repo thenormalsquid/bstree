@@ -6,7 +6,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 class Node {
-    public int value;
+    public int key;
     public Node left = null;
     public Node right = null;
 
@@ -21,7 +21,7 @@ class Node {
         }
       }
 
-      if (node.value < this.value) {
+      if (node.key < this.key) {
         return left.get_predecessor(node, this, predecessor);
       } else {
         return right.get_predecessor(node, this, predecessor);
@@ -45,7 +45,7 @@ class Node {
         }
       }
 
-      if (node.value < this.value) {
+      if (node.key < this.key) {
         return left.get_successor(node, this, successor);
       } else {
         return right.get_successor(node, this, successor);
@@ -87,10 +87,10 @@ class Node {
 
     private boolean get_is_bst(int minimum, boolean result) {
       if (this.left != null) { result = this.left.get_is_bst(minimum, result); }
-      if (minimum >= this.value) {
+      if (minimum >= this.key) {
         result = false;
       }
-      minimum = this.value;
+      minimum = this.key;
       if (this.right != null) { result = this.right.get_is_bst(minimum, result); }
       return result;
     }
@@ -116,9 +116,9 @@ class Node {
     }
 
     public Node search(int key) {
-      if (this.value == key) { return this; }
+      if (this.key == key) { return this; }
 
-      if (key < this.value) {
+      if (key < this.key) {
         if (this.left != null) {
           return this.left.search(key);
         }
@@ -131,9 +131,9 @@ class Node {
     }
 
     public boolean is_present(int key) {
-      if (this.value == key) { return true; }
+      if (this.key == key) { return true; }
 
-      if (key < this.value) {
+      if (key < this.key) {
         if (this.left != null) {
           return this.left.is_present(key);
         }
@@ -148,7 +148,7 @@ class Node {
     // so...wordy...maybe change to ternary with
     // a couple of private calls with ternaries
     public void insert(Node node) {
-        if (node.value < this.value) {
+        if (node.key < this.key) {
             if (left == null) {
               left = node;
             } else {
@@ -165,12 +165,12 @@ class Node {
 
     public void collect(ArrayList<Integer> collector) {
       if (this.left != null) { this.left.collect(collector); }
-      collector.add(this.value);
+      collector.add(this.key);
       if (this.right != null) { this.right.collect(collector); }
     }
 
-    public Node(int v) {
-        value = v;
+    public Node(int k) {
+        key = k;
     }
 
     public static void main(String [] args) {

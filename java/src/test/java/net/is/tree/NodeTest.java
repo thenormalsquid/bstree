@@ -259,7 +259,7 @@ public class NodeTest extends TestCase {
 
     public void testInsert() {
         Node root = new Node(11);
-        assertEquals(11, root.value);
+        assertEquals(11, root.key);
 
         Node left = new Node(3);
         Node right = new Node(21);
@@ -285,7 +285,7 @@ public class NodeTest extends TestCase {
 
     public void testInstantiation() {
         Node node = new Node(11);
-        assertEquals(11, node.value);
+        assertEquals(11, node.key);
         assertEquals(null, node.left);
         assertEquals(null, node.right);
     }
