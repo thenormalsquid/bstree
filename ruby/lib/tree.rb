@@ -10,6 +10,10 @@ class Tree
     @size = 1
   end
 
+  def empty?
+    root.nil? ? true : false
+  end
+
   def insert node
     @root.insert node
     @size += 1

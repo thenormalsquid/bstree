@@ -27,6 +27,25 @@ describe Tree do
     end
   end
 
+  describe '.empty?' do
+    it 'returns false when root node is present' do
+      root = Node.new 17
+      tree = Tree.new root
+      expect(tree.empty?).to be false
+    end
+
+    it 'returns true when root node is not present' do
+      class Tree
+        def set_root_to_nil # root is attr_reader
+          @root = nil
+        end
+      end
+      tree = Tree.new
+      tree.set_root_to_nil
+      expect(tree.empty?).to be true
+    end
+  end
+
   describe 'tree structure' do
     it 'inserts a node to the tree with existing root' do
       node = Node.new(10)
