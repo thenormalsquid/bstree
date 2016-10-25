@@ -302,6 +302,16 @@ public:
     });
   }
 
+  void test_is_empty(void) {
+    describe_test(INDENT0, "From test_is_empty in TreeTest");
+    Spec spec;
+    Tree tree = Tree();
+
+    spec.it("tree with no root node is empty", [&]() {
+        return tree.is_empty() == true;
+    });
+  }
+
   // my own edification b/c I reach for new and delete
   void test_unique_ptr(void) {
     Spec spec;
@@ -341,6 +351,7 @@ public:
     test_is_present();
     test_collect();
     test_is_bst();
+    test_is_empty();
     // test_unique_ptr();
   }
 };

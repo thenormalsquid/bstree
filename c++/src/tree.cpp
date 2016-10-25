@@ -50,6 +50,11 @@ bool Tree::is_bst() {
   return this->root->is_bst();
 }
 
+bool Tree::is_empty() {
+  if (this->root == nullptr) { return true; }
+  return false;
+}
+
 bool Tree::is_present(int key) {
   return this->root->is_present(key);
 }
