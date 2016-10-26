@@ -310,6 +310,13 @@ public:
       return (tree_is_empty(t) == TRUE);
     });
 
+    Node * root = node_new(17);
+    tree_insert(t, root);
+
+    spec.it("tree with root is not empty", DO_SPEC_HANDLE {
+      return (tree_is_empty(t) == false);
+    });
+
     tree_delete(t);
   }
 
@@ -328,7 +335,6 @@ public:
   void run_tests(void) {
     test_tree_new_and_delete();
     test_tree_insert();
-    test_tree_is_empty();
     test_tree_collect();
     test_tree_search();
     //test_tree_is_present();
@@ -338,6 +344,7 @@ public:
     test_tree_successor();
     test_tree_predecessor();
     //test_tree_is_full();
+    test_tree_is_empty();
     test_tree_is_bst();
     test_tree_size();
   }

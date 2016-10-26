@@ -310,6 +310,13 @@ public:
     spec.it("tree with no root node is empty", [&]() {
         return tree.is_empty() == true;
     });
+
+    Node root(17);
+    tree.insert(&root);
+
+    spec.it("tree with root is not empty", [&]() {
+        return tree.is_empty() == false;
+    });
   }
 
   // my own edification b/c I reach for new and delete
