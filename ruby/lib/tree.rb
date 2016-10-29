@@ -19,6 +19,21 @@ class Tree
     @size += 1
   end
 
+  def transplant u, v
+    if u.parent == nil
+      @root = v
+    elsif u == u.parent.left
+      u.parent.left = v
+    else
+      u.parent.right = v
+    end
+
+    if v != nil
+      v.parent = u.parent
+    end
+    v
+  end
+
   # This is kind of nasty. It turns out that rooting a tree
   # in some sort of container is both a crutch and a constraint.
   # The big hassle is the edge case induced by deleting the root
