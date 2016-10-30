@@ -19,12 +19,14 @@ class Tree
     @size += 1
   end
 
+  # From CLRS (3rd Edition) p. 296, "transplant" a node's
+  # location in the tree. The idea is to replace u with v.
   def transplant u, v
-    if u.parent == nil
+    if u.parent == nil # u is a root node
       @root = v
-    elsif u == u.parent.left
+    elsif u == u.parent.left # u is a left child of its parent
       u.parent.left = v
-    else
+    else # u is a right child of its parent
       u.parent.right = v
     end
 
@@ -48,7 +50,7 @@ class Tree
     deleted_node
   end
 
-  # Another atsuccessort at rational delete implementation, using
+  # Another attempt at rational delete implementation, using
   # node successor for two child nodes instead of inserting the
   # orphaned subtree.
   def delete_by_key key

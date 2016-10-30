@@ -8,11 +8,37 @@ describe Tree do
   end
 
   describe 'transplant' do
-    it 'transplants' do
+    it 'transplants node into root' do
       root = Node.new 17
       tree = Tree.new root
       n23 = Node.new 23
-      expect(tree.transplant(root, n23)).to eq n23
+
+      tree.transplant(root, n23)
+      expect(tree.root).to eq n23
+    end
+
+    it 'transplants left child' do
+      root = Node.new 17
+      tree = Tree.new root
+      n5 = Node. new 5
+      n7 = Node.new 7
+      tree.insert n5
+      tree.insert n7
+
+      tree.transplant(n5, n7)
+      expect(n7.parent).to eq root
+    end
+
+    it 'transplants right child' do
+      root = Node.new 17
+      tree = Tree.new root
+      n5 = Node. new 5
+      n3 = Node.new 3
+      tree.insert n5
+      tree.insert n3
+
+      tree.transplant(n5, n3)
+      expect(n3.parent).to eq root
     end
   end
 
