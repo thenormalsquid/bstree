@@ -15,6 +15,7 @@ describe Tree do
 
       tree.transplant(root, n23)
       expect(tree.root).to eq n23
+      expect(n23.parent).to be nil
     end
 
     it 'transplants left child' do
@@ -51,7 +52,7 @@ describe Tree do
         expect(tree.root.nil?).to be true
         expect(tree.size).to eq 0
         expect(tree.height).to eq 0
-        # expect(tree.list_keys).to eq []
+        expect(tree.list_keys).to eq []
       end
 
       it 'deletes root with left child'
@@ -166,7 +167,7 @@ describe Tree do
           expect(tree.delete_by_key(5)).to eq n5
           expect(tree.root.nil?).to be false
           expect(tree.root.left).to eq n7
-          expect(n7.parent).to eq tree.root.left
+          expect(n7.parent).to eq tree.root # .left
           expect(n7.left).to eq n3
           expect(n3.parent).to eq n7
           expect(tree.root.right).to be nil
@@ -283,7 +284,7 @@ describe Tree do
       end
 
       describe 'mongo delete' do
-        xit 'deletes all the nodes from a mongo-sized tree' do
+        it 'deletes all the nodes from a mongo-sized tree' do
           root = Node.new 17
           n5 = Node.new 5
           n3 = Node.new 3
@@ -364,7 +365,6 @@ describe Tree do
           expect(n22.left).to eq n20
           expect(n20.parent).to eq n22
           expect(n22.parent).to eq n19
-=begin
           expect(n22.left).to eq n20
           expect(n22.right).to eq nil
           expect(tree.list_keys).to eq [8, 10, 11, 12, 17, 19, 20, 22, 23]
@@ -397,9 +397,9 @@ describe Tree do
           expect(tree.list_keys).to eq [10, 11, 20, 22, 23]
 
           expect(tree.delete_by_key(11)).to eq n11
-          puts "n11.parent: #{n11.parent.key}"
-          puts "n11.left: #{n11.left.key}"
-          puts "n11.right: #{n11&.right&.key}"
+          # puts "n11.parent: #{n11.parent.key}"
+          # puts "n11.left: #{n11.left.key}"
+          # puts "n11.right: #{n11&.right&.key}"
           expect(tree.list_keys).to eq [10, 20, 22, 23]
 
           expect(tree.delete_by_key(10)).to eq n10
@@ -407,8 +407,7 @@ describe Tree do
           expect(tree.delete_by_key(20)).to eq n20
 
           expect(tree.delete_by_key(23)).to eq n23
-          # expect(tree.list_keys).to eq [8, 10, 11, 20, 22]
-=end
+          expect(tree.list_keys).to eq [22]
         end
       end
     end

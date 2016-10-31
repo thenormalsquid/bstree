@@ -21,6 +21,9 @@ class Tree
 
   # From CLRS (3rd Edition) p. 296, "transplant" a node's
   # location in the tree. The idea is to replace u with v.
+  # This function would be better named `reset_parent` because
+  # that's all it does. Resetting child links is done in the
+  # delete method.
   def transplant u, v
     if u.parent == nil # u is a root node
       @root = v
@@ -34,6 +37,28 @@ class Tree
       v.parent = u.parent
     end
     v
+  end
+
+  def delete_clrs3 key
+    z = search key
+    if z.left.nil?
+      transplant z, z.right
+    elsif z.right.nil?
+      transplant z, z.left
+    else
+      y = z.right.minimum
+      if y.parent != z
+        transplant y, y.right
+        y.right = z.right
+        y.right.parent = y
+      end
+      transplant z, y
+      y.left = z.left
+      y.left.parent = y
+    end
+    @size -= 1
+    z.left = z.right = z.parent = nil
+    z
   end
 
   # This is kind of nasty. It turns out that rooting a tree
@@ -54,6 +79,8 @@ class Tree
   # node successor for two child nodes instead of inserting the
   # orphaned subtree.
   def delete_by_key key
+    return delete_clrs3 key
+
     node = search key
     left = node.left
     right = node.right
