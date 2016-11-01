@@ -55,9 +55,45 @@ describe Tree do
         expect(tree.list_keys).to eq []
       end
 
-      it 'deletes root with left child'
-      it 'deletes root with right child'
-      it 'deletes root with left and right children'
+      it 'deletes root with left child' do
+        root = Node.new 17
+        tree = Tree.new root
+        n5 = Node.new 5
+        tree.insert n5
+        expect(tree.delete_by_key(17)).to eq root
+        expect(tree.root).to eq n5
+        expect(tree.size).to eq 1
+        expect(tree.height).to eq 0
+        expect(tree.list_keys).to eq [5]
+      end
+
+      it 'deletes root with right child' do
+        root = Node.new 17
+        tree = Tree.new root
+        n23 = Node.new 23
+        tree.insert n23
+        expect(tree.delete_by_key(17)).to eq root
+        expect(tree.root).to eq n23
+        expect(tree.size).to eq 1
+        expect(tree.height).to eq 0
+        expect(tree.list_keys).to eq [23]
+      end
+
+      it 'deletes root with left and right children' do
+        root = Node.new 17
+        tree = Tree.new root
+        n23 = Node.new 23
+        n5 = Node.new 5
+        tree.insert n23
+        tree.insert n5
+        expect(tree.delete_by_key(17)).to eq root
+        expect(tree.root).to eq n23
+        expect(tree.root.left).to eq n5
+        expect(n5.parent).to eq n23
+        expect(tree.size).to eq 2
+        expect(tree.height).to eq 1
+        expect(tree.list_keys).to eq [5, 23]
+      end
     end
 
     it 'deletes left node with no children in two node tree' do
