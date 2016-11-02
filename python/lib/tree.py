@@ -50,6 +50,19 @@ class Tree(object):
     def predecessor(self, node):
         return self.root.predecessor(node)
 
+    # A better name for `transplant` might be `reset_parent`
+    def transplant(self, u, v):
+        if u.parent is None:
+            self.root = v
+        elif u == u.parent.left:
+            u.parent.left = v
+        else:
+            u.parent.right = v
+
+        if v is not None:
+            v.parent = u.parent
+
+
     # Refactored and renamed from CLR. The CLR code is a little
     # difficult to follow as it has a lot of conditional statements
     # and single letter temporary nodes (x, y, z).

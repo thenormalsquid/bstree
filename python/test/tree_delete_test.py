@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# pylint: disable=invalid-name,missing-docstring
+
 import pdb
 
 import unittest
@@ -12,6 +14,68 @@ class TestTreeDelete(unittest.TestCase):
 
     def setUp(self):
         self.testing = True
+
+    def test_transplant_root_with_nil(self):
+        root = Node(17)
+        tree = Tree(root)
+        tree.transplant(root, None)
+        assert tree.is_empty()
+
+    def test_transplant_left_child(self):
+        root = Node(17)
+        tree = Tree(root)
+        n23 = Node(23)
+        tree.insert(n23)
+        tree.transplant(root, n23)
+        assert tree.root == n23
+        assert n23.parent is None
+
+    def test_transplant_right_child(self):
+        root = Node(17)
+        tree = Tree(root)
+        n5 = Node(5)
+        tree.insert(n5)
+        tree.transplant(root, n5)
+        assert tree.root == n5
+        assert n5.parent is None
+
+    def test_transplant_right_tree(self):
+        root = Node(17)
+        tree = Tree(root)
+        n23 = Node(23)
+        n29 = Node(29)
+        tree.insert(n23)
+        tree.insert(n29)
+        tree.transplant(n23, n29)
+        assert n29.parent == root
+        assert root.right == n29
+
+    def test_transplant_right_tree_nil(self):
+        root = Node(17)
+        tree = Tree(root)
+        n23 = Node(23)
+        tree.insert(n23)
+        tree.transplant(n23, None)
+        assert root.right == None
+
+    def test_transplant_left_tree(self):
+        root = Node(17)
+        tree = Tree(root)
+        n5 = Node(5)
+        n7 = Node(7)
+        tree.insert(n5)
+        tree.insert(n7)
+        tree.transplant(n5, n7)
+        assert n7.parent == root
+        assert root.left == n7
+
+    def test_transplant_left_tree_nil(self):
+        root = Node(17)
+        tree = Tree(root)
+        n5 = Node(5)
+        tree.insert(n5)
+        tree.transplant(n5, None)
+        assert root.left == None
 
     def test_delete_root_when_single_node(self):
         root = Node(17)
