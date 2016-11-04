@@ -43,6 +43,8 @@ Node * node_maximum     (Node * n);
 
 Node * node_minimum     (Node * n);
 
+void   node_unlink      (Node * n);
+
 void   node_is_full     (void);
 
 int    node_is_bst      (Node * n);

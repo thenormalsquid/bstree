@@ -332,6 +332,18 @@ public:
     tree_delete(t);
   }
 
+  void test_tree_transplant(void) {
+    describe_test(INDENT0, "From test_node_transplant in TreeTest.");
+    Node * root = node_new(17);
+    Tree * tree = tree_new();
+    tree_insert(tree, root);
+
+    Spec spec;
+    spec.it("transplant root with nil", DO_SPEC_HANDLE {
+      return false;
+    });
+  }
+
   void run_tests(void) {
     test_tree_new_and_delete();
     test_tree_insert();
@@ -347,6 +359,7 @@ public:
     test_tree_is_empty();
     test_tree_is_bst();
     test_tree_size();
+    test_tree_transplant();
   }
 };
 

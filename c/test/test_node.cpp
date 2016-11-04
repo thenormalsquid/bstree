@@ -141,7 +141,7 @@ public:
     collector_destroy(actual);
   }
 
-  void test_node_search(void) {
+  void test_node_search_and_is_present(void) {
     describe_test(INDENT0, "From test_node_search in NodeTest.");
     Spec spec;
     Node * root = node_new(13);
@@ -206,9 +206,6 @@ public:
     });
 
     node_destroy(root);
-  }
-
-  void test_node_is_present(void) {
   }
 
   void test_node_destroy(void) {
@@ -538,6 +535,14 @@ public:
     node_destroy(root);
   }
 
+  void test_node_unlink(void) {
+    describe_test(INDENT0, "From test_node_unlink");
+    Spec spec;
+    spec.it("dummy spec to fail test", DO_SPEC_HANDLE {
+        return false;
+    });
+  }
+
   void test_node_new_and_destroy(void) {
     describe_test(INDENT0, "From test_node_new_and_destroy in NodeTest.");
     Node * n = node_new(13);
@@ -558,8 +563,7 @@ public:
     test_node_right();
     test_node_key();
     test_node_collect();
-    test_node_search();
-    //test_node_is_present();
+    test_node_search_and_is_present();
     test_node_height();
     //test_node_destroy();
     test_node_minimum();
@@ -569,6 +573,7 @@ public:
     test_node_size();
     test_node_successor();
     test_node_is_bst();
+    test_node_unlink();
     //teardown();
   }
 };

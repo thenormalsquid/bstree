@@ -87,8 +87,10 @@ void
 node_insert(Node * root, Node * next) {
   if (next->key < root->key) {
     if (root->left == NULL) {
+      next->parent = root;
       root->left = next;
     } else {
+      next->parent = root;
       node_insert(root->left, next);
     }
   } else {
@@ -233,11 +235,33 @@ void
 node_is_full(void) {
 }
 
+void
+unlinker(Node * n, State * state) {
+  n->left = NULL;
+  n->right = NULL;
+  n->parent = NULL;
+}
+
+void
+node_unlink(Node * n) {
+  State state;
+  post_order_traverse(n, unlinker, &state);
+}
+
 typedef struct _bst_data {
   int result;
   int minimum;
+  int size;
 } bst_data;
 
+/*
+ * This implementation walks the whole tree. The
+ * `result = 0` on an out of order violation is
+ * checked by the invoking function on return.
+ * A better way to do this might be to return
+ * immediately on an out-of-order violation,
+ * if that's possible.
+ */
 void
 check_minimum(Node * n, void * userdata) {
   bst_data * data = (bst_data *)userdata;
@@ -254,6 +278,7 @@ node_is_bst(Node * node) {
   userdata-> minimum = -10000;
 
   in_order_traverse(node, check_minimum, (void *)userdata);
+
   result = userdata->result;
   free(userdata);
   return result;

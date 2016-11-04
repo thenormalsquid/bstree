@@ -7,6 +7,7 @@ struct _node {
   int key;
   Node * left;
   Node * right;
+  Node * parent;
 };
 
 

@@ -1,8 +1,9 @@
 AM_CXXFLAGS = -std=c++11 -Wall -Wextra  -Wno-unused-parameter
-AM_CPPFLAGS = -I../include -I.
+AM_CPPFLAGS = -I../include -I. $(shell cppunit-config --cflags)
 
-# Not used with clang at the moment, save it in case
 # AM_LDFLAGS = $(shell cppunit-config --libs)
+# Not used with clang at the moment, save it in case
+AM_LDFLAGS = $(shell cppunit-config --libs) -L/usr/local/Cellar/boost/1.62.0/lib/
 LDADD = ../src/libbst.a
 
 %.o: %.cpp
