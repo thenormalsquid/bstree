@@ -9,6 +9,7 @@ class Node {
     public int key;
     public Node left = null;
     public Node right = null;
+    public Node parent = null;
 
     private Node get_predecessor(Node node, Node parent, Node predecessor) {
       if (parent.right == this) { predecessor = parent; }
@@ -150,12 +151,14 @@ class Node {
     public void insert(Node node) {
         if (node.key < this.key) {
             if (left == null) {
+              node.parent = this;
               left = node;
             } else {
               left.insert(node);
             }
         } else {
             if (right == null) {
+              node.parent = this;
               right = node;
             } else {
               right.insert(node);

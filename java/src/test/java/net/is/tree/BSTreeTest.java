@@ -130,6 +130,54 @@ public class BSTreeTest extends TestCase {
         assertEquals(4, tree.size());
     }
 
+    public void testTransplant() {
+        Node root = new Node(17);
+        BSTree tree = new BSTree(root);
+        tree.transplant(root, null);
+        assertEquals(tree.root, null);
+
+
+       /* transplant left child into root */
+        root = new Node(17);
+        tree = new BSTree(root);
+        Node n5 = new Node(5);
+        tree.insert(n5);
+        tree.transplant(root, n5);
+        assertEquals(n5.parent, null);
+        assertEquals(tree.root, n5);
+
+       /* transplant right child into root */
+        root = new Node(17);
+        tree = new BSTree(root);
+        Node n23 = new Node(23);
+        tree.insert(n23);
+        tree.transplant(root, n23);
+        assertEquals(n23.parent, null);
+        assertEquals(tree.root, n23);
+
+       /* transplant from left subtree */
+        root = new Node(17);
+        tree = new BSTree(root);
+        n5 = new Node(5);
+        Node n7 = new Node(7);
+        tree.insert(n5);
+        tree.insert(n7);
+        tree.transplant(n5, n7);
+        assertEquals(n7.parent, tree.root);
+        assertEquals(tree.root.left, n7);
+
+       /* transplant from right subtree */
+        root = new Node(17);
+        tree = new BSTree(root);
+        n23 = new Node(23);
+        Node n29 = new Node(29);
+        tree.insert(n23);
+        tree.insert(n29);
+        tree.transplant(n23, n29);
+        assertEquals(n29.parent, tree.root);
+        assertEquals(tree.root.right, n29);
+    }
+
     /*
      * do not delete anything when empty
      * delete the root node when only single tree

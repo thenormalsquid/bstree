@@ -13,6 +13,18 @@ class BSTree {
       return root.is_bst();
     }
 
+    public void transplant(Node u, Node v) {
+        if (u == root) {
+            root = v;
+        } else if (u.parent.left == u) {
+            u.parent.left = v;
+        } else {
+            u.parent.right = v;
+        }
+
+        if (v != null) { v.parent = u.parent; }
+    }
+
     public Node maximum() {
         if (root == null) { return null; }
         return root.maximum();
