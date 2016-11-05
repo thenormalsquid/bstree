@@ -6,35 +6,20 @@
 #include <collector.h>
 #include "node_private.h"
 
-/*
- * State is a private struct used for mimicking "closures"
- * in plain old vanilla c.
- */
-typedef struct _state {
-  int size;
-  int current_position;
-  int * values;
-  Node * n;
-  //int height;
-} State;
 
-
-// Clean this up and whereever State is used,
-// cast it to void * userdata
-typedef void (*Callback)(Node * n, State * state);
-typedef void (*Callback1)(Node * n, void * userdata);
+typedef void (*Callback)(Node * n, void * userdata);
 
 void
-post_order_traverse(Node * n, Callback callback, State * state) {
+post_order_traverse(Node * n, Callback callback, void * userdata) {
   // consider if (n == NULL) return;
 
-  if (n->left  != NULL) { post_order_traverse(n->left, callback, state); }
-  if (n->right != NULL) { post_order_traverse(n->right, callback, state); }
-  if (callback != NULL) { callback(n, state); }
+  if (n->left  != NULL) { post_order_traverse(n->left, callback, userdata); }
+  if (n->right != NULL) { post_order_traverse(n->right, callback, userdata); }
+  if (callback != NULL) { callback(n, userdata); }
 }
 
 void
-in_order_traverse(Node * n, Callback1 callback, void * userdata) {
+in_order_traverse(Node * n, Callback callback, void * userdata) {
   if (n->left  != NULL) { in_order_traverse(n->left, callback, userdata); }
   if (callback != NULL) { callback(n, userdata); }
   if (n->right != NULL) { in_order_traverse(n->right, callback, userdata); }
@@ -235,8 +220,14 @@ void
 node_is_full(void) {
 }
 
+typedef struct _bst_data {
+  int result;
+  int minimum;
+  int size;
+} bst_data;
+
 void
-unlinker(Node * n, State * state) {
+unlinker(Node * n, void * userdata) {
   n->left = NULL;
   n->right = NULL;
   n->parent = NULL;
@@ -244,15 +235,9 @@ unlinker(Node * n, State * state) {
 
 void
 node_unlink(Node * n) {
-  State state;
-  post_order_traverse(n, unlinker, &state);
+  bst_data * userdata;
+  post_order_traverse(n, unlinker, (void *)userdata);
 }
-
-typedef struct _bst_data {
-  int result;
-  int minimum;
-  int size;
-} bst_data;
 
 /*
  * This implementation walks the whole tree. The
@@ -285,14 +270,21 @@ node_is_bst(Node * node) {
 }
 
 void
-size_tracker(Node * n, State * state) {
-  state->size++;
+// size_tracker(Node * n, State * userdata) {
+size_tracker(Node * n, void * userdata) {
+  bst_data * data = (bst_data *)userdata;
+  data->size++;
 }
 
 int
 node_size(Node * n) {
-  State state;
-  state.size = 0;
-  post_order_traverse(n, size_tracker, &state);
-  return state.size;
+  bst_data * userdata = (bst_data*)malloc(sizeof(bst_data));
+  userdata->size = 0;
+  int size;
+
+  post_order_traverse(n, size_tracker, (void *)userdata);
+
+  size = userdata->size;
+  free(userdata);
+  return size;
 }
