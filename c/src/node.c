@@ -33,6 +33,7 @@ node_new(int key) {
   n->key = key;
   n->left = NULL;
   n->right = NULL;
+  n->parent = NULL;
   return n;
 }
 
@@ -75,11 +76,11 @@ node_insert(Node * root, Node * next) {
       next->parent = root;
       root->left = next;
     } else {
-      next->parent = root;
       node_insert(root->left, next);
     }
   } else {
     if (root->right == NULL) {
+      next->parent = root;
       root->right = next;
     } else {
       node_insert(root->right, next);

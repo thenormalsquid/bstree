@@ -370,12 +370,66 @@ public:
         return tree_is_empty(tree) == TRUE;
     });
 
-    tree_unlink(tree);
+    tree_delete(tree);
 
     Node * n5 = node_new(5);
+    root = node_new(17);
+    tree = tree_new();
     tree_insert(tree, root);
     tree_insert(tree, n5);
+    spec.it("transplant left child to root", DO_SPEC_HANDLE {
+      tree_transplant(tree, root, n5);
+      return tree->root == n5 && n5->parent == NULL;
+    });
 
+   /* starting from here, need to run this through valgrind to ensure
+    * all the node memory is actually reclaimed, because moving nodes
+    * around is liable to orphan some memory; remember the delete is
+    * done recursively, and assumes the tree hasn't been "tampered with."
+    * Since osx doesn't have a working valgrind at this moment, will
+    * need to do that work in linux.
+    */
+    tree_delete(tree);
+
+    Node * n23 = node_new(23);
+    root = node_new(17);
+    tree = tree_new();
+    tree_insert(tree, root);
+    tree_insert(tree, n23);
+    spec.it("transplant right child to root", DO_SPEC_HANDLE {
+      tree_transplant(tree, root, n23);
+      return tree->root == n23 && n23->parent == NULL;
+    });
+
+    tree_delete(tree);
+
+    Node * n7 = node_new(7);
+    n5 = node_new(5);
+    root = node_new(17);
+    tree = tree_new();
+    tree_insert(tree, root);
+    tree_insert(tree, n5);
+    tree_insert(tree, n7);
+    spec.it("transplants grandchild into left child", DO_SPEC_HANDLE {
+      tree_transplant(tree, n5, n7);
+      return tree->root->left == n7 && n7->parent == tree->root;
+    });
+
+    tree_delete(tree);
+
+    Node * n29 = node_new(29);
+    n23 = node_new(23);
+    root = node_new(17);
+    tree = tree_new();
+    tree_insert(tree, root);
+    tree_insert(tree, n23);
+    tree_insert(tree, n29);
+    spec.it("transplants grandchild into right child", DO_SPEC_HANDLE {
+      tree_transplant(tree, n23, n29);
+      return tree->root->right == n29; // && n29->parent == tree->root;
+    });
+
+    tree_delete(tree);
   }
 
   void run_tests(void) {
