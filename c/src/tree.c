@@ -3,10 +3,7 @@
 
 #include <tree.h>
 #include "tree_private.h"
-
-//struct _tree {
-//  Node * root;
-//};
+#include "node_private.h" // needed for delete implementation, bummer
 
 Tree *
 tree_new(void) {
@@ -29,6 +26,28 @@ tree_insert(Tree * t, Node * n) {
     t->root = n;
   } else {
     node_insert(t->root, n);
+  }
+}
+
+void
+tree_unlink(Tree * t) {
+  if (t->root == NULL) return;
+  node_unlink(t->root);
+  t->root = NULL;
+}
+
+void
+tree_transplant(Tree * t, Node * u, Node * v) {
+  if (u == t->root) {
+    t->root = v;
+  } else if (u->parent->left == u) {
+    u->parent->left = v;
+  } else {
+    u->parent->right = v;
+  }
+
+  if (v != NULL) {
+    v->parent = u->parent;
   }
 }
 

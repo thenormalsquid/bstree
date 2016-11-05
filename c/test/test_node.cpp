@@ -538,8 +538,22 @@ public:
   void test_node_unlink(void) {
     describe_test(INDENT0, "From test_node_unlink");
     Spec spec;
-    spec.it("dummy spec to fail test", DO_SPEC_HANDLE {
-        return false;
+    Node * root = node_new(17);
+
+    spec.it("sets links to NULL for single node", DO_SPEC_HANDLE {
+      node_unlink(root);
+      return node_is_unlinked(root);
+    });
+
+    Node * n5 = node_new(5);
+    Node * n23 = node_new(23);
+    node_insert(root, n5);
+    node_insert(root, n23);
+    spec.it("unlinks root node with left and right children", DO_SPEC_HANDLE {
+      node_unlink(root);
+      return node_is_unlinked(root)
+          && node_is_unlinked(n5)
+          && node_is_unlinked(n23);
     });
   }
 

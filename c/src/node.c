@@ -233,6 +233,11 @@ unlinker(Node * n, void * userdata) {
   n->parent = NULL;
 }
 
+int
+node_is_unlinked(Node * n) {
+  return (n->left == NULL && n->right == NULL && n->parent == NULL) ? 1 : 0;
+}
+
 void
 node_unlink(Node * n) {
   bst_data * userdata;

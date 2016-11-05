@@ -332,6 +332,32 @@ public:
     tree_delete(t);
   }
 
+  void test_tree_unlink(void) {
+    describe_test(INDENT0, "From test_tree_unlink.");
+    Node * root = node_new(17);
+    Tree * tree = tree_new();
+    tree_insert(tree, root);
+
+    Spec spec;
+    spec.it("unlink root in single node tree", DO_SPEC_HANDLE {
+      tree_unlink(tree);
+      return node_is_unlinked(root) && tree->root == NULL;
+    });
+
+    Node * n5 = node_new(5);
+    Node * n23 = node_new(23);
+    tree_insert(tree, root);
+    tree_insert(tree, n5);
+    tree_insert(tree, n23);
+
+    spec.it("unlink tree with left and right children", DO_SPEC_HANDLE {
+      tree_unlink(tree);
+      return node_is_unlinked(root)
+          && node_is_unlinked(n5)
+          && node_is_unlinked(n23);
+    });
+  }
+
   void test_tree_transplant(void) {
     describe_test(INDENT0, "From test_node_transplant in TreeTest.");
     Node * root = node_new(17);
@@ -340,8 +366,16 @@ public:
 
     Spec spec;
     spec.it("transplant root with nil", DO_SPEC_HANDLE {
-      return false;
+        tree_transplant(tree, root, NULL);
+        return tree_is_empty(tree) == TRUE;
     });
+
+    tree_unlink(tree);
+
+    Node * n5 = node_new(5);
+    tree_insert(tree, root);
+    tree_insert(tree, n5);
+
   }
 
   void run_tests(void) {
@@ -359,6 +393,7 @@ public:
     test_tree_is_empty();
     test_tree_is_bst();
     test_tree_size();
+    test_tree_unlink();
     test_tree_transplant();
   }
 };

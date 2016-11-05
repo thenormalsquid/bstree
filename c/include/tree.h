@@ -24,6 +24,12 @@ void   tree_collect     (Tree * t,
 Node * tree_search      (Tree * t,
                          int key);
 
+void   tree_unlink      (Tree * t);
+
+void   tree_transplant  (Tree * t,
+                         Node * u,
+                         Node * v);
+
 int    tree_is_present  (Tree * t,
                          int key);
 
