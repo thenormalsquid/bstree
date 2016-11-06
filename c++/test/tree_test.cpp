@@ -342,6 +342,63 @@ public:
     });
   }
 
+  void test_transplant(void) {
+    describe_test(INDENT0, "From test_transplant in TreeTest");
+    Spec spec;
+
+    spec.it("replace nullptr to root node", [&]() {
+      Tree tree = Tree();
+      Node root(17);
+      tree.insert(&root);
+      tree.transplant(&root, nullptr);
+      return tree.is_empty();
+    });
+
+    spec.it("transplant left child to root", [&]() {
+      Tree tree = Tree();
+      Node root(17);
+      Node n5(5);
+      tree.insert(&root);
+      tree.insert(&n5);
+      tree.transplant(&root, &n5);
+      return tree.root == &n5;
+    });
+
+    spec.it("transplant grandchild to left child", [&]() {
+      Tree tree = Tree();
+      Node root(17);
+      Node n5(5);
+      Node n7(7);
+      tree.insert(&root);
+      tree.insert(&n5);
+      tree.insert(&n7);
+      tree.transplant(&n5, &n7);
+      return n7.parent == tree.root && tree.root->left == &n7;
+    });
+
+    spec.it("transplant right child to root", [&]() {
+      Tree tree = Tree();
+      Node root(17);
+      Node n23(23);
+      tree.insert(&root);
+      tree.insert(&n23);
+      tree.transplant(&root, &n23);
+      return tree.root == &n23;
+    });
+
+    spec.it("transplant grandchild to right child", [&]() {
+      Tree tree = Tree();
+      Node root(17);
+      Node n23(23);
+      Node n29(29);
+      tree.insert(&root);
+      tree.insert(&n23);
+      tree.insert(&n29);
+      tree.transplant(&n23, &n29);
+      return n29.parent == tree.root && tree.root->right == &n29;
+    });
+  }
+
   void runTest() {
     test_instantiation();
     test_insert();
@@ -359,6 +416,7 @@ public:
     test_collect();
     test_is_bst();
     test_is_empty();
+    test_transplant();
     // test_unique_ptr();
   }
 };

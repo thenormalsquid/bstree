@@ -45,6 +45,20 @@ Node * Tree::predecessor(Node * node) {
   return root->predecessor(node);
 }
 
+void Tree::transplant(Node * u, Node * v) {
+  if (u == root) {
+    root = v;
+  } else if (u->parent->left == u) {
+    u->parent->left = v;
+  } else {
+    u->parent->right = v;
+  }
+
+  if (v != nullptr) {
+    v->parent = u->parent;
+  }
+}
+
 bool Tree::is_bst() {
   if (this->root == nullptr) { return true; }
   return this->root->is_bst();

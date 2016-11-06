@@ -12,7 +12,7 @@ class Node {
     Node * get_predecessor(Node * node, Node * parent, Node * successor);
 
   public:
-    Node(int _key) : key(_key), left(nullptr), right(nullptr) {}
+    Node(int _key) : key(_key), left(nullptr), right(nullptr), parent(nullptr) {}
 
     // void post_order_traverse(std::function<void (const Node&)> callback);
     void post_order_traverse(std::function<void (void)> callback);
@@ -34,6 +34,7 @@ class Node {
     int key;
     Node * left;
     Node * right;
+    Node * parent;
 };
 
 #endif /* IS_NODE_H */

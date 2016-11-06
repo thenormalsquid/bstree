@@ -13,6 +13,7 @@ void Node::insert(Node * node) {
 
 void Node::insert_left(Node * node) {
   if (this->left == nullptr) {
+    node->parent = this;
     this->left = node;
   } else {
     left->insert(node);
@@ -21,6 +22,7 @@ void Node::insert_left(Node * node) {
 
 void Node::insert_right(Node * node) {
   if (this->right == nullptr) {
+    node->parent = this;
     this->right = node;
   } else {
     right->insert(node);

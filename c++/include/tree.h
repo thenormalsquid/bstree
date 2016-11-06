@@ -12,6 +12,7 @@ public:
   Tree(Node * _root) : root(_root) {}
   // Tree(std::unique_ptr<Node> _root) : root(_root) {}
 
+  void transplant(Node * u, Node * v);
   void insert(Node * node);
   std::vector<int> collect(void);
   Node * find(int);
@@ -19,6 +20,7 @@ public:
   Node * predecessor(Node * n);
   Node * maximum(void);
   Node * minimum(void);
+
   bool is_bst(void);
   bool is_empty(void);
   int size(void);
