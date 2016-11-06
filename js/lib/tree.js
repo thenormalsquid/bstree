@@ -54,6 +54,10 @@ Tree.prototype.is_bst = function() {
   return this.root.is_bst();
 }
 
+Tree.prototype.is_empty = function() {
+  return (this.root === null);
+}
+
 Tree.prototype.height = function() {
   if (this.root === null) { return 0; }
   return this.root.height();

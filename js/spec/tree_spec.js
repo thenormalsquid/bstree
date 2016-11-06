@@ -220,6 +220,13 @@ describe('Tree', function() {
     });
   });
 
+  describe('is_empty', function() {
+    it('tree with no root is empty', function() {
+      var t = new tree();
+      assert(t.is_empty());
+    });
+  });
+
   describe('is_bst', function() {
     it('determines a single node is a BST', function() {
       var t = new tree();
