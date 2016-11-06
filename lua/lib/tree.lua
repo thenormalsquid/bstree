@@ -52,6 +52,10 @@ function Tree:predecessor(node)
   return self.root:predecessor(node)
 end
 
+function Tree:is_empty()
+  if self.root == nil then return true else return false end
+end
+
 function Tree:is_bst()
   if self.root == nil then return true end
   return self.root:is_bst()

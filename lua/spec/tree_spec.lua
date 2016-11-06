@@ -20,6 +20,16 @@ describe("instantiating trees", function()
   end)
 end)
 
+describe("is_empty", function()
+  it("is empty when root is nill", function()
+    root = node:new(17)
+    tree = tree:new(root)
+    tree.root = nil
+    assert.are.same(tree:is_empty(), true)
+  end)
+end)
+
+
 describe("insert nodes into tree", function()
   setup(function()
     local root = node:new(11)
