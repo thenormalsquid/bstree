@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# pylint: disable=invalid-name,missing-docstring
+# pylint: disable=invalid-name,missing-docstring,no-self-use
 
 import pdb
 
@@ -56,7 +56,7 @@ class TestTreeDelete(unittest.TestCase):
         n23 = Node(23)
         tree.insert(n23)
         tree.transplant(n23, None)
-        assert root.right == None
+        assert root.right is None
 
     def test_transplant_left_tree(self):
         root = Node(17)
@@ -75,15 +75,14 @@ class TestTreeDelete(unittest.TestCase):
         n5 = Node(5)
         tree.insert(n5)
         tree.transplant(n5, None)
-        assert root.left == None
+        assert root.left is None
 
     def test_delete_root_when_single_node(self):
         root = Node(17)
         tree = Tree(root)
         result = tree.clr_delete(root)
         assert result == root
-        # TODO: needs to be tested independently
-        # assert tree.is_empty()
+        assert tree.is_empty()
 
     def test_delete_left_child_from_two_node_tree(self):
         root = Node(17)
@@ -91,8 +90,6 @@ class TestTreeDelete(unittest.TestCase):
         assert root.left is None
         tree = Tree(root)
         # tree.insert(root) # DON'T DO THIS! See Trac 2587
-        assert root.left is None
-        assert root.right is None
 
         n5 = Node(5)
         tree.insert(n5)
@@ -111,7 +108,7 @@ class TestTreeDelete(unittest.TestCase):
         n23 = Node(23)
         tree.insert(n5)
         tree.insert(n23)
-        result = tree.clr_delete(root)
+        tree.clr_delete(root)
         assert tree.root.key == 23
         assert tree.root == root
         assert tree.is_bst() is True
@@ -281,7 +278,7 @@ class TestTreeDelete(unittest.TestCase):
         assert tree.is_bst() is True
         assert tree.list_keys() == [2, 3, 7, 11, 13, 17, 19, 23, 29]
 
-    def test_delete_entire_tree(self):
+    def test_clrs_delete(self):
         root = Node(17)
         tree = Tree(root)
         n5 = Node(5)
@@ -302,33 +299,61 @@ class TestTreeDelete(unittest.TestCase):
         n29 = Node(29)
         tree.insert(n19)
         tree.insert(n29)
-        result = tree.clr_delete(n5)
-        # We acquire a reference to n5's successor because n5 has
-        # both left and right children.
-        assert result == n7
-        # TODO: check the key for the result (n7), and
-        # the right, left and parent links.
-        # TODO: There is one more case which needs to be tested here
-        # for delete, which is when the successor has a right child.
-        # In this case, a node with value 8 inserted after n7.
-        assert n5.key == 7
-        assert tree.size() == 9
-        assert tree.is_bst() is True
-        assert tree.list_keys() == [2, 3, 7, 11, 13, 17, 19, 23, 29]
-        tree.to_json()
-        # We have a problem here using delete with a node argument:
-        # nodes with two children swap values with the successor, which
-        # means that deleting successive nodes - by node instead of by
-        # key - will result in errors.
-        result = tree.clr_delete(n7)
+        assert tree.list_keys() == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 
-###################### Broken below #####################################
-        # assert tree.to_a() == [2, 3, 11, 13, 17, 19, 23, 29]
-        # print "result.key: %d" % result.key
-        # assert result == n11
-        # assert tree.size() == 8
-        # assert tree.is_bst() is True
-        # assert tree.to_a() == [2, 3, 11, 13, 17, 19, 23, 29]
+        tree.clrs_delete(2)
+        assert n3.left is None
+        assert tree.size() == 9
+        assert tree.list_keys() == [3, 5, 7, 11, 13, 17, 19, 23, 29]
+
+        tree.clrs_delete(5)
+        assert tree.size() == 8
+        assert tree.root.left == n7
+        assert n7.parent == tree.root
+        assert n7.left == n3
+        assert tree.list_keys() == [3, 7, 11, 13, 17, 19, 23, 29]
+
+        tree.clrs_delete(17)
+        assert tree.size() == 7
+        assert tree.root == n19
+        assert tree.root.left == n7
+        assert n7.parent == tree.root
+        assert tree.root.right == n23
+        assert n23.parent == tree.root
+        assert n19.parent is None
+        assert tree.list_keys() == [3, 7, 11, 13, 19, 23, 29]
+
+        tree.clrs_delete(13)
+        assert tree.size() == 6
+        assert n11.right is None
+        assert tree.list_keys() == [3, 7, 11, 19, 23, 29]
+
+        tree.clrs_delete(23)
+        assert tree.size() == 5
+        assert tree.root.right == n29
+        assert n29.parent == tree.root
+        assert tree.list_keys() == [3, 7, 11, 19, 29]
+
+        tree.clrs_delete(7)
+        assert tree.size() == 4
+        assert tree.root.left == n11
+        assert n11.parent == tree.root
+        assert n3.parent == n11
+        assert tree.list_keys() == [3, 11, 19, 29]
+
+        tree.clrs_delete(19)
+        tree.clrs_delete(11)
+        tree.clrs_delete(3)
+        assert tree.size() == 1
+        assert tree.root == n29
+        assert n29.left is None
+        assert n29.right is None
+        assert tree.list_keys() == [29]
+
+        tree.clrs_delete(29)
+        assert tree.is_empty()
+        assert tree.size() == 0
+        assert tree.list_keys() == []
 
     def tearDown(self):
         self.testing = False

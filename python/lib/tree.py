@@ -28,6 +28,8 @@ class Tree(object):
         self.root.collect(collector)
 
     def size(self):
+        if self.root is None:
+            return 0
         return self.root.size()
 
     def maximum(self):
@@ -61,6 +63,24 @@ class Tree(object):
 
         if v is not None:
             v.parent = u.parent
+
+    def clrs_delete(self, key):
+        z = self.find(key)
+
+        if z.left is None:
+            self.transplant(z, z.right)
+        elif z.right is None:
+            self.transplant(z, z.left)
+        else:
+            y = z.right.minimum()
+            if y.parent != z:
+                self.transplant(y, y.right)
+                y.right = z.right
+                y.right.parent = y
+
+            self.transplant(z, y)
+            y.left = z.left
+            y.left.parent = y
 
 
     # Refactored and renamed from CLR. The CLR code is a little
