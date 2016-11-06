@@ -2,6 +2,7 @@ var Node = function (k) {
   this.key = k;
   this.left = null;
   this.right = null;
+  this.parent = null;
 };
 
 Node.prototype.log = function (msg) {
@@ -14,12 +15,14 @@ Node.prototype.log = function (msg) {
 Node.prototype.insert = function(n) {
   if (n.key < this.key) {
     if (this.left === null) {
+      n.parent = this;
       this.left = n;
     } else {
       this.left.insert(n);
     }
   } else {
     if (this.right === null) {
+      n.parent = this;
       this.right = n;
     } else {
       this.right.insert(n);

@@ -10,6 +10,68 @@ describe('Tree', function() {
     });
   });
 
+  describe('transplant', function() {
+    it('replaces root with null', function() {
+      var t = new tree();
+      var root = new node(17);
+      t.insert(root);
+      t.transplant(root, null);
+      assert(t.is_empty());
+    });
+
+    it('replaces root with left child', function() {
+      var t = new tree();
+      var root = new node(17);
+      var n5 = new node(5);
+      t.insert(root);
+      t.insert(n5);
+
+      t.transplant(root, n5);
+      assert.equal(t.root, n5);
+      assert.equal(n5.parent, null);
+    });
+
+    it('replaces left child with grandchild', function() {
+      var t = new tree();
+      var root = new node(17);
+      var n5 = new node(5);
+      var n7 = new node(7);
+      t.insert(root);
+      t.insert(n5);
+      t.insert(n7);
+
+      t.transplant(n5, n7);
+      assert.equal(t.root.left, n7);
+      assert.equal(n7.parent, t.root);
+    });
+
+     it('replaces root with right child', function() {
+      var t = new tree();
+      var root = new node(17);
+      var n23 = new node(23);
+      t.insert(root);
+      t.insert(n23);
+
+      t.transplant(root, n23);
+      assert.equal(t.root, n23);
+      assert.equal(n23.parent, null);
+    });
+
+     it('replaces right child with grnadchild', function() {
+      var t = new tree();
+      var root = new node(17);
+      var n23 = new node(23);
+      var n29 = new node(29);
+      t.insert(root);
+      t.insert(n23);
+      t.insert(n29);
+
+      t.transplant(n23, n29);
+      assert.equal(t.root.right, n29);
+      assert.equal(n29.parent, t.root);
+    });
+  });
+
   describe('insertion', function() {
     it('insert root node into empty tree', function() {
       var t = new tree();

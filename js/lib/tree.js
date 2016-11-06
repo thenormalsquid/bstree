@@ -24,6 +24,20 @@ Tree.prototype.search = function(key) {
   return this.root.search(key);
 }
 
+Tree.prototype.transplant = function(u, v) {
+  if (u === this.root) {
+    this.root = v;
+  } else if (u.parent.left === u) {
+    u.parent.left = v;
+  } else {
+    u.parent.right = v;
+  }
+
+  if (v !== null) {
+    v.parent = u.parent;
+  }
+}
+
 Tree.prototype.is_present = function(key) {
   if (this.root === null) { return false; }
   return this.root.is_present(key);
