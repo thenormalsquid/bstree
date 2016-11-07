@@ -70,6 +70,12 @@ Node.prototype.collect = function(collector) {
   if (this.right !== null) { this.right.collect(collector); }
 };
 
+Node.prototype.list_keys = function() {
+  collector = []
+  this.collect(collector);
+  return collector;
+}
+
 Node.prototype.post_order_traverse = function(callback) {
   if (this.left !== null) {  this.left.post_order_traverse(callback); }
   if (this.right !== null) {this.right.post_order_traverse(callback); }

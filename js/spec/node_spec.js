@@ -155,6 +155,15 @@ describe('Node', function() {
     });
   });
 
+  describe('list_keys', function() {
+    it('wraps the collect function for convenience', function() {
+      var root = new node(17);
+      var expected = [17];
+      assert.deepEqual(expected, root.list_keys());
+    });
+  });
+
+
   describe('maximum and minimum', function() {
     it('root node is both maximum and minimum', function() {
       var root = new node(13);

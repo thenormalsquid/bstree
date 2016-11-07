@@ -180,6 +180,13 @@ describe('Tree', function() {
     });
   });
 
+  describe('list_keys', function() {
+    it('finds no keys for empty tree', function() {
+      var t = new tree();
+      assert.deepEqual([], t.list_keys());
+    });
+  });
+
   describe('maximum and minimum', function() {
     it('empty tree has null maximum', function() {
       var t = new tree();

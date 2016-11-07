@@ -19,6 +19,11 @@ Tree.prototype.collect = function(collector) {
   this.root.collect(collector);
 };
 
+Tree.prototype.list_keys = function() {
+  if (this.root === null) return [];
+  return this.root.list_keys();
+}
+
 Tree.prototype.search = function(key) {
   if (this.root === null) { return false; }
   return this.root.search(key);
