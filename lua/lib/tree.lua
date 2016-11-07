@@ -27,6 +27,20 @@ function Tree:insert(node)
   self.root:insert(node)
 end
 
+function Tree:transplant(u, v)
+  if u == self.root then
+    self.root = v
+  elseif u.parent.left == u then
+    u.parent.left = v
+  else
+    u.parent.right = v
+  end
+
+  if v ~= nil then
+    v.parent = u.parent
+  end
+end
+
 function Tree:search(key)
   if self.root == nil then return nil end
   return self.root:search(key)

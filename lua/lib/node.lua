@@ -16,12 +16,14 @@ end
 function Node:insert(n)
   if n.key < self.key then
     if self.left == nil then
+      n.parent = self
       self.left = n
     else
       self.left:insert(n)
     end
   else
     if self.right == nil then
+      n.parent = self
       self.right = n
     else
       self.right:insert(n)
