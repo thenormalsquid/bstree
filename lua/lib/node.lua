@@ -107,6 +107,12 @@ function Node:predecessor(node)
   return self:get_predecessor(node, self, node)
 end
 
+function Node:list_keys()
+  collector = {}
+  self:collect(collector)
+  return collector
+end
+
 function Node:collect(collector)
   if self.left then self.left:collect(collector) end
   collector[#collector + 1] = self.key

@@ -199,6 +199,21 @@ describe("collects values in key order", function()
   end)
 end)
 
+describe(":list_keys", function()
+  it("returns {} for empty tree", function()
+    t = tree:new()
+    assert.are.same({}, t:list_keys())
+  end)
+
+  it("lists the key for a treew with a root node", function()
+    root = node:new(17)
+    t = tree:new(root)
+    -- t:insert(r) -- DON'T DO THIS! Not handling duplicate keys yet.
+    expected = {17}
+    assert.are.same(expected, t:list_keys())
+  end)
+end)
+
 describe("deletes a node from the tree", function()
   pending("deletes root when 1 node tree")
 end)

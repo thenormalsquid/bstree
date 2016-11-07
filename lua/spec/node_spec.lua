@@ -310,3 +310,11 @@ describe("collecting values or labels from nodes in order", function()
     assert.are.same(expected, actual)
   end)
 end)
+
+describe(":list_keys", function()
+  it("lists the keys linked nodes", function()
+    root = node:new(17)
+    expected = {17}
+    assert.are.same(expected, root:list_keys())
+  end)
+end)
