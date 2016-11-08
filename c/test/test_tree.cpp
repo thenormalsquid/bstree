@@ -432,6 +432,26 @@ public:
     tree_delete(tree);
   }
 
+  void test_tree_list_keys(void) {
+    describe_test(INDENT0, "From test_tree_list_keys in TreeTest.");
+    Tree * t = tree_new();
+    Node * root = node_new(17);
+    tree_insert(t, root);
+    Collector * expected = collector_new(100);
+    Collector * actual = collector_new(100);
+
+    Spec spec;
+    spec.it("array with single element for single node", DO_SPEC_HANDLE {
+      collector_add(expected, 17);
+      tree_collect(t, (void *) actual);
+      return (collector_equals(expected, actual));
+    });
+
+    tree_delete(t);
+    collector_destroy(expected);
+    collector_destroy(actual);
+  }
+
   void run_tests(void) {
     test_tree_new_and_delete();
     test_tree_insert();
@@ -449,6 +469,7 @@ public:
     test_tree_size();
     test_tree_unlink();
     test_tree_transplant();
+    test_tree_list_keys();
   }
 };
 

@@ -569,6 +569,23 @@ public:
     node_destroy(n);
   }
 
+  void test_node_list_keys(void) {
+    describe_test(INDENT0, "From test_node_list_keys.");
+    Spec spec;
+
+    spec.it("collects a single value", DO_SPEC_HANDLE {
+      Collector * expected = collector_new(15);
+      Collector * actual = collector_new(15);
+      collector_add(expected, 17);
+      Node * root = node_new(17);
+      node_list_keys(root, actual);
+      int result = collector_equals(expected, actual);
+      collector_destroy(expected);
+      collector_destroy(actual);
+      return result;
+    });
+  }
+
   void run_tests(void) {
     //setup();
     test_node_new_and_destroy();
@@ -588,6 +605,7 @@ public:
     test_node_successor();
     test_node_is_bst();
     test_node_unlink();
+    test_node_list_keys();
     //teardown();
   }
 };

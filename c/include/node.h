@@ -5,6 +5,7 @@
 extern "C" {
 #endif
 
+
 typedef struct _node Node;
 
 Node * node_new         (int key);
@@ -46,6 +47,9 @@ Node * node_minimum     (Node * n);
 void   node_unlink      (Node * n);
 
 int    node_is_unlinked (Node * n);
+
+void   node_list_keys   (Node * root,
+                         void * collector);
 
 void   node_is_full     (void);
 

@@ -89,6 +89,11 @@ node_insert(Node * root, Node * next) {
 }
 
 void
+node_list_keys(Node * n, void * userdata) {
+  node_collect(n, userdata);
+}
+
+void
 value_collector(Node * n, void * userdata) {
   Collector * c = (Collector *) userdata;
   c->values[c->current_position] = n->key;
