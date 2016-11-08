@@ -147,8 +147,17 @@ public:
   }
 
   void test_collect() {
+    describe_test(INDENT0, "From test_tree_collect in TreeTest");
     Spec spec;
-    spec.it("Testing Tree.collect", DO_SPEC {
+
+    spec.it("empty tree collects no values", DO_SPEC {
+        Tree tree;
+        std::vector<int> a1;
+        tree.collect(a1);
+        return a1.empty();
+    });
+
+    spec.it("collect all values from tree", DO_SPEC {
       Node node(25);
       Tree tree(&node);
       std::vector<int> a1{4, 8, 10, 15, 25, 33, 43, 97};
@@ -166,7 +175,41 @@ public:
       tree.insert(&node6);
       tree.insert(&node7);
       tree.insert(&node8);
-      std::vector<int> a2 = tree.collect();
+      std::vector<int> a2;
+      tree.collect(a2);
+      return (a1 == a2);
+    });
+  }
+
+  void test_list_keys(void) {
+    describe_test(INDENT0, "From test_list_keys in TreeTest.");
+    Spec spec;
+
+    spec.it("empty tree lists no keys", DO_SPEC {
+        Tree tree;
+        std::vector<int> a1 = tree.list_keys();
+        return a1.empty();
+    });
+
+    spec.it("list all keys from tree", DO_SPEC {
+      Node node(25);
+      Tree tree(&node);
+      std::vector<int> a1{4, 8, 10, 15, 25, 33, 43, 97};
+      Node node2(43);
+      Node node3(8);
+      Node node4(10);
+      Node node5(15);
+      Node node6(33);
+      Node node7(97);
+      Node node8(4);
+      tree.insert(&node2);
+      tree.insert(&node3);
+      tree.insert(&node4);
+      tree.insert(&node5);
+      tree.insert(&node6);
+      tree.insert(&node7);
+      tree.insert(&node8);
+      std::vector<int> a2 = tree.list_keys();
       return (a1 == a2);
     });
   }
@@ -417,6 +460,7 @@ public:
     test_is_bst();
     test_is_empty();
     test_transplant();
+    test_list_keys();
     // test_unique_ptr();
   }
 };

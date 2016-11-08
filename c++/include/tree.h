@@ -14,7 +14,8 @@ public:
 
   void transplant(Node * u, Node * v);
   void insert(Node * node);
-  std::vector<int> collect(void);
+  void collect(std::vector<int> & keys);
+  std::vector<int> list_keys(void);
   Node * find(int);
   Node * successor(Node * n);
   Node * predecessor(Node * n);
@@ -29,14 +30,16 @@ public:
   bool is_present(int key);
 
   Node * root;
-  std::vector<int> keys;
+  //std::vector<int> keys;
 
 private:
   Node * find_node(int key, Node * node);
 
+  /*
   void collect_keys(Node * node);
   void get_left(Node * node);
   void get_right(Node * node);
+  */
 
   bool found;
 };

@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include <vector>
 #include <node.h>
 
 void Node::insert(Node * node) {
@@ -28,6 +29,20 @@ void Node::insert_right(Node * node) {
     right->insert(node);
   }
 }
+
+Node * Node::search(int key) {
+  if (this->key == key) return this;
+
+  if (key < this->key) {
+    if (left != nullptr) {
+      return left->search(key);
+    } else {
+      return right->search(key);
+    }
+  }
+  return nullptr;
+}
+
 
 bool Node::get_is_bst(int minimum, bool result) {
   if (this->left != nullptr) { result = this->left->get_is_bst(minimum, result); }
@@ -120,6 +135,41 @@ int Node::get_height(int height, int max) {
 
 int Node::height(void) {
   return get_height(0, 0);
+}
+
+void Node::in_order_traverse(std::function<void (void)> callback) {
+  if (left != nullptr) { left->in_order_traverse(callback); }
+  callback();
+  if (right != nullptr) { right->in_order_traverse(callback); }
+}
+
+std::vector<int> Node::list_keys() {
+  std::vector<int> keys;
+  collect(keys);
+  return keys;
+}
+
+// TODO: get rid of get_left and get_right
+void Node::get_left(std::vector<int> & keys) {
+  if (left == nullptr) {
+    return;
+  } else {
+    left->collect(keys);
+  }
+}
+
+void Node::get_right(std::vector<int> & keys) {
+  if (right == nullptr) {
+    return;
+  } else {
+    right->collect(keys);
+  }
+}
+
+void Node::collect(std::vector<int> & keys) {
+  get_left(keys);
+  keys.push_back(key);
+  get_right(keys);
 }
 
 int Node::size(void) {

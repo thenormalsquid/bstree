@@ -317,6 +317,56 @@ public:
     });
   }
 
+  void test_collect(void) {
+    describe_test(INDENT0, "From test_collect in NodeTest");
+    Spec spec;
+
+    spec.it("collects 1 value from a single node", DO_SPEC {
+      Node root(17);
+      std::vector<int> a1{17};
+      std::vector<int> a2;
+      root.collect(a2);
+      return a1 == a2;
+    });
+
+    spec.it("Testing Node.collect", DO_SPEC {
+      Node root(25);
+      std::vector<int> a1{4, 8, 10, 15, 25, 33, 43, 97};
+      Node node2(43);
+      Node node3(8);
+      Node node4(10);
+      Node node5(15);
+      Node node6(33);
+      Node node7(97);
+      Node node8(4);
+      root.insert(&node2);
+      root.insert(&node3);
+      root.insert(&node4);
+      root.insert(&node5);
+      root.insert(&node6);
+      root.insert(&node7);
+      root.insert(&node8);
+      std::vector<int> a2;
+      root.collect(a2);
+      return (a1 == a2);
+    });
+  }
+
+  void test_search(void) {
+  }
+
+  void test_list_keys(void) {
+    describe_test(INDENT0, "From test_list_keys in NodeTest.");
+    Spec spec;
+
+    spec.it("lists key for single node", DO_SPEC {
+      Node root(17);
+      std::vector<int> a1{17};
+      std::vector<int> a2 = root.list_keys();
+      return a1 == a2;
+    });
+  }
+
   void runTest() {
     test_instantiation();
     test_left_initialize();
@@ -329,6 +379,9 @@ public:
     test_maximum();
     test_minimum();
     test_is_bst();
+    test_collect();
+    test_list_keys();
+    test_search();
   }
 };
 

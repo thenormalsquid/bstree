@@ -2,6 +2,7 @@
 #define IS_NODE_H
 
 #include<functional>
+#include<vector>
 
 class Node {
 
@@ -11,11 +12,16 @@ class Node {
     Node * get_successor(Node * node, Node * parent, Node * successor);
     Node * get_predecessor(Node * node, Node * parent, Node * successor);
 
+    // get rid of these two methods
+    void get_left(std::vector<int> & keys);
+    void get_right(std::vector<int> & keys);
+
   public:
     Node(int _key) : key(_key), left(nullptr), right(nullptr), parent(nullptr) {}
 
     // void post_order_traverse(std::function<void (const Node&)> callback);
     void post_order_traverse(std::function<void (void)> callback);
+    void in_order_traverse(std::function<void (void)> callback);
 
     void insert(Node * node);
     void insert_left(Node * node);
@@ -23,10 +29,13 @@ class Node {
 
     bool is_present(int);
 
+    Node * search(int key);
     Node * successor(Node * n);
     Node * predecessor(Node * n);
     Node * maximum(void);
     Node * minimum(void);
+    std::vector<int> list_keys(void);
+    void collect(std::vector<int> & keys);
     bool is_bst(void);
     int size(void);
     int height(void);

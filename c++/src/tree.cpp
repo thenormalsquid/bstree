@@ -86,30 +86,13 @@ Node * Tree::find_node(int key, Node * node) {
   return nullptr;
 }
 
-std::vector<int> Tree::collect() {
-  collect_keys(root);
+void Tree::collect(std::vector<int> & keys) {
+  if (this->root == nullptr) return;
+  this->root->collect(keys);
+}
+
+std::vector<int> Tree::list_keys() {
+  std::vector<int> keys;
+  collect(keys);
   return keys;
-}
-
-// TODO: move to Node class
-void Tree::collect_keys(Node * node) {
-  get_left(node);
-  keys.push_back(node->key);
-  get_right(node);
-}
-
-void Tree::get_left(Node * node) {
-  if (node->left == nullptr) {
-    return;
-  } else {
-    collect_keys(node->left);
-  }
-}
-
-void Tree::get_right(Node * node) {
-  if (node->right == nullptr) {
-    return;
-  } else {
-    collect_keys(node->right);
-  }
 }
