@@ -224,6 +224,40 @@ public class NodeTest extends TestCase {
         assertEquals(actual, expected);
     }
 
+
+    public void testListKeys() {
+        // single node
+        ArrayList<Integer> expected = new ArrayList<Integer>();
+        expected.add(17);
+        Node root = new Node(17);
+        ArrayList<Integer> actual = root.list_keys();
+        assertEquals(expected, actual);
+
+        // node with children
+        expected.clear(); 
+        expected.add(3);
+        expected.add(5);
+        expected.add(7);
+        expected.add(17);
+        expected.add(19);
+        expected.add(23);
+        expected.add(29);
+        Node n3 = new Node(3);
+        Node n5 = new Node(5);
+        Node n7 = new Node(7);
+        Node n19 = new Node(19);
+        Node n23 = new Node(23);
+        Node n29 = new Node(29);
+        root.insert(n5);
+        root.insert(n7);
+        root.insert(n3);
+        root.insert(n23);
+        root.insert(n29);
+        root.insert(n19);
+        actual = root.list_keys();
+        assertEquals(expected, actual); 
+    }
+
     public void testSize() {
         Node root = new Node(11);
         assertEquals(1, root.size());

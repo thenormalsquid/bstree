@@ -45,11 +45,18 @@ class BSTree {
       return root.successor(node);
     }
 
-    public List<Integer> collect() {
-        ArrayList<Integer> actual = new ArrayList<Integer>();
-        if (this.root == null) { return actual; }
-        this.root.collect(actual);
-        return actual;
+    public ArrayList<Integer> list_keys() {
+      ArrayList<Integer> collector = new ArrayList<Integer>();
+      if (root == null) { return collector; }
+      return root.list_keys();
+    }
+
+    // TODO: collect method should take a collector object
+    // and not return anything. This gives us parallel implementation
+    // with Node class.
+    public void collect(ArrayList<Integer> collector) {
+        if (this.root == null) { return; }
+        this.root.collect(collector);
     }
 
     public Node search(int key) {

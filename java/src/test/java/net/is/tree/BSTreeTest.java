@@ -189,17 +189,35 @@ public class BSTreeTest extends TestCase {
      * delete an interior node right left
      */
     public void testDelete() {
-      // after each delete, search to ensure node cannot be found
-      // and check that the size of the tree is reduced, and check
-      // that it's still a binary search tree with `is_bst()`.
-      // Also check that the left and right child links are pointing
-      // to the correct children.
+        // after each delete, search to ensure node cannot be found
+        // and check that the size of the tree is reduced, and check
+        // that it's still a binary search tree with `is_bst()`.
+        // Also check that the left and right child links are pointing
+        // to the correct children.
+    }
+
+    public void testlistKeys() {
+        // empty list for empty tree
+        BSTree tree = new BSTree();
+        ArrayList<Integer> expected = new ArrayList<Integer>();
+        ArrayList<Integer> actual = tree.list_keys();
+        assertEquals(expected, actual);
+
+        // returns result from root node list keys
+        expected.clear();
+        expected.add(17);
+        Node root = new Node(17);
+        tree.insert(root);
+        actual = tree.list_keys();
+        assertEquals(expected, actual);
     }
 
     public void testCollectEmptyTree() {
         ArrayList<Integer> expected = new ArrayList<Integer>();
         BSTree tree = new BSTree();
-        assertEquals(tree.collect(), expected);
+        ArrayList<Integer> actual = new ArrayList<Integer>();
+        tree.collect(actual);
+        assertEquals(expected, expected);
     }
 
     public void testCollectSingleNode() {
@@ -207,7 +225,9 @@ public class BSTreeTest extends TestCase {
         expected.add(11);
         Node root = new Node(11);
         BSTree tree = new BSTree(root);
-        assertEquals(tree.collect(), expected);
+        ArrayList<Integer> actual = new ArrayList<Integer>();
+        tree.collect(actual);
+        assertEquals(expected, actual);
     }
 
     public void testCollect3() {
@@ -222,8 +242,10 @@ public class BSTreeTest extends TestCase {
         Node n13 = new Node(13);
         tree.insert(n7);
         tree.insert(n13);
+        ArrayList<Integer> actual = new ArrayList<Integer>();
+        tree.collect(actual);
 
-        assertEquals(tree.collect(), expected);
+        assertEquals(expected, actual);
     }
 
     // TODO:
@@ -262,7 +284,9 @@ public class BSTreeTest extends TestCase {
         tree.insert(n17);
         tree.insert(n13);
 
-        assertEquals(tree.collect(), expected);
+        ArrayList<Integer> actual = new ArrayList<Integer>();
+        tree.collect(actual);
+        assertEquals(expected, actual);
     }
 
     public void testInsert() {

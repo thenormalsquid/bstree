@@ -166,10 +166,17 @@ class Node {
         }
     }
 
+    // TODO: rewrite this to use an in_order_traverse
     public void collect(ArrayList<Integer> collector) {
       if (this.left != null) { this.left.collect(collector); }
       collector.add(this.key);
       if (this.right != null) { this.right.collect(collector); }
+    }
+
+    public ArrayList<Integer> list_keys() {
+      ArrayList<Integer> collector = new ArrayList<Integer>();
+      collect(collector);
+      return collector;
     }
 
     public Node(int k) {
