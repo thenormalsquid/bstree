@@ -74,9 +74,16 @@ public:
     collector_destroy(c5);
   }
 
+  void test_collector_add_int_array(void) {
+    Collector * c4 = collector_new(5);
+    int values[5] = {1, 2, 3, 4, 5};
+    collector_add_int_array(c4, values);
+  }
+
   void run_tests(void) {
     setup();
     teardown();
+    test_collector_add_int_array();
     test_collector_equals();
   }
 };

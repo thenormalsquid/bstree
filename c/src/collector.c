@@ -23,6 +23,19 @@ collector_add(Collector * c, int value) {
   c->current_position++;
 }
 
+void
+collector_add_int_array(Collector * c, int values[]) {
+  int size = sizeof(values) / sizeof(int);
+  for (int i=0; i<size; i++) {
+    collector_add(c, values[i]);
+  }
+}
+
+void
+collector_clear(Collector * c) {
+  memset(c->values, 0, sizeof(int)*c->size);
+}
+
 Collector *
 collector_new(size_t size) {
   Collector * c = (Collector *) malloc(sizeof(Collector));

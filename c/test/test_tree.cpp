@@ -486,6 +486,8 @@ public:
     int size = 0;
     int is_present = 0;
     Node * deleted;
+    // Collector * expected = collector_new(100);
+    // Collector * actual = collector_new(100);
     // Node * left;
     // Node * right;
     // Node * parent;

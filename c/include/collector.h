@@ -37,19 +37,22 @@ struct _collector {
   Executor execute;
 };
 
-int collector_equals      (Collector * c1,
-                           Collector * c2);
+int collector_equals         (Collector * c1,
+                              Collector * c2);
 
-void collector_add        (Collector * c,
-                           int value);
+void collector_add           (Collector * c,
+                              int value);
 
-Collector * collector_new (size_t size);
+void collector_add_int_array (Collector * c,
+                              int values[]);
 
-void collector_destroy    (Collector * c);
+Collector * collector_new    (size_t size);
 
-void collector_printf     (Collector * c);
+void collector_destroy       (Collector * c);
 
-void collector_reset      (Collector * c);
+void collector_printf        (Collector * c);
+
+void collector_reset         (Collector * c);
 
 #ifdef __cplusplus
 }
