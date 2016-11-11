@@ -13,6 +13,11 @@ using std::string;
 
 class TreeTest : public CppUnit::TestCase {
 
+int
+node_stripped(Node * n) {
+  return n->parent == NULL && n->left == NULL && n->right == NULL ? 1 : 0;
+}
+
 public:
   TreeTest( std::string name ) : CppUnit::TestCase( name ) {}
 
@@ -452,6 +457,81 @@ public:
     collector_destroy(actual);
   }
 
+  void test_tree_delete_node() {
+    describe_test(INDENT0, "From test_tree_delete_node in TreeTest");
+    Spec spec;
+    Tree * t = tree_new();
+    Node * root = node_new(17);
+    tree_insert(t, root);
+    Node * n2 = node_new(2);
+    Node * n3 = node_new(3);
+    Node * n5 = node_new(5);
+    Node * n7 = node_new(7);
+    Node * n11 = node_new(11);
+    Node * n13 = node_new(13);
+    Node * n19 = node_new(19);
+    Node * n23 = node_new(23);
+    Node * n29 = node_new(29);
+
+    tree_insert(t, n5);
+    tree_insert(t, n3);
+    tree_insert(t, n2);
+    tree_insert(t, n7);
+    tree_insert(t, n11);
+    tree_insert(t, n13);
+    tree_insert(t, n23);
+    tree_insert(t, n19);
+    tree_insert(t, n29);
+
+    int size = 0;
+    int is_present = 0;
+    Node * deleted;
+    // Node * left;
+    // Node * right;
+    // Node * parent;
+
+    spec.it("case 1a: node has no left child, right child is NULL", DO_SPEC_HANDLE {
+      deleted = tree_delete_node(t, 2);
+      size = tree_size(t);
+      is_present = tree_is_present(t, 2);
+      return deleted == n2
+          && size == 9
+          && is_present == 0
+          && node_stripped(deleted) == 1
+          && n3->left == NULL;
+    });
+
+    spec.it("case 1b: node has no left child, right child is not NULL", DO_SPEC_HANDLE {
+      deleted = tree_delete_node(t, 11);
+      size = tree_size(t);
+      is_present = tree_is_present(t, 11);
+      // std::cout << "size: " << size << std::endl;
+      return deleted == n11
+          && size == 8
+          && is_present == 0
+          && node_stripped(deleted) == 1
+          && n7->right == n13;
+    });
+
+    spec.it("case 2: node has left child, right child is NULL", DO_SPEC_HANDLE {
+      tree_insert(t, n2);
+      deleted = tree_delete_node(t, 3);
+      size = tree_size(t);
+      is_present = tree_is_present(t, 3);
+      return deleted == n3
+          && size == 8
+          && is_present == 0
+          && node_stripped(deleted) == 1
+          && n2->parent == n5
+          && n5->left == n2;
+    });
+
+    // node_delete(n2);
+    // node_delete(n4);
+    // node_delete(n11);
+    tree_delete(t);
+  }
+
   void run_tests(void) {
     test_tree_new_and_delete();
     test_tree_insert();
@@ -470,6 +550,7 @@ public:
     test_tree_unlink();
     test_tree_transplant();
     test_tree_list_keys();
+    test_tree_delete_node();
   }
 };
 

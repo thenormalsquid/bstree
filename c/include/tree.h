@@ -13,6 +13,9 @@ Tree * tree_new         (void);
 
 void   tree_delete      (Tree * t);
 
+Node * tree_delete_node (Tree * t,
+                         int key);
+
 void   tree_insert      (Tree * t,
                          Node * n);
 

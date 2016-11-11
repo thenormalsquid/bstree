@@ -10,7 +10,11 @@ typedef struct _node Node;
 
 Node * node_new         (int key);
 
+void   node_delete      (Node * n);
+
 void   node_destroy     (Node * n);
+
+void   node_strip       (Node * n);
 
 int    node_key         (Node * n);
 
@@ -31,8 +35,6 @@ int    node_is_present  (Node * n,
                          int key);
 
 int    node_height      (Node * n);
-
-void   node_delete      (void);
 
 Node * node_successor   (Node * root,
                          Node * node);

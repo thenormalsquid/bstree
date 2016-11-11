@@ -39,7 +39,8 @@ node_new(int key) {
 
 
 /*
- * TODO: Reimplement using post_order_traverse.
+ * TODO: Reimplement using post_order_traverse
+ * and the node_delete function as the callback.
  */
 void
 node_destroy(Node * n) {
@@ -47,10 +48,18 @@ node_destroy(Node * n) {
 
   node_destroy(n->left);
   node_destroy(n->right);
+  // TODO: replace the following 2 lines with
+  // node_delete(n);
   memset((void *)n, 0xDD, sizeof(Node));
   free(n);
 }
 
+void
+node_strip(Node * n) {
+  n->parent = NULL;
+  n->left = NULL;
+  n->right = NULL;
+}
 
 int
 node_key(Node * n) {
@@ -207,7 +216,9 @@ node_predecessor(Node * this, Node * node) {
 }
 
 void
-node_delete(void) {
+node_delete(Node * n) {
+  memset((void *)n, 0xDD, sizeof(Node));
+  free(n);
 }
 
 Node *

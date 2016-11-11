@@ -21,6 +21,21 @@ tree_delete(Tree * t) {
   free(t);
 }
 
+Node *
+tree_delete_node(Tree * t, int key) {
+  Node * z = tree_search(t, key);
+  if (z->left == NULL) {
+    tree_transplant(t, z, z->right);
+  } else if (z->right == NULL) {
+    tree_transplant(t, z, z->left);
+  } else { // node has 2 children
+
+  }
+
+  node_strip(z);
+  return z;
+}
+
 void
 tree_insert(Tree * t, Node * n) {
   if (t->root == NULL) {

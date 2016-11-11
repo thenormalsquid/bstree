@@ -24,6 +24,10 @@ teardown(void) {
   node_destroy(root);
 }
 
+int
+node_stripped(Node * n) {
+  return (n->parent == NULL && n->left == NULL && n->right == NULL) ? 1 : 0;
+}
 
 class NodeTest : public CppUnit::TestCase {
 
@@ -586,6 +590,27 @@ public:
     });
   }
 
+
+  void test_node_strip(void) {
+    describe_test(INDENT0, "From test_node_strip in NodeTest.");
+    Node * node = node_new(17);
+
+    Spec spec;
+    spec.it("new node should be stripped", DO_SPEC_HANDLE {
+      // return node_stripped(node) == 1;
+      return node_is_unlinked(node) == 1;
+    });
+
+    Node * left = node_new(5);
+    node_insert(node, left);
+    Node * right = node_new(23);
+    node_insert(node, right);
+    spec.it("should strip nodes", DO_SPEC_HANDLE {
+      node_strip(node);
+      return node_is_unlinked(node) == 1;
+    });
+  }
+
   void run_tests(void) {
     //setup();
     test_node_new_and_destroy();
@@ -606,6 +631,7 @@ public:
     test_node_is_bst();
     test_node_unlink();
     test_node_list_keys();
+    test_node_strip();
     //teardown();
   }
 };
