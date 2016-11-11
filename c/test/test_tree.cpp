@@ -513,8 +513,9 @@ public:
           && n7->right == n13;
     });
 
+    tree_insert(t, n2);
+
     spec.it("case 2: node has left child, right child is NULL", DO_SPEC_HANDLE {
-      tree_insert(t, n2);
       deleted = tree_delete_node(t, 3);
       size = tree_size(t);
       is_present = tree_is_present(t, 3);
@@ -526,9 +527,101 @@ public:
           && n5->left == n2;
     });
 
-    // node_delete(n2);
-    // node_delete(n4);
-    // node_delete(n11);
+    spec.it("root node with left and right children", DO_SPEC_HANDLE {
+      deleted = tree_delete_node(t, 17);
+      size = tree_size(t);
+      is_present = tree_is_present(t, 17);
+      return deleted == root
+          && size == 7
+          && is_present == 0
+          && t->root == n19
+          && node_stripped(deleted) == 1
+          && t->root->left == n5
+          && n5->parent == t->root
+          && t->root->right == n23
+          && n23->parent == t->root
+          && n23->left == NULL;
+    });
+
+    spec.it("left child with both right and left children", DO_SPEC_HANDLE {
+      deleted = tree_delete_node(t, 5);
+      size = tree_size(t);
+      is_present = tree_is_present(t, 5);
+      return deleted == n5
+          && size == 6
+          && is_present == 0
+          && node_stripped(deleted) == 1
+          && t->root->left == n7
+          && n7->parent == t->root
+          && n7->left == n2
+          && n2->parent == n7;
+    });
+
+    spec.it("left child with both right and left children (case 2)", DO_SPEC_HANDLE {
+      deleted = tree_delete_node(t, 7);
+      size = tree_size(t);
+      is_present = tree_is_present(t, 7);
+      return deleted == n7
+          && size == 5
+          && is_present == 0
+          && node_stripped(deleted) == 1
+          && t->root->left == n13
+          && n13->parent == t->root
+          && n13->right == NULL
+          && n13->left == n2
+          && n2->parent == n13;
+    });
+
+    spec.it("left child from root, in line", DO_SPEC_HANDLE {
+      deleted = tree_delete_node(t, 13);
+      size = tree_size(t);
+      is_present = tree_is_present(t, 13);
+      return deleted == n13
+          && size == 4
+          && is_present == 0
+          && node_stripped(deleted) == 1
+          && t->root->left == n2
+          && n2->parent == t->root;
+    });
+
+    spec.it("delete several nodes in a row", DO_SPEC_HANDLE {
+      tree_delete_node(t, 19);
+      tree_delete_node(t, 2);
+      deleted = tree_delete_node(t, 23);
+      is_present = tree_is_present(t, 23);
+      size = tree_size(t);
+      return deleted == n23
+          && size == 1
+          && is_present == 0
+          && tree_is_present(t, 19) == 0
+          && tree_is_present(t, 2) == 0
+          && node_stripped(deleted) == 1
+          && node_stripped(n19) == 1
+          && node_stripped(n2) == 1
+          && node_stripped(n29) == 1
+          && t->root == n29;
+    });
+
+
+    spec.it("delete root from single node tree", DO_SPEC_HANDLE {
+      return tree_delete_node(t, 29) == n29
+          && tree_is_present(t, 29) == 0
+          && node_stripped(n29) == 1
+          && tree_size(t) == 0
+          && t->root == NULL;
+    });
+
+
+    node_delete(n2);
+    node_delete(n3);
+    node_delete(n5);
+    node_delete(n7);
+    node_delete(n11);
+    node_delete(n13);
+    node_delete(root);
+    node_delete(n19);
+    node_delete(n23);
+    node_delete(n29);
     tree_delete(t);
   }
 

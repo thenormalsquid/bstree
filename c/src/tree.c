@@ -23,13 +23,23 @@ tree_delete(Tree * t) {
 
 Node *
 tree_delete_node(Tree * t, int key) {
+  Node * y;
   Node * z = tree_search(t, key);
   if (z->left == NULL) {
     tree_transplant(t, z, z->right);
   } else if (z->right == NULL) {
     tree_transplant(t, z, z->left);
   } else { // node has 2 children
+    y = node_minimum(z->right);
+    if (y->parent != z) {
+      tree_transplant(t, y, y->right);
+      y->right = z->right;
+      y->right->parent = y;
+    }
 
+    tree_transplant(t, z, y);
+    y->left = z->left;
+    y->left->parent = y;
   }
 
   node_strip(z);
