@@ -183,6 +183,14 @@ class Node {
         key = k;
     }
 
+    public void unlink() {
+      this.left = this.right = this.parent = null;
+    }
+
+    public boolean is_unlinked() {
+        return this.left == null && this.right == null && this.parent == null;
+    }
+
     public static void main(String [] args) {
         System.out.println("From Node main...");
     };

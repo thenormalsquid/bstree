@@ -317,6 +317,26 @@ public class NodeTest extends TestCase {
         assertEquals(root.right.left.right, n17);
     }
 
+    public void testUnlink() {
+        Node root = new Node(17);
+        assertEquals(root.is_unlinked(), true);
+
+        Node n5 = new Node(5);
+        Node n19 = new Node(19);
+        root.insert(n5);
+        root.insert(n19);
+        assertEquals(root.is_unlinked(), false);
+        assertEquals(n5.is_unlinked(), false);
+        assertEquals(n19.is_unlinked(), false);
+
+        root.unlink();
+        n5.unlink();
+        n19.unlink();
+        assertEquals(root.is_unlinked(), true);
+        assertEquals(n5.is_unlinked(), true);
+        assertEquals(n19.is_unlinked(), true);
+    }
+
     public void testInstantiation() {
         Node node = new Node(11);
         assertEquals(11, node.key);
