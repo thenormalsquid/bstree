@@ -442,6 +442,102 @@ public:
     });
   }
 
+  void test_delete_node(void) {
+    describe_test(INDENT0, "From test_delete_node in TreeTest.");
+    Node root(17);
+    Node n2(2);
+    Node n3(3);
+    Node n5(5);
+    Node n7(7);
+    Node n11(11);
+    Node n13(13);
+    Node n19(19);
+    Node n23(23);
+    Node n29(29);
+    Tree tree(&root);
+    tree.insert(&n5);
+    tree.insert(&n3);
+    tree.insert(&n2);
+    tree.insert(&n7);
+    tree.insert(&n11);
+    tree.insert(&n13);
+    tree.insert(&n23);
+    tree.insert(&n19);
+    tree.insert(&n29);
+
+    Node * deleted;
+    Spec spec;
+    spec.it("delete right node with no left child", [&]() {
+      deleted = tree.delete_node(11);
+      return deleted == &n11
+          && tree.size() == 9
+          && deleted->is_unlinked() == true
+          && n7.right == &n13
+          && n13.parent == &n7;
+    });
+
+    spec.it("delete left node with only left child", [&]() {
+      deleted = tree.delete_node(3);
+      return deleted == &n3
+          && tree.size() == 8
+          && deleted->is_unlinked() == true
+          && n5.left == &n2
+          && n2.parent == &n5;
+    });
+
+    spec.it("delete node who's right child is node's successor", [&]() {
+      deleted = tree.delete_node(23);
+      return deleted == &n23
+          && tree.size() == 7
+          && deleted->is_unlinked() == true
+          && tree.root->right == &n29
+          && n29.parent == tree.root
+          && n29.left == &n19
+          && n19.parent == &n29;
+    });
+
+    spec.it("delete the root node with two children", [&]() {
+      deleted = tree.delete_node(17);
+      return deleted == &root
+          && tree.root == &n19
+          && tree.root->right == &n29
+          && tree.size() == 6
+          && tree.root->right == &n29
+          && n29.parent == tree.root
+          && tree.root->left == &n5
+          && n5.parent == tree.root;
+    });
+
+    spec.it("delete a two child node to the left of root", [&]() {
+      deleted = tree.delete_node(5);
+      return deleted == &n5
+          && tree.size() == 5
+          && deleted->is_unlinked() == true
+          && tree.root->left == &n7
+          && n7.parent == tree.root
+          && n7.left == &n2
+          && n2.parent == &n7;
+    });
+
+    spec.it("delete several nodes in succession", [&]() {
+      tree.delete_node(7);
+      tree.delete_node(2);
+      tree.delete_node(13);
+      deleted = tree.delete_node(19);
+      return deleted == &n19
+          && tree.size() == 1
+          && tree.root == &n29
+          && n29.is_unlinked() == 1;
+    });
+
+    spec.it("delete the last node in a tree", [&]() {
+      deleted = tree.delete_node(29);
+      return deleted == &n29
+          && tree.size() == 0
+          && tree.is_empty() == 1;
+    });
+  }
+
   void runTest() {
     test_instantiation();
     test_insert();
@@ -459,8 +555,9 @@ public:
     test_collect();
     test_is_bst();
     test_is_empty();
-    test_transplant();
     test_list_keys();
+    test_transplant();
+    test_delete_node();
     // test_unique_ptr();
   }
 };

@@ -34,6 +34,8 @@ class Node {
     Node * predecessor(Node * n);
     Node * maximum(void);
     Node * minimum(void);
+    void unlink(void); // could also be unlink
+    bool is_unlinked(void);
     std::vector<int> list_keys(void);
     void collect(std::vector<int> & keys);
     bool is_bst(void);

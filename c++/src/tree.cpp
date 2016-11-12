@@ -59,6 +59,30 @@ void Tree::transplant(Node * u, Node * v) {
   }
 }
 
+Node * Tree::delete_node(int key) {
+  Node * z = find(key);
+
+  if (z->left == nullptr) {
+    transplant(z, z->right);
+  } else if (z->right == nullptr) {
+    transplant(z, z->left);
+  } else { // two children
+    Node * y = z->right->minimum();
+    // if y is not z successor, do extra stuff here
+    if (y->parent != z) {
+      transplant(y, y->right);
+      z->right->parent = y;
+      y->right = z->right;
+    }
+    transplant(z, y);
+    y->left = z->left;
+    y->left->parent = y;
+  }
+
+  z->unlink();
+  return z;
+}
+
 bool Tree::is_bst() {
   if (this->root == nullptr) { return true; }
   return this->root->is_bst();
@@ -73,6 +97,7 @@ bool Tree::is_present(int key) {
   return this->root->is_present(key);
 }
 
+#if 1
 // TODO: move the guts of this method to Node class
 Node * Tree::find_node(int key, Node * node) {
   if (node == nullptr) return node;
@@ -85,6 +110,7 @@ Node * Tree::find_node(int key, Node * node) {
   }
   return nullptr;
 }
+#endif
 
 void Tree::collect(std::vector<int> & keys) {
   if (this->root == nullptr) return;

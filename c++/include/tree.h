@@ -16,6 +16,8 @@ public:
   void insert(Node * node);
   void collect(std::vector<int> & keys);
   std::vector<int> list_keys(void);
+
+  Node * delete_node(int key);
   Node * find(int);
   Node * successor(Node * n);
   Node * predecessor(Node * n);

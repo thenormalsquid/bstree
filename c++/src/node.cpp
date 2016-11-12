@@ -12,6 +12,14 @@ void Node::insert(Node * node) {
   }
 }
 
+void Node::unlink() {
+  left = right = parent = nullptr;
+}
+
+bool Node::is_unlinked() {
+  return left == nullptr && right == nullptr && parent == nullptr;
+}
+
 void Node::insert_left(Node * node) {
   if (this->left == nullptr) {
     node->parent = this;
