@@ -194,6 +194,74 @@ public class BSTreeTest extends TestCase {
         // that it's still a binary search tree with `is_bst()`.
         // Also check that the left and right child links are pointing
         // to the correct children.
+
+        Node root = new Node(17);
+        BSTree tree = new BSTree(root);
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        Node n5 = new Node(5);
+        Node n7 = new Node(7);
+        Node n11 = new Node(11);
+        Node n13 = new Node(13);
+        Node n19 = new Node(19);
+        Node n23 = new Node(23);
+        Node n29 = new Node(29);
+        tree.insert(n5);
+        tree.insert(n3);
+        tree.insert(n2);
+        tree.insert(n7);
+        tree.insert(n11);
+        tree.insert(n13);
+        tree.insert(n23);
+        tree.insert(n19);
+        tree.insert(n29);
+
+        tree.delete_node(11);
+        assertEquals(n11.is_unlinked(), true);
+        assertEquals(tree.size(), 9);
+        assertEquals(n7.right, n13);
+        assertEquals(n13.parent, n7);
+
+        tree.delete_node(3);
+        assertEquals(n3.is_unlinked(), true);
+        assertEquals(tree.size(), 8);
+        assertEquals(n5.left, n2);
+        assertEquals(n2.parent, n5);
+
+        tree.delete_node(5);
+        assertEquals(tree.size(), 7);
+        assertEquals(tree.root.left, n7);
+        assertEquals(n7.parent, tree.root);
+        assertEquals(n7.left, n2);
+        assertEquals(n2.parent, n7);
+
+        tree.delete_node(17);
+        assertEquals(tree.size(), 6);
+        assertEquals(tree.root, n19);
+        assertEquals(tree.root.left, n7);
+        assertEquals(n7.parent, tree.root);
+        assertEquals(tree.root.right, n23);
+        assertEquals(n23.parent, tree.root);
+
+        tree.delete_node(7);
+        assertEquals(tree.size(), 5);
+        assertEquals(tree.root.left, n13);
+        assertEquals(n13.parent, tree.root);
+        assertEquals(n13.left, n2);
+        assertEquals(n2.parent, n13);
+
+        tree.delete_node(2);
+        tree.delete_node(23);
+        tree.delete_node(13);
+        Node deleted = tree.delete_node(19);
+        assertEquals(deleted, n19);
+        assertEquals(tree.size(), 1);
+        assertEquals(tree.root, n29);
+        assertEquals(n29.is_unlinked(), true);
+
+        tree.delete_node(29);
+        assertEquals(tree.root, null);
+        assertEquals(tree.size(), 0);
     }
 
     public void testlistKeys() {

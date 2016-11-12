@@ -25,6 +25,30 @@ class BSTree {
         if (v != null) { v.parent = u.parent; }
     }
 
+    public Node delete_node(int key) {
+      Node z = search(key);
+      // TODO: handle null for node not found
+
+      if (z.left == null) {
+        transplant(z, z.right);
+      } else if (z.right == null) {
+        transplant(z, z.left);
+      } else {
+        Node y = z.right.minimum();
+        if (y.parent != z) {
+            transplant(y, y.right);
+            y.right = z.right;
+            y.right.parent = y;
+        }
+        transplant(z, y);
+        y.left = z.left;
+        y.left.parent = y;
+      }
+
+      z.unlink();
+      return z;
+    }
+
     public Node maximum() {
         if (root == null) { return null; }
         return root.maximum();
