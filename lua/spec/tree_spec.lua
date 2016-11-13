@@ -1,7 +1,7 @@
 require 'busted.runner'()
 
-tree = require 'lib/tree'
-node = require 'lib/node'
+tree = require '../lib/tree'
+node = require '../lib/node'
 
 describe("instantiating trees", function()
   it("instantiates an empty tree", function()
@@ -83,6 +83,80 @@ describe("transplant", function()
     tree:transplant(n23, n29)
     assert.are.same(tree.root.right, n29)
     assert.are.same(n29.parent, tree.root)
+  end)
+end)
+
+describe(":delete_node", function()
+  it("deletes nodes from a tree", function()
+    root = node:new(17)
+    tree = tree:new(root)
+    n2 = node:new(2)
+    n3 = node:new(3)
+    n5 = node:new(5)
+    n7 = node:new(7)
+    n11 = node:new(11)
+    n13 = node:new(13)
+    n19 = node:new(19)
+    n23 = node:new(23)
+    n29 = node:new(29)
+
+    tree:insert(n5)
+    tree:insert(n3)
+    tree:insert(n2)
+    tree:insert(n7)
+    tree:insert(n11)
+    tree:insert(n13)
+    tree:insert(n23)
+    tree:insert(n19)
+    tree:insert(n29)
+
+    -- only right child
+    deleted = tree:delete_node(11)
+    assert.are.same(deleted, n11)
+    assert.are.same(tree:size(), 9)
+    assert.are.same(n7.right, n13)
+    assert.are.same(n13.parent, n7)
+
+    -- only left child
+    deleted = tree:delete_node(3)
+    assert.are.same(deleted, n3)
+    assert.are.same(tree:size(), 8)
+    assert.are.same(n3:is_unlinked(), true)
+    assert.are.same(n5.left, n2)
+    assert.are.same(n2.parent, n5)
+
+    -- two children, right node is successor
+    deleted = tree:delete_node(5)
+    assert.are.same(deleted, n5)
+    assert.are.same(tree:size(), 7)
+    assert.are.same(tree.root.left, n7)
+    assert.are.same(n7.parent, tree.root)
+    assert.are.same(n7.left, n2)
+    assert.are.same(n2.parent, n7)
+
+    -- two children, right node is not successor
+    deleted = tree:delete_node(17)
+    assert.are.same(deleted, root)
+    assert.are.same(root:is_unlinked(), true)
+    assert.are.same(tree.root, n19)
+    assert.are.same(n19.right, n23)
+    assert.are.same(n23.parent, n19)
+    assert.are.same(n19.left, n7)
+    assert.are.same(n7.parent, n19)
+    assert.are.same(tree:size(), 6)
+
+    tree:delete_node(2)
+    tree:delete_node(13)
+    tree:delete_node(7)
+    tree:delete_node(23)
+    tree:delete_node(19)
+    assert.are.same(tree.root, n29)
+    assert.are.same(tree:size(), 1)
+    assert.are.same(n29:is_unlinked(), true)
+
+    tree:delete_node(29)
+    assert.are.same(tree:size(), 0)
+    assert.are.same(tree:is_empty(), true)
   end)
 end)
 

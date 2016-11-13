@@ -41,6 +41,30 @@ function Tree:transplant(u, v)
   end
 end
 
+function Tree:delete_node(key)
+  z = self:search(key)
+
+  if (z.left == nil) then
+    self:transplant(z, z.right)
+  elseif (z.right == nil) then
+    self:transplant(z, z.left)
+  else
+    y = z.right:minimum()
+    if y.parent ~= z then
+      self:transplant(y, y.right)
+      y.right = z.right
+      y.right.parent = y
+    end
+
+    self:transplant(z, y)
+    y.left = z.left
+    y.left.parent = y
+  end
+
+  z:unlink()
+  return z
+end
+
 function Tree:search(key)
   if self.root == nil then return nil end
   return self.root:search(key)
