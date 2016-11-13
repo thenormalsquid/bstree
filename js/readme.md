@@ -4,6 +4,11 @@ The code here is secondary to understanding how to engineer
 some sort of javascript module. In this case, the structure
 will be a very simple lib + spec.
 
+## Installing
+
+* install npm
+* `npm install mocha`
+
 ## TODO
 
 Lots and lots I'm sure. At the time of this writing, I'm not
