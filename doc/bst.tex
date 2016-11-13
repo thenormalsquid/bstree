@@ -58,7 +58,7 @@
 \abstract{A few notes on binary search trees and their implementations
 in various programming languages.}
 
-
+\tableofcontents
 
 \section{Introduction}
 
@@ -695,7 +695,39 @@ let () =
 \section{Selected exercises and problems}
 
 
-\subsection{CLR}
+\subsection{CLRS, 3rd Edition}
+
+\subsubsection{6.1-5} Is an array in sorted order a min-heap?
+
+Yes, because for every index $i = 1, 2, 3,\ldots, A[i-1] \leq A[i]$,
+which satisifies the min-heap property.
+
+\subsubsection{12.1-2} What is the difference between the binary-search-tree
+property and the min-heap property (p. 153)? Can the min-heap property be used
+to print out the keys of an $n$-node tree, in sorted order, in $O(n)$ time?
+Show how, or explain why not.
+
+Let's start with definitions.
+The min-heap property:
+
+\begin{equation}
+  A[\mathrm{parent}] \leq A[i].
+\end{equation}
+
+The binary-search-tree property: For $x$ a node in a in binary search tree,
+$y$ in the left subtree implies $y.\mathrm{key} \leq x.\mathrm{key}$, and
+$y$ in the right subtree implies $y.\mathrm{key} \geq x.\mathrm{key}$.
+
+The difference is the min-heap requires \emph{both} children to be
+greater than the root node, violating the binary-search-tree property.
+
+In-order printing the keys of an arbitrary min-heap cannot be done in $O(n)$
+for either breadth-first, or any depth-first traversal without inducing
+additional comparisons at each level. Consider the min-heap $[2, 8, 4]$.
+Breadth-first traversal requires comparing elements 2 and 3.
+
+There may be a result elsewhere proving sorting requires $O(n\ln n)$,
+this would be a good place to cite that result if the conditions hold.
 
 \subsubsection{Problem 3-4: Number of different binary trees}
 
