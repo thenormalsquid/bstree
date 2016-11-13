@@ -414,4 +414,30 @@ describe('Node', function() {
       assert.equal(root.size(), 10);
     });
   });
+
+  describe('unlink and is_unlinked', function() {
+    it('new nodes are unlinked', function() {
+      var n = new node(17);
+      assert.equal(n.is_unlinked(), true);
+    });
+
+    it('unlink a small tree', function() {
+      var root = new node(17);
+      var n5 = new node(5);
+      var n23 = new node(23);
+
+      root.insert(n5);
+      root.insert(n23);
+      assert.equal(root.is_unlinked(), false);
+      assert.equal(n5.is_unlinked(), false);
+      assert.equal(n23.is_unlinked(), false);
+
+      root.unlink();
+      n5.unlink();
+      n23.unlink();
+      assert.equal(root.is_unlinked(), true);
+      assert.equal(n5.is_unlinked(), true);
+      assert.equal(n23.is_unlinked(), true);
+    });
+  });
 });

@@ -181,6 +181,13 @@ Node.prototype.is_bst = function() {
   return result;
 }
 
+Node.prototype.unlink = function() {
+  this.left = this.right = this.parent = null;
+}
+
+Node.prototype.is_unlinked = function() {
+  return this.left === null && this.right === null && this.parent === null;
+}
 
 // exports.Node = new Node();
 exports.Node = Node;
