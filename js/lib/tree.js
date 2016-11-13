@@ -43,6 +43,30 @@ Tree.prototype.transplant = function(u, v) {
   }
 }
 
+Tree.prototype.delete_node = function(key) {
+  z = this.search(key);
+  // TODO: catch key not found
+
+  if (z.left === null) {
+    this.transplant(z, z.right);
+  } else if (z.right === null) {
+    this.transplant(z, z.left);
+  } else {
+    y = z.right.minimum();
+    if (z.right.parent != y) {
+      this.transplant(y, y.right);
+      y.right = z.right;
+      y.right.parent = y;
+    }
+    this.transplant(z, y);
+    y.left = z.left;
+    y.left.parent = y;
+  }
+
+  z.unlink();
+  return z;
+}
+
 Tree.prototype.is_present = function(key) {
   if (this.root === null) { return false; }
   return this.root.is_present(key);
