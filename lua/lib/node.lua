@@ -180,4 +180,14 @@ function Node:minimum()
   end
 end
 
+function Node:unlink()
+  self.left = nil
+  self.right = nil
+  self.parent = nil
+end
+
+function Node:is_unlinked()
+  return self.left == nil and self.right == nil and self.parent == nil
+end
+
 return Node

@@ -311,6 +311,27 @@ describe("collecting values or labels from nodes in order", function()
   end)
 end)
 
+describe("unlinked and is_unlinked", function()
+  it("unlinks nodes", function()
+    root = node:new(17);
+    n5 = node:new(5);
+    n23 = node:new(23);
+    root:insert(n5)
+    root:insert(n23)
+
+    assert.are.same(false, root:is_unlinked())
+    assert.are.same(false, n5:is_unlinked())
+    assert.are.same(false, n23:is_unlinked())
+
+    root:unlink()
+    n5:unlink()
+    n23:unlink()
+    assert.are.same(true, root:is_unlinked())
+    assert.are.same(true, n5:is_unlinked())
+    assert.are.same(true, n23:is_unlinked())
+  end)
+end)
+
 describe(":list_keys", function()
   it("lists the keys linked nodes", function()
     root = node:new(17)
