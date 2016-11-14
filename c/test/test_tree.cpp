@@ -180,8 +180,6 @@ public:
       return (tree_minimum(tree) == n2);
     });
 
-    // TODO: consider testing a few other nodes, just for fun.
-
     tree_delete(tree);
   }
 
@@ -195,6 +193,7 @@ public:
     spec.it("root of tree with single node is own successor", DO_SPEC_HANDLE {
         return tree_successor(t, root) == root;
     });
+    tree_delete(t);
   }
 
   void test_tree_predecessor(void) {
@@ -207,6 +206,7 @@ public:
     spec.it("root of tree with single node is own predecessor", DO_SPEC_HANDLE {
         return tree_predecessor(t, root) == root;
     });
+    tree_delete(t);
   }
 
   void test_tree_is_full(void) {
@@ -222,6 +222,7 @@ public:
     spec.it("tree with single node is bst", DO_SPEC_HANDLE {
         return tree_is_bst(t) == 1;
     });
+    tree_delete(t);
   }
 
   void test_tree_size(void) {
@@ -361,6 +362,11 @@ public:
           && node_is_unlinked(n5)
           && node_is_unlinked(n23);
     });
+
+    node_delete(root);
+    node_delete(n5);
+    node_delete(n23);
+    tree_delete(tree);
   }
 
   void test_tree_transplant(void) {
@@ -375,6 +381,7 @@ public:
         return tree_is_empty(tree) == TRUE;
     });
 
+    node_delete(root);
     tree_delete(tree);
 
     Node * n5 = node_new(5);
@@ -387,13 +394,7 @@ public:
       return tree->root == n5 && n5->parent == NULL;
     });
 
-   /* starting from here, need to run this through valgrind to ensure
-    * all the node memory is actually reclaimed, because moving nodes
-    * around is liable to orphan some memory; remember the delete is
-    * done recursively, and assumes the tree hasn't been "tampered with."
-    * Since osx doesn't have a working valgrind at this moment, will
-    * need to do that work in linux.
-    */
+    node_delete(root);
     tree_delete(tree);
 
     Node * n23 = node_new(23);
@@ -406,6 +407,7 @@ public:
       return tree->root == n23 && n23->parent == NULL;
     });
 
+    node_delete(root);
     tree_delete(tree);
 
     Node * n7 = node_new(7);
@@ -420,6 +422,7 @@ public:
       return tree->root->left == n7 && n7->parent == tree->root;
     });
 
+    node_delete(n5);
     tree_delete(tree);
 
     Node * n29 = node_new(29);
@@ -434,6 +437,7 @@ public:
       return tree->root->right == n29; // && n29->parent == tree->root;
     });
 
+    node_delete(n23);
     tree_delete(tree);
   }
 
@@ -632,9 +636,7 @@ public:
     test_tree_insert();
     test_tree_collect();
     test_tree_search();
-    //test_tree_is_present();
     test_tree_height();
-    //test_tree_destroy();
     test_tree_maximum();
     test_tree_successor();
     test_tree_predecessor();
