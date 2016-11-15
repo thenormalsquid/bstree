@@ -390,6 +390,8 @@ public:
         return node_is_bst(n23) == 1
             && node_is_bst(root) == 0;
     });
+
+    node_destroy(root);
   }
 
   void test_node_height(void) {
@@ -559,6 +561,10 @@ public:
           && node_is_unlinked(n5)
           && node_is_unlinked(n23);
     });
+
+    node_destroy(root);
+    node_destroy(n5);
+    node_destroy(n23);
   }
 
   void test_node_new_and_destroy(void) {
@@ -586,8 +592,10 @@ public:
       int result = collector_equals(expected, actual);
       collector_destroy(expected);
       collector_destroy(actual);
+      node_destroy(root);
       return result;
     });
+
   }
 
 
@@ -609,6 +617,10 @@ public:
       node_strip(node);
       return node_is_unlinked(node) == 1;
     });
+
+    node_destroy(node);
+    node_destroy(right);
+    node_destroy(left);
   }
 
   void run_tests(void) {
@@ -624,7 +636,6 @@ public:
     //test_node_destroy();
     test_node_minimum();
     test_node_maximum();
-    //test_node_minimum();
     //test_node_is_full();
     test_node_size();
     test_node_successor();
