@@ -10,9 +10,9 @@ void Tree::insert(Node * node) {
   this->root->insert(node);
 }
 
-Node * Tree::find(int key) {
+Node * Tree::search(int key) {
   if (root == nullptr) return nullptr;
-  return find_node(key, root);
+  return search_node(key, root);
 }
 
 Node * Tree::maximum(void) {
@@ -60,7 +60,7 @@ void Tree::transplant(Node * u, Node * v) {
 }
 
 Node * Tree::delete_node(int key) {
-  Node * z = find(key);
+  Node * z = search(key);
 
   if (z->left == nullptr) {
     transplant(z, z->right);
@@ -99,14 +99,14 @@ bool Tree::is_present(int key) {
 
 #if 1
 // TODO: move the guts of this method to Node class
-Node * Tree::find_node(int key, Node * node) {
+Node * Tree::search_node(int key, Node * node) {
   if (node == nullptr) return node;
   if (node->key == key) return node;
 
   if (node->left != nullptr && key < node->key) {
-    return find_node(key, node->left);
+    return search_node(key, node->left);
   } else if (node->right != nullptr) {
-    return find_node(key, node->right);
+    return search_node(key, node->right);
   }
   return nullptr;
 }

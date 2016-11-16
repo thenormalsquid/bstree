@@ -18,7 +18,7 @@ public:
   std::vector<int> list_keys(void);
 
   Node * delete_node(int key);
-  Node * find(int);
+  Node * search(int);
   Node * successor(Node * n);
   Node * predecessor(Node * n);
   Node * maximum(void);
@@ -35,7 +35,7 @@ public:
   //std::vector<int> keys;
 
 private:
-  Node * find_node(int key, Node * node);
+  Node * search_node(int key, Node * node);
 
   /*
   void collect_keys(Node * node);

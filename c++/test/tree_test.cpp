@@ -49,9 +49,9 @@ public:
     });
   }
 
-  void test_find_right_node() {
+  void test_search_right_node() {
     Spec spec;
-    spec.it("Testing Tree.find for right node", DO_SPEC {
+    spec.it("Testing Tree.search for right node", DO_SPEC {
       Node node(25);
       Tree tree(&node);
       Node node2(43);
@@ -59,14 +59,14 @@ public:
       tree.insert(&node2);
       tree.insert(&node3);
 
-      Node * n = tree.find(43);
+      Node * n = tree.search(43);
       return (n->key == node2.key);
     });
   }
 
-  void test_find_left_node() {
+  void test_search_left_node() {
     Spec spec;
-    spec.it("Testing Tree.find for left node", DO_SPEC {
+    spec.it("Testing Tree.search for left node", DO_SPEC {
       Node node(25);
       Tree tree(&node);
       Node node2(43);
@@ -74,14 +74,14 @@ public:
       tree.insert(&node2);
       tree.insert(&node3);
 
-      Node * n = tree.find(8);
+      Node * n = tree.search(8);
       return (n->key == node3.key);
     });
   }
 
-  void test_find_root_node() {
+  void test_search_root_node() {
     Spec spec;
-    spec.it("Testing Tree.find for root node", DO_SPEC {
+    spec.it("Testing Tree.search for root node", DO_SPEC {
       Node node(25);
       Tree tree(&node);
       Node node2(43);
@@ -89,16 +89,16 @@ public:
       tree.insert(&node2);
       tree.insert(&node3);
 
-      Node * n = tree.find(25);
+      Node * n = tree.search(25);
       return (n->key == node.key);
     });
   }
 
   //TODO: add test for nullptr node indicating key not found.
 
-  void test_find() {
+  void test_search() {
     Spec spec;
-    spec.it("Testing Tree.find with 8 nodes", DO_SPEC {
+    spec.it("Testing Tree.search with 8 nodes", DO_SPEC {
       Node node(25);
       Tree tree(&node);
       Node node2(43);
@@ -116,7 +116,7 @@ public:
       tree.insert(&node7);
       tree.insert(&node8);
 
-      Node * n = tree.find(43);
+      Node * n = tree.search(43);
       return (n->key == node2.key);
     });
   }
@@ -547,10 +547,10 @@ public:
     test_predecessor();
     test_maximum();
     test_minimum();
-    test_find_root_node();
-    test_find_right_node();
-    test_find_left_node();
-    test_find();
+    test_search_root_node();
+    test_search_right_node();
+    test_search_left_node();
+    test_search();
     test_is_present();
     test_collect();
     test_is_bst();
