@@ -55,7 +55,7 @@ class TestNode(unittest.TestCase):
         assert node.left.left == node_l4
         assert node.left.right == node_l5
 
-    def test_find(self):
+    def test_search(self):
         root = Node(15)
         node_l1 = Node(8)
         node_l2 = Node(33)
@@ -67,8 +67,8 @@ class TestNode(unittest.TestCase):
         root.insert(node_l3)
         root.insert(node_l4)
         root.insert(node_l5)
-        assert root.find(33) == node_l2
-        n, p = root.find_with_parent(8)
+        assert root.search(33) == node_l2
+        n, p = root.search_with_parent(8)
         assert n == node_l1
         assert p == root
 

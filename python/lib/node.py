@@ -63,28 +63,28 @@ class Node(object):
             else:
                 self.right.insert(node)
 
-    def find(self, key):
+    def search(self, key):
         if self.key == key:
             return self
 
         if key < self.key:
             if self.left is not None:
-                return self.left.find(key)
+                return self.left.search(key)
         else:
             if self.right is not None:
-                return self.right.find(key)
+                return self.right.search(key)
 
-    def find_with_parent(self, key, parent=None):
-        # print "in find_with_parent, key: %d" % key
+    def search_with_parent(self, key, parent=None):
+        # print "in search_with_parent, key: %d" % key
         if self.key == key:
             return self, parent
 
         if key < self.key:
             if self.left is not None:
-                return self.left.find_with_parent(key, self)
+                return self.left.search_with_parent(key, self)
         else:
             if self.right is not None:
-                return self.right.find_with_parent(key, self)
+                return self.right.search_with_parent(key, self)
 
 
     def is_present(self, key):
@@ -177,7 +177,7 @@ class Node(object):
     # parent pointers are part of CLR's definition of
     # node in BST.
     def clr_delete(T, node):
-        z, p = T.root.find_with_parent(node)
+        z, p = T.root.search_with_parent(node)
 
         if z.left is None or z.right is None:
             y = z

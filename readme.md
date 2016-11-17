@@ -20,17 +20,10 @@ to be wrong.
 
 ## TODO
 
-* implement diameter algorithm
-* change `find` to `search` where applicable
-* change `add` to `insert` where applicable
-* handle nodes with duplicate values. Currently, inserting a duplicate
+* Implement diameter algorithm.
+* Handle nodes with duplicate values. Currently, inserting a duplicate
   node cause a stack overflow. I hope this can be done elegantly, I
   suspect it will look ugly.
-
-* Finish `size`, `search`, `present?`, `height`, `bst?`, `maximum`, `minimum`, `successor` and
-  `predecessor` before finishing node `delete`. This will provide a lot
-of extra sanity checking for the `delete` implementation.
-
 * Develop some sort of plan for reducing tests to minimal size. There
   should be some analysis or proof techniques for determining the
   necessary and sufficient conditions for testing recursive code. I
@@ -42,9 +35,9 @@ of extra sanity checking for the `delete` implementation.
 
 The `Tree` data structure API:
 
-* `add` provisions the tree.
-* `find` returns a reference to a particular node in the tree.
-* `collect` prints values in order to some container or stream.
+* `insert` provisions the tree.
+* `search` returns a reference to a particular node in the tree.
+* `collect` prints keys in order to some container or stream.
 * `is_present` determines whether a key exists in the tree.
 * `depth`
 * `destroy` (c/c++) cleans up memory.

@@ -48,7 +48,7 @@ class TestTree(unittest.TestCase):
         tree.collect(collector)
         assert [4, 8] == collector
 
-    def test_find(self):
+    def test_search(self):
         root = Node(15)
         tree = Tree(root)
         node_l1 = Node(8)
@@ -61,8 +61,8 @@ class TestTree(unittest.TestCase):
         tree.insert(node_l3)
         tree.insert(node_l4)
         tree.insert(node_l5)
-        assert tree.find(33) == node_l2
-        assert tree.find(35) is None
+        assert tree.search(33) == node_l2
+        assert tree.search(35) is None
 
     def test_is_present(self):
         node = Node(15)

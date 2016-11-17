@@ -12,8 +12,8 @@ class Tree(object):
     def insert(self, node):
         self.root.insert(node)
 
-    def find(self, value):
-        return self.root.find(value)
+    def search(self, value):
+        return self.root.search(value)
 
     def is_present(self, value):
         return self.root.is_present(value)
@@ -65,7 +65,7 @@ class Tree(object):
             v.parent = u.parent
 
     def clrs_delete(self, key):
-        z = self.find(key)
+        z = self.search(key)
 
         if z.left is None:
             self.transplant(z, z.right)
