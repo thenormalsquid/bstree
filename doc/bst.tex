@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{fancybox}
 \usepackage{tikz}
 
@@ -728,6 +729,26 @@ Breadth-first traversal requires comparing elements 2 and 3.
 
 There may be a result elsewhere proving sorting requires $O(n\ln n)$,
 this would be a good place to cite that result if the conditions hold.
+
+\subsubsection{12.4-4 Prove $2^x$ is convex}
+
+Proving $2^x$ is convex is a bit tricky, and leans on a fairly deep result about
+exponentiation which I don't really understand yet. We can start with a definition
+of convexity, with the assumption $x\in\mathbb{R}$:
+
+\begin{equation}
+  f''(x) \geq 0.
+\end{equation}
+
+Differentiating $f(x) = 2^z$ twice,
+
+\begin{equation}
+  f' = 2^x \ln 2, f'' = 2^x\ln^2 2.
+\end{equation}
+
+Showing the second derivative is positive requires showing that the
+terms in the product are both positive, or both negative. Since $\ln 2$
+is positive, we must show that $2^x$ for all $x$.
 
 \subsubsection{Problem 3-4: Number of different binary trees}
 
