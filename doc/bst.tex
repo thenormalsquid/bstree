@@ -749,6 +749,26 @@ Breadth-first traversal requires comparing elements 2 and 3.
 There may be a result elsewhere proving sorting requires $O(n\ln n)$,
 this would be a good place to cite that result if the conditions hold.
 
+\subsubsection{12.2-2 Iterative implementations of min and max}
+
+The original problem calls for recursive implementations for minimum
+and maximum elements, but I already derived those, so this exercise
+is changed to provide the iterative implementations. Here's the
+Ruby code for \texttt{minimum}:
+
+\lstset{language={Ruby}}
+\begin{lstlisting}[frame=single]
+def minimum
+  min = self.left
+  while min.left
+    min = min.left
+  end
+  min
+end
+\end{lstlisting}
+
+
+
 \subsubsection{12.4-4 Prove $2^x$ is convex}
 
 Proving $2^x$ is convex is a bit tricky, and leans on a fairly deep result about

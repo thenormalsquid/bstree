@@ -150,10 +150,28 @@ class Node
 
   def maximum
     right&.maximum || self
+    # iterative_maximum
+  end
+
+  def iterative_maximum
+    max = self
+    while max.right
+      max = max.right
+    end
+    max
   end
 
   def minimum
     left&.minimum || self
+    # iterative_minimum
+  end
+
+  def iterative_minimum
+    min = self
+    while min.left
+      min = min.left
+    end
+    min
   end
 
   def collect collector
