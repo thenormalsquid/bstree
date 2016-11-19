@@ -335,6 +335,68 @@ describe Tree do
       it 'performs breadth-first search finds root node' do
         expect(@tree.bfsearch).to eq @expected
       end
+
+      describe 'CLRS 12.1-1 trees of heights 2, 3, 4, 5 and 6' do
+        it 'builds tree of height 2' do
+          tree = Tree.new Node.new(10)
+          tree.insert Node.new(4)
+          tree.insert Node.new(17)
+          tree.insert Node.new(1)
+          tree.insert Node.new(5)
+          tree.insert Node.new(16)
+          tree.insert Node.new(21)
+          expect(tree.height).to eq 2
+          expect(tree.bfsearch).to eq [10, 4, 17, 1, 5, 16, 21]
+        end
+
+        it 'builds tree of height 3' do
+          tree = Tree.new Node.new(5)
+          tree.insert Node.new(1)
+          tree.insert Node.new(17)
+          tree.insert Node.new(4)
+          tree.insert Node.new(16)
+          tree.insert Node.new(21)
+          tree.insert Node.new(10)
+          expect(tree.height).to eq 3
+          expect(tree.bfsearch).to eq [5, 1, 17, 4, 16, 21, 10]
+        end
+
+        it 'builds tree of height 4' do
+          tree = Tree.new Node.new(5)
+          tree.insert Node.new(1)
+          tree.insert Node.new(10)
+          tree.insert Node.new(4)
+          tree.insert Node.new(16)
+          tree.insert Node.new(17)
+          tree.insert Node.new(21)
+          expect(tree.height).to eq 4
+          expect(tree.bfsearch).to eq [5, 1, 10, 4, 16, 17, 21]
+        end
+
+        it 'builds tree of height 5' do
+          tree = Tree.new Node.new(4)
+          tree.insert Node.new(1)
+          tree.insert Node.new(5)
+          tree.insert Node.new(10)
+          tree.insert Node.new(16)
+          tree.insert Node.new(17)
+          tree.insert Node.new(21)
+          expect(tree.height).to eq 5
+          expect(tree.bfsearch).to eq [4, 1, 5, 10, 16, 17, 21]
+        end
+
+        it 'builds tree of height 6' do
+          tree = Tree.new Node.new(1)
+          tree.insert Node.new(4)
+          tree.insert Node.new(5)
+          tree.insert Node.new(10)
+          tree.insert Node.new(16)
+          tree.insert Node.new(17)
+          tree.insert Node.new(21)
+          expect(tree.height).to eq 6
+          expect(tree.bfsearch).to eq [1, 4, 5, 10, 16, 17, 21]
+        end
+      end
     end
   end
 end

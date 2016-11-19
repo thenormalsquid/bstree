@@ -703,6 +703,22 @@ let () =
 Yes, because for every index $i = 1, 2, 3,\ldots, A[i-1] \leq A[i]$,
 which satisifies the min-heap property.
 
+\subsubsection{12.1-1 Draw various height trees}
+
+At some point in the future, I may actually draw these as for
+display in this document. For now, here is the sequence
+$[1, 4, 5, 10, 16, 17, 21]$ used to create binary search trees
+of various heights. Each of the following sequences represents
+a breadth-first listing, which corresponds to insertion order.
+
+\begin{itemize}
+  \item Height 2: $[10, 4, 17, 1, 5, 16, 21]$
+  \item Height 3: $[5, 1, 17, 4, 16, 21, 10]$
+  \item Height 4: $[5, 1, 10, 4, 16, 17, 21]$
+  \item Height 5: $[4, 1, 5, 10, 16, 17, 21]$
+  \item Height 6: $[1, 4, 5, 10, 16, 17, 21]$
+\end{itemize}
+
 \subsubsection{12.1-2} What is the difference between the binary-search-tree
 property and the min-heap property (p. 153)? Can the min-heap property be used
 to print out the keys of an $n$-node tree, in sorted order, in $O(n)$ time?
