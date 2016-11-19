@@ -4,6 +4,7 @@
 \usepackage{amssymb}
 \usepackage{fancybox}
 \usepackage{tikz}
+\usepackage{comment}
 
 \usepackage{hyperref}
 
@@ -719,10 +720,12 @@ a breadth-first listing, which corresponds to insertion order.
   \item Height 6: $[1, 4, 5, 10, 16, 17, 21]$
 \end{itemize}
 
-\subsubsection{12.1-2} What is the difference between the binary-search-tree
-property and the min-heap property (p. 153)? Can the min-heap property be used
-to print out the keys of an $n$-node tree, in sorted order, in $O(n)$ time?
-Show how, or explain why not.
+\subsubsection{12.1-2 Compare binary-search-tree and min-heap}
+
+What is the difference between the binary-search-tree property and the min-heap
+property (p. 153)? Can the min-heap property be used to print out the keys of
+an $n$-node tree, in sorted order, in $O(n)$ time?  Show how, or explain why
+not.
 
 Let's start with definitions.
 The min-heap property:
@@ -766,7 +769,46 @@ Showing the second derivative is positive requires showing that the
 terms in the product are both positive, or both negative. Since $\ln 2$
 is positive, we must show that $2^x$ for all $x$.
 
-\subsubsection{Problem 3-4: Number of different binary trees}
+By definition,
+
+\begin{equation}
+  e^x = \sum_{n=0}^\infty \frac{x^n}{n!}.
+\end{equation}
+
+Also by definition,
+
+\begin{equation}\label{eq:log2}
+  2^x = e^{x\ln 2}
+\end{equation}
+
+Using the result $e^xe^y = e^{(x+y)}$, we note that $e^xe^{-x} = 1$, implying
+
+\begin{equation}
+  e^{-x} = \frac{1}{e^x}.
+\end{equation}
+
+For $x > 0$, every term in the power series expansion for $e^x$ is positive.
+Further, $e^x$ and $e^{-x}$ are positive for all $x\in\mathbb{R}$. The result
+$2^x > 0$ for all $x\in\mathbb{R}$ follows by substitution using
+Eq.~\ref{eq:log2}. Hence $2^x\ln^2 2 > 0$ and $2^x$ is convex.
+
+\begin{comment}
+Substituting and expanding:
+
+\begin{equation}
+  2^x = 1 + x\ln 2 + \frac{x^2 \ln^2 2}{2!} + \frac{x^3 \ln^3 2}{3!} + \cdots.
+\end{equation}
+
+For $x > 0, 2^x$ is clearly positive. For $x = 0, 2^0 = 1$, again positive. When $x < 0$,
+
+\begin{equation}
+  2^{-x} = 1 - x\ln 2 + \frac{x^2 \ln^2 2}{2!} - \frac{x^3 \ln^3 2}{3!} + \frac{x^4 \ln^4 2}{4!}
+  - \frac{x^5 \ln^5 2}{5!} + \cdots.
+\end{equation}
+\end{comment}
+
+
+\subsubsection{Problem 12-4: Number of different binary trees}
 
 The goal of this problem is to determine the number of binary
 trees possible given $n$ nodes.
@@ -783,7 +825,7 @@ Let's do some examples, starting with $n = 1$, giving $k = 0$:
 \item [$k=0$] $b_0 = 1, b_1$
 \end{itemize}
 
-\subsubsection{b.} Let $B(x)$ be the generating function
+\paragraph{Part b.} Let $B(x)$ be the generating function
 
 \begin{equation}
 B(x) = \sum_{n=0}^{\infty}b_nx^n.
@@ -798,7 +840,7 @@ B(x) = \frac{1}{2x}(1-\sqrt{1-4x}).
 
 First, a short detour into generating functions.
 
-\subsubsection{Detour into generating functions}
+\subsection{Detour into generating functions}
 
 This example is taken from Cormen et al.~\cite[p. 74]{cormen:th:1990}
 Problem 4-6.
@@ -828,7 +870,7 @@ F(z) - zF(z) & = z + z^2(0 + z + z^2 + 2Z^3 + 3z^4 +\cdots)\\
 \end{align}
 
 
-\subsubsection{Detour into partial fraction expansion}
+\subsection{Detour into partial fraction expansion}
 
 The idea of partial fraction expansion is to reduce some
 complicated ratio of functions into a sum of simpler functions.
@@ -853,7 +895,7 @@ $B = -1$:
 which can of course be verified by summing the right hand side.
 
 
-\subsubsection{Detour into Taylor series}
+\subsection{Detour into Taylor series}
 
 Cormen et al.~\cite[p. 262]{cormen:th:1990} gives Taylor Series definition as
 (there is an error in the edition cited here, see the Errata for clarification):
