@@ -81,13 +81,15 @@ node class, abstracting keys.
 
 Skiena~\cite[pp. 77, 370, 375, 589]{skiena} has a few notes.
 
-Aho and Ullman~\cite[pp. 210]{rosen} define height and depth for nodes in a binary tree.
+Aho and Ullman~\cite[pp. 210]{aho:av:1992} define height and depth for nodes in a binary tree.
 
 \begin{quote}
 The height of a node n is the length of a longest path from n to
 a leaf. The height of the tree is the height of the root. The depth or level of
 a node n is the length of the path from the root to n.
 \end{quote}
+
+Rosen~\cite{rosen}...
 
 Cormen et al.~\cite{cormen:th:1990} remains a classic reference.
 
@@ -749,6 +751,12 @@ Breadth-first traversal requires comparing elements 2 and 3.
 There may be a result elsewhere proving sorting requires $O(n\ln n)$,
 this would be a good place to cite that result if the conditions hold.
 
+\subsubsection{12.1-3 Iterative algorithm for in-order tree walk}
+
+\subsubsection{12.1-4 Derive recursive pre- and post-order walks}
+
+\subsubsection{12.1-5 Worst case comparisons on sorted data}
+
 \subsubsection{12.2-1 Valid search sequence}
 
 \begin{quote}
@@ -766,6 +774,11 @@ d. 2, 399, 387, 219, 266, 382, 381, 278, 363.
 
 e. \textbf{INVALID} 935, 278, 347, 621, 299, 392, 358, 363.
 \end{quote}
+
+Search and insertion are conceptually similar in binary search
+trees. To determine validity, each sequence above was drawn as
+a binary search tree. After drawing, it's obvious which sequences
+are not valid for finding the desired node.
 
 \subsubsection{12.2-2 Iterative implementations of min and max}
 
@@ -790,7 +803,21 @@ child, as one might suspect.
 
 \subsubsection{12.2-3 Tree predecessor}
 
-This is already written.
+This is already written, recursively, without using parent pointer.
+
+
+\subsubsection{12.2-4 Prof. Bunyan's key sorting claim}
+
+\subsubsection{12.2-5 Successor and predecessor for node with 2 children}
+
+\subsubsection{12.2-6 Ancestor nodes}
+
+\subsubsection{12.2-7 In-order walk using minimum and successor}
+
+\subsubsection{12.2-8 Complexity of successive calls to successor}
+
+\subsubsection{12.2-9 Node parent-child key relationship}
+
 
 \subsubsection{12.4-4 Prove $2^x$ is convex}
 
@@ -814,7 +841,7 @@ is positive, we must show that $2^x$ for all $x$.
 
 By definition,
 
-\begin{equation}
+\begin{equation}\label{eq:exp_series}
   e^x = \sum_{n=0}^\infty \frac{x^n}{n!}.
 \end{equation}
 
@@ -826,12 +853,13 @@ Also by definition,
 
 Using the result $e^xe^y = e^{(x+y)}$, we note that $e^xe^{-x} = 1$, implying
 
-\begin{equation}
+\begin{equation}\label{eq:invert}
   e^{-x} = \frac{1}{e^x}.
 \end{equation}
 
-For $x > 0$, every term in the power series expansion for $e^x$ is positive.
-Further, $e^x$ and $e^{-x}$ are positive for all $x\in\mathbb{R}$. The result
+For $x > 0$, every term in the power series expansion
+(Eq.~\ref{eq:exp_series}) for $e^x$ is positive.
+From Eq.~\ref{eq:invert}, $e^x$ and $e^{-x}$ are positive for all $x\in\mathbb{R}$. The result
 $2^x > 0$ for all $x\in\mathbb{R}$ follows by substitution using
 Eq.~\ref{eq:log2}. Hence $2^x\ln^2 2 > 0$ and $2^x$ is convex.
 
@@ -850,6 +878,12 @@ For $x > 0, 2^x$ is clearly positive. For $x = 0, 2^0 = 1$, again positive. When
 \end{equation}
 \end{comment}
 
+
+\subsubsection{Problem 12-1}
+
+\subsubsection{Problem 12-2}
+
+\subsubsection{Problem 12-3}
 
 \subsubsection{Problem 12-4: Number of different binary trees}
 
@@ -881,6 +915,37 @@ B(x) = \frac{1}{2x}(1-\sqrt{1-4x}).
 \end{equation}
 
 
+\subsection{Sedgewick and Wayne, 4th Edition}
+
+Sedgewick has been publishing an algorithms book for a very long time.
+This latest version with Wayne seems pretty good. They take a slightly
+different approach than Cormen et al., and it's worth working through
+a number of their exercises as well.
+
+\subsubsection{3.2.1 E A S Y Q U E S T I O N}
+
+
+
+\subsubsection{3.2.4 Invalid search sequences}
+
+\begin{quote}
+Suppose that a certain BST has keys that are integers between 1 and 10, and we
+search for 5. Which sequence below cannot be the sequence of keys examined?
+
+a. 10, 9, 8, 7, 6, 5
+
+b. 4, 10, 8, 7, 53
+
+c. 1, 10, 2, 9, 3, 8, 4, 7, 6, 5
+
+d. 2, 7, 3, 8, 4, 5
+
+e. 1, 2, 10, 4, 8, 5
+\end{quote}
+
+\section{Detours}
+
+Detours fill in a bit of mathematical background material.
 First, a short detour into generating functions.
 
 \subsection{Detour into generating functions}
