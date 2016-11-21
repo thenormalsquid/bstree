@@ -570,7 +570,6 @@ def delete(T, z):
       z.key = y.key
 
   return y
-
 \end{lstlisting}
 
 Note that the returned node ({\tt y}) may or may not be the node
@@ -623,6 +622,23 @@ Test cases:
 \item deletes nil when key is not in the tree
 \item deletes the entire tree node-by-node
 \item deleted node has key, left and right set to nil
+\end{enumerate}
+
+Yet another delete algorithm comes from CLRS~\cite{clrs}, with the following
+cases:
+
+\begin{enumerate}
+  \item \textbf{Node z has no left child}: Replace z with it's right child
+    which may or may not be nil.
+  \item \textbf{Node z has left child but no right child}: Replace z with
+    its left child.
+  \item \textbf{Node z has 2 children where right child is successor}: 1.
+    Replace z with successor; 2. Update sucessor left to point to z's left;
+    3. Update z's left parent to point to z.
+  \item \textbf{Node z has 2 children where right child is not successor}:
+    1. Replace successor (y) with it's own right child; 2. Set y's right to
+    z's right; 3. Set y's right parent to y; 4. Proceed with 3 above using
+    z's right child successor.
 \end{enumerate}
 
 
