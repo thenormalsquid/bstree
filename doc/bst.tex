@@ -771,6 +771,34 @@ this would be a good place to cite that result if the conditions hold.
 
 \subsubsection{12.1-4 Derive recursive pre- and post-order walks}
 
+Implementing pre- and post-order-traverse in C is not difficult. Getting
+such traverses to do work requires passing in an argument to handle
+the accumulated state, and a function with which to compute that state.
+This would be handled by closures in languages which support closures.
+Passing in both function pointer and data allows the passed in function
+to properly type and dereference the \texttt{userdata}.
+
+\lstset{language={c}}
+\begin{lstlisting}[frame=single,title=Post-order traverse]
+void
+post_order_traverse(Node * n, Callback callback, void * userdata) {
+  if (n->left  != NULL) { post_order_traverse(n->left, callback, userdata); }
+  if (n->right != NULL) { post_order_traverse(n->right, callback, userdata); }
+  if (callback != NULL) { callback(n, userdata); }
+}
+\end{lstlisting}
+
+\lstset{language={c}}
+\begin{lstlisting}[frame=single,title=Pre-order traverse]
+void
+pre_order_traverse(Node * n, Callback callback, void * userdata) {
+  if (callback != NULL) { callback(n, userdata); }
+  if (n->left  != NULL) { in_order_traverse(n->left, callback, userdata); }
+  if (n->right != NULL) { in_order_traverse(n->right, callback, userdata); }
+}
+\end{lstlisting}
+
+
 \subsubsection{12.1-5 Worst case comparisons on sorted data}
 
 \subsubsection{12.2-1 Valid search sequence}
