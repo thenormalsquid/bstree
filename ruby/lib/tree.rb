@@ -173,7 +173,28 @@ class Tree
     end
   end
 
+  def iterative_inorder_traverse
+    # Go down left side until no more left
+    # print value
+    # go down right side
+
+    nextnode = root.left
+    while nextnode != nil
+      if nextnode.left
+        nextnode = nextnode.left
+        next
+      end
+      puts nextnode.key
+      if nextnode.right
+        nextnode = nextnode.right
+        next
+      end
+      nextnode = nil
+    end
+  end
+
   def list_keys
+    return iterative_inorder_traverse
     root&.list_keys or []
   end
 
