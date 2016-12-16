@@ -178,24 +178,33 @@ class Tree
     # print value
     # go down right side
 
+    stack = []
+    output = []
     nextnode = root.left
+    stack << nextnode
     while nextnode != nil
       if nextnode.left
         nextnode = nextnode.left
+        stack << nextnode
         next
       end
       puts nextnode.key
+      output << nextnode.key
       if nextnode.right
         nextnode = nextnode.right
+        next
+      else
+        nextnode = stack.pop
         next
       end
       nextnode = nil
     end
+    output
   end
 
   def list_keys
     return iterative_inorder_traverse
-    root&.list_keys or []
+    # root&.list_keys or []
   end
 
   def collect collector
