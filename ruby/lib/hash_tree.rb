@@ -20,5 +20,6 @@ class HashTree
     @documents.each do |document|
       @hashes << Digest::SHA256.hexdigest(document)
     end
+    puts Digest::SHA256.hexdigest(@hashes.join)
   end
 end
