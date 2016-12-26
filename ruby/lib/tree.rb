@@ -109,8 +109,8 @@ class Tree
   end
 
   def list_keys
-    # return iterative_inorder_traverse
-    root&.list_keys or []
+    return iterative_inorder_traverse
+    # root&.list_keys or []
   end
 
   def collect collector
