@@ -25,7 +25,8 @@ class Tree
   # that's all it does. Resetting child links is done in the
   # delete method.
   def transplant u, v
-    if u.parent == nil # u is a root node
+    # Consider "ruby-izing the following. Rubocop doesn't like it.
+    if u.parent.nil? # u is a root node
       @root = v
     elsif u == u.parent.left # u is a left child of its parent
       u.parent.left = v
@@ -33,9 +34,9 @@ class Tree
       u.parent.right = v
     end
 
-    if v != nil
-      v.parent = u.parent
-    end
+    # if !v.nil?
+    v.parent = u.parent unless v.nil?
+    # end
     v
   end
 
@@ -76,7 +77,7 @@ class Tree
   end
 
   def delete_by_key key
-    return delete_clrs3 key
+    delete_clrs3 key
   end
 
   def iterative_inorder_traverse
@@ -109,8 +110,8 @@ class Tree
   end
 
   def list_keys
-    return iterative_inorder_traverse
-    # root&.list_keys or []
+    # iterative_inorder_traverse
+    root&.list_keys or []
   end
 
   def collect collector
@@ -159,7 +160,6 @@ class Tree
 
   def to_json_file filename
     File.open(filename, 'w') do |file|
-      # file.write to_json
       file.write root.to_json
     end
   end
