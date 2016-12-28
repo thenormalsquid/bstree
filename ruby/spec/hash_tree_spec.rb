@@ -15,8 +15,8 @@ describe HashTree do
   describe 'insert' do
     it 'hashes inserted documents automatically' do
       ht = HashTree.new
-      doc1 = ""
-      doc2 = "1"
+      doc1 = ''
+      doc2 = '1'
       ht.insert doc1
       ht.insert doc2
       ht.rehash

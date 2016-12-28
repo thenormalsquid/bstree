@@ -347,7 +347,7 @@ describe BinarySearchTree do
         root.insert n2
         root.insert n19
         root.insert n29
-       end
+      end
 
       describe '.predecessor' do
         it 'finds predecessor around root' do
