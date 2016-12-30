@@ -149,28 +149,24 @@ class Node
   end
 
   def maximum
-    right&.maximum || self
-    # iterative_maximum
+    # right&.maximum || self
+    iterative_maximum
   end
 
   def iterative_maximum
     max = self
-    while max.right
-      max = max.right
-    end
+    max = max.right while max.right
     max
   end
 
   def minimum
-    left&.minimum || self
-    # iterative_minimum
+    # left&.minimum || self
+    iterative_minimum
   end
 
   def iterative_minimum
     min = self
-    while min.left
-      min = min.left
-    end
+    min = min.left while min.left
     min
   end
 
