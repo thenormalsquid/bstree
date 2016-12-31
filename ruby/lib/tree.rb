@@ -35,7 +35,8 @@ class Tree
     end
 
     # if !v.nil?
-    v.parent = u.parent unless v.nil?
+    v&.parent = u.parent
+    # v.parent = u.parent unless v.nil?
     # end
     v
   end
@@ -111,7 +112,7 @@ class Tree
 
   def list_keys
     # iterative_inorder_traverse
-    root&.list_keys or []
+    root&.list_keys || []
   end
 
   def collect collector
