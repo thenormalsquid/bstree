@@ -140,7 +140,7 @@ class Node
   end
 
   def bst?
-    minimum = -10000 # fixme
+    minimum = -10_000 # fixme
     in_order_traverse do |node|
       return false if minimum >= node.key
       minimum = node.key
