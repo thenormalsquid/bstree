@@ -364,7 +364,8 @@ describe Tree do
           tree.insert n22
 
           expect(tree.root.right).to be n23
-          expect(tree.list_keys).to eq [3, 5, 7, 8, 10, 11, 12, 17, 19, 20, 21, 22, 23, 29]
+          expected = [3, 5, 7, 8, 10, 11, 12, 17, 19, 20, 21, 22, 23, 29]
+          expect(tree.list_keys).to eq expected
           expect(tree.height).to eq 5
           expect(tree.delete_by_key(5)).to eq n5
           expect(node_pointers_nil?(n5)).to be true
@@ -375,7 +376,8 @@ describe Tree do
           expect(n11.parent).to eq n7
           expect(tree.size).to eq 13
           expect(tree.height).to eq 4
-          expect(tree.list_keys).to eq [3, 7, 8, 10, 11, 12, 17, 19, 20, 21, 22, 23, 29]
+          expected = [3, 7, 8, 10, 11, 12, 17, 19, 20, 21, 22, 23, 29]
+          expect(tree.list_keys).to eq expected
 
           expect(tree.delete_by_key(7)).to eq n7
           expect(tree.root.left).to be n8
@@ -386,12 +388,14 @@ describe Tree do
           expect(n11.parent).to be n8
           expect(tree.size).to eq 12
           expect(tree.height).to eq 4
-          expect(tree.list_keys).to eq [3, 8, 10, 11, 12, 17, 19, 20, 21, 22, 23, 29]
+          expected = [3, 8, 10, 11, 12, 17, 19, 20, 21, 22, 23, 29]
+          expect(tree.list_keys).to eq expected
 
           expect(tree.delete_by_key(29)).to eq n29
           expect(n23.right).to be nil
           expect(tree.size).to eq 11
-          expect(tree.list_keys).to eq [3, 8, 10, 11, 12, 17, 19, 20, 21, 22, 23]
+          expected = [3, 8, 10, 11, 12, 17, 19, 20, 21, 22, 23]
+          expect(tree.list_keys).to eq expected
           expect(tree.delete_by_key(3)).to eq n3
           expect(n8.left).to be nil
           expect(n3.left).to be nil
