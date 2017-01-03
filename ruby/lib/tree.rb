@@ -90,7 +90,7 @@ class Tree
     output = []
     nextnode = root.left
     stack << nextnode
-    while nextnode != nil
+    while !nextnode.nil?
       if nextnode.left
         nextnode = nextnode.left
         stack << nextnode
