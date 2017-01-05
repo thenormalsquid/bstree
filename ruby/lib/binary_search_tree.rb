@@ -6,7 +6,7 @@ module BinarySearchTree
   DECR = -1
 
   def < _other
-    raise NoMethodError.new "'<' method must be overridden"
+    raise NoMethodError, "'<' method must be overridden"
   end
 
   def insert node
@@ -23,9 +23,9 @@ module BinarySearchTree
     return right.nil? ? successor : right.minimum if node == self
 
     if node < self
-       left&.get_successor node, self, successor
+      left&.get_successor node, self, successor
     else
-       right&.get_successor node, self, successor
+      right&.get_successor node, self, successor
     end
   end
 
