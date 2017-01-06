@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 source 'https://rubygems.org'
 
-gem 'rspec'
 gem 'awesome_print'
+gem 'rspec'
 # gem 'byebug'
 gem 'pry-nav'
-gem 'rubocop'
 gem 'reek'
+gem 'rubocop'
