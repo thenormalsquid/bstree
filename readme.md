@@ -11,12 +11,11 @@ The goal is twofold:
 
 ## Disclaimer
 
-In the unlikely chance you have stumbled into this repo, please
-note that all the code, exercises, problems and the like are
-quite likely to be wrong. _None of this material is vetted_.
-I find (and correct) mistakes and falsehoods regularly.
-If you use it for homework or interview questions, you are quite likely
-to be wrong.
+In the unlikely chance you have stumbled into this repo, please note
+that all the code, exercises, problems and the like could be wrong.
+_None of this material is vetted_.  I find (and correct) mistakes and
+falsehoods regularly.  If you use it for homework or interview
+questions, you are quite likely to be wrong as well.
 
 ## TODO
 
