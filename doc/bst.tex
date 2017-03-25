@@ -6,12 +6,27 @@
 \usepackage{tikz}
 \usepackage{comment}
 
-\usepackage{hyperref}
 
 \usepackage{cite}
 
 \usepackage{listings}
 \usepackage{color}
+
+%%% begin for sentence numbering
+%\usepackage{babel, scrjura, xcolor, etoolbox}
+%\usepackage{scrjura, xcolor, etoolbox}
+% \usepackage{scrjura}
+
+%\useshorthands{/}
+%\defineshorthand{/S}{\Sentence\ignorespaces}
+%\defineshorthand{/.}{. \Sentence\ignorespaces}
+
+%\makeatletter
+%\preto\contract@paragraph@font{\color{white}}
+%\makeatother
+%%% ^^^ for sentence numbering
+
+\usepackage{hyperref}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -75,6 +90,10 @@ node class, abstracting keys.
 \item Theory and performance.
 
 \end{itemize}
+
+\newcounter{sno}
+\setcounter{sno}{0}
+\newcommand\sno{\stepcounter{sno}$^{\thesno}$}
 
 
 \section{Literature review}
@@ -146,19 +165,21 @@ Properties include:
 
 \subsubsection{Successor and predecessor}
 
-For an ordered list of values $x_i \in [x_0, x_1,\ldots,x_k]$, the successor of
+\setcounter{sno}{0}
+
+\sno For an ordered list of values $x_i \in [x_0, x_1,\ldots,x_k]$, the successor of
 $x_i$ is $x_{i+1}$, the predecessor $x_{i-1}$.
 
-Cormen et al.~\cite[p. 248-249]{cormen:th:1990} provide a succinct algorithm for
+\sno Cormen et al.~\cite[p. 248-249]{cormen:th:1990} provide a succinct algorithm for
 determining the successor given each node is linked to its parent.
 
-A decision has to made regarding the definition of minimum and maximum
-elements in the tree. The choices are having the relevant successor or
-predecessors of such elements either be nil or be the node. For this implementation,
+\sno A decision has to made regarding the definition of minimum and maximum
+elements in the tree. \sno The choices are having the relevant successor or
+predecessors of such elements either be nil or be the node. \sno For this implementation,
 maximum nodes are their own successors and minimum nodes are their
 own predecessors.
 
-Here's an implementation in Python. The nodes do not have a parent
+\sno Here's an implementation in Python. \sno The nodes do not have a parent
 pointer, so the parent must be passed along the recursion, along with
 the correct predecessor.
 
@@ -185,7 +206,7 @@ def predecessor(self, node):
     return get_predecessor(node, self, node)
 \end{lstlisting}
 
-Implementing {\tt successor} is easy, use right for left, and find the
+\sno Implementing {\tt successor} is easy, use right for left, and find the
 maximum where predecessor finds the minimum.
 
 
@@ -195,12 +216,14 @@ maximum where predecessor finds the minimum.
 
 \subsubsection{Maximum and minimum}
 
-Maximum and minimum elements of binary search trees are probably the easiest
-algorithms to both understand and implement. The maximum is the right-most
+\setcounter{sno}{0}
+
+\sno Maximum and minimum elements of binary search trees are probably the easiest
+algorithms to both understand and implement. \sno The maximum is the right-most
 node, the minimum the left-most, finding either means traversing the tree
 to the appropriate leaf, and returning that node which has no children.
 
-The maximum function written in Ruby is particularly elegant,
+\sno The maximum function written in Ruby is particularly elegant,
 we take advantage of Ruby 2.3.x's ``safe navigation'' operator {\tt \&}:
 \lstset{language={Ruby}}
 \begin{lstlisting}[frame=single]
