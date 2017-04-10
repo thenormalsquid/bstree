@@ -81,38 +81,9 @@ class Tree
     delete_clrs3 key
   end
 
-  def iterative_inorder_traverse
-    # Go down left side until no more left
-    # print value
-    # go down right side
-
-    stack = []
-    output = []
-    nextnode = root.left
-    stack << nextnode
-    while !nextnode.nil?
-      if nextnode.left
-        nextnode = nextnode.left
-        stack << nextnode
-        next
-      end
-      puts nextnode.key
-      output << nextnode.key
-      if nextnode.right
-        nextnode = nextnode.right
-        next
-      else
-        nextnode = stack.pop
-        next
-      end
-      nextnode = nil
-    end
-    output
-  end
-
   def list_keys
-    # iterative_inorder_traverse
-    root&.list_keys || []
+    iterative_inorder_traverse
+    # root&.list_keys || []
   end
 
   def collect collector
@@ -176,6 +147,27 @@ class Tree
     Tree.new(Node.build_from_hash(hash))
   end
 
+  def iterative_inorder_traverse
+    output = []
+    stack = [root]
+
+    while stack.last&.left != nil
+      stack << stack.last.left
+    end
+
+    while !stack.empty?
+      current = stack.pop
+      output << current&.key
+      if current&.right != nil
+        stack << current.right
+        while stack.last&.left != nil
+          stack << stack.last.left
+        end
+      end
+    end
+    output.compact
+  end
+
   def get_next_row current_row
     next_row = []
     current_row.each do |node|
@@ -185,6 +177,7 @@ class Tree
     next_row.compact
   end
 
+  # TODO: rename to breadth_first_traverse
   def bfsearch
     rows = [[root]]
     rows << get_next_row(rows.last) until rows.last.empty?

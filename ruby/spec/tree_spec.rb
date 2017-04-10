@@ -157,6 +157,17 @@ describe Tree do
       expect(tree.list_keys).to eq [4, 9]
     end
 
+    it 'collects node keys for degenerate left tree' do
+      root = Node.new(17)
+      tree = Tree.new root
+      tree.insert Node.new(7)
+      tree.insert Node.new(3)
+      expect(tree.size).to eq 3
+      expected = [3, 7, 17]
+      expect(tree.collect([])).to eq expected
+      expect(tree.list_keys).to eq expected
+    end
+
     it 'collects node keys for right node only' do
       node = Node.new(9)
       tree = Tree.new node
@@ -164,6 +175,18 @@ describe Tree do
       expect(tree.size).to eq 2
       expect(tree.collect([])).to eq [9, 14]
       expect(tree.list_keys).to eq [9, 14]
+    end
+
+    it 'collects node keys for degenerate right tree' do
+      root = Node.new(3)
+      tree = Tree.new root
+      tree.insert Node.new(7)
+      tree.insert Node.new(17)
+      tree.insert Node.new(77)
+      expect(tree.size).to eq 4
+      expected = [3, 7, 17, 77]
+      expect(tree.collect([])).to eq expected
+      expect(tree.list_keys).to eq expected
     end
 
     it 'collects node keys' do
