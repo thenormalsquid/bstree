@@ -82,8 +82,7 @@ class Tree
   end
 
   def list_keys
-    iterative_inorder_traverse
-    # root&.list_keys || []
+    root&.list_keys || []
   end
 
   def collect collector
@@ -151,16 +150,16 @@ class Tree
     output = []
     stack = [root]
 
-    while stack.last&.left != nil
+    while stack.last&.left
       stack << stack.last.left
     end
 
     while !stack.empty?
       current = stack.pop
       output << current&.key
-      if current&.right != nil
+      if current&.right
         stack << current.right
-        while stack.last&.left != nil
+        while stack.last&.left
           stack << stack.last.left
         end
       end

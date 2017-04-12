@@ -146,6 +146,7 @@ describe Tree do
       expect(tree.size).to eq 1
       expect(tree.collect([])).to eq [9]
       expect(tree.list_keys).to eq [9]
+      expect(tree.iterative_inorder_traverse).to eq [9]
     end
 
     it 'collects node keys for left node only' do
@@ -155,6 +156,7 @@ describe Tree do
       expect(tree.size).to eq 2
       expect(tree.collect([])).to eq [4, 9]
       expect(tree.list_keys).to eq [4, 9]
+      expect(tree.iterative_inorder_traverse).to eq [4, 9]
     end
 
     it 'collects node keys for degenerate left tree' do
@@ -166,6 +168,7 @@ describe Tree do
       expected = [3, 7, 17]
       expect(tree.collect([])).to eq expected
       expect(tree.list_keys).to eq expected
+      expect(tree.iterative_inorder_traverse).to eq expected
     end
 
     it 'collects node keys for right node only' do
@@ -175,6 +178,7 @@ describe Tree do
       expect(tree.size).to eq 2
       expect(tree.collect([])).to eq [9, 14]
       expect(tree.list_keys).to eq [9, 14]
+      expect(tree.iterative_inorder_traverse).to eq [9, 14]
     end
 
     it 'collects node keys for degenerate right tree' do
@@ -187,6 +191,7 @@ describe Tree do
       expected = [3, 7, 17, 77]
       expect(tree.collect([])).to eq expected
       expect(tree.list_keys).to eq expected
+      expect(tree.iterative_inorder_traverse).to eq expected
     end
 
     it 'collects node keys' do
@@ -200,6 +205,24 @@ describe Tree do
       expect(tree.size).to eq 6
       expect(tree.collect([])).to eq [1, 4, 5, 14, 23, 99]
       expect(tree.list_keys).to eq [1, 4, 5, 14, 23, 99]
+      expect(tree.iterative_inorder_traverse).to eq [1, 4, 5, 14, 23, 99]
+    end
+
+    it 'iterates successfully' do
+      root = Node.new(25)
+      tree = Tree.new root
+      tree.insert Node.new 43
+      tree.insert Node.new 8
+      tree.insert Node.new 10
+      tree.insert Node.new 15
+      tree.insert Node.new 33
+      tree.insert Node.new 97
+      tree.insert Node.new 4
+      expect(tree.size).to eq 8
+      expected = [4, 8, 10, 15, 25, 33, 43, 97]
+      expect(tree.collect([])).to eq expected
+      expect(tree.list_keys).to eq expected
+      expect(tree.iterative_inorder_traverse).to eq expected
     end
   end
 
