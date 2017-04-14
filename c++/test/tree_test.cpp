@@ -214,6 +214,42 @@ public:
     });
   }
 
+  void test_iterative_inorder_traverse(void) {
+    describe_test(INDENT0, "From test_iterative_inorder_traverse in TreeTest.");
+    Spec spec;
+
+    spec.it("empty tree lists no keys", DO_SPEC {
+        Tree tree;
+        std::vector<int> a1 = tree.iterative_inorder_traverse();
+        return a1.empty();
+    });
+
+    spec.it("list all keys from tree", DO_SPEC {
+      Node node(25);
+      Tree tree(&node);
+      std::vector<int> a1{4, 8, 10, 15, 25, 33, 43, 97};
+      Node node2(43);
+      Node node3(8);
+      Node node4(10);
+      Node node5(15);
+      Node node6(33);
+      Node node7(97);
+      Node node8(4);
+      tree.insert(&node2);
+      tree.insert(&node3);
+      tree.insert(&node4);
+      tree.insert(&node5);
+      tree.insert(&node6);
+      tree.insert(&node7);
+      tree.insert(&node8);
+      std::vector<int> a2 = tree.iterative_inorder_traverse();
+      for (auto i : a2) {
+        std::cout << i << std::endl;
+      }
+      return (a1 == a2);
+    });
+  }
+
   void test_insert() {
     Spec spec;
     spec.it("insert root node to empty tree", DO_SPEC {
@@ -539,6 +575,7 @@ public:
   }
 
   void runTest() {
+#if 0
     test_instantiation();
     test_insert();
     test_size();
@@ -556,8 +593,12 @@ public:
     test_is_bst();
     test_is_empty();
     test_list_keys();
-    test_transplant();
-    test_delete_node();
+#endif
+
+    test_iterative_inorder_traverse();
+
+    // test_transplant();
+    // test_delete_node();
     // test_unique_ptr();
   }
 };

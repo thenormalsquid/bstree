@@ -16,6 +16,7 @@ public:
   void insert(Node * node);
   void collect(std::vector<int> & keys);
   std::vector<int> list_keys(void);
+  std::vector<int> iterative_inorder_traverse(void);
 
   Node * delete_node(int key);
   Node * search(int);

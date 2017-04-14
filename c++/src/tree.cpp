@@ -122,3 +122,42 @@ std::vector<int> Tree::list_keys() {
   collect(keys);
   return keys;
 }
+
+std::vector<int> Tree::iterative_inorder_traverse() {
+  std::vector<int> keys;
+
+  Node * stack[100];
+
+  Node * current = root;
+
+  if (is_empty()) {
+    return keys;
+  }
+
+  while (current->left != nullptr) {
+    current = current->left;
+  }
+
+  int iterations = 0;
+
+  while (current != nullptr) {
+
+    iterations++;
+    keys.push_back(current->key);
+    if (iterations > 8) break;
+
+    if (current->right != nullptr) {
+      current = current->right;
+
+      while (current->left != nullptr) {
+        current = current->left;
+      }
+    } else if (current->parent != nullptr) {
+
+      current = current->parent;
+    }
+
+  }
+
+  return keys;
+}
