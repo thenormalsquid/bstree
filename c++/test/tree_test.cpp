@@ -252,6 +252,66 @@ public:
       return (a1 == a2);
     });
 
+    spec.it("correctly lists with full left subtree", DO_SPEC {
+      Node root(17);
+      Tree tree(&root);
+      Node node23(23);
+      Node node3(3);
+      Node node5(5);
+      Node node7(7);
+      tree.insert(&node23);
+      tree.insert(&node7);
+      tree.insert(&node5);
+      tree.insert(&node3);
+      std::vector<int> a1{3, 5, 7, 17, 23};
+      std::vector<int> a2 = tree.iterative_inorder_traverse();
+      return (a1 == a2);
+    });
+
+    spec.it("correctly lists with full right subtree", DO_SPEC {
+      Node root(17);
+      Tree tree(&root);
+      Node node23(23);
+      Node node7(7);
+      Node node29(29);
+      Node node19(19);
+      tree.insert(&node23);
+      tree.insert(&node7);
+      tree.insert(&node19);
+      tree.insert(&node29);
+      std::vector<int> a1{7, 17, 19, 23, 29};
+      std::vector<int> a2 = tree.iterative_inorder_traverse();
+      return (a1 == a2);
+    });
+
+    spec.it("correctly lists degenerate left subtree", DO_SPEC {
+      Node root(17);
+      Tree tree(&root);
+      Node node3(3);
+      Node node5(5);
+      Node node7(7);
+      tree.insert(&node3);
+      tree.insert(&node5);
+      tree.insert(&node7);
+      std::vector<int> a1{3, 5, 7, 17};
+      std::vector<int> a2 = tree.iterative_inorder_traverse();
+      return (a1 == a2);
+    });
+
+    spec.it("correctly lists with degenerate right subtree", DO_SPEC {
+      Node root(17);
+      Tree tree(&root);
+      Node node23(23);
+      Node node29(29);
+      Node node19(19);
+      tree.insert(&node29);
+      tree.insert(&node23);
+      tree.insert(&node19);
+      std::vector<int> a1{17, 19, 23, 29};
+      std::vector<int> a2 = tree.iterative_inorder_traverse();
+      return (a1 == a2);
+    });
+
     spec.it("list all keys from tree", DO_SPEC {
       Node node(25);
       Tree tree(&node);
@@ -600,7 +660,6 @@ public:
   }
 
   void runTest() {
-#if 0
     test_instantiation();
     test_insert();
     test_size();
@@ -618,12 +677,9 @@ public:
     test_is_bst();
     test_is_empty();
     test_list_keys();
-#endif
-
     test_iterative_inorder_traverse();
-
-    // test_transplant();
-    // test_delete_node();
+    test_transplant();
+    test_delete_node();
     // test_unique_ptr();
   }
 };

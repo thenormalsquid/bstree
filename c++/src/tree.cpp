@@ -141,24 +141,13 @@ std::vector<int> Tree::iterative_inorder_traverse() {
     return keys;
   }
 
-  // while (stack[index]->left != nullptr) {
   while (current->left != nullptr) {
     current = current->left;
-    index++;
-    stack[index] = current;
-    // std::cout << "index: " << index << std::endl;
+    stack[++index] = current; // push stack
   }
 
-  // std::cout << "-------" << std::endl;
-
-  int iterations = 0;
-
   while (index >= 0 && stack[index] != nullptr) {
-    current = stack[index]; // pop stack
-    // std::cout << "index: " << index << std::endl;
-    // std::cout << "current key: " << current->key << std::endl;
-    index--;
-    // std::cout << "after stack popped, index: " << index << std::endl;
+    current = stack[index--]; // pop stack
 
     keys.push_back(current->key);
     if (current->right != nullptr) {
