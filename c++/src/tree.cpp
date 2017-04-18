@@ -123,40 +123,52 @@ std::vector<int> Tree::list_keys() {
   return keys;
 }
 
+
+#ifndef STACK_SIZE
+#define STACK_SIZE 100
+#endif
+
 std::vector<int> Tree::iterative_inorder_traverse() {
   std::vector<int> keys;
 
-  Node * stack[100];
+  Node * stack[STACK_SIZE] = { nullptr };
+  int index = 0; // use int as index < 0 provides halting condition
 
   Node * current = root;
+  stack[0] = root;
 
   if (is_empty()) {
     return keys;
   }
 
+  // while (stack[index]->left != nullptr) {
   while (current->left != nullptr) {
     current = current->left;
+    index++;
+    stack[index] = current;
+    // std::cout << "index: " << index << std::endl;
   }
+
+  // std::cout << "-------" << std::endl;
 
   int iterations = 0;
 
-  while (current != nullptr) {
+  while (index >= 0 && stack[index] != nullptr) {
+    current = stack[index]; // pop stack
+    // std::cout << "index: " << index << std::endl;
+    // std::cout << "current key: " << current->key << std::endl;
+    index--;
+    // std::cout << "after stack popped, index: " << index << std::endl;
 
-    iterations++;
     keys.push_back(current->key);
-    if (iterations > 8) break;
-
     if (current->right != nullptr) {
       current = current->right;
-
+      stack[++index] = current;
       while (current->left != nullptr) {
         current = current->left;
+        stack[++index] = current;
       }
-    } else if (current->parent != nullptr) {
-
-      current = current->parent;
     }
-
   }
 
   return keys;

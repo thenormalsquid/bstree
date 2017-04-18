@@ -3,7 +3,7 @@
 
 # LATEX=pdflatex
 LATEX=xelatex
-
+CP_TARGET=$(HOME)/Documents/personal/goodreader\ docs/doolin
 
 TEXINPUTS := ${TEXINPUTS}:`pwd`/..
 #test:
@@ -28,7 +28,7 @@ zips: $(ZIPS)
 	bibtex	$*
 	$(LATEX) $*
 	$(LATEX) $*
-
+	cp $*.pdf $(CP_TARGET)
 
 
 # %.zip: %.tex preamble.tex

@@ -27,8 +27,8 @@ questions, you are quite likely to be wrong as well.
   should be some analysis or proof techniques for determining the
   necessary and sufficient conditions for testing recursive code. I
   don't mind overtesting while learning, it helps build intuitive
-  understanding. But writing too many tests is time I'd rather spend
-  learning more theory or actual implementation.
+  understanding. On the other hand,  writing too many tests is time
+  I'd rather spend learning more theory or actual implementation.
 
 ## Specification
 
@@ -52,6 +52,9 @@ two nodes in a binary tree, which is not necessarily a binary search
 tree. (Binary search tree is probably much easier than an arbitrary
 binary tree.)
 
+* The [Stanford Great Tree-List Recursion
+  Problem](http://cslibrary.stanford.edu/109/TreeListRecursion.html).
+This is a must-do!
 
 ## Current implementations
 
@@ -144,9 +147,24 @@ implementation, adding and overriding as necessary.
 ## Iterative implementation
 
 Anything which can be done with recursion can be done with iteration.
+Iterative techniques can be useful in resource constrained systems,
+such as sensors and small devices.
+
+Being able to visualize how iteration works is also a useful skill. For
+example, one way to implement a binary search tree with iteration is by
+creating a stack of nodes as the tree is traversed. Understanding how
+this stack works requires making the implicit "magic" of recursion explicit.
 
 Algorithms such as breadth-first search are easier to implement by
 iteration.
+
+Some milestones for iterative implementation:
+
+* Ruby, inorder traverse implemented in `tree.rb` on 2017-04-10.
+* c++, inorder traverse implemented in `tree.cpp` on 2017-04-18.
+
+At some point I'll make a table for all these milestones, but I'm not
+yet sure what the milestones will be.
 
 ## Trees implemented with arrays instead of pointers
 

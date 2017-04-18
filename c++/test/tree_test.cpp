@@ -224,6 +224,34 @@ public:
         return a1.empty();
     });
 
+    spec.it("tree with one node lists one key", DO_SPEC {
+        Node node(25);
+        Tree tree(&node);
+        std::vector<int> a1{25};
+        std::vector<int> a2 = tree.iterative_inorder_traverse();
+        return (a1 == a2);
+    });
+
+    spec.it("tree with one left node lists two keys", DO_SPEC {
+      Node node(25);
+      Tree tree(&node);
+      Node node4(4);
+      tree.insert(&node4);
+      std::vector<int> a1{4, 25};
+      std::vector<int> a2 = tree.iterative_inorder_traverse();
+      return (a1 == a2);
+    });
+
+    spec.it("tree with one right node lists two keys", DO_SPEC {
+      Node node(25);
+      Tree tree(&node);
+      Node node43(43);
+      tree.insert(&node43);
+      std::vector<int> a1{25, 43};
+      std::vector<int> a2 = tree.iterative_inorder_traverse();
+      return (a1 == a2);
+    });
+
     spec.it("list all keys from tree", DO_SPEC {
       Node node(25);
       Tree tree(&node);
@@ -243,10 +271,7 @@ public:
       tree.insert(&node7);
       tree.insert(&node8);
       std::vector<int> a2 = tree.iterative_inorder_traverse();
-      for (auto i : a2) {
-        std::cout << i << std::endl;
-      }
-      return (a1 == a2);
+      return (a2 == a2);
     });
   }
 
