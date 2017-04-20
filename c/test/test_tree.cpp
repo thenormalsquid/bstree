@@ -126,6 +126,55 @@ public:
       return collector_equals(expected, actual);
     });
 
+    tree_delete_node(t, 3);
+    tree_delete_node(t, 5);
+    tree_delete_node(t, 7);
+    tree_delete_node(t, 17);
+    tree_delete_node(t, 19);
+    tree_delete_node(t, 23);
+    tree_delete_node(t, 29);
+
+    spec.it("finds degenerate left tree", DO_SPEC_HANDLE {
+      collector_reset(actual);
+      collector_reset(expected);
+      tree_insert(t, node19);
+      tree_insert(t, node3);
+      tree_insert(t, node5);
+      tree_insert(t, node7);
+      tree_insert(t, root);
+      collector_add(expected, 3);
+      collector_add(expected, 5);
+      collector_add(expected, 7);
+      collector_add(expected, 17);
+      collector_add(expected, 19);
+      tree_inorder_iter(t, actual);
+      return collector_equals(expected, actual);
+    });
+
+    tree_delete_node(t, 3);
+    tree_delete_node(t, 5);
+    tree_delete_node(t, 7);
+    tree_delete_node(t, 17);
+    tree_delete_node(t, 19);
+
+    spec.it("finds degenerate right tree", DO_SPEC_HANDLE {
+      collector_reset(actual);
+      collector_reset(expected);
+      tree_insert(t, node7);
+      tree_insert(t, node29);
+      tree_insert(t, node23);
+      tree_insert(t, node19);
+      tree_insert(t, root);
+      collector_add(expected, 7);
+      collector_add(expected, 17);
+      collector_add(expected, 19);
+      collector_add(expected, 23);
+      collector_add(expected, 29);
+      tree_inorder_iter(t, actual);
+      return collector_equals(expected, actual);
+    });
+
+
     // TODO: compile and run this in linux to leverage valgrind
     // and ensure all the nodes are being freed.
     tree_delete(t);
