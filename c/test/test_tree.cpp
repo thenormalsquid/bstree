@@ -108,6 +108,26 @@ public:
       return collector_equals(expected, actual);
     });
 
+    Node * node3 = node_new(3);
+    Node * node5 = node_new(5);
+    spec.it("finds full left subtree", DO_SPEC_HANDLE {
+      collector_reset(actual);
+      collector_reset(expected);
+      collector_add(expected, 3);
+      collector_add(expected, 5);
+      collector_add(expected, 7);
+      collector_add(expected, 17);
+      collector_add(expected, 19);
+      collector_add(expected, 23);
+      collector_add(expected, 29);
+      tree_insert(t, node3);
+      tree_insert(t, node5);
+      tree_inorder_iter(t, actual);
+      return collector_equals(expected, actual);
+    });
+
+    // TODO: compile and run this in linux to leverage valgrind
+    // and ensure all the nodes are being freed.
     tree_delete(t);
     collector_destroy(expected);
     collector_destroy(actual);
