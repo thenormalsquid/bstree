@@ -68,13 +68,15 @@ public:
       collector_reset(expected);
       // collector_add_int_array(expected, (int [])[7, 17]); // produces interesting error
       int values[] = {7, 17};
+      // TODO: rookie error here, collector_add_int_array never got tested,
+      // so no surprise it doesn't work correctly.
       collector_add_int_array(expected, values);
       tree_inorder_iter(t, (void *)actual);
       // collector_printf(actual);
       return collector_equals(expected, actual);
     });
 
-    tree_delete_node(t, 7);
+    tree_delete_node(t, 7); // memory is not collected here...
     Node * node23 = node_new(23);
     tree_insert(t, node23);
     spec.it("finds a single right node", DO_SPEC_HANDLE {
@@ -84,6 +86,25 @@ public:
       collector_add_int_array(expected, values);
       tree_inorder_iter(t, actual);
       // collector_printf(actual);
+      return collector_equals(expected, actual);
+    });
+
+    Node * node19 = node_new(19);
+    Node * node29 = node_new(29);
+    tree_insert(t, node7);
+    tree_insert(t, node29);
+    tree_insert(t, node19);
+    spec.it("finds full right subtree", DO_SPEC_HANDLE {
+      collector_reset(actual);
+      collector_reset(expected);
+      // TODO: fix collector_add_int_array
+      //int values[] = {7, 17, 19, 23, 29};
+      collector_add(expected, 7);
+      collector_add(expected, 17);
+      collector_add(expected, 19);
+      collector_add(expected, 23);
+      collector_add(expected, 29);
+      tree_inorder_iter(t, actual);
       return collector_equals(expected, actual);
     });
 
