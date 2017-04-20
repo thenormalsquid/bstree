@@ -48,6 +48,8 @@ void collector_add_int_array (Collector * c,
 
 Collector * collector_new    (size_t size);
 
+int collector_empty          (Collector * c);
+
 void collector_destroy       (Collector * c);
 
 void collector_printf        (Collector * c);

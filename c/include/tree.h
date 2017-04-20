@@ -9,52 +9,55 @@ extern "C" {
 
 typedef struct _tree Tree;
 
-Tree * tree_new         (void);
+Tree * tree_new          (void);
 
-void   tree_delete      (Tree * t);
+void   tree_delete       (Tree * t);
 
-Node * tree_delete_node (Tree * t,
-                         int key);
+Node * tree_delete_node  (Tree * t,
+                          int key);
 
-void   tree_insert      (Tree * t,
-                         Node * n);
+void   tree_insert       (Tree * t,
+                          Node * n);
 
-int    tree_is_empty    (Tree * t);
+int    tree_is_empty     (Tree * t);
 
-void   tree_collect     (Tree * t,
-                         void * c);
+void   tree_collect      (Tree * t,
+                          void * c);
 
-Node * tree_search      (Tree * t,
-                         int key);
+void   tree_inorder_iter (Tree * t,
+                          void * c);
 
-void   tree_unlink      (Tree * t);
+Node * tree_search       (Tree * t,
+                          int key);
 
-void   tree_transplant  (Tree * t,
-                         Node * u,
-                         Node * v);
+void   tree_unlink       (Tree * t);
 
-int    tree_is_present  (Tree * t,
-                         int key);
+void   tree_transplant   (Tree * t,
+                          Node * u,
+                          Node * v);
 
-int    tree_height      (Tree * t);
+int    tree_is_present   (Tree * t,
+                          int key);
 
-void   tree_destroy     (void);
+int    tree_height       (Tree * t);
 
-Node * tree_successor   (Tree * t,
-                         Node * n);
+void   tree_destroy      (void);
 
-Node * tree_predecessor (Tree * t,
-                         Node * n);
+Node * tree_successor    (Tree * t,
+                          Node * n);
 
-Node * tree_maximum     (Tree * t);
+Node * tree_predecessor  (Tree * t,
+                          Node * n);
 
-Node * tree_minimum     (Tree * t);
+Node * tree_maximum      (Tree * t);
 
-void   tree_is_full     (void);
+Node * tree_minimum      (Tree * t);
 
-int    tree_is_bst      (Tree * t);
+void   tree_is_full      (void);
 
-int    tree_size        (Tree * t);
+int    tree_is_bst       (Tree * t);
+
+int    tree_size         (Tree * t);
 
 #ifdef __cplusplus
 }

@@ -102,6 +102,8 @@ node_list_keys(Node * n, void * userdata) {
   node_collect(n, userdata);
 }
 
+// Move this to collector class, or at least have something
+// like this in collector class.
 void
 value_collector(Node * n, void * userdata) {
   Collector * c = (Collector *) userdata;

@@ -25,10 +25,16 @@ collector_add(Collector * c, int value) {
 
 void
 collector_add_int_array(Collector * c, int values[]) {
+  // TODO: need size_t here not int
   int size = sizeof(values) / sizeof(int);
   for (int i=0; i<size; i++) {
     collector_add(c, values[i]);
   }
+}
+
+int
+collector_empty(Collector * c) {
+  return (c->current_position == 0);
 }
 
 void

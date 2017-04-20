@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include <tree.h>
+#include <collector.h>
 #include "tree_private.h"
 #include "node_private.h" // needed for delete implementation, bummer
 
@@ -91,6 +92,59 @@ void
 tree_collect(Tree * t, void * collector) {
   if (t->root == NULL) { return; }
   node_collect(t->root, collector);
+}
+
+#ifndef BST_STACK_SIZE
+#define BST_STACK_SIZE 100
+#endif
+
+void
+tree_inorder_iter(Tree * t, void * collector) {
+  Node * stack[BST_STACK_SIZE] = {NULL};
+  int index = 0;
+  Node * current;
+
+  if (t->root == NULL) { return; }
+
+  current = t->root;
+  stack[0] = current;
+
+  while (current->left != NULL) {
+    current = current->left;
+    index++;
+    stack[index] = current;
+  }
+
+  while (index >= 0) {
+    current = stack[index];
+    // printf("index: %d\n", index);
+    collector_add(collector, current->key);
+    index--;
+
+    if (current->right != NULL) {
+      current = current->right;
+      stack[++index] = current;
+#if 1
+
+      while (current->left != NULL) {
+        current = current->left;
+        stack[++index] = current;
+      }
+#endif
+
+    }
+  }
+
+  // traverse left node while has left children, pushing to stack
+  // once at end of left node,
+  // while ( index >= 0 && has_right_child )
+  // pop stack
+  // print value
+  // set to right child, then traverse left pushing to stack
+  // end while
+
+  //if (t->root == NULL) { return; }
+  //node_collect(t->root, collector);
 }
 
 Node *

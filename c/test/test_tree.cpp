@@ -41,6 +41,57 @@ public:
     collector_destroy(actual);
   }
 
+  void test_tree_inorder_iter(void) {
+    describe_test(INDENT0, "From test_tree_inorder_iter in TreeTest.");
+    Spec spec;
+    Tree * t = tree_new();
+    Collector * expected = collector_new(100);
+    Collector * actual = collector_new(100);
+    Node * root = node_new(17);
+
+    spec.it("empty tree returns empty array", DO_SPEC_HANDLE {
+      tree_inorder_iter(t, (void *)actual);
+      return collector_empty(actual);
+    });
+
+    tree_insert(t, root);
+    spec.it("array with single element for single node", DO_SPEC_HANDLE {
+      collector_add(expected, 17);
+      tree_inorder_iter(t, (void *) actual);
+      return (collector_equals(expected, actual));
+    });
+
+    Node * node7 = node_new(7);
+    tree_insert(t, node7);
+    spec.it("finds a single left child", DO_SPEC_HANDLE {
+      collector_reset(actual);
+      collector_reset(expected);
+      // collector_add_int_array(expected, (int [])[7, 17]); // produces interesting error
+      int values[] = {7, 17};
+      collector_add_int_array(expected, values);
+      tree_inorder_iter(t, (void *)actual);
+      // collector_printf(actual);
+      return collector_equals(expected, actual);
+    });
+
+    tree_delete_node(t, 7);
+    Node * node23 = node_new(23);
+    tree_insert(t, node23);
+    spec.it("finds a single right node", DO_SPEC_HANDLE {
+      collector_reset(actual);
+      collector_reset(expected);
+      int values[] = {17, 23};
+      collector_add_int_array(expected, values);
+      tree_inorder_iter(t, actual);
+      // collector_printf(actual);
+      return collector_equals(expected, actual);
+    });
+
+    tree_delete(t);
+    collector_destroy(expected);
+    collector_destroy(actual);
+  }
+
   void test_tree_search(void) {
     describe_test(INDENT0, "From test_tree_search in NodeTest.");
     Spec spec;
@@ -632,9 +683,13 @@ public:
   }
 
   void run_tests(void) {
+#if 0
     test_tree_new_and_delete();
     test_tree_insert();
     test_tree_collect();
+#endif
+    test_tree_inorder_iter();
+#if 0
     test_tree_search();
     test_tree_height();
     test_tree_maximum();
@@ -648,6 +703,7 @@ public:
     test_tree_transplant();
     test_tree_list_keys();
     test_tree_delete_node();
+#endif
   }
 };
 
