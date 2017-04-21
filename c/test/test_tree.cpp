@@ -66,26 +66,21 @@ public:
     spec.it("finds a single left child", DO_SPEC_HANDLE {
       collector_reset(actual);
       collector_reset(expected);
-      // collector_add_int_array(expected, (int [])[7, 17]); // produces interesting error
-      int values[] = {7, 17};
-      // TODO: rookie error here, collector_add_int_array never got tested,
-      // so no surprise it doesn't work correctly.
-      collector_add_int_array(expected, values);
+      collector_add(expected, 7);
+      collector_add(expected, 17);
       tree_inorder_iter(t, (void *)actual);
-      // collector_printf(actual);
       return collector_equals(expected, actual);
     });
 
-    tree_delete_node(t, 7); // memory is not collected here...
+    tree_delete_node(t, 7); // node memory is not collected here...
     Node * node23 = node_new(23);
     tree_insert(t, node23);
     spec.it("finds a single right node", DO_SPEC_HANDLE {
       collector_reset(actual);
       collector_reset(expected);
-      int values[] = {17, 23};
-      collector_add_int_array(expected, values);
+      collector_add(expected, 17);
+      collector_add(expected, 23);
       tree_inorder_iter(t, actual);
-      // collector_printf(actual);
       return collector_equals(expected, actual);
     });
 
@@ -97,8 +92,6 @@ public:
     spec.it("finds full right subtree", DO_SPEC_HANDLE {
       collector_reset(actual);
       collector_reset(expected);
-      // TODO: fix collector_add_int_array
-      //int values[] = {7, 17, 19, 23, 29};
       collector_add(expected, 7);
       collector_add(expected, 17);
       collector_add(expected, 19);
@@ -773,13 +766,10 @@ public:
   }
 
   void run_tests(void) {
-#if 0
     test_tree_new_and_delete();
     test_tree_insert();
     test_tree_collect();
-#endif
     test_tree_inorder_iter();
-#if 0
     test_tree_search();
     test_tree_height();
     test_tree_maximum();
@@ -793,7 +783,6 @@ public:
     test_tree_transplant();
     test_tree_list_keys();
     test_tree_delete_node();
-#endif
   }
 };
 
