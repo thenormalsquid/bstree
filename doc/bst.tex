@@ -526,6 +526,29 @@ Test cases:
 \item finds nil when key is not in the tree
 \end{enumerate}
 
+\subsubsection{Pre- and post-order traversing}
+
+Pre- and post-order traversing are useful for binary trees in general:
+
+\paragraph{Pre-order traverse}
+
+\begin{enumerate}
+  \item serialization of binary search tree.
+    Write node data out
+    as the tree would rebuild in insertion order when read the data back in.
+  \item creating pre-order parse tree for binary operations such as arithmetic
+    expressed in Lisp, Scheme, etc.
+\end{enumerate}
+
+\paragraph{Post-order-traverser}
+
+\begin{enumerate}
+  \item useful for freeing memory or otherwise releasing
+    nodes from a tree without orphaning nodes.
+  \item creating a post-order expression tree for parsing binary operations
+    in post fix languages such as Postscript or Forth.
+\end{enumerate}
+
 \subsubsection{Delete}
 
 Delete depends on search, so that will need to be implemented everywhere first.
@@ -902,7 +925,7 @@ Differentiating $f(x) = 2^z$ twice,
 
 Showing the second derivative is positive requires showing that the
 terms in the product are both positive, or both negative. Since $\ln 2$
-is positive, we must show that $2^x$ for all $x$.
+is positive, we must show that $2^x \geq 0$ for all $x$.
 
 By definition,
 
@@ -915,6 +938,8 @@ Also by definition,
 \begin{equation}\label{eq:log2}
   2^x = e^{x\ln 2}
 \end{equation}
+
+(\textit{This seems wrong, redo this to be more explicit.})
 
 Using the result $e^xe^y = e^{(x+y)}$, we note that $e^xe^{-x} = 1$, implying
 
@@ -979,6 +1004,62 @@ Show that $B(x) = xB(x)^2 + 1$, and
 B(x) = \frac{1}{2x}(1-\sqrt{1-4x}).
 \end{equation}
 
+
+\paragraph{Double factorial}
+
+(A bunch of the following was copied from Wikipedia. Over the next few
+revisions of this section I'll rework into my own material. What's here
+now is just to get the grunt work of the equation formatting finished.
+This comment will be deleted as well.)
+
+The double factorial for $n$, denoted $n!!$, is defined as
+
+\begin{equation}
+  n!! = \prod_{k=0}^{\left\lceil\frac{n}{2}\right\rceil - 1} (n-2k) = n (n-2) (n-4) \cdots
+\end{equation}
+
+\begin{equation}
+  \prod_{k=1}^\frac{n}{2} (2k) = n(n-2)(n-4)\cdots 4\cdot 2\,,
+\end{equation}
+
+\begin{equation}
+  \prod_{k=1}^\frac{n+1}{2} (2k-1) = n(n-2)(n-4)\cdots 3\cdot 1 \,.
+\end{equation}
+
+For an even positive integer $n = 2k, k \geq 0$, the double factorial may be expressed as
+
+\begin{equation}
+{\displaystyle n!!=2^{k}k!\,.}
+\end{equation}
+
+For odd $n = 2k - 1, k \geq 1$, it has the expressions
+\begin{equation}
+{\displaystyle n!!={\frac {(2k)!}{2^{k}k!}}={\frac {n!}{(n-1)!!}}\,.}
+\end{equation}
+
+In this expression, the first denominator equals $(2k)!!$
+and cancels the unwanted even factors from the numerator.
+
+
+(Change this to double factorial.)
+\begin{equation}
+n!! = \begin{cases}
+  x & \text{if } x \geq 0 \\
+ -x & \text{if } x < 0
+\end{cases}
+\end{equation}
+
+\[
+  \binom{n}{k} = \frac{n!}{k!(n-k)!}
+\]
+
+Some references:
+
+\begin{itemize}
+  \item \href{https://en.wikipedia.org/wiki/Double\_factorial}{Wikipedia}. There is a
+    really cool example on perfect matchings for complete graphs, which I could use
+    for a generating function practice perhaps.
+\end{itemize}
 
 \subsection{Sedgewick and Wayne, 4th Edition}
 
