@@ -56,6 +56,9 @@ binary tree.)
   Problem](http://cslibrary.stanford.edu/109/TreeListRecursion.html).
 This is a must-do!
 
+* Here's an odd one: [print a binary search tree
+  vertically](http://www.geeksforgeeks.org/print-binary-tree-vertical-order/).
+
 ## Current implementations
 
 The following tables show what has been finished, and what is planned
@@ -162,6 +165,7 @@ Some milestones for iterative implementation:
 
 * Ruby, inorder traverse implemented in `tree.rb` on 2017-04-10.
 * c++, inorder traverse implemented in `tree.cpp` on 2017-04-18.
+* c, inorder traverse implemented in `tree.cpp` on 2017-04-20.
 
 At some point I'll make a table for all these milestones, but I'm not
 yet sure what the milestones will be.

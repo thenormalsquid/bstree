@@ -3,17 +3,19 @@ require_relative '../lib/tree.rb'
 require_relative '../lib/node.rb'
 
 describe Tree do
-  it 'instantiates correctly' do
-    expect(Tree.new).not_to be_nil
+  describe '#new' do
+    it 'instantiates correctly' do
+      expect(Tree.new).not_to be_nil
+    end
+
+    it 'instantiates a root node' do
+      node = Node.new
+      expect(tree = Tree.new(node)).not_to be_nil
+      expect(tree.root).to eq node
+    end
   end
 
-  it 'instantiates a root node' do
-    node = Node.new
-    expect(tree = Tree.new(node)).not_to be_nil
-    expect(tree.root).to eq node
-  end
-
-  describe '.size' do
+  describe '#size' do
     it 'inserts a node to the tree with existing root' do
       node = Node.new(1)
       tree = Tree.new node
@@ -27,7 +29,7 @@ describe Tree do
     end
   end
 
-  describe '.empty?' do
+  describe '#empty?' do
     it 'returns false when root node is present' do
       root = Node.new 17
       tree = Tree.new root
@@ -96,7 +98,7 @@ describe Tree do
     end
   end
 
-  describe 'height of tree' do
+  describe '#height' do
     # Depth should be incremented when nodes are inserted,
     # if the height is to be considered as an attribute of the tree.
     # As a virtual attribute (to borrow a notion from Ruby), calling a
@@ -226,7 +228,7 @@ describe Tree do
     end
   end
 
-  describe '.bst?' do
+  describe '#bst?' do
     let(:root) { Node.new 100 }
     let(:tree) { Tree.new root }
 
@@ -235,7 +237,7 @@ describe Tree do
     end
   end
 
-  describe '.full?' do
+  describe '#full?' do
     let(:root) { Node.new 100 }
     let(:tree) { Tree.new root }
     let(:left) { Node.new 50 }

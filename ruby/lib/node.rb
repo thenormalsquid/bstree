@@ -172,8 +172,16 @@ class Node
     min
   end
 
+  def collect_pre_order collector
+    pre_order_traverse { |node| collector << node.key }
+  end
+
   def collect collector
     in_order_traverse { |node| collector << node.key }
+  end
+
+  def collect_post_order collector
+    post_order_traverse { |node| collector << node.key }
   end
 
   def list_keys

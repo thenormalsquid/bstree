@@ -6,21 +6,21 @@ require_relative './nodes'
 require 'pry'
 
 describe Node do
-  # include Nodes
-
-  it 'instantiates' do
-    expect(Node.new).not_to be_nil
+  describe '#new' do
+    it 'instantiates' do
+      expect(Node.new).not_to be_nil
+    end
   end
 
-  describe '.insert' do
-    it 'inserts left node' do
+  describe '#insert' do
+    example 'left node' do
       node = Node.new 2
       left_node = Node.new 1
       node.insert left_node
       expect(node.left).to eq left_node
     end
 
-    it 'inserts right node' do
+    example 'right node' do
       node = Node.new 1
       right_node = Node.new 2
       node.insert right_node
@@ -28,13 +28,13 @@ describe Node do
     end
   end
 
-  describe 'list_keys' do
-    it 'collects key from single node' do
+  describe '#list_keys' do
+    example 'from single node' do
       node = Node.new 17
       expect(node.list_keys).to eq [17]
     end
 
-    it 'collect keys from several nodes' do
+    example 'from several nodes' do
       root = Node.new 17
       root.insert Node.new 5
       expect(root.list_keys).to eq [5, 17]
@@ -47,7 +47,88 @@ describe Node do
     end
   end
 
-  describe '.delete' do
+  describe '#collect_post_order' do
+    let(:root) { Node.new 17 }
+    subject(:tree) { root.collect_post_order([]) }
+
+    example 'from single node' do
+      expect(tree).to eq [17]
+    end
+
+    example 'from node with left child' do
+      root.insert Node.new 5
+      expect(tree).to eq [5, 17]
+    end
+
+    example 'from node with right child' do
+      root.insert Node.new 19
+      expect(tree).to eq [19, 17]
+    end
+
+    example 'from node with left and right child' do
+      root.insert Node.new 19
+      root.insert Node.new 5
+      expect(tree).to eq [5, 19, 17]
+    end
+
+    # Now for some overtesting, which is mostly for me to get a
+    # clear mental picture of what post-order traverse looks like
+    # with data I understand, to wit, sorted primes.
+    example 'from node with lots of children' do
+      root.insert Node.new 7
+      root.insert Node.new 3
+      root.insert Node.new 5
+      root.insert Node.new 2
+      root.insert Node.new 13
+      root.insert Node.new 11
+      root.insert Node.new 29
+      root.insert Node.new 43
+      root.insert Node.new 23
+      root.insert Node.new 19
+      expect(tree).to eq [2, 5, 3, 11, 13, 7, 19, 23, 43, 29, 17]
+    end
+  end
+
+  describe '#collect_pre_order' do
+    let(:root) { Node. new 17 }
+    subject(:tree) { root.collect_pre_order([]) }
+
+    example 'from single node' do
+      expect(tree).to eq [17]
+    end
+
+    example 'from left child' do
+      root.insert Node.new 7
+      expect(tree).to eq [17, 7]
+    end
+
+    example 'from right child' do
+      root.insert Node.new 29
+      expect(tree).to eq [17, 29]
+    end
+
+    example 'from left and right children' do
+      root.insert Node.new 29
+      root.insert Node.new 7
+      expect(tree).to eq [17, 7, 29]
+    end
+
+    example 'from node with lots of children' do
+      root.insert Node.new 7
+      root.insert Node.new 3
+      root.insert Node.new 5
+      root.insert Node.new 2
+      root.insert Node.new 13
+      root.insert Node.new 11
+      root.insert Node.new 29
+      root.insert Node.new 43
+      root.insert Node.new 23
+      root.insert Node.new 19
+      expect(tree).to eq [17, 7, 3, 2, 5, 13, 11, 29, 23, 19, 43]
+    end
+  end
+
+  describe '#delete' do
     it 'returns the root node when specified for deletion' do
       root = Node.new(9)
       expect(root.delete(9)).to eq root
