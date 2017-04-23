@@ -1,0 +1,599 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usepackage{comment}
+
+
+\usepackage{cite}
+
+\usepackage{listings}
+\usepackage{color}
+
+%%% begin for sentence numbering
+%\usepackage{babel, scrjura, xcolor, etoolbox}
+%\usepackage{scrjura, xcolor, etoolbox}
+% \usepackage{scrjura}
+
+%\useshorthands{/}
+%\defineshorthand{/S}{\Sentence\ignorespaces}
+%\defineshorthand{/.}{. \Sentence\ignorespaces}
+
+%\makeatletter
+%\preto\contract@paragraph@font{\color{white}}
+%\makeatother
+%%% ^^^ for sentence numbering
+
+\usepackage{hyperref}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  % deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  % otherkeywords={*,...},           % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                   % sets default   tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% \language=[Objective]{Caml}
+
+
+\title{CLRS}
+\date{\today}
+\author{David M. Doolin}
+
+
+\begin{document}
+
+\maketitle
+
+\abstract{CLRS}
+
+\tableofcontents
+
+\section{Introduction}
+
+
+\section{Selected exercises and problems}
+
+
+\subsection{CLRS, 3rd Edition}
+
+\subsubsection{6.1-5} Is an array in sorted order a min-heap?
+
+Yes, because for every index $i = 1, 2, 3,\ldots, A[i-1] \leq A[i]$,
+which satisifies the min-heap property.
+
+\subsubsection{12.1-1 Draw various height trees}
+
+At some point in the future, I may actually draw these as for
+display in this document. For now, here is the sequence
+$[1, 4, 5, 10, 16, 17, 21]$ used to create binary search trees
+of various heights. Each of the following sequences represents
+a breadth-first listing, which corresponds to insertion order.
+
+\begin{itemize}
+  \item Height 2: $[10, 4, 17, 1, 5, 16, 21]$
+  \item Height 3: $[5, 1, 17, 4, 16, 21, 10]$
+  \item Height 4: $[5, 1, 10, 4, 16, 17, 21]$
+  \item Height 5: $[4, 1, 5, 10, 16, 17, 21]$
+  \item Height 6: $[1, 4, 5, 10, 16, 17, 21]$
+\end{itemize}
+
+\subsubsection{12.1-2 Compare binary-search-tree and min-heap}
+
+What is the difference between the binary-search-tree property and the min-heap
+property (p. 153)? Can the min-heap property be used to print out the keys of
+an $n$-node tree, in sorted order, in $O(n)$ time?  Show how, or explain why
+not.
+
+Let's start with definitions.
+The min-heap property:
+
+\begin{equation}
+  A[\mathrm{parent}] \leq A[i].
+\end{equation}
+
+The binary-search-tree property: For $x$ a node in a in binary search tree,
+$y$ in the left subtree implies $y.\mathrm{key} \leq x.\mathrm{key}$, and
+$y$ in the right subtree implies $y.\mathrm{key} \geq x.\mathrm{key}$.
+
+The difference is the min-heap requires \emph{both} children to be
+greater than the root node, violating the binary-search-tree property.
+
+In-order printing the keys of an arbitrary min-heap cannot be done in $O(n)$
+for either breadth-first, or any depth-first traversal without inducing
+additional comparisons at each level. Consider the min-heap $[2, 8, 4]$.
+Breadth-first traversal requires comparing elements 2 and 3.
+
+There may be a result elsewhere proving sorting requires $O(n\ln n)$,
+this would be a good place to cite that result if the conditions hold.
+
+\subsubsection{12.1-3 Iterative algorithm for in-order tree walk}
+
+\subsubsection{12.1-4 Derive recursive pre- and post-order walks}
+
+Implementing pre- and post-order-traverse in C is not difficult. Getting
+such traverses to do work requires passing in an argument to handle
+the accumulated state, and a function with which to compute that state.
+This would be handled by closures in languages which support closures.
+Passing in both function pointer and data allows the passed in function
+to properly type and dereference the \texttt{userdata}.
+
+\lstset{language={c}}
+\begin{lstlisting}[frame=single,title=Post-order traverse]
+void
+post_order_traverse(Node * n, Callback callback, void * userdata) {
+  if (n->left  != NULL) { post_order_traverse(n->left, callback, userdata); }
+  if (n->right != NULL) { post_order_traverse(n->right, callback, userdata); }
+  if (callback != NULL) { callback(n, userdata); }
+}
+\end{lstlisting}
+
+\lstset{language={c}}
+\begin{lstlisting}[frame=single,title=Pre-order traverse]
+void
+pre_order_traverse(Node * n, Callback callback, void * userdata) {
+  if (callback != NULL) { callback(n, userdata); }
+  if (n->left  != NULL) { in_order_traverse(n->left, callback, userdata); }
+  if (n->right != NULL) { in_order_traverse(n->right, callback, userdata); }
+}
+\end{lstlisting}
+
+
+\subsubsection{12.1-5 Worst case comparisons on sorted data}
+
+\subsubsection{12.2-1 Valid search sequence}
+
+\begin{quote}
+Suppose that we have numbers between 1 and 1000 in a binary search tree, and we
+want to search for the number 363. Which of the following sequences could not be
+the sequence of nodes examined?
+
+a. 2, 252, 401, 398, 330, 344, 397, 363.
+
+b. 924, 220, 911, 244, 898, 258, 362, 363.
+
+c. \textbf{INVALID} 925, 202, 911, 240, 912, 245, 363.
+
+d. 2, 399, 387, 219, 266, 382, 381, 278, 363.
+
+e. \textbf{INVALID} 935, 278, 347, 621, 299, 392, 358, 363.
+\end{quote}
+
+Search and insertion are conceptually similar in binary search
+trees. To determine validity, each sequence above was drawn as
+a binary search tree. After drawing, it's obvious which sequences
+are not valid for finding the desired node.
+
+\subsubsection{12.2-2 Iterative implementations of min and max}
+
+The original problem calls for recursive implementations for minimum
+and maximum elements, but I already derived those, so this exercise
+is changed to provide the iterative implementations. Here's the
+Ruby code for \texttt{minimum}:
+
+\lstset{language={Ruby}}
+\begin{lstlisting}[frame=single]
+def minimum
+  min = self.left
+  while min.left
+    min = min.left
+  end
+  min
+end
+\end{lstlisting}
+
+The \texttt{maximum} function works by successively calling the right
+child, as one might suspect.
+
+\subsubsection{12.2-3 Tree predecessor}
+
+This is already written, recursively, without using parent pointer.
+
+
+\subsubsection{12.2-4 Prof. Bunyan's key sorting claim}
+
+\subsubsection{12.2-5 Successor and predecessor for node with 2 children}
+
+\subsubsection{12.2-6 Ancestor nodes}
+
+\subsubsection{12.2-7 In-order walk using minimum and successor}
+
+\subsubsection{12.2-8 Complexity of successive calls to successor}
+
+\subsubsection{12.2-9 Node parent-child key relationship}
+
+
+\subsubsection{12.4-4 Prove $2^x$ is convex}
+
+Proving $2^x$ is convex is a bit tricky, and leans on a fairly deep result about
+exponentiation which I don't really understand yet. We can start with a definition
+of convexity, with the assumption $x\in\mathbb{R}$:
+
+\begin{equation}
+  f''(x) \geq 0.
+\end{equation}
+
+Differentiating $f(x) = 2^z$ twice,
+
+\begin{equation}
+  f' = 2^x \ln 2, f'' = 2^x\ln^2 2.
+\end{equation}
+
+Showing the second derivative is positive requires showing that the
+terms in the product are both positive, or both negative. Since $\ln 2$
+is positive, we must show that $2^x \geq 0$ for all $x$.
+
+By definition,
+
+\begin{equation}\label{eq:exp_series}
+  e^x = \sum_{n=0}^\infty \frac{x^n}{n!}.
+\end{equation}
+
+Also by definition,
+
+\begin{equation}\label{eq:log2}
+  2^x = e^{x\ln 2}
+\end{equation}
+
+(\textit{This seems wrong, redo this to be more explicit.})
+
+Using the result $e^xe^y = e^{(x+y)}$, we note that $e^xe^{-x} = 1$, implying
+
+\begin{equation}\label{eq:invert}
+  e^{-x} = \frac{1}{e^x}.
+\end{equation}
+
+For $x > 0$, every term in the power series expansion
+(Eq.~\ref{eq:exp_series}) for $e^x$ is positive.
+From Eq.~\ref{eq:invert}, $e^x$ and $e^{-x}$ are positive for all $x\in\mathbb{R}$. The result
+$2^x > 0$ for all $x\in\mathbb{R}$ follows by substitution using
+Eq.~\ref{eq:log2}. Hence $2^x\ln^2 2 > 0$ and $2^x$ is convex.
+
+\begin{comment}
+Substituting and expanding:
+
+\begin{equation}
+  2^x = 1 + x\ln 2 + \frac{x^2 \ln^2 2}{2!} + \frac{x^3 \ln^3 2}{3!} + \cdots.
+\end{equation}
+
+For $x > 0, 2^x$ is clearly positive. For $x = 0, 2^0 = 1$, again positive. When $x < 0$,
+
+\begin{equation}
+  2^{-x} = 1 - x\ln 2 + \frac{x^2 \ln^2 2}{2!} - \frac{x^3 \ln^3 2}{3!} + \frac{x^4 \ln^4 2}{4!}
+  - \frac{x^5 \ln^5 2}{5!} + \cdots.
+\end{equation}
+\end{comment}
+
+
+\subsubsection{Problem 12-1}
+
+\subsubsection{Problem 12-2}
+
+\subsubsection{Problem 12-3}
+
+\subsubsection{Problem 12-4: Number of different binary trees}
+
+The goal of this problem is to determine the number of binary
+trees possible given $n$ nodes.
+
+\paragraph{Part a} For $b_0 = 1$ and $n \geq 1$,
+
+\[
+b_n = \sum_{k=0}^{n-1} b_kb_{n-1-k}.
+\]
+
+Let's do some examples, starting with $n = 1$, giving $k = 0$:
+
+\begin{itemize}
+\item [$k=0$] $b_0 = 1, b_1$
+\end{itemize}
+
+\paragraph{Part b.} Let $B(x)$ be the generating function
+
+\begin{equation}
+B(x) = \sum_{n=0}^{\infty}b_nx^n.
+\end{equation}
+
+Show that $B(x) = xB(x)^2 + 1$, and
+
+\begin{equation}
+B(x) = \frac{1}{2x}(1-\sqrt{1-4x}).
+\end{equation}
+
+
+\paragraph{Double factorial}
+
+(A bunch of the following was copied from Wikipedia. Over the next few
+revisions of this section I'll rework into my own material. What's here
+now is just to get the grunt work of the equation formatting finished.
+This comment will be deleted as well.)
+
+The double factorial for $n$, denoted $n!!$, is defined as
+
+\begin{equation}
+  n!! = \prod_{k=0}^{\left\lceil\frac{n}{2}\right\rceil - 1} (n-2k) = n (n-2) (n-4) \cdots
+\end{equation}
+
+\begin{equation}
+  \prod_{k=1}^\frac{n}{2} (2k) = n(n-2)(n-4)\cdots 4\cdot 2\,,
+\end{equation}
+
+\begin{equation}
+  \prod_{k=1}^\frac{n+1}{2} (2k-1) = n(n-2)(n-4)\cdots 3\cdot 1 \,.
+\end{equation}
+
+For an even positive integer $n = 2k, k \geq 0$, the double factorial may be expressed as
+
+\begin{equation}
+{\displaystyle n!!=2^{k}k!\,.}
+\end{equation}
+
+For odd $n = 2k - 1, k \geq 1$, it has the expressions
+\begin{equation}
+{\displaystyle n!!={\frac {(2k)!}{2^{k}k!}}={\frac {n!}{(n-1)!!}}\,.}
+\end{equation}
+
+In this expression, the first denominator equals $(2k)!!$
+and cancels the unwanted even factors from the numerator.
+
+
+(Change this to double factorial.)
+\begin{equation}
+n!! = \begin{cases}
+  x & \text{if } x \geq 0 \\
+ -x & \text{if } x < 0
+\end{cases}
+\end{equation}
+
+\[
+  \binom{n}{k} = \frac{n!}{k!(n-k)!}
+\]
+
+Some references:
+
+\begin{itemize}
+  \item \href{https://en.wikipedia.org/wiki/Double\_factorial}{Wikipedia}. There is a
+    really cool example on perfect matchings for complete graphs, which I could use
+    for a generating function practice perhaps.
+\end{itemize}
+
+\subsection{Sedgewick and Wayne, 4th Edition}
+
+Sedgewick has been publishing an algorithms book for a very long time.
+This latest version with Wayne seems pretty good. They take a slightly
+different approach than Cormen et al., and it's worth working through
+a number of their exercises as well.
+
+\subsubsection{3.2.1 E A S Y Q U E S T I O N}
+
+
+
+\subsubsection{3.2.4 Invalid search sequences}
+
+\begin{quote}
+Suppose that a certain BST has keys that are integers between 1 and 10, and we
+search for 5. Which sequence below cannot be the sequence of keys examined?
+
+a. 10, 9, 8, 7, 6, 5
+
+b. 4, 10, 8, 7, 53
+
+c. 1, 10, 2, 9, 3, 8, 4, 7, 6, 5
+
+d. 2, 7, 3, 8, 4, 5
+
+e. 1, 2, 10, 4, 8, 5
+\end{quote}
+
+\section{Detours}
+
+Detours fill in a bit of mathematical background material.
+First, a short detour into generating functions.
+
+\subsection{Detour into generating functions}
+
+This example is taken from Cormen et al.~\cite[p. 74]{cormen:th:1990}
+Problem 4-6.
+
+\begin{align}
+F(z) & = \sum_{i=0}^{\infty} F_ix^i\\
+\label{eqn:fibonacci_opsgf}
+     & = 0 + z + z^2 + 2z^3 + 3z^4 + 5z^5 + 8z^6 + 13z^7 + 21z^8+\cdots
+\end{align}
+
+This is inconvenient for a closed form solution, so we need to do a bit of
+manipulation. First, multiply both sides by $Z$:
+
+\begin{equation}
+\label{eqn:zfibonacci_opsgf}
+zF(z) = z^2 + z^3 + 2z^4 + 3z^5 + 5z^6 + 8z^7 + 13z^8 + 21z^9+\cdots
+\end{equation}
+
+Now subtract~\ref{eqn:zfibonacci_opsgf} from~\ref{eqn:fibonacci_opsgf} to
+obtain
+
+\begin{align}
+F(z) - zF(z) & = z + z^3 + z^4 + 2z^5 + 3z^6 +\cdots\\
+F(z) - zF(z) & = z + z^2(0 + z + z^2 + 2Z^3 + 3z^4 +\cdots)\\
+             & = z + z^2F(z)\\
+        F(z) & = \frac{z}{1-z-z^2}.
+\end{align}
+
+
+\subsection{Detour into partial fraction expansion}
+
+The idea of partial fraction expansion is to reduce some
+complicated ratio of functions into a sum of simpler functions.
+Practical uses include analytic solutions for differential equations
+using the Laplace Transform~\cite[p. 347]{nagle:rk1989}, and simplifying
+generating functions, as will done for deriving a formula for the
+$nth$ Catalan number.
+
+Here's a simple example:
+
+\begin{equation}
+\frac{-4x-10}{x^2+4x+3} = \frac{A}{x+1} + \frac{B}{x+3}
+\end{equation}
+
+Solving for $A$ and $B$ can be done using a system of linear equations,
+or, in this case, simply assuming the values $x = -1$ and $x = -5$
+to solve for $A$ and $B$ respectively. Either technique results in $A = -3$ and
+$B = -1$:
+\begin{equation}
+\frac{-4x-10}{x^2+4x+3} = \frac{-3}{x+1} + \frac{-1}{x+3},
+\end{equation}
+which can of course be verified by summing the right hand side.
+
+
+\subsection{Detour into Taylor series}
+
+Cormen et al.~\cite[p. 262]{cormen:th:1990} gives Taylor Series definition as
+(there is an error in the edition cited here, see the Errata for clarification):
+
+\begin{equation}
+f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(a)}{k!}(x-a)^k,
+\end{equation}
+
+and suggests expanding the radical term in the generation function
+$\sqrt{1-4x}$ around $0$.
+
+{\bf TODO: write out a few derivatives of the radical to construct
+the Taylor Series.}
+
+\bibliography{references}{}
+\bibliographystyle{plain}
+
+\appendix
+
+\section{Tikz}
+
+% \href{http://www.texample.net/tikz/examples/merge-sort-recursion-tree/}{From texample.net}
+
+\ovalbox{%
+  \begin{tikzpicture}[level/.style={sibling distance=50mm/#1}]
+  \node [circle,draw] (z){$17$}
+    child {node [circle,draw] (a) {$5$}
+      child {node [circle,draw] (b) {$3$}
+        child {node [circle, draw] (c) {$2$}}
+        child {node (ca) {}}
+      }
+      child {node [circle,draw] (g) {$7$}
+        child {node (ga) {}}
+        child {node [circle,draw] (gb) {$11$}
+          child {node {}}
+          child {node [circle,draw] (gc) {$13$}}
+        }
+      }
+    }
+    child {node [circle,draw] (j) {$23$}
+      child {node [circle,draw] (k) {$19$}}
+    child {node [circle,draw] (l) {$29$}}
+  };
+\end{tikzpicture}
+}
+
+
+
+\href{http://www.texample.net/tikz/examples/merge-sort-recursion-tree/}{From texample.net}
+
+\ovalbox{%
+%\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\begin{tikzpicture}[level/.style={sibling distance=40mm/#1}]
+\node [circle,draw] (z){$n$}
+  child {node [circle,draw] (a) {$\frac{n}{2}$}
+    child {node [circle,draw] (b) {$\frac{n}{2^2}$}
+      child {node {$\vdots$}
+        child {node [circle,draw] (d) {$\frac{n}{2^k}$}}
+        child {node [circle,draw] (e) {$\frac{n}{2^k}$}}
+      }
+      child {node {$\vdots$}}
+    }
+    child {node [circle,draw] (g) {$\frac{n}{2^2}$}
+      child {node {$\vdots$}}
+      child {node {$\vdots$}}
+    }
+  }
+  child {node [circle,draw] (j) {$\frac{n}{2}$}
+    child {node [circle,draw] (k) {$\frac{n}{2^2}$}
+      child {node {$\vdots$}}
+      child {node {$\vdots$}}
+    }
+  child {node [circle,draw] (l) {$\frac{n}{2^2}$}
+    child {node {$\vdots$}}
+    child {node (c){$\vdots$}
+      child {node [circle,draw] (o) {$\frac{n}{2^k}$}}
+      child {node [circle,draw] (p) {$\frac{n}{2^k}$}
+        child [grow=right] {node (q) {$=$} edge from parent[draw=none]
+          child [grow=right] {node (q) {$O_{k = \lg n}(n)$} edge from parent[draw=none]
+            child [grow=up] {node (r) {$\vdots$} edge from parent[draw=none]
+              child [grow=up] {node (s) {$O_2(n)$} edge from parent[draw=none]
+                child [grow=up] {node (t) {$O_1(n)$} edge from parent[draw=none]
+                  child [grow=up] {node (u) {$O_0(n)$} edge from parent[draw=none]}
+                }
+              }
+            }
+            child [grow=down] {node (v) {$O(n \cdot \lg n)$}edge from parent[draw=none]}
+          }
+        }
+      }
+    }
+  }
+};
+\path (a) -- (j) node [midway] {+};
+\path (b) -- (g) node [midway] {+};
+\path (k) -- (l) node [midway] {+};
+\path (k) -- (g) node [midway] {+};
+\path (d) -- (e) node [midway] {+};
+\path (o) -- (p) node [midway] {+};
+\path (o) -- (e) node (x) [midway] {$\cdots$}
+  child [grow=down] {
+    node (y) {$O\left(\displaystyle\sum_{i = 0}^k 2^i \cdot \frac{n}{2^i}\right)$}
+    edge from parent[draw=none]
+  };
+\path (q) -- (r) node [midway] {+};
+\path (s) -- (r) node [midway] {+};
+\path (s) -- (t) node [midway] {+};
+\path (s) -- (l) node [midway] {=};
+\path (t) -- (u) node [midway] {+};
+\path (z) -- (u) node [midway] {=};
+\path (j) -- (t) node [midway] {=};
+\path (y) -- (x) node [midway] {$\Downarrow$};
+\path (v) -- (y)
+  node (w) [midway] {$O\left(\displaystyle\sum_{i = 0}^k n\right) = O(k \cdot n)$};
+\path (q) -- (v) node [midway] {=};
+\path (e) -- (x) node [midway] {+};
+\path (o) -- (x) node [midway] {+};
+\path (y) -- (w) node [midway] {$=$};
+\path (v) -- (w) node [midway] {$\Leftrightarrow$};
+\path (r) -- (c) node [midway] {$\cdots$};
+\end{tikzpicture}}
+
+
+\end{document}

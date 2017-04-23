@@ -532,15 +532,26 @@ Pre- and post-order traversing are useful for binary trees in general:
 
 \paragraph{Pre-order traverse}
 
+Pre-order traverse is also known as top-down traverse as the the nodes
+are dereferenced from the root (pretend the tree is upside down) going
+down into the tree. Pre-order traverse is good for:
+
 \begin{enumerate}
-  \item serialization of binary search tree.
+  \item Serialization of binary search tree.
     Write node data out
     as the tree would rebuild in insertion order when read the data back in.
+  \item Visually displaying a tree structure can be done with a pre-order traverse.
+    Indentation would have to be handled in some way.
   \item creating pre-order parse tree for binary operations such as arithmetic
     expressed in Lisp, Scheme, etc.
+  \item Useful for duplicating tree in single pass.
 \end{enumerate}
 
 \paragraph{Post-order-traverser}
+
+Post-order traverse is also known as bottom-up traverse as the nodes
+are dereferenced from the leaf nodes towards the top (root) of the
+tree. Post-order traverse is good for:
 
 \begin{enumerate}
   \item useful for freeing memory or otherwise releasing
