@@ -228,6 +228,18 @@ describe Tree do
     end
   end
 
+  context 'collect and list keys with pre-order traverse' do
+    it 'iterates on an empty tree'
+    it 'iterates on a single node tree'
+    it 'iterates with left child'
+    it 'iterates with right child'
+    it 'iterates with left full subtree'
+    it 'iterates with right full subtree'
+    it 'iterates with degenerate left subtree'
+    it 'iterates with degenerate right subtree'
+    it 'iterates with larger arbitrary tree'
+  end
+
   describe '#bst?' do
     let(:root) { Node.new 100 }
     let(:tree) { Tree.new root }
