@@ -229,11 +229,37 @@ describe Tree do
   end
 
   context 'collect and list keys with pre-order traverse' do
-    it 'iterates on an empty tree'
-    it 'iterates on a single node tree'
-    it 'iterates with left child'
-    it 'iterates with right child'
-    it 'iterates with left full subtree'
+    let(:root) { Node.new 17 }
+    subject(:tree) { Tree.new root }
+
+    it 'iterates on an empty tree' do
+      tree = Tree.new root
+      tree.delete 17
+      expect(tree.pre_iterate).to eq []
+    end
+
+    it 'iterates on a single node tree' do
+      tree = Tree.new root
+      expect(tree.pre_iterate).to eq [17]
+    end
+
+    it 'iterates with left child' do
+      tree.insert Node.new 7
+      expect(tree.pre_iterate).to eq [17, 7]
+    end
+
+    it 'iterates with right child' do
+      tree.insert Node.new 29
+      expect(tree.pre_iterate).to eq [17,  29]
+    end
+
+    xit 'iterates with left full subtree' do
+      tree.insert Node.new 7
+      tree.insert Node.new 5
+      tree.insert Node.new 3
+      expect(tree.pre_iterate).to eq [17, 7, 3, 5]
+    end
+
     it 'iterates with right full subtree'
     it 'iterates with degenerate left subtree'
     it 'iterates with degenerate right subtree'

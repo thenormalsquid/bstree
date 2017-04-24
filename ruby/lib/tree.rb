@@ -167,6 +167,33 @@ class Tree
     output.compact
   end
 
+  def pre_iterate
+    output = []
+    stack = [root]
+    while stack.last != nil
+      current = stack.pop
+      output << current.key
+
+      while current.left != nil
+        current = current.left
+        stack.push current
+      end
+
+      if current.right != nil
+        current = current.right
+        stack.push current
+=begin
+        while current.left != nil
+          current = current.left
+          stack.push current
+        end
+=end
+      end
+    end
+
+    output
+  end
+
   def get_next_row current_row
     next_row = []
     current_row.each do |node|
