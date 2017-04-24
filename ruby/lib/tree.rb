@@ -168,32 +168,6 @@ class Tree
     output.compact
   end
 
-
-  # For preorder iteration, we have to keep at least a pointer
-  # to the root node in case there is a right child. The root
-  # node in the context of any branch of the tree can be considered
-  # to be the parent of a subtree at the node. The problem is
-  # being able to traverse the tree down all branches without
-  # duplicating output when the stack is popped.
-  #
-  # The recursive version:
-  # 1. prints
-  # 2. traverses left
-  # 3. traverses right
-  #
-  # How do we do this with the iterative version?
-  #
-  # What I've been doing is printing immediately, which I think is
-  # correct, because the stack won't pop directly up the left side,
-  # it will push right children along the way, so the printing really
-  # does need to be done first.
-  #
-  # I think no matter what, I have to build a stack down the left
-  # branch first. Once we get to the bottom of the left branch,
-  # then pop, check for the right branch. If there is a right branch,
-  # travel down it's left children all the way, then pop back up each
-  # to check for the right branch, left branch etc.
-  require 'ap'
   def preorder_iterate
     output = []
     return output unless root
@@ -214,7 +188,11 @@ class Tree
       if current&.right != nil
         current = current.right
         stack.push current
-        output << stack.last.key
+        output << current.key
+        while stack.last&.left
+          stack << stack.last.left
+          output << stack.last.key
+        end
       end
     end
 

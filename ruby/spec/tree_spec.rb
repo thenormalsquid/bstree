@@ -266,30 +266,30 @@ describe Tree do
       expect(tree.preorder_iterate).to eq [17, 7, 5, 3]
     end
 
-    xit 'iterates with right full subtree' do
+    it 'iterates with right full subtree' do
       tree.insert Node.new 29
       tree.insert Node.new 43
       tree.insert Node.new 19
-      expect(tree.preorder_iterate).to eq []
+      expect(tree.preorder_iterate).to eq [17, 29, 19, 43]
     end
 
-    xit 'iterates with degenerate left subtree' do
+    it 'iterates with degenerate left subtree' do
       tree.insert Node.new 3
       tree.insert Node.new 7
       tree.insert Node.new 11
       tree.insert Node.new 13
-      expect(tree.preorder_iterate).to eq []
+      expect(tree.preorder_iterate).to eq [17, 3, 7, 11, 13]
     end
 
-    xit 'iterates with degenerate right subtree' do
+    it 'iterates with degenerate right subtree' do
       tree.insert Node.new 43
       tree.insert Node.new 29
       tree.insert Node.new 23
       tree.insert Node.new 19
-      expect(tree.preorder_iterate).to eq []
+      expect(tree.preorder_iterate).to eq [17, 43, 29, 23, 19]
     end
 
-    xit 'iterates with larger arbitrary tree' do
+    it 'iterates with larger arbitrary tree' do
       tree.insert Node.new 7
       tree.insert Node.new 5
       tree.insert Node.new 2
@@ -298,7 +298,7 @@ describe Tree do
       tree.insert Node.new 43
       tree.insert Node.new 23
       tree.insert Node.new 19
-      expect(tree.preorder_iterate).to eq []
+      expect(tree.preorder_iterate).to eq [17, 7, 5, 2, 3, 29, 23, 19, 43]
     end
   end
 
