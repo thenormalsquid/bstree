@@ -146,6 +146,7 @@ class Tree
     Tree.new(Node.build_from_hash(hash))
   end
 
+  # TODO: change to inorder_iterate
   def iterative_inorder_traverse
     output = []
     stack = [root]
@@ -167,31 +168,60 @@ class Tree
     output.compact
   end
 
-  def pre_iterate
+
+  # For preorder iteration, we have to keep at least a pointer
+  # to the root node in case there is a right child. The root
+  # node in the context of any branch of the tree can be considered
+  # to be the parent of a subtree at the node. The problem is
+  # being able to traverse the tree down all branches without
+  # duplicating output when the stack is popped.
+  #
+  # The recursive version:
+  # 1. prints
+  # 2. traverses left
+  # 3. traverses right
+  #
+  # How do we do this with the iterative version?
+  #
+  # What I've been doing is printing immediately, which I think is
+  # correct, because the stack won't pop directly up the left side,
+  # it will push right children along the way, so the printing really
+  # does need to be done first.
+  #
+  # I think no matter what, I have to build a stack down the left
+  # branch first. Once we get to the bottom of the left branch,
+  # then pop, check for the right branch. If there is a right branch,
+  # travel down it's left children all the way, then pop back up each
+  # to check for the right branch, left branch etc.
+  require 'ap'
+  def preorder_iterate
     output = []
+    return output unless root
+
     stack = [root]
-    while stack.last != nil
-      current = stack.pop
+    current = stack.last
+    output << current.key
+
+    while current&.left != nil
+      current = current.left
       output << current.key
+      stack.push current
+    end
 
-      while current.left != nil
-        current = current.left
-        stack.push current
-      end
+    while !stack.empty?
+      current = stack.pop
 
-      if current.right != nil
+      if current&.right != nil
         current = current.right
         stack.push current
-=begin
-        while current.left != nil
-          current = current.left
-          stack.push current
-        end
-=end
+        output << stack.last.key
       end
     end
 
     output
+  end
+
+  def postorder_iterate
   end
 
   def get_next_row current_row

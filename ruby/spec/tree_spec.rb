@@ -235,35 +235,71 @@ describe Tree do
     it 'iterates on an empty tree' do
       tree = Tree.new root
       tree.delete 17
-      expect(tree.pre_iterate).to eq []
+      expect(tree.preorder_iterate).to eq []
     end
 
     it 'iterates on a single node tree' do
       tree = Tree.new root
-      expect(tree.pre_iterate).to eq [17]
+      expect(tree.preorder_iterate).to eq [17]
     end
 
     it 'iterates with left child' do
       tree.insert Node.new 7
-      expect(tree.pre_iterate).to eq [17, 7]
+      expect(tree.preorder_iterate).to eq [17, 7]
     end
 
     it 'iterates with right child' do
       tree.insert Node.new 29
-      expect(tree.pre_iterate).to eq [17,  29]
+      expect(tree.preorder_iterate).to eq [17,  29]
     end
 
-    xit 'iterates with left full subtree' do
+    it 'iterates with left and right children' do
+      tree.insert Node.new 29
+      tree.insert Node.new 7
+      expect(tree.preorder_iterate).to eq [17, 7, 29]
+    end
+
+    it 'iterates with left full subtree' do
       tree.insert Node.new 7
       tree.insert Node.new 5
       tree.insert Node.new 3
-      expect(tree.pre_iterate).to eq [17, 7, 3, 5]
+      expect(tree.preorder_iterate).to eq [17, 7, 5, 3]
     end
 
-    it 'iterates with right full subtree'
-    it 'iterates with degenerate left subtree'
-    it 'iterates with degenerate right subtree'
-    it 'iterates with larger arbitrary tree'
+    xit 'iterates with right full subtree' do
+      tree.insert Node.new 29
+      tree.insert Node.new 43
+      tree.insert Node.new 19
+      expect(tree.preorder_iterate).to eq []
+    end
+
+    xit 'iterates with degenerate left subtree' do
+      tree.insert Node.new 3
+      tree.insert Node.new 7
+      tree.insert Node.new 11
+      tree.insert Node.new 13
+      expect(tree.preorder_iterate).to eq []
+    end
+
+    xit 'iterates with degenerate right subtree' do
+      tree.insert Node.new 43
+      tree.insert Node.new 29
+      tree.insert Node.new 23
+      tree.insert Node.new 19
+      expect(tree.preorder_iterate).to eq []
+    end
+
+    xit 'iterates with larger arbitrary tree' do
+      tree.insert Node.new 7
+      tree.insert Node.new 5
+      tree.insert Node.new 2
+      tree.insert Node.new 3
+      tree.insert Node.new 29
+      tree.insert Node.new 43
+      tree.insert Node.new 23
+      tree.insert Node.new 19
+      expect(tree.preorder_iterate).to eq []
+    end
   end
 
   describe '#bst?' do
