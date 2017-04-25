@@ -146,8 +146,7 @@ class Tree
     Tree.new(Node.build_from_hash(hash))
   end
 
-  # TODO: change to inorder_iterate
-  def iterative_inorder_traverse
+  def inorder_iterate
     output = []
     stack = [root]
 
@@ -195,11 +194,41 @@ class Tree
         end
       end
     end
-
-    output
+    output.compact
   end
 
+  require 'ap'
   def postorder_iterate
+    output = []
+    return output unless root
+    stack = [root]
+
+    iteration = 0
+
+    while stack.last&.left
+      stack << stack.last.left
+    end
+
+    # output << stack.last.key
+
+    while !stack.empty?
+      current = stack.pop
+
+      iteration += 1
+      # ap output
+      break if iteration > 4
+
+      if current&.right
+        stack << current.right
+        while stack.last&.left
+          stack << stack.last.left
+        end
+        output << stack.last.key
+        stack.pop
+      end
+      output << current.key
+    end
+    output
   end
 
   def get_next_row current_row

@@ -141,14 +141,14 @@ describe Tree do
     end
   end
 
-  describe 'collect and list keys with in-order traversal' do
+  describe '#inorder_iterate' do
     it 'collects node keys for single node' do
       node = Node.new(9)
       tree = Tree.new node
       expect(tree.size).to eq 1
       expect(tree.collect([])).to eq [9]
       expect(tree.list_keys).to eq [9]
-      expect(tree.iterative_inorder_traverse).to eq [9]
+      expect(tree.inorder_iterate).to eq [9]
     end
 
     it 'collects node keys for left node only' do
@@ -158,7 +158,7 @@ describe Tree do
       expect(tree.size).to eq 2
       expect(tree.collect([])).to eq [4, 9]
       expect(tree.list_keys).to eq [4, 9]
-      expect(tree.iterative_inorder_traverse).to eq [4, 9]
+      expect(tree.inorder_iterate).to eq [4, 9]
     end
 
     it 'collects node keys for degenerate left tree' do
@@ -170,7 +170,7 @@ describe Tree do
       expected = [3, 7, 17]
       expect(tree.collect([])).to eq expected
       expect(tree.list_keys).to eq expected
-      expect(tree.iterative_inorder_traverse).to eq expected
+      expect(tree.inorder_iterate).to eq expected
     end
 
     it 'collects node keys for right node only' do
@@ -180,7 +180,7 @@ describe Tree do
       expect(tree.size).to eq 2
       expect(tree.collect([])).to eq [9, 14]
       expect(tree.list_keys).to eq [9, 14]
-      expect(tree.iterative_inorder_traverse).to eq [9, 14]
+      expect(tree.inorder_iterate).to eq [9, 14]
     end
 
     it 'collects node keys for degenerate right tree' do
@@ -193,7 +193,7 @@ describe Tree do
       expected = [3, 7, 17, 77]
       expect(tree.collect([])).to eq expected
       expect(tree.list_keys).to eq expected
-      expect(tree.iterative_inorder_traverse).to eq expected
+      expect(tree.inorder_iterate).to eq expected
     end
 
     it 'collects node keys' do
@@ -207,7 +207,7 @@ describe Tree do
       expect(tree.size).to eq 6
       expect(tree.collect([])).to eq [1, 4, 5, 14, 23, 99]
       expect(tree.list_keys).to eq [1, 4, 5, 14, 23, 99]
-      expect(tree.iterative_inorder_traverse).to eq [1, 4, 5, 14, 23, 99]
+      expect(tree.inorder_iterate).to eq [1, 4, 5, 14, 23, 99]
     end
 
     it 'iterates successfully' do
@@ -224,11 +224,11 @@ describe Tree do
       expected = [4, 8, 10, 15, 25, 33, 43, 97]
       expect(tree.collect([])).to eq expected
       expect(tree.list_keys).to eq expected
-      expect(tree.iterative_inorder_traverse).to eq expected
+      expect(tree.inorder_iterate).to eq expected
     end
   end
 
-  context 'collect and list keys with pre-order traverse' do
+  describe '#preorder_iterate' do
     let(:root) { Node.new 17 }
     subject(:tree) { Tree.new root }
 
@@ -299,6 +299,76 @@ describe Tree do
       tree.insert Node.new 23
       tree.insert Node.new 19
       expect(tree.preorder_iterate).to eq [17, 7, 5, 2, 3, 29, 23, 19, 43]
+    end
+  end
+
+  describe '#postorder_iterate' do
+    let(:root) { Node.new 17 }
+    subject(:tree) { Tree.new root }
+
+    it 'deals with empty tree' do
+      tree.delete 17
+      expect(tree.postorder_iterate).to eq []
+    end
+
+    it 'iterates with single root node' do
+      expect(tree.postorder_iterate).to eq [17]
+    end
+
+    it 'iterates with single left node' do
+      tree.insert Node.new 7
+      expect(tree.postorder_iterate).to eq [7, 17]
+    end
+
+    it 'iterate with a single right node' do
+      tree.insert Node.new 29
+      expect(tree.postorder_iterate).to eq [29, 17]
+    end
+
+    it 'iterate with left full subtree' do
+      tree.insert Node.new 7
+      tree.insert Node.new 3
+      tree.insert Node.new 5
+      tree.insert Node.new 2
+      expect(tree.postorder_iterate).to eq [2, 5, 3, 7, 17]
+    end
+
+    xit 'iterate with right full subtree' do
+      tree.insert Node.new 29
+      tree.insert Node.new 43
+      tree.insert Node.new 19
+      expect(tree.postorder_iterate).to eq [19, 43, 29, 17]
+    end
+
+    xit 'iterate with left degenerate subtree' do
+      tree.insert Node.new 3
+      tree.insert Node.new 5
+      tree.insert Node.new 7
+      tree.insert Node.new 11
+      expect(tree.postorder_iterate).to eq [11, 7, 5, 3, 17]
+    end
+
+    xit 'iterate with right degenerate subtree' do
+      tree.insert Node.new 43
+      tree.insert Node.new 29
+      tree.insert Node.new 23
+      tree.insert Node.new 19
+      expect(tree.postorder_traverse).to eq [19, 23, 29, 43, 17]
+    end
+
+    xit 'iterates with larger arbitrary tree' do
+      tree.insert Node.new 7
+      tree.insert Node.new 3
+      tree.insert Node.new 2
+      tree.insert Node.new 5
+      tree.insert Node.new 13
+      tree.insert Node.new 11
+
+      tree.insert Node.new 29
+      tree.insert Node.new 43
+      tree.insert Node.new 23
+      tree.insert Node.new 19
+      expect(tree.postorder_iterate).to eq [2, 5, 3, 11, 13, 7, 19, 23, 43, 29, 17]
     end
   end
 
