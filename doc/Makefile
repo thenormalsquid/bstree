@@ -13,7 +13,7 @@ TEXFILES = $(wildcard ../*.tex)
 
 ZIPS = bst.zip
 
-PDFS = bst.pdf examples.pdf hash_tree.pdf
+PDFS = bst.pdf examples.pdf hash_tree.pdf clrs.pdf sedgewick.pdf
 
 pdfs: $(PDFS)
 
