@@ -11,12 +11,14 @@ end
 class Node
   attr_accessor :parent, :left, :right, :uuid
   attr_accessor :key
+  attr_accessor :visited
 
   INCR = 1
   DECR = -1
 
   def initialize key = nil, uuid = nil
     @key = key
+    @visited = false
     @uuid = uuid || SecureRandom.uuid
   end
 
@@ -88,6 +90,10 @@ class Node
     l > r ? l : r
   end
 
+  def visited?
+    @visited
+  end
+
   def height
     # This check makes the ABC and cyclomatic complexity of this method
     # too high. May need to disable for just this method
@@ -148,6 +154,10 @@ class Node
       minimum = node.key
       true
     end
+  end
+
+  def has_children?
+    left || right
   end
 
   def maximum

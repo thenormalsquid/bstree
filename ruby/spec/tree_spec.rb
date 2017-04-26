@@ -302,6 +302,57 @@ describe Tree do
     end
   end
 
+  describe '#find_leaf_node' do
+    let(:root) { Node.new 17 }
+    subject(:tree) { Tree.new root }
+
+    it 'finds self as leaf' do
+      expect(tree.find_leaf_node(root)).to eq root
+    end
+
+    it 'finds left node as leaf' do
+      node7 = Node.new 7
+      tree.insert node7
+      expect(tree.find_leaf_node(root)).to eq node7
+    end
+
+    it 'finds right node as leaf' do
+      node29 = Node.new 29
+      tree.insert node29
+      expect(tree.find_leaf_node(root)).to eq node29
+    end
+
+    it 'finds leaf on left elbow' do
+      node11 = Node.new 11
+      tree.insert Node.new 7
+      tree.insert node11
+      expect(tree.find_leaf_node(root)).to eq node11
+    end
+
+    it 'finds leaf on left subtree' do
+      node5 = Node.new 5
+      tree.insert Node.new 7
+      tree.insert Node.new 11
+      tree.insert node5
+      expect(tree.find_leaf_node(root)).to eq node5
+    end
+
+    it 'finds leaf on right elbow' do
+      tree.insert Node.new 29
+      node19 = Node.new 19
+      tree.insert node19
+      expect(tree.find_leaf_node(root)).to eq node19
+    end
+
+    it 'finds leaf node on right subtree' do
+      tree.insert Node.new 29
+      tree.insert Node.new 43
+      node19 = Node.new 19
+      tree.insert node19
+      expect(tree.find_leaf_node(root)).to eq node19
+    end
+  end
+
   describe '#postorder_iterate' do
     let(:root) { Node.new 17 }
     subject(:tree) { Tree.new root }
@@ -325,12 +376,49 @@ describe Tree do
       expect(tree.postorder_iterate).to eq [29, 17]
     end
 
-    it 'iterate with left full subtree' do
+    it 'iterate with a 3 node full tree' do
+      tree.insert Node.new 29
+      tree.insert Node.new 7
+      expect(tree.postorder_iterate).to eq [7, 29, 17]
+    end
+
+    xit 'iterates on a left elbow' do
+      tree.insert Node.new 7
+      tree.insert Node.new 11
+      expect(tree.postorder_iterate).to eq [11, 7, 17]
+    end
+
+    xit 'iterates on a right elbow' do
+      tree.insert Node.new 29
+      tree.insert Node.new 19
+      expect(tree.postorder_iterate).to eq [19, 29, 17]
+    end
+
+    xit 'iterate with left full subtree' do
       tree.insert Node.new 7
       tree.insert Node.new 3
       tree.insert Node.new 5
       tree.insert Node.new 2
       expect(tree.postorder_iterate).to eq [2, 5, 3, 7, 17]
+    end
+
+    xit 'iterate with augmented left full subtree' do
+      tree.insert Node.new 7
+      tree.insert Node.new 3
+      tree.insert Node.new 5
+      tree.insert Node.new 2
+      tree.insert Node.new 9
+      expect(tree.postorder_iterate).to eq [2, 5, 3, 9, 7, 17]
+    end
+
+    xit 'iterate with augmented left full subtree' do
+      tree.insert Node.new 7
+      tree.insert Node.new 3
+      tree.insert Node.new 5
+      tree.insert Node.new 2
+      tree.insert Node.new 9
+      tree.insert Node.new 4
+      expect(tree.postorder_iterate).to eq [2, 4, 5, 3, 9, 7, 17]
     end
 
     xit 'iterate with right full subtree' do
