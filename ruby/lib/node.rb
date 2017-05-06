@@ -162,6 +162,15 @@ class Node
     left || right ? true : false # would otherwise return the node or nil
   end
 
+  def visit
+    @visited = true
+    self
+  end
+
+  def unvisited?
+    !visited
+  end
+
   def has_unvisited_children?
     return false unless has_children?
     !left&.visited? || !right&.visited? ? true : false

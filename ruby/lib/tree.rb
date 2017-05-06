@@ -197,11 +197,24 @@ class Tree
     output.compact
   end
 
+  # TODO: consider making this static
   def find_leaf_node current
     while current.has_children?
       if current.left
         current = current.left
       elsif current.right
+        current = current.right
+      end
+    end
+    current
+  end
+
+  # TODO: consider making this static
+  def find_unvisited_leaf_node current
+    while current.has_unvisited_children?
+      if current.left&.unvisited?
+        current = current.left
+      elsif current.right&.unvisited?
         current = current.right
       end
     end
