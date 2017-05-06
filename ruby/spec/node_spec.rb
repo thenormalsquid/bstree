@@ -71,6 +71,24 @@ describe Node do
       expect(tree).to eq [5, 19, 17]
     end
 
+    example 'left subtree with degenerate right branch' do
+      root.insert Node.new 7
+      root.insert Node.new 2
+      root.insert Node.new 11
+      root.insert Node.new 13
+      expect(tree).to eq [2, 13, 11, 7, 17]
+    end
+
+    example 'right subtree with degenerate right tree' do
+      root.insert Node.new 29
+      root.insert Node.new 43
+      node53 = Node.new 53
+      root.insert node53
+      node19 = Node.new 19
+      root.insert node19
+      expect(tree).to eq [19, 53, 43, 29, 17]
+    end
+
     # Now for some overtesting, which is mostly for me to get a
     # clear mental picture of what post-order traverse looks like
     # with data I understand, to wit, sorted primes.
@@ -251,6 +269,80 @@ describe Node do
       expect(n5.left).to eq n3
       expect(n5.right).to eq n7
       expect(n7.right).to eq n17
+    end
+  end
+
+  describe '#has_children?' do
+    let(:tree) { Node.new 17 }
+
+    example 'root node has no children' do
+      expect(tree.has_children?).to be false
+    end
+
+    example 'root has left child only' do
+      tree.insert Node.new 7
+      expect(tree.has_children?).to be true
+    end
+
+    example 'root has right child only' do
+      tree.insert Node.new 29
+      expect(tree.has_children?).to be true
+    end
+  end
+
+  describe '#has_unvisited_children?' do
+    let(:tree) { Node.new 17 }
+
+    example 'root node has no children' do
+      expect(tree.has_unvisited_children?).to be false
+    end
+
+    example 'root has unvisited left child only' do
+      tree.insert Node.new 7
+      expect(tree.has_unvisited_children?).to be true
+    end
+
+    example 'root has unvisited right child only' do
+      tree.insert Node.new 29
+      expect(tree.has_unvisited_children?).to be true
+    end
+
+    context 'full tree with both children unvisited' do
+      example 'found correctly' do
+        tree.insert Node.new 7
+        tree.insert Node.new 29
+        expect(tree.has_unvisited_children?).to be true
+      end
+    end
+
+    context 'full tree with one of the nodes visited' do
+      example 'found left node visited' do
+        node7 = Node.new 7
+        node7.visited = true
+        tree.insert node7
+        tree.insert Node.new 29
+        expect(tree.has_unvisited_children?).to be true
+      end
+
+      example 'found right node visited' do
+        node29 = Node.new 29
+        node29.visited = true
+        tree.insert node29
+        tree.insert Node.new 7
+        expect(tree.has_unvisited_children?).to be true
+      end
+    end
+
+    context 'full tree with both left and right child visited' do
+      example 'finds both children visited' do
+        node29 = Node.new 29
+        node29.visited = true
+        tree.insert node29
+        node7 = Node.new 7
+        node7.visited = true
+        tree.insert node7
+        expect(tree.has_unvisited_children?).to be false
+      end
     end
   end
 

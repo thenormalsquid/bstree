@@ -213,6 +213,15 @@ class Tree
     output = []
     return output unless root
 
+    current = find_leaf_node root
+    output << current.key
+    current.visited = true
+    current = current.parent if current.parent
+
+    current = find_leaf_node current.right
+
+
+
 =begin
     current = root
 
@@ -254,7 +263,7 @@ class Tree
     return output.compact
 =end
 
-#=begin
+=begin
     stack = [root]
     current = stack.last
 
@@ -297,7 +306,7 @@ class Tree
       output << current.key
       # current = stack.pop
     end
-#=end
+=end
 
 =begin
     while stack.last&.left
