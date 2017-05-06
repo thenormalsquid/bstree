@@ -56,6 +56,7 @@ class Node
     end
   end
 
+  # TODO: use right_child? helper method
   def get_predecessor node, parent, predecessor
     predecessor = parent if parent&.right == self
     return left.nil? ? predecessor : left.maximum if node == self
@@ -71,6 +72,7 @@ class Node
     get_predecessor node, self, node
   end
 
+  # TODO: use left_child helper method
   def get_successor node, parent, successor
     successor = parent if parent&.left == self
     return right.nil? ? successor : right.minimum if node == self
@@ -167,6 +169,14 @@ class Node
 
   def has_parent?
     !parent.nil?
+  end
+
+  def right_child?
+    self == parent&.right
+  end
+
+  def left_child?
+    self == parent&.left
   end
 
   def maximum

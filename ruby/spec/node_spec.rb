@@ -366,6 +366,46 @@ describe Node do
     end
   end
 
+  describe '#left_child?' do
+    let(:root) { Node.new 17 }
+
+    example 'root is not the left child' do
+      expect(root.left_child?).to be false
+    end
+
+    example 'left child is found correctly' do
+      node7 = Node.new 7
+      root.insert node7
+      expect(node7.left_child?).to be true
+    end
+
+    example 'right child is found correctly' do
+      node29 = Node.new 29
+      root.insert node29
+      expect(node29.left_child?).to be false
+    end
+  end
+
+  describe '#right_child?' do
+    let(:root) { Node.new 17 }
+
+    example 'root is not the right child' do
+      expect(root.right_child?).to be false
+    end
+
+    example 'left child is found correctly' do
+      node7 = Node.new 7
+      root.insert node7
+      expect(node7.right_child?).to be false
+    end
+
+    example 'right child is found correctly' do
+      node29 = Node.new 29
+      root.insert node29
+      expect(node29.right_child?).to be true
+    end
+  end
+
   describe 'comparators' do
     it 'compares keys with <' do
       node1 = Node.new(1)
