@@ -165,6 +165,10 @@ class Node
     !left&.visited? || !right&.visited? ? true : false
   end
 
+  def has_parent?
+    !parent.nil?
+  end
+
   def maximum
     # right&.maximum || self
     iterative_maximum

@@ -346,6 +346,26 @@ describe Node do
     end
   end
 
+  describe '#has_parent?' do
+    let(:root) { Node.new 17 }
+
+    example 'is false for root node' do
+      expect(root.has_parent?).to be false
+    end
+
+    example 'is true when left child' do
+      node7 = Node.new 7
+      root.insert node7
+      expect(node7.has_parent?).to be true
+    end
+
+    example 'is true when right child' do
+      node29 = Node.new 29
+      root.insert node29
+      expect(node29.has_parent?).to be true
+    end
+  end
+
   describe 'comparators' do
     it 'compares keys with <' do
       node1 = Node.new(1)
