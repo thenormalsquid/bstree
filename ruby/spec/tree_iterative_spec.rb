@@ -141,8 +141,43 @@ describe Tree do
     end
 
     # TODO: probably some of the above specs can be moved here.
-    context 'degenerate rght tree on left child' do
-      it 'finds the right most leaf after first leftmost is visited'
+    context 'on degenerate tree' do
+      context 'with right chain on left child' do
+        it 'finds the first leftmost leaf' do
+          tree.insert node7
+          tree.insert node2 = Node.new(2)
+          tree.insert Node.new 11
+          tree.insert Node.new 13
+          expect(tree.find_unvisited_leaf_node(root)).to eq node2
+        end
+
+        it 'finds the rightmost leaf after first leftmost is visited' do
+          tree.insert node7
+          tree.insert Node.new(2).visit
+          tree.insert Node.new 11
+          node13 = Node.new 13
+          tree.insert node13
+          expect(tree.find_unvisited_leaf_node(root)).to eq node13
+        end
+      end
+
+      context 'with left chain on right child' do
+        it 'finds first leftmost leaf' do
+          tree.insert node29
+          tree.insert Node.new 23
+          tree.insert expected = Node.new(19)
+          tree.insert Node.new 43
+          expect(tree.find_unvisited_leaf_node(root)).to eq expected
+        end
+
+        it 'finds rightmost leaf after all left leaves have been visited' do
+          tree.insert node29
+          tree.insert Node.new(23).visit
+          tree.insert Node.new(19).visit
+          tree.insert expected = Node.new(43)
+          expect(tree.find_unvisited_leaf_node(root)).to eq expected
+        end
+      end
     end
   end
 
