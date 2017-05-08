@@ -173,7 +173,7 @@ class Node
 
   def has_unvisited_children?
     return false unless has_children?
-    !left&.visited? || !right&.visited? ? true : false
+    left&.unvisited? || right&.unvisited? ? true : false
   end
 
   def has_parent?

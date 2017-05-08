@@ -218,141 +218,20 @@ class Tree
         current = current.right
       end
     end
-    current
+    current.visit
   end
 
-  require 'ap'
   def postorder_iterate
     output = []
     return output unless root
 
-    current = find_leaf_node root
+    current = find_unvisited_leaf_node root
     output << current.key
-    current.visited = true
-    current = current.parent if current.parent
 
-    current = find_leaf_node current.right
-
-
-
-=begin
-    current = root
-
-    # Pure parent implementation
-
-    # I think what I need to do is find a leaf node, that is, a node with
-    # both children nil, then work my way backwards via parent pointers.
-    # I don't even know how to find a leaf node at the moment.
-    #
-    # A related problem might be to find the deepest leaf node. Recursively,
-    # that should be pretty easy, think.
-
-    if current.left
-      current = find_leaf_node current.left
+    while current.has_parent?
+      current = find_unvisited_leaf_node current.parent
       output << current.key
-      if current == current.parent.right
-        current = current.parent
-        output << current.key
-      end
     end
-
-    current = root
-
-    if current.right
-      current = find_leaf_node current.right
-      output << current.key
-      if current == current.parent.right
-        current = current.parent
-        output << current.key
-      elsif current == current.parent.left
-        current = current.parent
-        # output << current.key
-        # check right child for leaf nodes
-      end
-    end
-
-    output << root.key
-
-    return output.compact
-=end
-
-=begin
-    stack = [root]
-    current = stack.last
-
-    # while current&.left != nil
-    #   current = current.left
-    #   stack.push current
-    # end
-
-    while current.has_children?
-      if current.left
-        current = current.left
-      elsif current.right
-        current = current.right
-      end
-      stack.push current if current.has_children?
-    end
-
-    # binding.pry
-
-    while !stack.empty?
-      # binding.pry
-      current = stack.pop
-
-      # if current&.right != nil && !current&.right.visited?
-      if current&.left != nil && !current&.left.visited?
-        stack.push current
-        # current = current.right
-        current = current.left
-        stack.push current if current.has_children?
-        # while stack.last&.left
-        #   stack << stack.last.left
-        # end
-        while stack.last&.right
-          stack << stack.last.right
-        end
-      # output << current.key
-      end
-
-      current.visited = true
-      output << current.key
-      # current = stack.pop
-    end
-=end
-
-=begin
-    while stack.last&.left
-      stack << stack.last.left
-    end
-    current = stack.last
-
-
-    # We want to keep 17 and 29 on the stack until 19 and 43
-    # have been written out. Let's do it explicitly.
-
-    # while !stack.empty?
-    while current
-
-      # TODO: delete once working
-      iteration += 1
-      break if iteration > 8
-
-      if current&.right
-        stack << current.right # push 43
-        current = current.right
-        while current&.left # nothing
-          current = current.left
-          stack << current
-        end
-        current = stack.pop # pop 43
-        output << current.key # write 43
-      end
-      current = stack.pop # pop 29
-      output << current.key if current
-    end
-=end
-
     output
   end
 

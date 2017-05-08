@@ -297,37 +297,47 @@ describe Node do
       expect(tree.has_unvisited_children?).to be false
     end
 
-    example 'root has unvisited left child only' do
-      tree.insert Node.new 7
-      expect(tree.has_unvisited_children?).to be true
-    end
-
-    example 'root has unvisited right child only' do
-      tree.insert Node.new 29
-      expect(tree.has_unvisited_children?).to be true
-    end
-
-    context 'full tree with both children unvisited' do
-      example 'found correctly' do
+    context 'unvisited children' do
+      example 'root has unvisited left child only' do
         tree.insert Node.new 7
+        expect(tree.has_unvisited_children?).to be true
+      end
+
+      example 'root has unvisited right child only' do
         tree.insert Node.new 29
         expect(tree.has_unvisited_children?).to be true
+      end
+
+      context 'full tree with both children unvisited' do
+        example 'found correctly' do
+          tree.insert Node.new 7
+          tree.insert Node.new 29
+          expect(tree.has_unvisited_children?).to be true
+        end
+      end
+    end
+
+    context 'visited children' do
+      example 'left node is visited, right node nil' do
+        tree.insert Node.new(7).visit
+        expect(tree.has_unvisited_children?).to be false
+      end
+
+      example 'right node is visited, left node nil' do
+        tree.insert Node.new(29).visit
+        expect(tree.has_unvisited_children?).to be false
       end
     end
 
     context 'full tree with one of the nodes visited' do
       example 'found left node visited' do
-        node7 = Node.new 7
-        node7.visited = true
-        tree.insert node7
+        tree.insert Node.new(7).visit
         tree.insert Node.new 29
         expect(tree.has_unvisited_children?).to be true
       end
 
       example 'found right node visited' do
-        node29 = Node.new 29
-        node29.visited = true
-        tree.insert node29
+        tree.insert Node.new(29).visit
         tree.insert Node.new 7
         expect(tree.has_unvisited_children?).to be true
       end
@@ -335,12 +345,8 @@ describe Node do
 
     context 'full tree with both left and right child visited' do
       example 'finds both children visited' do
-        node29 = Node.new 29
-        node29.visited = true
-        tree.insert node29
-        node7 = Node.new 7
-        node7.visited = true
-        tree.insert node7
+        tree.insert Node.new(29).visit
+        tree.insert Node.new(7).visit
         expect(tree.has_unvisited_children?).to be false
       end
     end
