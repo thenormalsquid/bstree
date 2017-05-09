@@ -146,6 +146,8 @@ class Tree
     Tree.new(Node.build_from_hash(hash))
   end
 
+  # TODO: implement inorder_iterate without a stack,
+  # using pointer equality.
   def inorder_iterate
     output = []
     stack = [root]
@@ -167,6 +169,10 @@ class Tree
     output.compact
   end
 
+  # TODO: try implementing with has_unvisited_child?
+  # and writing out the key before setting to child
+  # node. The node is set to visited as soon as the
+  # key is written.
   def preorder_iterate
     output = []
     return output unless root
@@ -225,6 +231,7 @@ class Tree
     output = []
     return output unless root
 
+    # TODO: use do-while if possible.
     current = find_unvisited_leaf_node root
     output << current.key
 

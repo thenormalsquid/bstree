@@ -164,6 +164,7 @@ iteration.
 Some milestones for iterative implementation:
 
 * Ruby, inorder traverse implemented in `tree.rb` on 2017-04-10.
+* Ruby, postorder traverse implemented in `tree.rb` on 2017-05-08.
 * c++, inorder traverse implemented in `tree.cpp` on 2017-04-18.
 * c, inorder traverse implemented in `tree.cpp` on 2017-04-20.
 

@@ -3,49 +3,51 @@ require_relative './tree'
 require_relative './node'
 
 class Generator
-  def build nodes
-    tree = Tree.new(Node.new(nodes.shift))
-    nodes.each { |n| tree.insert(Node.new(n)) }
-    tree
-  end
+  class << self
+    def build nodes
+      tree = Tree.new(Node.new(nodes.shift))
+      nodes.each { |n| tree.insert(Node.new(n)) }
+      tree
+    end
 
-  def self.tree1
-    Generator.new.build [11]
-  end
+    def tree1
+      Generator.build [11]
+    end
 
-  def self.tree2
-    Generator.new.build [11, 7]
-  end
+    def tree2
+      Generator.build [11, 7]
+    end
 
-  def self.tree3
-    Generator.new.build [11, 7, 13]
-  end
+    def tree3
+      Generator.build [11, 7, 13]
+    end
 
-  def self.tree4
-    Generator.new.build [11, 7, 5]
-  end
+    def tree4
+      Generator.build [11, 7, 5]
+    end
 
-  def self.tree5
-    Generator.new.build [5, 7, 11]
-  end
+    def tree5
+      Generator.build [5, 7, 11]
+    end
 
-  def self.tree6
-    Generator.new.build [11, 5, 3, 7, 13]
-  end
+    def tree6
+      Generator.build [11, 5, 3, 7, 13]
+    end
 
-  def self.tree7
-    Generator.new.build [5, 3, 11, 7, 13]
-  end
+    def tree7
+      Generator.build [5, 3, 11, 7, 13]
+    end
 
-  def self.tree8
-    Generator.new.build [11, 5, 3, 7, 17, 13, 19]
-  end
+    def tree8
+      Generator.build [11, 5, 3, 7, 17, 13, 19]
+    end
 
-  def self.tree9
-    Generator.new.build [19, 23, 13, 17, 11, 5, 7]
-  end
+    def tree9
+      Generator.build [19, 23, 13, 17, 11, 5, 7]
+    end
 
-  def self.tree10
-    Generator.new.build [11, 5, 3, 19, 17, 29, 23, 41, 37, 53]
+    def tree10
+      Generator.build [11, 5, 3, 19, 17, 29, 23, 41, 37, 53]
+    end
   end
 end
