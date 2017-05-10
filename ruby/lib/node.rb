@@ -189,25 +189,11 @@ class Node
   end
 
   def maximum
-    # right&.maximum || self
-    iterative_maximum
-  end
-
-  def iterative_maximum
-    max = self
-    max = max.right while max.right
-    max
+    right&.maximum || self
   end
 
   def minimum
-    # left&.minimum || self
-    iterative_minimum
-  end
-
-  def iterative_minimum
-    min = self
-    min = min.left while min.left
-    min
+    left&.minimum || self
   end
 
   def collect_pre_order collector
@@ -226,6 +212,8 @@ class Node
     collect []
   end
 
+  # TODO: this should be the same with any traverse, each should
+  # visit every node once.
   def size
     size = 0
     post_order_traverse { size += 1 }
