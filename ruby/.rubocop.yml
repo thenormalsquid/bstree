@@ -21,6 +21,9 @@ ClassLength:
   Exclude:
     - lib/node.rb
 
+Metrics/LineLength:
+  Max: 96
+
 # Offense count: 8
 # Cop supports --auto-correct.
 # Configuration parameters: SupportedStyles.

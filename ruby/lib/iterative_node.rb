@@ -1,22 +1,16 @@
+# frozen_string_literal: true
+
 require 'node'
 
 class IterativeNode < Node
   def insert node
     current = self
 
-    while true
+    loop do
       if node < current
-        if current.left.nil?
-          current.left = node and break
-        else
-          current = current.left
-        end
+        current.left.nil? ? (current.left = node) && break : current = current.left
       else
-        if current.right.nil?
-          current.right = node and break
-        else
-          current = current.right
-        end
+        current.right.nil? ? (current.right = node) && break : current = current.right
       end
     end
   end
