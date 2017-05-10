@@ -52,7 +52,7 @@ Let's start with definitions.
 The min-heap property:
 
 \begin{equation}
-  A[\mathrm{parent}] \leq A[i].
+  A[\mathrm{parent(i)}] \leq A[i].
 \end{equation}
 
 The binary-search-tree property: For $x$ a node in a in binary search tree,
@@ -71,6 +71,38 @@ There may be a result elsewhere proving sorting requires $O(n\ln n)$,
 this would be a good place to cite that result if the conditions hold.
 
 \subsubsection{12.1-3 Iterative algorithm for in-order tree walk}
+
+Here's an implementation using a stack:
+
+\lstset{language={ruby}}
+\begin{lstlisting}[frame=single,title=Iterative inorder traverse]
+def inorder_iterate
+  output = []
+  stack = [root]
+
+  while stack.last&.left
+    stack << stack.last.left
+  end
+
+  while !stack.empty?
+    current = stack.pop
+    output << current&.key
+    if current&.right
+      stack << current.right
+      while stack.last&.left
+        stack << stack.last.left
+      end
+    end
+  end
+  output.compact
+end
+\end{lstlisting}
+
+This is not a fulfilling implementation. First, CLRS hints at an
+`elegant' solution not requiring a stack, provided we can compare pointers
+(which we can). Second, even using the stack, there is a block of
+repeat code to dig out the lowest leftmost, and that smells. There should
+be a cleaner implementation using a stack.
 
 \subsubsection{12.1-4 Derive recursive pre- and post-order walks}
 
