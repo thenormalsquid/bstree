@@ -2,6 +2,9 @@
 
 \include{preamble}
 
+\input{comment}
+
+
 \title{CLRS, 3rd Edition}
 \date{\today}
 \author{David M. Doolin}
@@ -15,13 +18,73 @@
 
 \tableofcontents
 
+\section{The Role of Algorithms in Computing}
+
+\subsection{Algorithms}
+
+\subsubsection{Real world example of convex hull}
+
+\subsubsection{Measure of efficiency}
+
+\subsubsection{Data structure discussion}
+
+\subsubsection{Similarity of shortest path and TSP}
+
+\subsubsection{Problems for ``best'' and ``good enough'' solutions}
+
+\subsection{Algorithms as Technology}
+
+\subsubsection{Algorithm for application}
+
+\subsubsection{Compare implementations of merge and insertion sorts}
+
+\subsubsection{Smallest $n$ for $100n^2 < 2^n$}
+
+\setcounter{section}{2}
+\section{Growth of Functions}\label{sec:growthfunctions}
+
+
+\paragraph{Asymptotic efficiency} is concerned with the behavior of functions where the
+order of growth is relevant, and the values of lower order terms and multiplicative
+constants don't matter.
+Asymptotic running times are described in terms of functions over the natural
+numbers $\mathbb{N} = \{ 0, 1, 2,\ldots\}$. This restriction may occasionally be
+abused for convenience, but never misused.
+
+Let's start with definitions:
+
+\begin{itemize}
+  \item [$\Omega$:] Chapter 3, p. 48 in CLRS. $\Omega$ is the \emph{asymptotic lower
+  bound} on a function.
+  \item [Big-$O$:]
+  \item [$\Theta$:]
+\end{itemize}
+
+
+
+
+\setcounter{section}{7}
+\section{Sorting in Linear Time}\label{sec:lineartime}
+
+\subsection{Lower bounds for sorting}
+
+\subsubsection{Smallest depth of leaf in decision tree}
+
+\subsubsection{Asymptotically tight bounds on $\lg(n!)$}
+
+\subsubsection{No comparison sorts in linear time for certain inputs}
+
+\subsubsection{Sorting a sequence of $n$ elements}
+
+\subsection{Counting sort}
+
 \setcounter{section}{11}
 \section{Binary search trees}
 
 Sedgewick and Wayne~\cite{sedgewick:r2011} assert that (paraphrasing)
 binary search trees are the most fundamental algorithms
 in computer science. Let's agree with the assertion in
-general, but let's also make a particular istinction between the
+general, but let's also make a particular distinction between the
 binary search tree \emph{data structure}, and the various
 \emph{algorithms operating on binary search trees}. For example,
 a binary search tree consists of a data structure containing a key
@@ -39,7 +102,9 @@ backwards revisiting every node.
 
 \subsection{What is a binary search tree?}
 
-The discussion in the text book is very good.
+The discussion in the textbook is very good. Using the definition of
+a tree in Appendix B, a binary search tree is a tree equipped with
+a comparator such that the nodes are ordered.
 
 \paragraph{Practical applications of binary search trees} include:
 
@@ -161,9 +226,56 @@ pre_order_traverse(Node * n, Callback callback, void * userdata) {
 
 \subsubsection{Worst case comparisons on sorted data}
 
+\begin{quote}
+  Argue that since sorting $n$ elements takes $\Omega(n\lg n)$ time in the worst
+  case in the comparison model, any comparison-based algorithm for
+  constructing a binary tree from an arbitrary list of $n$ elements takes
+  $\Omega(n\lg n)$ time in the worst case.
+\end{quote}
+
+I'm not sure I understand the question correctly, which hinges on the
+definitions of ``argue'' and $\Omega(n\lg n)$. After some digging on the
+web and poking around in the text:
+
+\begin{itemize}
+
+  \item Wikipedia provides a reference to pages 191--193 in CLRS, which is Chapter 8
+``Sorting in Linear Time.'' Relevant material is covered above in
+\S~\ref{sec:lineartime}.
+
+\item From Ch. 8, comparison sort algorithms share the property that
+  the sorted order determined by the algorithm is based only on
+  comparison between input elements. Hence, \emph{comparison sorts}.
+
+\end{itemize}
+
+Based on the above and some reading through CLRS, here's my observations:
+
+\begin{enumerate}
+  \item Constructing a binary search tree by feeding it ordered data (a list
+    of $n$ ordered elements) is going to take $n^2$ time, as for each of $n$
+    elements in the list, we visit each node in the tree up to $n$ times as
+    a chain forms representing the sorted order. This isn't quite the right
+    way to express what I'm trying to say. Another way to imagine is that
+    constructing with an ordered list traverses the same nodes every insertion,
+    while inserting random nodes takes different paths.
+  \item Constructing a binary tree by recursively splitting a sorted list
+    from the mid-point of the list can be done in $n\lg n$. Once to construct
+    the list using some sort algorithm, then to build the tree by recursively
+    splitting the ordered list.
+\end{enumerate}
+
+So, yes, it's possible to build in $n\lg n$, but it has to be done from a
+sorted list recursively to guarantee the worst case. I really would like
+to talk to someone about these notions, for bouncing ideas around, and
+ensuring I'm going in the right direction. I'll need to revisit this later.
+
 %%%%%%%%%% Section 2
 
 \subsection{Querying a Binary Search Tree}
+
+Binary search trees are often used as dictionaries, hence, it's important
+to be able to find data in the tree.
 
 \subsubsection{Valid search sequence}
 
@@ -176,10 +288,12 @@ a. 2, 252, 401, 398, 330, 344, 397, 363.
 
 b. 924, 220, 911, 244, 898, 258, 362, 363.
 
+% TODO: why invalid?
 c. \textbf{INVALID} 925, 202, 911, 240, 912, 245, 363.
 
 d. 2, 399, 387, 219, 266, 382, 381, 278, 363.
 
+% TODO: why invalid?
 e. \textbf{INVALID} 935, 278, 347, 621, 299, 392, 358, 363.
 \end{quote}
 
@@ -187,6 +301,11 @@ Search and insertion are conceptually similar in binary search
 trees. To determine validity, each sequence above was drawn as
 a binary search tree. After drawing, it's obvious which sequences
 are not valid for finding the desired node.
+
+% For item c, ...
+
+% For item e, ...
+
 
 \subsubsection{Iterative implementations of min and max}
 
@@ -213,18 +332,14 @@ child, as one might suspect.
 
 This is already written, recursively, without using parent pointer.
 
-
+\begin{comment}
 \subsubsection{Prof. Bunyan's key sorting claim}
-
 \subsubsection{Successor and predecessor for node with 2 children}
-
 \subsubsection{Ancestor nodes}
-
 \subsubsection{In-order walk using minimum and successor}
-
 \subsubsection{Complexity of successive calls to successor}
-
 \subsubsection{Node parent-child key relationship}
+\end{comment}
 
 %%%%%%%%%%% Section 3
 
@@ -232,15 +347,13 @@ This is already written, recursively, without using parent pointer.
 
 \subsubsection{Recursive tree insertion}
 
+\begin{comment}
 \subsubsection{Cost of repeated insertion and searching}
-
 \subsubsection{Cost of sorting with binary search tree}
-
 \subsubsection{Is deletion commutative?}
-
 \subsubsection{Implement search, insert, delete with successor}
-
 \subsubsection{Choose predecessor for delete}
+\end{comment}
 
 %%%%%%%%%%%% Section 4
 
