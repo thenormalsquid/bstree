@@ -2,23 +2,20 @@ require 'node'
 
 class IterativeNode < Node
   def insert node
-    current = node
+    current = self
+
     while true
-      if current < self
-        if self.left.nil?
-          self.left = current
-          break
+      if node < current
+        if current.left.nil?
+          current.left = node and break
         else
           current = current.left
-          # next
         end
       else
-        if self.right.nil?
-          self.right = current
-          break
+        if current.right.nil?
+          current.right = node and break
         else
           current = current.right
-          # next
         end
       end
     end
