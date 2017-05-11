@@ -20,12 +20,25 @@
 
 
 
+\setcounter{section}{5}
+\section{Heap sort}
+
 \subsection{6.1-5} Is an array in sorted order a min-heap?
 
 Yes, because for every index $i = 1, 2, 3,\ldots, A[i-1] \leq A[i]$,
 which satisifies the min-heap property.
 
-\subsection{12.1-1 Draw various height trees}
+
+\subsection{Preliminaries}
+
+\setcounter{section}{11}
+\section{Binary search trees}
+
+
+\subsection{Preliminaries}
+
+
+\subsubsection{Draw various height trees}
 
 At some point in the future, I may actually draw these as for
 display in this document. For now, here is the sequence
@@ -41,7 +54,7 @@ a breadth-first listing, which corresponds to insertion order.
   \item Height 6: $[1, 4, 5, 10, 16, 17, 21]$
 \end{itemize}
 
-\subsubsection{12.1-2 Compare binary-search-tree and min-heap}
+\subsubsection{Compare binary-search-tree and min-heap}
 
 What is the difference between the binary-search-tree property and the min-heap
 property (p. 153)? Can the min-heap property be used to print out the keys of
@@ -52,7 +65,7 @@ Let's start with definitions.
 The min-heap property:
 
 \begin{equation}
-  A[\mathrm{parent(i)}] \leq A[i].
+  A[\mathrm{parent}(i)] \leq A[i].
 \end{equation}
 
 The binary-search-tree property: For $x$ a node in a in binary search tree,
@@ -70,41 +83,9 @@ Breadth-first traversal requires comparing elements 2 and 3.
 There may be a result elsewhere proving sorting requires $O(n\ln n)$,
 this would be a good place to cite that result if the conditions hold.
 
-\subsubsection{12.1-3 Iterative algorithm for in-order tree walk}
+\subsubsection{Iterative algorithm for in-order tree walk}
 
-Here's an implementation using a stack:
-
-\lstset{language={ruby}}
-\begin{lstlisting}[frame=single,title=Iterative inorder traverse]
-def inorder_iterate
-  output = []
-  stack = [root]
-
-  while stack.last&.left
-    stack << stack.last.left
-  end
-
-  while !stack.empty?
-    current = stack.pop
-    output << current&.key
-    if current&.right
-      stack << current.right
-      while stack.last&.left
-        stack << stack.last.left
-      end
-    end
-  end
-  output.compact
-end
-\end{lstlisting}
-
-This is not a fulfilling implementation. First, CLRS hints at an
-`elegant' solution not requiring a stack, provided we can compare pointers
-(which we can). Second, even using the stack, there is a block of
-repeat code to dig out the lowest leftmost, and that smells. There should
-be a cleaner implementation using a stack.
-
-\subsubsection{12.1-4 Derive recursive pre- and post-order walks}
+\subsubsection{Derive recursive pre- and post-order walks}
 
 Implementing pre- and post-order-traverse in C is not difficult. Getting
 such traverses to do work requires passing in an argument to handle
@@ -134,9 +115,13 @@ pre_order_traverse(Node * n, Callback callback, void * userdata) {
 \end{lstlisting}
 
 
-\subsubsection{12.1-5 Worst case comparisons on sorted data}
+\subsubsection{Worst case comparisons on sorted data}
 
-\subsubsection{12.2-1 Valid search sequence}
+%%%%%%%%%% Section 2
+
+\subsection{Querying a Binary Search Tree}
+
+\subsubsection{Valid search sequence}
 
 \begin{quote}
 Suppose that we have numbers between 1 and 1000 in a binary search tree, and we
@@ -159,7 +144,7 @@ trees. To determine validity, each sequence above was drawn as
 a binary search tree. After drawing, it's obvious which sequences
 are not valid for finding the desired node.
 
-\subsubsection{12.2-2 Iterative implementations of min and max}
+\subsubsection{Iterative implementations of min and max}
 
 The original problem calls for recursive implementations for minimum
 and maximum elements, but I already derived those, so this exercise
@@ -180,25 +165,51 @@ end
 The \texttt{maximum} function works by successively calling the right
 child, as one might suspect.
 
-\subsubsection{12.2-3 Tree predecessor}
+\subsubsection{Tree predecessor}
 
 This is already written, recursively, without using parent pointer.
 
 
-\subsubsection{12.2-4 Prof. Bunyan's key sorting claim}
+\subsubsection{Prof. Bunyan's key sorting claim}
 
-\subsubsection{12.2-5 Successor and predecessor for node with 2 children}
+\subsubsection{Successor and predecessor for node with 2 children}
 
-\subsubsection{12.2-6 Ancestor nodes}
+\subsubsection{Ancestor nodes}
 
-\subsubsection{12.2-7 In-order walk using minimum and successor}
+\subsubsection{In-order walk using minimum and successor}
 
-\subsubsection{12.2-8 Complexity of successive calls to successor}
+\subsubsection{Complexity of successive calls to successor}
 
-\subsubsection{12.2-9 Node parent-child key relationship}
+\subsubsection{Node parent-child key relationship}
+
+%%%%%%%%%%% Section 3
+
+\subsection{Insertion and deletion}
+
+\subsubsection{Recursive tree insertion}
+
+\subsubsection{Cost of repeated insertion and searching}
+
+\subsubsection{Cost of sorting with binary search tree}
+
+\subsubsection{Is deletion commutative?}
+
+\subsubsection{Implement search, insert, delete with successor}
+
+\subsubsection{Choose predecessor for delete}
+
+%%%%%%%%%%%% Section 4
+
+\subsection{Randomly built binary search trees}
+
+\subsubsection{Prove Eq. 12.3}
+
+\subsubsection{Depth versus height}
+
+\subsubsection{Differentiate randomly built trees}
 
 
-\subsubsection{12.4-4 Prove $2^x$ is convex}
+\subsubsection{Prove $2^x$ is convex}
 
 Proving $2^x$ is convex is a bit tricky, and leans on a fairly deep result about
 exponentiation which I don't really understand yet. We can start with a definition
@@ -259,6 +270,9 @@ For $x > 0, 2^x$ is clearly positive. For $x = 0, 2^0 = 1$, again positive. When
 \end{equation}
 \end{comment}
 
+\subsubsection{Randomized Quick Sort permutations}
+
+\subsection{Problems}
 
 \subsubsection{Problem 12-1}
 
@@ -295,63 +309,21 @@ Show that $B(x) = xB(x)^2 + 1$, and
 B(x) = \frac{1}{2x}(1-\sqrt{1-4x}).
 \end{equation}
 
-
-\paragraph{Double factorial}
-
-(A bunch of the following was copied from Wikipedia. Over the next few
-revisions of this section I'll rework into my own material. What's here
-now is just to get the grunt work of the equation formatting finished.
-This comment will be deleted as well.)
-
-The double factorial for $n$, denoted $n!!$, is defined as
+Make the substitution $z = B(x)$ and rewrite:
 
 \begin{equation}
-  n!! = \prod_{k=0}^{\left\lceil\frac{n}{2}\right\rceil - 1} (n-2k) = n (n-2) (n-4) \cdots
+  xz^2 - z + 1 = 0,
 \end{equation}
 
-\begin{equation}
-  \prod_{k=1}^\frac{n}{2} (2k) = n(n-2)(n-4)\cdots 4\cdot 2\,,
-\end{equation}
+a straightforward quadratic equation.
 
-\begin{equation}
-  \prod_{k=1}^\frac{n+1}{2} (2k-1) = n(n-2)(n-4)\cdots 3\cdot 1 \,.
-\end{equation}
+\paragraph{Part c.}
 
-For an even positive integer $n = 2k, k \geq 0$, the double factorial may be expressed as
+\paragraph{Part d.}
 
-\begin{equation}
-{\displaystyle n!!=2^{k}k!\,.}
-\end{equation}
+This concludes the exercises and problems for Chapter 12.
 
-For odd $n = 2k - 1, k \geq 1$, it has the expressions
-\begin{equation}
-{\displaystyle n!!={\frac {(2k)!}{2^{k}k!}}={\frac {n!}{(n-1)!!}}\,.}
-\end{equation}
-
-In this expression, the first denominator equals $(2k)!!$
-and cancels the unwanted even factors from the numerator.
-
-
-(Change this to double factorial.)
-\begin{equation}
-n!! = \begin{cases}
-  x & \text{if } x \geq 0 \\
- -x & \text{if } x < 0
-\end{cases}
-\end{equation}
-
-\[
-  \binom{n}{k} = \frac{n!}{k!(n-k)!}
-\]
-
-Some references:
-
-\begin{itemize}
-  \item \href{https://en.wikipedia.org/wiki/Double\_factorial}{Wikipedia}. There is a
-    really cool example on perfect matchings for complete graphs, which I could use
-    for a generating function practice perhaps.
-\end{itemize}
-
+\appendix
 
 \section{Detours}
 
@@ -412,10 +384,71 @@ $B = -1$:
 \end{equation}
 which can of course be verified by summing the right hand side.
 
+\paragraph{Double factorial}
+
+(A bunch of the following was copied from Wikipedia. Over the next few
+revisions of this section I'll rework into my own material. What's here
+now is just to get the grunt work of the equation formatting finished.
+This comment will be deleted as well.)
+
+The double factorial for $n$, denoted $n!!$, is defined as
+
+\begin{equation}
+  n!! = \prod_{k=0}^{\left\lceil\frac{n}{2}\right\rceil - 1} (n-2k) = n (n-2) (n-4) \cdots
+\end{equation}
+
+\begin{equation}
+  \prod_{k=1}^\frac{n}{2} (2k) = n(n-2)(n-4)\cdots 4\cdot 2\,,
+\end{equation}
+
+\begin{equation}
+  \prod_{k=1}^\frac{n+1}{2} (2k-1) = n(n-2)(n-4)\cdots 3\cdot 1 \,.
+\end{equation}
+
+For an even positive integer $n = 2k, k \geq 0$, the double factorial may be expressed as
+
+\begin{equation}\label{eq:df-even}
+{\displaystyle n!!=2^{k}k!\,.}
+\end{equation}
+
+For odd $n = 2k - 1, k \geq 1$, it has the expressions
+\begin{equation}\label{eq:df-odd}
+{\displaystyle n!!={\frac {(2k)!}{2^{k}k!}}={\frac {n!}{(n-1)!!}}\,.}
+\end{equation}
+
+All together:
+\begin{equation}
+n!! = \begin{cases}
+  2^kk! & \text{when } x \text{ is even}, k = \frac{n}{2} \\
+  \frac{(2k)!}{2^kk!} & \text{when } x \text{ is odd}, k = \frac{(n+1)}{2}
+\end{cases}
+\end{equation}
 
 
+This next spiffy little result is implied by both
+Eqs.~\ref{eq:df-even} and~\ref{eq:df-odd}:
+\begin{equation}
+  (n-1)!!n!! = \frac{(2k)!}{2^kk!}2^kk! = n!
+\end{equation}
 
-\subsection{Detour into Taylor series}
+In this expression, when $n$ is even the first denominator equals $(2k)!!$
+and cancels the unwanted even factors from the numerator. When $n$ is odd,
+$k$ assumes values appropriate to $n$ and $n-1$. This brings us to the binomial
+coefficients:
+
+\[
+  \binom{n}{k} = \frac{n!}{k!(n-k)!}
+\]
+
+\href{https://en.wikipedia.org/wiki/Double\_factorial}{Wikipedia} has a
+really cool example on perfect matchings for complete graphs, which I could use
+for a generating function practice perhaps.
+
+The upshot is when expressions such as $1\cdot3\cdot5\cdot7\cdots$ and
+$2\cdot4\cdot6\cdot8\cdots$ appear, we have well-understood tools for dealing
+with them.
+
+\subsection{Detour into Taylor series and Binomial Expansion}
 
 Cormen et al.~\cite[p. 262]{cormen:th:1990} gives Taylor Series definition as
 (there is an error in the edition cited here, see the Errata for clarification):
@@ -424,119 +457,56 @@ Cormen et al.~\cite[p. 262]{cormen:th:1990} gives Taylor Series definition as
 f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(a)}{k!}(x-a)^k,
 \end{equation}
 
-and suggests expanding the radical term in the generation function
+and suggests expanding the radical term in the generating function
 $\sqrt{1-4x}$ around $0$.
 
 {\bf TODO: write out a few derivatives of the radical to construct
 the Taylor Series.}
 
+For binomial expansion, we have
+
+\begin{equation}
+  (1 + z)^k = 1 + kz + \frac{1}{2!}k(k - 1)z^2 + \frac{1}{3!}k(k - 1)(k - 2)z^3 + \cdots
+\end{equation}
+
+There are several keys to deriving the quantity we're looking for.
+The first is using the substitution $z = -4x$, with $k = 1/2$. This way the expansion
+can proceed unencumbered with extraneous details. Another key is evaluating the
+numerator separately. Observe:
+
+\textbf{THESE AREN'T REALLY SUMS AS WRITTEN, IT'S BOGUS, REWRITE IT CORRECTLY.}
+
+Consider the sequence $k, k(k-1),\dots, k(k - 1)(k - 2)\cdots(k - n + 1)$.
+
+\begin{equation}
+  \frac{1}{2},
+  \left(\frac{1}{2}\right)\left(-\frac{1}{2}\right),
+  \left(\frac{1}{2}\right)\left(-\frac{1}{2}\right)\left(-\frac{3}{2}\right),
+  \left(-\frac{1\cdot3\cdot5}{16}\right),
+  \left(-\frac{1\cdot3\cdot5\cdot7}{32}\right)
+\end{equation}
+
+\begin{equation}
+  \frac{1}{2},
+  \frac{1}{4},
+  \frac{1\cdot3}{8},
+  \frac{1\cdot3\cdot5}{16},
+  \frac{1\cdot3\cdot5\cdot7}{32}
+\end{equation}
+
+\begin{equation}
+  \frac{0!!}{2},
+  \frac{1!!}{4},
+  \frac{3!!}{8},
+  \frac{5!!}{16},
+  \frac{7!!}{32}
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%% End of body of article %%%%%%%%%%%%%%%%%%%%%%%
+
+
 \bibliography{references}{}
 \bibliographystyle{plain}
-
-\appendix
-
-\section{Tikz}
-
-% \href{http://www.texample.net/tikz/examples/merge-sort-recursion-tree/}{From texample.net}
-
-\ovalbox{%
-  \begin{tikzpicture}[level/.style={sibling distance=50mm/#1}]
-  \node [circle,draw] (z){$17$}
-    child {node [circle,draw] (a) {$5$}
-      child {node [circle,draw] (b) {$3$}
-        child {node [circle, draw] (c) {$2$}}
-        child {node (ca) {}}
-      }
-      child {node [circle,draw] (g) {$7$}
-        child {node (ga) {}}
-        child {node [circle,draw] (gb) {$11$}
-          child {node {}}
-          child {node [circle,draw] (gc) {$13$}}
-        }
-      }
-    }
-    child {node [circle,draw] (j) {$23$}
-      child {node [circle,draw] (k) {$19$}}
-    child {node [circle,draw] (l) {$29$}}
-  };
-\end{tikzpicture}
-}
-
-
-
-\href{http://www.texample.net/tikz/examples/merge-sort-recursion-tree/}{From texample.net}
-
-\ovalbox{%
-%\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
-\begin{tikzpicture}[level/.style={sibling distance=40mm/#1}]
-\node [circle,draw] (z){$n$}
-  child {node [circle,draw] (a) {$\frac{n}{2}$}
-    child {node [circle,draw] (b) {$\frac{n}{2^2}$}
-      child {node {$\vdots$}
-        child {node [circle,draw] (d) {$\frac{n}{2^k}$}}
-        child {node [circle,draw] (e) {$\frac{n}{2^k}$}}
-      }
-      child {node {$\vdots$}}
-    }
-    child {node [circle,draw] (g) {$\frac{n}{2^2}$}
-      child {node {$\vdots$}}
-      child {node {$\vdots$}}
-    }
-  }
-  child {node [circle,draw] (j) {$\frac{n}{2}$}
-    child {node [circle,draw] (k) {$\frac{n}{2^2}$}
-      child {node {$\vdots$}}
-      child {node {$\vdots$}}
-    }
-  child {node [circle,draw] (l) {$\frac{n}{2^2}$}
-    child {node {$\vdots$}}
-    child {node (c){$\vdots$}
-      child {node [circle,draw] (o) {$\frac{n}{2^k}$}}
-      child {node [circle,draw] (p) {$\frac{n}{2^k}$}
-        child [grow=right] {node (q) {$=$} edge from parent[draw=none]
-          child [grow=right] {node (q) {$O_{k = \lg n}(n)$} edge from parent[draw=none]
-            child [grow=up] {node (r) {$\vdots$} edge from parent[draw=none]
-              child [grow=up] {node (s) {$O_2(n)$} edge from parent[draw=none]
-                child [grow=up] {node (t) {$O_1(n)$} edge from parent[draw=none]
-                  child [grow=up] {node (u) {$O_0(n)$} edge from parent[draw=none]}
-                }
-              }
-            }
-            child [grow=down] {node (v) {$O(n \cdot \lg n)$}edge from parent[draw=none]}
-          }
-        }
-      }
-    }
-  }
-};
-\path (a) -- (j) node [midway] {+};
-\path (b) -- (g) node [midway] {+};
-\path (k) -- (l) node [midway] {+};
-\path (k) -- (g) node [midway] {+};
-\path (d) -- (e) node [midway] {+};
-\path (o) -- (p) node [midway] {+};
-\path (o) -- (e) node (x) [midway] {$\cdots$}
-  child [grow=down] {
-    node (y) {$O\left(\displaystyle\sum_{i = 0}^k 2^i \cdot \frac{n}{2^i}\right)$}
-    edge from parent[draw=none]
-  };
-\path (q) -- (r) node [midway] {+};
-\path (s) -- (r) node [midway] {+};
-\path (s) -- (t) node [midway] {+};
-\path (s) -- (l) node [midway] {=};
-\path (t) -- (u) node [midway] {+};
-\path (z) -- (u) node [midway] {=};
-\path (j) -- (t) node [midway] {=};
-\path (y) -- (x) node [midway] {$\Downarrow$};
-\path (v) -- (y)
-  node (w) [midway] {$O\left(\displaystyle\sum_{i = 0}^k n\right) = O(k \cdot n)$};
-\path (q) -- (v) node [midway] {=};
-\path (e) -- (x) node [midway] {+};
-\path (o) -- (x) node [midway] {+};
-\path (y) -- (w) node [midway] {$=$};
-\path (v) -- (w) node [midway] {$\Leftrightarrow$};
-\path (r) -- (c) node [midway] {$\cdots$};
-\end{tikzpicture}}
-
 
 \end{document}
