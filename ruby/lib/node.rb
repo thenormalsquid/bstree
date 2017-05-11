@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'securerandom'
 require 'csv'
 
@@ -103,6 +104,9 @@ class Node
     self.class.max(left&.height || -1, right&.height || -1) + 1
   end
 
+  # TODO: this method could almost surely be refactored into
+  # something smaller and more literate.
+  # rubocop:disable Metrics/MethodLength
   def delete key, parent = nil
     node_to_delete, parent = find_with_parent key, parent
     left = node_to_delete.left
@@ -119,6 +123,7 @@ class Node
     node_to_delete.left = node_to_delete.right = nil
     node_to_delete
   end
+  # rubocop:enable Metrics/MethodLength
 
   def find_with_parent key, parent
     return [self, parent] if key == @key
@@ -158,9 +163,13 @@ class Node
     end
   end
 
+  # TODO: write out why I have an issue with what rubocop
+  # demands here.
+  # rubocop:disable Style/PredicateName
   def has_children?
     left || right ? true : false # would otherwise return the node or nil
   end
+  # rubocop:enable Style/PredicateName
 
   def visit
     @visited = true
@@ -171,14 +180,18 @@ class Node
     !visited
   end
 
+  # rubocop:disable Style/PredicateName
   def has_unvisited_children?
     return false unless has_children?
     left&.unvisited? || right&.unvisited? ? true : false
   end
+  # rubocop:enable Style/PredicateName
 
+  # rubocop:disable Style/PredicateName
   def has_parent?
     !parent.nil?
   end
+  # rubocop:enable Style/PredicateName
 
   def right_child?
     self == parent&.right

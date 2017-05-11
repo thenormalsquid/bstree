@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative '../lib/tree.rb'
 require_relative '../lib/node.rb'
 
@@ -250,7 +251,7 @@ describe Tree do
 
     it 'iterates with right child' do
       tree.insert Node.new 29
-      expect(tree.preorder_iterate).to eq [17,  29]
+      expect(tree.preorder_iterate).to eq [17, 29]
     end
 
     it 'iterates with left and right children' do

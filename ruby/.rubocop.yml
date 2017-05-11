@@ -16,6 +16,10 @@ Style/Documentation:
     - 'test/**/*'
     - 'lib/*.rb'
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
 ClassLength:
   Max: 100
   Exclude:

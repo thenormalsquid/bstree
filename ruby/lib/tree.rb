@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative './node'
 require 'pry'
 
@@ -85,7 +86,7 @@ class Tree
     root&.list_keys || []
   end
 
-  def collect collector
+  def collect _collector
     root&.collect [] || []
   end
 
@@ -148,23 +149,20 @@ class Tree
 
   # TODO: implement inorder_iterate without a stack,
   # using pointer equality.
+  # TODO: move this method to an IterativeTree class.
   def inorder_iterate
     output = []
     stack = [root]
 
-    while stack.last&.left
-      stack << stack.last.left
-    end
+    stack << stack.last.left while stack.last&.left
 
-    while !stack.empty?
+    until stack.empty?
       current = stack.pop
       output << current&.key
-      if current&.right
-        stack << current.right
-        while stack.last&.left
-          stack << stack.last.left
-        end
-      end
+      next unless current&.right
+
+      stack << current.right
+      stack << stack.last.left while stack.last&.left
     end
     output.compact
   end
@@ -181,16 +179,16 @@ class Tree
     current = stack.last
     output << current.key
 
-    while current&.left != nil
+    until current&.left.nil?
       current = current.left
       output << current.key
       stack.push current
     end
 
-    while !stack.empty?
+    until stack.empty?
       current = stack.pop
 
-      if current&.right != nil
+      unless current&.right.nil?
         current = current.right
         stack.push current
         output << current.key
