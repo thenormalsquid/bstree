@@ -19,8 +19,8 @@
 \section{Selected exercises and problems}
 
 
-
-\setcounter{section}{5}
+%%% TODO: get rid of this heapsort stuff.
+\setcounter{section}{6}
 \section{Heap sort}
 
 \subsection{6.1-5} Is an array in sorted order a min-heap?
@@ -30,6 +30,8 @@ which satisifies the min-heap property.
 
 
 \subsection{Preliminaries}
+
+%%%%% ^^^^ TODO: get rid of heapsort ^^^^^
 
 \setcounter{section}{11}
 \section{Binary search trees}
@@ -84,6 +86,39 @@ There may be a result elsewhere proving sorting requires $O(n\ln n)$,
 this would be a good place to cite that result if the conditions hold.
 
 \subsubsection{Iterative algorithm for in-order tree walk}
+
+Here's an implementation using a stack:
+
+\lstset{language={ruby}}
+\begin{lstlisting}[frame=single,title=Iterative inorder traverse]
+def inorder_iterate
+  output = []
+  stack = [root]
+
+  while stack.last&.left
+    stack << stack.last.left
+  end
+
+  while !stack.empty?
+    current = stack.pop
+    output << current&.key
+    if current&.right
+      stack << current.right
+      while stack.last&.left
+        stack << stack.last.left
+      end
+    end
+  end
+  output.compact
+end
+\end{lstlisting}
+
+This is not a fulfilling implementation. First, CLRS hints at an
+`elegant' solution not requiring a stack, provided we can compare pointers
+(which we can). Second, even using the stack, there is a block of
+repeat code to dig out the lowest leftmost, and that smells. There should
+be a cleaner implementation using a stack.
+
 
 \subsubsection{Derive recursive pre- and post-order walks}
 
