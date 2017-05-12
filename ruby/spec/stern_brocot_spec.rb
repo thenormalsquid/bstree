@@ -8,44 +8,78 @@ RSpec.describe SternBrocot do
 
   describe '.rationalize' do
     context 'integers >= 0' do
-      example '0' do
+      example '0 yields 0/1' do
         actual = SternBrocot.rationalize 0
         expect(actual).to eq [0, 1]
       end
 
-      example '1' do
+      example '1 yields 1/1' do
         actual = SternBrocot.rationalize 1
         expect(actual).to eq [1, 1]
       end
 
-      example '2' do
+      example '2 yields 2/1' do
         actual = SternBrocot.rationalize 2
         expect(actual).to eq [2, 1]
       end
 
-      example '1246' do
+      example '1246 yields 1246/1' do
         actual = SternBrocot.rationalize 1246
         expect(actual).to eq [1246, 1]
       end
     end
 
     context 'rational numbers <= 1.0' do
-      example '0.0'
-      example '1.0'
-      example '0.5'
-      example '1.5'
-      example '0.3'
-      example '0.33'
+      example '0.0 yields 0/1' do
+        actual = SternBrocot.rationalize 0.0
+        expect(actual).to eq [0, 1]
+      end
+
+      example '1.0 yields 1/1' do
+        actual = SternBrocot.rationalize 1.0
+        expect(actual).to eq [1, 1]
+      end
+
+      example '0.5 yields 1/2' do
+        actual = SternBrocot.rationalize 0.5
+        expect(actual).to eq [1, 2]
+      end
+
+      example '0.1 yields 1/10' do
+        actual = SternBrocot.rationalize 0.1
+        expect(actual).to eq [1, 10]
+      end
+
+      xexample '0.15 yields 15/100' do
+        binding.pry
+        actual = SternBrocot.rationalize 0.15
+        expect(actual).to eq [15, 100]
+      end
+
+      xexample '0.3 yields 3/10' do
+        actual = SternBrocot.rationalize 0.3
+        expect(actual).to eq [3, 10]
+      end
+
+      xexample '0.333 yields 333/1000' do
+        actual = SternBrocot.rationalize 0.333
+        expect(actual).to eq [333, 1000]
+      end
     end
 
     context 'rational numbers > 1.0' do
-      example '1.1'
+      xexample '1.1 yields 11/10' do
+        actual = SternBrocot.rationalize 1.1
+        expect(actual).to eq [11, 10]
+      end
+
       example '3.1'
       example '5.2'
       example '9.9'
       example '123.123'
     end
 
+=begin
     context 'irrational numbers' do
       context 'pi' do
         example 'to 1 decimal place'
@@ -63,5 +97,6 @@ RSpec.describe SternBrocot do
         example 'to 5 decimal places'
       end
     end
+=end
   end
 end
