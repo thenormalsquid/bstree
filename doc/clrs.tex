@@ -15,30 +15,37 @@
 
 \tableofcontents
 
-
-\section{Selected exercises and problems}
-
-
-%%% TODO: get rid of this heapsort stuff.
-\setcounter{section}{6}
-\section{Heap sort}
-
-\subsection{6.1-5} Is an array in sorted order a min-heap?
-
-Yes, because for every index $i = 1, 2, 3,\ldots, A[i-1] \leq A[i]$,
-which satisifies the min-heap property.
-
-
-\subsection{Preliminaries}
-
-%%%%% ^^^^ TODO: get rid of heapsort ^^^^^
-
 \setcounter{section}{11}
 \section{Binary search trees}
 
+Sedgewick and Wayne~\cite{sedgewick:r2011} assert that (paraphrasing)
+binary search trees are the most fundamental algorithms
+in computer science. Let's agree with the assertion in
+general, but let's also make a particular istinction between the
+binary search tree \emph{data structure}, and the various
+\emph{algorithms operating on binary search trees}. For example,
+a binary search tree consists of a data structure containing a key
+which may be ordered by comparison with keys for other data structures,
+and two child nodes traditionally referred to as ``left'' and ``right.''
 
-\subsection{Preliminaries}
+To examine all of the keys in a binary search tree, we might
+implement a \emph{depth first search} to find a node furthest
+away from some initial base, or root node, then walk the tree
+backwards revisiting every node.
 
+%% Why is this distinction useful? I'm not sure, it just
+%% seems right to me.
+
+
+\subsection{What is a binary search tree?}
+
+The discussion in the text book is very good.
+
+\paragraph{Practical applications of binary search trees} include:
+
+\begin{itemize}
+  \item \href{https://www.quora.com/What-are-some-practical-applications-of-binary-trees/answer/Az-Na?__nsrc__=4&__snid3__=1020331524}{quora}
+\end{itemize}
 
 \subsubsection{Draw various height trees}
 
@@ -58,10 +65,12 @@ a breadth-first listing, which corresponds to insertion order.
 
 \subsubsection{Compare binary-search-tree and min-heap}
 
-What is the difference between the binary-search-tree property and the min-heap
-property (p. 153)? Can the min-heap property be used to print out the keys of
-an $n$-node tree, in sorted order, in $O(n)$ time?  Show how, or explain why
-not.
+\begin{quote}
+  What is the difference between the binary-search-tree property and the min-heap
+  property (p. 153)? Can the min-heap property be used to print out the keys of
+  an $n$-node tree, in sorted order, in $O(n)$ time?  Show how, or explain why
+  not.
+\end{quote}
 
 Let's start with definitions.
 The min-heap property:
@@ -419,7 +428,62 @@ $B = -1$:
 \end{equation}
 which can of course be verified by summing the right hand side.
 
-\paragraph{Double factorial}
+\subsection{Detour into Taylor series}
+
+
+Cormen et al.~\cite[p. 262]{cormen:th:1990} gives Taylor Series definition as
+(there is an error in the edition cited here, see the Errata for clarification):
+
+\begin{equation}
+f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(a)}{k!}(x-a)^k,
+\end{equation}
+
+and suggests expanding the radical term in the generating function
+$\sqrt{1-4x}$ around $0$.
+
+% {\bf TODO: write out a few derivatives of the radical to construct
+% the Taylor Series.}
+
+
+\subsection{Detour into binomial Expansion}
+
+For binomial expansion, we have
+
+\begin{equation}
+  (1 + z)^k = 1 + kz + \frac{1}{2!}k(k - 1)z^2 + \frac{1}{3!}k(k - 1)(k - 2)z^3 + \cdots
+\end{equation}
+
+There are several keys to deriving the quantity we're looking for.
+The first is using the substitution $z = -4x$, with $k = 1/2$. This way the expansion
+can proceed unencumbered with extraneous details. Another key is evaluating the
+numerator separately. Observe the sequence $k, k(k-1),\dots, k(k - 1)(k - 2)\cdots(k - n + 1)$,
+for $k = 1/2$.
+
+\begin{equation}
+  \frac{1}{2},
+  \left(\frac{1}{2}\right)\left(-\frac{1}{2}\right),
+  \left(\frac{1}{2}\right)\left(-\frac{1}{2}\right)\left(-\frac{3}{2}\right),
+  \left(-\frac{1\cdot3\cdot5}{16}\right),
+  \left(\frac{1\cdot3\cdot5\cdot7}{32}\right)
+\end{equation}
+
+\begin{equation}
+  \frac{1}{2},
+  -\frac{1}{4},
+  \frac{1\cdot3}{8},
+  -\frac{1\cdot3\cdot5}{16},
+  \frac{1\cdot3\cdot5\cdot7}{32}
+\end{equation}
+
+\begin{equation}
+  \frac{0!!}{2},
+  \frac{1!!}{4},
+  \frac{3!!}{8},
+  \frac{5!!}{16},
+  \frac{7!!}{32}
+\end{equation}
+
+\subsection{Detour into double factorials}
 
 (A bunch of the following was copied from Wikipedia. Over the next few
 revisions of this section I'll rework into my own material. What's here
@@ -483,62 +547,8 @@ The upshot is when expressions such as $1\cdot3\cdot5\cdot7\cdots$ and
 $2\cdot4\cdot6\cdot8\cdots$ appear, we have well-understood tools for dealing
 with them.
 
-\subsection{Detour into Taylor series and Binomial Expansion}
 
-Cormen et al.~\cite[p. 262]{cormen:th:1990} gives Taylor Series definition as
-(there is an error in the edition cited here, see the Errata for clarification):
-
-\begin{equation}
-f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(a)}{k!}(x-a)^k,
-\end{equation}
-
-and suggests expanding the radical term in the generating function
-$\sqrt{1-4x}$ around $0$.
-
-{\bf TODO: write out a few derivatives of the radical to construct
-the Taylor Series.}
-
-For binomial expansion, we have
-
-\begin{equation}
-  (1 + z)^k = 1 + kz + \frac{1}{2!}k(k - 1)z^2 + \frac{1}{3!}k(k - 1)(k - 2)z^3 + \cdots
-\end{equation}
-
-There are several keys to deriving the quantity we're looking for.
-The first is using the substitution $z = -4x$, with $k = 1/2$. This way the expansion
-can proceed unencumbered with extraneous details. Another key is evaluating the
-numerator separately. Observe:
-
-\textbf{THESE AREN'T REALLY SUMS AS WRITTEN, IT'S BOGUS, REWRITE IT CORRECTLY.}
-
-Consider the sequence $k, k(k-1),\dots, k(k - 1)(k - 2)\cdots(k - n + 1)$.
-
-\begin{equation}
-  \frac{1}{2},
-  \left(\frac{1}{2}\right)\left(-\frac{1}{2}\right),
-  \left(\frac{1}{2}\right)\left(-\frac{1}{2}\right)\left(-\frac{3}{2}\right),
-  \left(-\frac{1\cdot3\cdot5}{16}\right),
-  \left(-\frac{1\cdot3\cdot5\cdot7}{32}\right)
-\end{equation}
-
-\begin{equation}
-  \frac{1}{2},
-  \frac{1}{4},
-  \frac{1\cdot3}{8},
-  \frac{1\cdot3\cdot5}{16},
-  \frac{1\cdot3\cdot5\cdot7}{32}
-\end{equation}
-
-\begin{equation}
-  \frac{0!!}{2},
-  \frac{1!!}{4},
-  \frac{3!!}{8},
-  \frac{5!!}{16},
-  \frac{7!!}{32}
-\end{equation}
-
-
-%%%%%%%%%%%%%%%%%%%%% End of body of article %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%% End of body of appendix %%%%%%%%%%%%%%%%%%%%%%%
 
 
 \bibliography{references}{}
