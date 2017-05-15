@@ -8,21 +8,29 @@ class IterativeNode < Node
 
     loop do
       if node < current
-        current.left.nil? ? (current.left = node) && break : current = current.left
+        current.left.nil? ? insert_left(current, node) && break : current = current.left
       else
-        current.right.nil? ? (current.right = node) && break : current = current.right
+        current.right.nil? ? insert_right(current, node) && break : current = current.right
       end
     end
   end
 
-  # TODO: test these with this class
+  def insert_left current, node
+    node.parent = current
+    current.left = node
+  end
+
+  def insert_right current, node
+    node.parent = current
+    current.right = node
+  end
+
   def maximum
     max = self
     max = max.right while max.right
     max
   end
 
-  # TODO: test these with this class
   def minimum
     min = self
     min = min.left while min.left

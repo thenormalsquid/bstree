@@ -3,7 +3,6 @@ require 'tree'
 class IterativeTree < Tree
   # TODO: implement inorder_iterate without a stack,
   # using pointer equality.
-  # TODO: move this method to an IterativeTree class.
   def inorder_iterate
     output = []
     stack = [root]
@@ -20,10 +19,7 @@ class IterativeTree < Tree
     end
     output.compact
   end
-  # TODO: try implementing with has_unvisited_child?
-  # and writing out the key before setting to child
-  # node. The node is set to visited as soon as the
-  # key is written.
+
   def preorder_iterate
     output = []
     return output unless root
@@ -46,7 +42,7 @@ class IterativeTree < Tree
         stack.push current
         output << current.key
         while stack.last&.left
-          stack << stack.last.left
+          stack.push stack.last.left
           output << stack.last.key
         end
       end
@@ -54,7 +50,6 @@ class IterativeTree < Tree
     output.compact
   end
 
-  # TODO: consider making this static
   def find_leaf_node current
     while current.has_children?
       if current.left
@@ -66,7 +61,6 @@ class IterativeTree < Tree
     current
   end
 
-  # TODO: consider making this static
   def find_unvisited_leaf_node current
     while current.has_unvisited_children?
       if current.left&.unvisited?
@@ -82,7 +76,6 @@ class IterativeTree < Tree
     output = []
     return output unless root
 
-    # TODO: use do-while if possible.
     current = find_unvisited_leaf_node root
     output << current.key
 
