@@ -366,7 +366,7 @@ describe Tree do
           expect(tree.root.right).to be n23
           expected = [3, 5, 7, 8, 10, 11, 12, 17, 19, 20, 21, 22, 23, 29]
           expect(tree.list_keys).to eq expected
-          expect(tree.inorder_iterate).to eq expected
+          # expect(tree.inorder_iterate).to eq expected
           expect(tree.height).to eq 5
           expect(tree.delete_by_key(5)).to eq n5
           expect(node_pointers_nil?(n5)).to be true
@@ -379,7 +379,7 @@ describe Tree do
           expect(tree.height).to eq 4
           expected = [3, 7, 8, 10, 11, 12, 17, 19, 20, 21, 22, 23, 29]
           expect(tree.list_keys).to eq expected
-          expect(tree.inorder_iterate).to eq expected
+          # expect(tree.inorder_iterate).to eq expected
 
           expect(tree.delete_by_key(7)).to eq n7
           expect(tree.root.left).to be n8
@@ -392,14 +392,14 @@ describe Tree do
           expect(tree.height).to eq 4
           expected = [3, 8, 10, 11, 12, 17, 19, 20, 21, 22, 23, 29]
           expect(tree.list_keys).to eq expected
-          expect(tree.inorder_iterate).to eq expected
+          # expect(tree.inorder_iterate).to eq expected
 
           expect(tree.delete_by_key(29)).to eq n29
           expect(n23.right).to be nil
           expect(tree.size).to eq 11
           expected = [3, 8, 10, 11, 12, 17, 19, 20, 21, 22, 23]
           expect(tree.list_keys).to eq expected
-          expect(tree.inorder_iterate).to eq expected
+          # expect(tree.inorder_iterate).to eq expected
           expect(tree.delete_by_key(3)).to eq n3
           expect(n8.left).to be nil
           expect(n3.left).to be nil
@@ -408,7 +408,7 @@ describe Tree do
           expect(tree.size).to eq 10
           expected = [8, 10, 11, 12, 17, 19, 20, 21, 22, 23]
           expect(tree.list_keys).to eq expected
-          expect(tree.inorder_iterate).to eq expected
+          # expect(tree.inorder_iterate).to eq expected
 
           # n21 still has 2 children
           expect(n21.parent).to eq n19
@@ -427,7 +427,7 @@ describe Tree do
           expect(n22.right).to eq nil
           expected = [8, 10, 11, 12, 17, 19, 20, 22, 23]
           expect(tree.list_keys).to eq expected
-          expect(tree.inorder_iterate).to eq expected
+          # expect(tree.inorder_iterate).to eq expected
 
           expect(tree.root.left).to be n8
           expect(tree.root.right).to be n23
@@ -441,7 +441,7 @@ describe Tree do
           expect(n23.parent).to eq n19
           expected = [8, 10, 11, 12, 19, 20, 22, 23]
           expect(tree.list_keys).to eq expected
-          expect(tree.inorder_iterate).to eq expected
+          # expect(tree.inorder_iterate).to eq expected
 
           expect(n12.left).to be nil
           expect(n12.right).to be nil
@@ -449,33 +449,33 @@ describe Tree do
           expect(tree.delete_by_key(12)).to eq n12
           expected = [8, 10, 11, 19, 20, 22, 23]
           expect(tree.list_keys).to eq expected
-          expect(tree.inorder_iterate).to eq expected
+          # expect(tree.inorder_iterate).to eq expected
 
           expect(tree.delete_by_key(19)).to eq n19
           expect(tree.root).to eq n20
           expected = [8, 10, 11, 20, 22, 23]
           expect(tree.list_keys).to eq expected
-          expect(tree.inorder_iterate).to eq expected
+          # expect(tree.inorder_iterate).to eq expected
 
           expect(tree.delete_by_key(8)).to eq n8
           expect(tree.root.left).to eq n11
           expected = [10, 11, 20, 22, 23]
           expect(tree.list_keys).to eq expected
-          expect(tree.inorder_iterate).to eq expected
+          # expect(tree.inorder_iterate).to eq expected
 
           expect(tree.delete_by_key(11)).to eq n11
           expected = [10, 20, 22, 23]
           expect(tree.list_keys).to eq expected
-          expect(tree.inorder_iterate).to eq expected
+          # expect(tree.inorder_iterate).to eq expected
 
           expect(tree.delete_by_key(10)).to eq n10
           expect(tree.list_keys).to eq [20, 22, 23]
-          expect(tree.inorder_iterate).to eq [20, 22, 23]
+          # expect(tree.inorder_iterate).to eq [20, 22, 23]
           expect(tree.delete_by_key(20)).to eq n20
 
           expect(tree.delete_by_key(23)).to eq n23
           expect(tree.list_keys).to eq [22]
-          expect(tree.inorder_iterate).to eq [22]
+          # expect(tree.inorder_iterate).to eq [22]
         end
       end
     end

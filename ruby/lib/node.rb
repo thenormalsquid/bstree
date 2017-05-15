@@ -163,8 +163,6 @@ class Node
     end
   end
 
-  # TODO: write out why I have an issue with what rubocop
-  # demands here.
   # rubocop:disable Style/PredicateName
   def has_children?
     left || right ? true : false # would otherwise return the node or nil
@@ -187,6 +185,21 @@ class Node
   end
   # rubocop:enable Style/PredicateName
 
+  # TODO: write out why I have an issue with what rubocop
+  # demands here. Rubocop demands the `has` to be removed
+  # from predicate method names. I don't agree with this
+  # in all cases as `is` and `has` are not the same sort
+  # of thing. Restricting the predicate names from `is`
+  # seems fine. Using `has` forces a point of view which
+  # is very helpful for readability. It puts the reader
+  # in the correct perspective, the perspective does not
+  # need to be inferred or implied. For example, `is_parent`
+  # and `has_parent` have very different meanings. What
+  # does a method named `parent?` mean? Here, we want to
+  # ask the node whether it has a parent, because if it
+  # does not, it's the root node, and that's a special
+  # case. Conversely, if the node is not a parent, it's
+  # a leaf node, another special case.
   # rubocop:disable Style/PredicateName
   def has_parent?
     !parent.nil?

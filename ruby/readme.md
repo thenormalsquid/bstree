@@ -21,6 +21,24 @@ and works similarly to the `add` method.
 Another possibility is to implement the traversal in the tree
 class.
 
+## Trees recursive and iterative
+
+Recursive techniques usually feel a lot more natural once
+a programmer has a certain amount of experience, and is the
+go-to technique for operations on recursively defined structures
+such as binary trees. Accordingly, the most complete implemenation
+will be recursive.
+
+However, iteration is always viable, and may save stack, and increase
+speed, so a number of algorithms are also implemented recursively.
+
+To keep lower the confusion, the `Tree`, `Node` and related
+data structures will all be implemented with recursive
+algorithms. Iterative implementations will subclass the
+recursive, overriding with iteration as necessary. The
+naming pattern for these subclasses will follow the pattern
+`IterativeTree`, `IterativeNode`, and so on.
+
 ## TODO
 
 * Create a simple data structure to store, subclass `Struct`
