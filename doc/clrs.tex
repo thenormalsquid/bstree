@@ -14,7 +14,7 @@
 
 \maketitle
 
-\abstract{CLRS}
+\abstract{Working notes for the CLRS Algorithms textbook.}
 
 \tableofcontents
 
@@ -22,27 +22,108 @@
 
 \subsection{Algorithms}
 
-\subsubsection{Real world example of convex hull}
+\subsubsection{Real world example of sorting or convex hull}
+
+\begin{quote}
+  Give a real-world example that requires sorting or a real-world
+  example that requires computing a convex hull.
+\end{quote}
+
+Sorting is almost always required in any application producing business
+reports. By ``almost always'' it's hard to think of an example where
+sorting-on-demand is \emph{not} required in business reporting. The sorting
+may be done at the application interface level, such as a front end of
+a web application, at the back end in code, or when there is a persistence
+layer such as a relational database, sorting is usually best performed
+in that layer.
 
 \subsubsection{Measure of efficiency}
 
+\begin{quote}
+  Other than speed, what other measures of efficiency might one use in a
+  real-world setting?
+\end{quote}
+
+Other real world measures of efficiency include:
+
+\begin{enumerate}
+  \item Memory usage, which can be either the gross amount of memory used, or the pattern
+    of how the memory is accessed (e.g., cache), or both.
+  \item
+\end{enumerate}
+
 \subsubsection{Data structure discussion}
+
+\begin{quote}
+  Select a data structure that you have seen previously, and discuss
+  it's strengths and weaknesses.
+\end{quote}
+
+The doubly linked list is an interesting and useful data structure.
 
 \subsubsection{Similarity of shortest path and TSP}
 
+\begin{quote}
+  How are the shortest-path and traveling-salesman problems given above [in the text]
+  similar? How are they different?
+\end{quote}
+
 \subsubsection{Problems for ``best'' and ``good enough'' solutions}
+
+\begin{quote}
+  Come up with a real-world problem in which only the best solution will do. Then
+  come up with one in which a solution that is ``approximately'' the best is
+  good enough.
+\end{quote}
+
 
 \subsection{Algorithms as Technology}
 
+The authors make a very good point: it's useful, in the most
+practical sense, to treat algorithms as simply technology, little
+different in the end than any other technology. One difficulty
+of the study of algorithms as technology is shared by all other
+technologies, that of the necessity of learning specialized,
+domain-specific vocabulary. Another difficulty is this language
+is, essentially, the language of mathematics, and incurs the
+same high hurdle of mathematics, \emph{viz.} precision is
+paramount.
+
 \subsubsection{Algorithm for application}
+
+\begin{quote}
+  Give an example of a problem which requires algorithmic content
+  at the application level, and discuss the function of the algorithms
+  involved.
+\end{quote}
+
+Computer-aided design (CAD) relies on algorithms at the application
+level. Notions such as perspective, scale and level of detail are
+all implemented algorithmically.
 
 \subsubsection{Compare implementations of merge and insertion sorts}
 
+\begin{quote}
+  Suppose we are comparing implementations of insertion sort and merge
+  sort on the same machine. For inputs of size $n$, insertion sort runs
+  in $8n^2$ steps, while merge sort runs in $64n\lg n$ steps. For which
+  values of $n$ does insertion sort beat merge sort?
+\end{quote}
+
 \subsubsection{Smallest $n$ for $100n^2 < 2^n$}
 
-\setcounter{section}{2}
+\begin{quote}
+  What is the smallest value of $n$ such that an algorithm whose running
+  time is $100n^2$ runs faster than an algorithm whose running time is
+  $2^n$ on the same machine?
+\end{quote}
+
+% \setcounter{section}{2}
 \section{Growth of Functions}\label{sec:growthfunctions}
 
+\paragraph{Worst-case analysis} provides an upper bound on the running time.
+This is a guarantee that it will not take any longer than this bound.
+A good initial discussion of this is in Chapter 2, p. 27.
 
 \paragraph{Asymptotic efficiency} is concerned with the behavior of functions where the
 order of growth is relevant, and the values of lower order terms and multiplicative
