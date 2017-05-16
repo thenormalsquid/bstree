@@ -1,33 +1,16 @@
 # frozen_string_literal: true
 
-require_relative './spec_helper'
+require 'spec_helper'
+require 'shared_examples'
+
 require_relative '../lib/node'
 require_relative './nodes'
 
 require 'pry'
 
 describe Node do
-  describe '#new' do
-    it 'instantiates' do
-      expect(Node.new).not_to be_nil
-    end
-  end
-
-  describe '#insert' do
-    example 'left node' do
-      node = Node.new 2
-      left_node = Node.new 1
-      node.insert left_node
-      expect(node.left).to eq left_node
-    end
-
-    example 'right node' do
-      node = Node.new 1
-      right_node = Node.new 2
-      node.insert right_node
-      expect(node.right).to eq right_node
-    end
-  end
+  it_inserts_like "insertion"
+  it_finds_extremes "extreme elements"
 
   describe '#list_keys' do
     example 'from single node' do
