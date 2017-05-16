@@ -6,6 +6,10 @@ require 'pry'
 class Tree
   attr_reader :root, :size
 
+  def preorder_walk; end
+  def inorder_walk; end
+  def postorder_walk; end
+
   def initialize node = nil
     @root = node ? node : Node.new
     @size = 1

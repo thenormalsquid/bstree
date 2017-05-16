@@ -1,6 +1,24 @@
 require 'tree'
 
 class IterativeTree < Tree
+  # TODO: some interesting API work here. We want to
+  # be able to test the implementations for traversing
+  # the tree pre-order, in-order and post-order, but the
+  # interface, that is, the method call must be the
+  # same for this case which iterates and the parent
+  # class which calls the root node to recurse.
+  # So we'll want the following in both this class
+  # and the parent class:
+  def preorder_walk; end
+  def inorder_walk; end
+
+  def postorder_walk &block
+    postorder_iterate(&block)
+  end
+
+  # TODO: all of these really need to accept callbacks,
+  # but maybe not this next rev.
+
   # TODO: implement inorder_iterate without a stack,
   # using pointer equality.
   def inorder_iterate
@@ -72,17 +90,20 @@ class IterativeTree < Tree
     current.visit
   end
 
-  def postorder_iterate
-    output = []
-    return output unless root
+  def postorder_iterate &block
+    # output = []
+    # return output unless root
+    return unless root
 
     current = find_unvisited_leaf_node root
-    output << current.key
+    # output << current.key
+    block.call(current.key)
 
     while current.has_parent?
       current = find_unvisited_leaf_node current.parent
-      output << current.key
+      # output << current.key
+      block.call(current.key)
     end
-    output
+    # output
   end
 end

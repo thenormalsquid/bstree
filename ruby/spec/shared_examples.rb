@@ -51,3 +51,131 @@ RSpec.shared_examples 'extreme elements' do
     end
   end
 end
+
+RSpec.shared_examples 'postorder iteration' do
+    let(:root) { Node.new 17 }
+    let(:keys) { [] }
+    let(:tree) { described_class.new root }
+
+    subject(:subject) do
+      tree.postorder_walk { |key| keys << key }
+    end
+
+    it 'walks an empty tree' do
+      tree.delete 17
+      subject
+      expect(keys).to eq []
+    end
+
+    it 'iterates with single root node' do
+      subject
+      expect(keys).to eq [17]
+    end
+
+    it 'iterates with single left node' do
+      tree.insert Node.new 7
+      # tree.postorder_walk { |key| keys << key }
+      subject
+      expect(keys).to eq [7, 17]
+    end
+
+    it 'iterate with a single right node' do
+      tree.insert Node.new 29
+      subject
+      # tree.postorder_walk { |key| keys << key }
+      expect(keys).to eq [29, 17]
+    end
+
+    it 'iterate with a 4 node full tree' do
+      tree.insert Node.new 29
+      tree.insert Node.new 7
+      subject
+      expect(keys).to eq [7, 29, 17]
+    end
+
+    it 'iterates on a left elbow' do
+      tree.insert Node.new 7
+      tree.insert Node.new 11
+      subject
+      expect(keys).to eq [11, 7, 17]
+    end
+
+    it 'iterates on a right elbow' do
+      tree.insert Node.new 29
+      tree.insert Node.new 19
+      subject
+      expect(keys).to eq [19, 29, 17]
+    end
+
+    it 'iterate with left full subtree' do
+      tree.insert Node.new 7
+      tree.insert Node.new 3
+      tree.insert Node.new 5
+      tree.insert Node.new 2
+      subject
+      expect(keys).to eq [2, 5, 3, 7, 17]
+    end
+
+    it 'iterate with augmented left full subtree' do
+      tree.insert Node.new 7
+      tree.insert Node.new 3
+      tree.insert Node.new 5
+      tree.insert Node.new 2
+      tree.insert Node.new 9
+      subject
+      expect(keys).to eq [2, 5, 3, 9, 7, 17]
+    end
+
+    it 'iterate with augmented left full subtree' do
+      tree.insert Node.new 7
+      tree.insert Node.new 3
+      tree.insert Node.new 5
+      tree.insert Node.new 2
+      tree.insert Node.new 9
+      tree.insert Node.new 4
+      subject
+      expect(keys).to eq [2, 4, 5, 3, 9, 7, 17]
+    end
+
+    it 'iterate with right full subtree' do
+      tree.insert Node.new 29
+      tree.insert Node.new 43
+      tree.insert Node.new 19
+      subject
+      expect(keys).to eq [19, 43, 29, 17]
+    end
+
+    it 'iterate with left degenerate subtree' do
+      tree.insert Node.new 3
+      tree.insert Node.new 5
+      tree.insert Node.new 7
+      tree.insert Node.new 11
+      subject
+      expect(keys).to eq [11, 7, 5, 3, 17]
+    end
+
+    it 'iterate with right degenerate subtree' do
+      tree.insert Node.new 43
+      tree.insert Node.new 29
+      tree.insert Node.new 23
+      tree.insert Node.new 19
+      subject
+      expect(keys).to eq [19, 23, 29, 43, 17]
+    end
+
+    it 'iterates with larger arbitrary tree' do
+      tree.insert Node.new 7
+      tree.insert Node.new 3
+      tree.insert Node.new 2
+      tree.insert Node.new 5
+      tree.insert Node.new 13
+      tree.insert Node.new 11
+
+      tree.insert Node.new 29
+      tree.insert Node.new 43
+      tree.insert Node.new 23
+      tree.insert Node.new 19
+      subject
+      expect(keys).to eq [2, 5, 3, 11, 13, 7, 19, 23, 43, 29, 17]
+    end
+  end
