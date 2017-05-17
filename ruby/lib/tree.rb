@@ -6,7 +6,7 @@ require 'pry'
 class Tree
   attr_reader :root, :size
 
-  def preorder_walk
+  def preorder_walk &block
     return [] unless root # kludge
     root.pre_order_traverse(&block)
   end

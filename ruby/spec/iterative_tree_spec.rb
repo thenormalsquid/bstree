@@ -3,12 +3,16 @@
 require 'spec_helper'
 require_relative '../lib/iterative_tree'
 require_relative '../lib/node'
+
 require 'shared_examples'
+require 'preorder_shared_examples'
 require 'inorder_shared_examples'
+require 'postorder_shared_examples'
 
 RSpec.describe IterativeTree do
   it_behaves_like 'postorder iteration'
   it_behaves_like 'inorder iterate'
+  it_behaves_like 'preorder iterate'
 
   describe '#find_leaf_node' do
     let(:root) { Node.new 17 }
@@ -185,80 +189,6 @@ RSpec.describe IterativeTree do
           expect(tree.find_unvisited_leaf_node(root)).to eq expected
         end
       end
-    end
-  end
-
-  describe '#preorder_iterate' do
-    let(:root) { Node.new 17 }
-    subject(:tree) { IterativeTree.new root }
-
-    it 'iterates on an empty tree' do
-      tree = IterativeTree.new root
-      tree.delete 17
-      expect(tree.preorder_iterate).to eq []
-    end
-
-    it 'iterates on a single node tree' do
-      tree = IterativeTree.new root
-      expect(tree.preorder_iterate).to eq [17]
-    end
-
-    it 'iterates with left child' do
-      tree.insert Node.new 7
-      expect(tree.preorder_iterate).to eq [17, 7]
-    end
-
-    it 'iterates with right child' do
-      tree.insert Node.new 29
-      expect(tree.preorder_iterate).to eq [17, 29]
-    end
-
-    it 'iterates with left and right children' do
-      tree.insert Node.new 29
-      tree.insert Node.new 7
-      expect(tree.preorder_iterate).to eq [17, 7, 29]
-    end
-
-    it 'iterates with left full subtree' do
-      tree.insert Node.new 7
-      tree.insert Node.new 5
-      tree.insert Node.new 3
-      expect(tree.preorder_iterate).to eq [17, 7, 5, 3]
-    end
-
-    it 'iterates with right full subtree' do
-      tree.insert Node.new 29
-      tree.insert Node.new 43
-      tree.insert Node.new 19
-      expect(tree.preorder_iterate).to eq [17, 29, 19, 43]
-    end
-
-    it 'iterates with degenerate left subtree' do
-      tree.insert Node.new 3
-      tree.insert Node.new 7
-      tree.insert Node.new 11
-      tree.insert Node.new 13
-      expect(tree.preorder_iterate).to eq [17, 3, 7, 11, 13]
-    end
-
-    it 'iterates with degenerate right subtree' do
-      tree.insert Node.new 43
-      tree.insert Node.new 29
-      tree.insert Node.new 23
-      tree.insert Node.new 19
-      expect(tree.preorder_iterate).to eq [17, 43, 29, 23, 19]
-    end
-
-    it 'iterates with larger arbitrary tree' do
-      tree.insert Node.new 7
-      tree.insert Node.new 5
-      tree.insert Node.new 2
-      tree.insert Node.new 3
-      tree.insert Node.new 29
-      tree.insert Node.new 43
-      tree.insert Node.new 23
-      tree.insert Node.new 19
-      expect(tree.preorder_iterate).to eq [17, 7, 5, 2, 3, 29, 23, 19, 43]
     end
   end
 end

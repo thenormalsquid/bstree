@@ -9,7 +9,9 @@ class IterativeTree < Tree
   # class which calls the root node to recurse.
   # So we'll want the following in both this class
   # and the parent class:
-  def preorder_walk; end
+  def preorder_walk &block
+    preorder_iterate(&block)
+  end
 
   def inorder_walk &block
     inorder_iterate(&block)
@@ -55,16 +57,19 @@ class IterativeTree < Tree
   end
 
   def preorder_iterate
-    output = []
-    return output unless root
+    # output = []
+    # return output unless root
+    return unless root
 
     stack = [root]
     current = stack.last
-    output << current.key
+    # output << current.key
+    yield current
 
     until current&.left.nil?
       current = current.left
-      output << current.key
+      # output << current.key
+      yield current
       stack.push current
     end
 
@@ -74,14 +79,16 @@ class IterativeTree < Tree
       unless current&.right.nil?
         current = current.right
         stack.push current
-        output << current.key
+        # output << current.key
+        yield current
         while stack.last&.left
           stack.push stack.last.left
-          output << stack.last.key
+          # output << stack.last.key
+          yield stack.last
         end
       end
     end
-    output.compact
+    # output.compact
   end
 
   def find_leaf_node current

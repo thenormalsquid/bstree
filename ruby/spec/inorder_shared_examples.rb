@@ -1,8 +1,8 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 require_relative '../lib/node'
 
-RSpec.shared_examples "inorder iterate" do
+RSpec.shared_examples 'inorder iterate' do
   describe '#inorder_iterate' do
     let(:root) { Node.new 17 }
     let(:nodes) { [] }
@@ -45,37 +45,29 @@ RSpec.shared_examples "inorder iterate" do
       expect(subject).to eq expected
     end
 
-=begin
     it 'collects node keys for degenerate right tree' do
-      root = Node.new(3)
-      tree = described_class.new root
       tree.insert Node.new(7)
-      tree.insert Node.new(17)
+      tree.insert Node.new(3)
       tree.insert Node.new(77)
-      expect(tree.size).to eq 4
       expected = [3, 7, 17, 77]
       expect(tree.collect([])).to eq expected
       expect(tree.list_keys).to eq expected
-      expect(tree.inorder_iterate).to eq expected
+      expect(subject).to eq expected
     end
 
     it 'collects node keys' do
-      node = Node.new(1)
-      tree = described_class.new node
       tree.insert Node.new(14)
       tree.insert Node.new(4)
       tree.insert Node.new(23)
       tree.insert Node.new(5)
       tree.insert Node.new(99)
-      expect(tree.size).to eq 6
-      expect(tree.collect([])).to eq [1, 4, 5, 14, 23, 99]
-      expect(tree.list_keys).to eq [1, 4, 5, 14, 23, 99]
-      expect(tree.inorder_iterate).to eq [1, 4, 5, 14, 23, 99]
+      expected = [4, 5, 14, 17, 23, 99]
+      expect(tree.collect([])).to eq expected
+      expect(tree.list_keys).to eq expected
+      expect(subject).to eq expected
     end
 
     it 'iterates successfully' do
-      root = Node.new(25)
-      tree = described_class.new root
       tree.insert Node.new 43
       tree.insert Node.new 8
       tree.insert Node.new 10
@@ -83,13 +75,10 @@ RSpec.shared_examples "inorder iterate" do
       tree.insert Node.new 33
       tree.insert Node.new 97
       tree.insert Node.new 4
-      expect(tree.size).to eq 8
-      expected = [4, 8, 10, 15, 25, 33, 43, 97]
+      expected = [4, 8, 10, 15, 17, 33, 43, 97]
       expect(tree.collect([])).to eq expected
       expect(tree.list_keys).to eq expected
-      expect(tree.inorder_iterate).to eq expected
+      expect(subject).to eq expected
     end
-=end
   end
 end
-
