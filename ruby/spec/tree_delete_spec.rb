@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative '../lib/tree.rb'
 require_relative '../lib/node.rb'
 

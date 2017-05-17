@@ -9,8 +9,8 @@ require_relative './nodes'
 require 'pry'
 
 describe Node do
-  it_inserts_like "insertion"
-  it_finds_extremes "extreme elements"
+  it_inserts_like 'insertion'
+  it_finds_extremes 'extreme elements'
 
   describe '#list_keys' do
     example 'from single node' do

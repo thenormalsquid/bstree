@@ -3,12 +3,12 @@
 require_relative '../lib/tree.rb'
 require_relative '../lib/node.rb'
 
-describe Tree do
-  describe '#new' do
-    it 'instantiates correctly' do
-      expect(Tree.new).not_to be_nil
-    end
+require 'shared_examples'
 
+describe Tree do
+  it_behaves_like 'postorder iteration'
+
+  describe '#new' do
     it 'instantiates a root node' do
       node = Node.new
       expect(tree = Tree.new(node)).not_to be_nil

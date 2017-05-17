@@ -91,19 +91,14 @@ class IterativeTree < Tree
   end
 
   def postorder_iterate &block
-    # output = []
-    # return output unless root
     return unless root
 
     current = find_unvisited_leaf_node root
-    # output << current.key
-    block.call(current.key)
+    yield current
 
     while current.has_parent?
       current = find_unvisited_leaf_node current.parent
-      # output << current.key
-      block.call(current.key)
+      yield current
     end
-    # output
   end
 end
