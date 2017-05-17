@@ -2,11 +2,6 @@
 
 require 'spec_helper'
 
-RSpec.configure do |c|
-  c.alias_it_should_behave_like_to :it_inserts_like, ''
-  c.alias_it_should_behave_like_to :it_finds_extremes, ''
-end
-
 RSpec.shared_examples 'insertion' do
   let(:root) { described_class.new 17 }
 

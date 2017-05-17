@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'postorder iteration' do
+RSpec.shared_examples '#postorder_walk' do
   let(:root) { Node.new 17 }
   let(:nodes) { [] }
   let(:tree) { described_class.new root }

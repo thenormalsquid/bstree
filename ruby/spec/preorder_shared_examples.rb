@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-require_relative '../lib/node'
-
-RSpec.shared_examples 'preorder iterate' do
+RSpec.shared_examples '#preorder_walk' do
   describe '#preorder_iterate' do
     let(:root) { Node.new 17 }
     let(:nodes) { [] }
