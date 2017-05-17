@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative '../lib/avl_node'
 
 describe AvlNode do

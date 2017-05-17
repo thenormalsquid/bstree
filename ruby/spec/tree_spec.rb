@@ -4,9 +4,14 @@ require_relative '../lib/tree.rb'
 require_relative '../lib/node.rb'
 
 require 'shared_examples'
+require 'preorder_shared_examples'
+require 'inorder_shared_examples'
+require 'postorder_shared_examples'
 
 describe Tree do
-  it_behaves_like 'postorder iteration'
+  it_traverses_with '#postorder_walk'
+  it_traverses_with '#inorder_walk'
+  it_traverses_with '#preorder_walk'
 
   describe '#new' do
     it 'instantiates a root node' do

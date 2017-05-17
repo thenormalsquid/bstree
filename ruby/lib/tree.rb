@@ -6,12 +6,19 @@ require 'pry'
 class Tree
   attr_reader :root, :size
 
-  def preorder_walk; end
-  def inorder_walk; end
+  def preorder_walk
+    return unless root
+    root.pre_order_traverse(&Proc.new)
+  end
 
-  def postorder_walk &block
-    return [] unless root # kludge
-    root.post_order_traverse(&block)
+  def inorder_walk
+    return unless root
+    root.in_order_traverse(&Proc.new)
+  end
+
+  def postorder_walk
+    return unless root
+    root.post_order_traverse(&Proc.new)
   end
 
   def initialize node = nil
