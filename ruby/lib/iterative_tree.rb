@@ -10,7 +10,10 @@ class IterativeTree < Tree
   # So we'll want the following in both this class
   # and the parent class:
   def preorder_walk; end
-  def inorder_walk; end
+
+  def inorder_walk &block
+    inorder_iterate(&block)
+  end
 
   def postorder_walk &block
     postorder_iterate(&block)
@@ -22,20 +25,33 @@ class IterativeTree < Tree
   # TODO: implement inorder_iterate without a stack,
   # using pointer equality.
   def inorder_iterate
-    output = []
+    # output = []
     stack = [root]
 
     stack << stack.last.left while stack.last&.left
 
     until stack.empty?
       current = stack.pop
-      output << current&.key
+      # output << current&.key
+      yield current
       next unless current&.right
 
       stack << current.right
       stack << stack.last.left while stack.last&.left
     end
-    output.compact
+    # output.compact
+  end
+
+  def postorder_iterate &block
+    return unless root
+
+    current = find_unvisited_leaf_node root
+    yield current
+
+    while current.has_parent?
+      current = find_unvisited_leaf_node current.parent
+      yield current
+    end
   end
 
   def preorder_iterate
@@ -88,17 +104,5 @@ class IterativeTree < Tree
       end
     end
     current.visit
-  end
-
-  def postorder_iterate &block
-    return unless root
-
-    current = find_unvisited_leaf_node root
-    yield current
-
-    while current.has_parent?
-      current = find_unvisited_leaf_node current.parent
-      yield current
-    end
   end
 end
