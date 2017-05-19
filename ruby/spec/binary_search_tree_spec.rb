@@ -4,43 +4,39 @@ require_relative './spec_helper'
 
 require_relative '../lib/binary_search_tree'
 
-describe BinarySearchTree do
-  class Foo
-    require 'securerandom'
-    include BinarySearchTree
-    attr_reader :key, :uuid
+require 'shared_examples/successor'
+require 'shared_examples/predecessor'
 
-    def initialize key
-      @key = key
-      @uuid = SecureRandom.uuid
-    end
+class Foo
+  require 'securerandom'
+  include BinarySearchTree
+  attr_reader :key, :uuid
 
-    def < other
-      @key < other.key
-    end
-
-    def >= other
-      @key >= other.key
-    end
-
-    def > other
-      @key > other.key
-    end
-
-    def <= other
-      @key <= other.key
-    end
+  def initialize key
+    @key = key
+    @uuid = SecureRandom.uuid
   end
 
-  before :each do
-    @bst = Class.new do
-      extend BinarySearchTree
-    end
+  def < other
+    @key < other.key
   end
 
-  it 'instantiates included in a class' do
-    expect(@bst).to_not be nil
+  def >= other
+    @key >= other.key
   end
+
+  def > other
+    @key > other.key
+  end
+
+  def <= other
+    @key <= other.key
+  end
+end
+
+describe Foo do
+  it_finds '#successor'
+  it_finds '#predecessor'
 
   describe 'algorithm methods' do
     let(:expected) { [2, 3, 5, 7, 11, 13, 23, 29] }
@@ -323,81 +319,6 @@ describe BinarySearchTree do
     describe '.minimum' do
       it 'finds the node with the smallest key' do
         expect(@root.minimum).to eq @foo2
-      end
-    end
-
-    describe '.successor and .predecessor' do
-      let(:root) { Foo.new 17 }
-      let(:n5) { Foo.new 5 }
-      let(:n23) { Foo.new 23 }
-      let(:n2) { Foo.new 2 }
-      let(:n3) { Foo.new 3 }
-      let(:n7) { Foo.new 7 }
-      let(:n11) { Foo.new 11 }
-      let(:n13) { Foo.new 13 }
-      let(:n19) { Foo.new 19 }
-      let(:n29) { Foo.new 29 }
-
-      before do
-        root.insert n5
-        root.insert n23
-        root.insert n7
-        root.insert n11
-        root.insert n13
-        root.insert n3
-        root.insert n2
-        root.insert n19
-        root.insert n29
-      end
-
-      describe '.predecessor' do
-        it 'finds predecessor around root' do
-          expect(root.predecessor(root)).to eq n13
-          expect(root.predecessor(n19)).to eq root
-        end
-
-        it 'predecessors down left side' do
-          expect(root.predecessor(n2)).to eq n2
-          expect(root.predecessor(n3)).to eq n2
-          expect(root.predecessor(n5)).to eq n3
-          expect(root.predecessor(n7)).to eq n5
-          expect(root.predecessor(n11)).to eq n7
-          expect(root.predecessor(n13)).to eq n11
-        end
-
-        it 'predecessors down right side' do
-          expect(root.predecessor(n29)).to eq n23
-          expect(root.predecessor(n23)).to eq n19
-          expect(n23.predecessor(n23)).to eq n19
-          expect(n19.predecessor(n19)).to eq n19
-        end
-      end
-
-      describe '.successor' do
-        it 'successors to root and right side' do
-          expect(root.successor(root)).to eq n19
-          expect(n23.successor(n23)).to eq n29
-          expect(n19.successor(n19)).to eq n19
-          expect(root.successor(n19)).to eq n23
-          expect(root.successor(n23)).to eq n29
-        end
-
-        it 'root is successor to left child' do
-          expect(root.successor(n5)).to eq n7
-          expect(n5.successor(n5)).to eq n7
-        end
-
-        it 'works down the left side' do
-          expect(root.successor(n3)).to eq n5
-          expect(root.successor(n2)).to eq n3
-        end
-
-        it 'finds a deep left right node' do
-          expect(root.successor(n7)).to be n11
-          expect(root.successor(n11)).to be n13
-          expect(n13.successor(n13)).to be n13
-          expect(root.successor(n13)).to be root
-        end
       end
     end
 

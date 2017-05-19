@@ -13,9 +13,17 @@ describe Tree do
   it_traverses_with '#inorder_walk'
   it_traverses_with '#preorder_walk'
 
+  let(:node_class) { Tree::NODE_CLASS }
+
+  describe '::NODE_CLASS' do
+    it 'returns Node' do
+      expect(Tree::NODE_CLASS).to eq Node
+    end
+  end
+
   describe '#new' do
     it 'instantiates a root node' do
-      node = Node.new
+      node = node_class.new
       expect(tree = Tree.new(node)).not_to be_nil
       expect(tree.root).to eq node
     end
@@ -23,13 +31,13 @@ describe Tree do
 
   describe '#size' do
     it 'inserts a node to the tree with existing root' do
-      node = Node.new(1)
+      node = node_class.new(1)
       tree = Tree.new node
-      node2 = Node.new(2)
+      node2 = node_class.new(2)
       tree.insert node2
       expect(tree.size).to eq 2
 
-      node3 = Node.new(3)
+      node3 = node_class.new(3)
       tree.insert node3
       expect(tree.size).to eq 3
     end
@@ -37,7 +45,7 @@ describe Tree do
 
   describe '#empty?' do
     it 'returns false when root node is present' do
-      root = Node.new 17
+      root = node_class.new 17
       tree = Tree.new root
       expect(tree.empty?).to be false
     end
@@ -56,17 +64,17 @@ describe Tree do
 
   describe 'tree structure' do
     it 'inserts a node to the tree with existing root' do
-      node = Node.new(10)
+      node = node_class.new(10)
       tree = Tree.new node
-      tree.insert Node.new(2)
+      tree.insert node_class.new(2)
       expect(tree.size).to eq 2
       expect(tree.root.left.key).to eq 2
 
-      tree.insert Node.new(33)
+      tree.insert node_class.new(33)
       expect(tree.size).to eq 3
       expect(tree.root.right.key).to eq 33
 
-      tree.insert Node.new(23)
+      tree.insert node_class.new(23)
       expect(tree.size).to eq 4
       expect(tree.root.right.left.key).to eq 23
     end
@@ -76,7 +84,7 @@ describe Tree do
     it 'finds successor to root node' do
       root = Node.new 13
       tree = Tree.new root
-      expect(tree.successor(root)).to be root
+      expect(tree.successor(root)).to be nil
     end
   end
 
@@ -84,7 +92,7 @@ describe Tree do
     it 'finds predecessor to root node' do
       root = Node.new 17
       tree = Tree.new root
-      expect(tree.predecessor(root)).to eq root
+      expect(tree.predecessor(root)).to eq nil
     end
   end
 
