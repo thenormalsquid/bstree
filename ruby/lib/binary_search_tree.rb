@@ -30,6 +30,7 @@ module BinarySearchTree
   end
 
   def successor node
+    return nil if node == self.maximum
     get_successor node, self, node
   end
 
@@ -45,6 +46,7 @@ module BinarySearchTree
   end
 
   def predecessor node
+    return nil if node == self.minimum
     get_predecessor node, self, node
   end
 
@@ -116,7 +118,7 @@ module BinarySearchTree
     dig(key) { |n| return true if n.key == key }
   end
 
-  # Also see CLR Chapter 14, p. 245
+  # Also see CLR Chapter 13, p. 245
   def bst?
     minimum = -1000
     in_order_traverse do |node|

@@ -1,6 +1,9 @@
 require 'tree'
+require 'iterative_node'
 
 class IterativeTree < Tree
+  NODE_CLASS = IterativeNode
+
   def preorder_walk
     preorder_iterate(&Proc.new)
   end

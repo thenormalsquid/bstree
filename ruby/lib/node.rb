@@ -69,6 +69,7 @@ class Node
   end
 
   def predecessor node
+    return nil if node == self.minimum # yuck
     get_predecessor node, self, node
   end
 
@@ -84,15 +85,17 @@ class Node
   end
 
   def successor node
+    # Horrible, horrible kludge
+    return nil if node == self.maximum
     get_successor node, self, node
-  end
-
-  def self.max l, r
-    l > r ? l : r
   end
 
   def visited?
     @visited
+  end
+
+  def self.max l, r
+    l > r ? l : r
   end
 
   def height

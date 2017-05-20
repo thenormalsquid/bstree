@@ -6,6 +6,8 @@ require 'pry'
 class Tree
   attr_reader :root, :size
 
+  NODE_CLASS = Node
+
   def preorder_walk
     return unless root
     root.pre_order_traverse(&Proc.new)
@@ -22,7 +24,11 @@ class Tree
   end
 
   def initialize node = nil
-    @root = node ? node : Node.new
+    # TODO: find out why both versions pass all
+    # the specs. That's bad. One should pass,
+    # the other fail.
+    # @root = node ? node : NODE_CLASS
+    @root = node ? node : NODE_CLASS.new
     @size = 1
   end
 
@@ -159,7 +165,8 @@ class Tree
   end
 
   def self.from_hash hash
-    Tree.new(Node.build_from_hash(hash))
+    # Tree.new(Node.build_from_hash(hash))
+    Tree.new(NODE_CLASS.build_from_hash(hash))
   end
 
   def get_next_row current_row
