@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module BinarySearchTree
   attr_accessor :left, :right
 
@@ -30,7 +31,7 @@ module BinarySearchTree
   end
 
   def successor node
-    return nil if node == self.maximum
+    return nil if node == maximum
     get_successor node, self, node
   end
 
@@ -46,7 +47,7 @@ module BinarySearchTree
   end
 
   def predecessor node
-    return nil if node == self.minimum
+    return nil if node == minimum
     get_predecessor node, self, node
   end
 

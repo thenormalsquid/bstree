@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tree'
 require 'iterative_node'
 
@@ -32,7 +34,7 @@ class IterativeTree < Tree
     end
   end
 
-  def postorder_iterate &block
+  def postorder_iterate
     return unless root
 
     current = find_unvisited_leaf_node root
@@ -60,14 +62,13 @@ class IterativeTree < Tree
     until stack.empty?
       current = stack.pop
 
-      unless current&.right.nil?
-        current = current.right
-        stack.push current
-        yield current
-        while stack.last&.left
-          stack.push stack.last.left
-          yield stack.last
-        end
+      next if current&.right.nil?
+      current = current.right
+      stack.push current
+      yield current
+      while stack.last&.left
+        stack.push stack.last.left
+        yield stack.last
       end
     end
   end

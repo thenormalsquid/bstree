@@ -69,7 +69,7 @@ class Node
   end
 
   def predecessor node
-    return nil if node == self.minimum # yuck
+    return nil if node == minimum # yuck
     get_predecessor node, self, node
   end
 
@@ -86,7 +86,7 @@ class Node
 
   def successor node
     # Horrible, horrible kludge
-    return nil if node == self.maximum
+    return nil if node == maximum
     get_successor node, self, node
   end
 
