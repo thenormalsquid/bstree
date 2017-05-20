@@ -21,8 +21,7 @@ class IterativeTree < Tree
   # TODO: implement inorder_iterate without a stack,
   # using pointer equality.
   def inorder_iterate
-    stack = [root]
-    stack << stack.last.left while stack.last&.left
+    stack = stack_left
 
     until stack.empty?
       current = stack.pop
@@ -30,7 +29,9 @@ class IterativeTree < Tree
       next unless current&.right
 
       stack << current.right
-      stack << stack.last.left while stack.last&.left
+      # TODO: what's the penalty for this in termsn
+      # of object creation?
+      stack = stack_left(stack)
     end
   end
 
@@ -46,6 +47,8 @@ class IterativeTree < Tree
     end
   end
 
+  # TODO: refactor this into something spiffy looking
+  # like postorder_iterate.
   def preorder_iterate
     return unless root
 
@@ -93,5 +96,12 @@ class IterativeTree < Tree
       end
     end
     current.visit
+  end
+
+  private
+
+  def stack_left stack = [root]
+    stack << stack.last.left while stack.last&.left
+    stack
   end
 end
