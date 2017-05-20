@@ -75,17 +75,6 @@ Two main ideas:
 \item intrinsic properties of BSTs.
 \end{enumerate}
 
-Operations include:
-
-\begin{itemize}
-\item insert node
-\item depth-first search
-\item breadth-first search
-\item node presence
-\item delete node
-\item node successor and predecessor
-\end{itemize}
-
 Properties include:
 
 \begin{itemize}
@@ -98,11 +87,94 @@ Properties include:
 \item class (full, perfect, complete, balanced, etc.)
 \end{itemize}
 
+Operations include:
 
-\subsection{Operating on the BST}
+\begin{itemize}
+\item insert node
+\item depth-first search
+\item breadth-first search
+\item node presence
+\item delete node
+\item node successor and predecessor
+\end{itemize}
+
+\section{Properties of BST}
+
+\subsection{Structural uniqueness of binary search tree}
+
+Hypothesis: each different preorder traverse of a binary search
+tree corresponds to a unique binary search tree. In other words,
+every structurally unique binary search
+tree has a unique preorder traverse.
+
+I think this is true.
+
+If it is true, it provides an easy to compare binary
+search trees, just compare the result of an inorder
+traverse, or define a function which compare nodes in
+parallel during an inorder traverse of each.
+
+Keys are assumed to be unique.
+
+\subsection{Height}
+
+\subsection{Depth}
+
+\subsection{Size}
+
+\subsection{Diameter}
+
+\subsection{Class}
+
+Binary search trees may be classified according to the
+arrangement of the leaves and internal nodes.
+
+Binary search tree classifications include
+full, perfect, complete, balanced, unbalanced, and degenerate.
+
+\subsection{Maximum and minimum keys}
+
+\setcounter{sno}{0}
+
+\sno Maximum and minimum elements of binary search trees are probably the easiest
+algorithms to both understand and implement. \sno The maximum is the right-most
+node, the minimum the left-most, finding either means traversing the tree
+to the appropriate leaf, and returning that node which has no children.
+
+\sno The maximum function written in Ruby is particularly elegant,
+we take advantage of Ruby's safe navigation operator {\tt \&}:
+
+\lstset{language={Ruby}}
+\begin{lstlisting}[frame=none]
+def maximum:
+  right&.maximum || self
+end
+\end{lstlisting}
 
 
-\subsubsection{Successor and predecessor}
+\section{Building a binary search tree}
+
+\subsection{Collisions or duplicate values}O
+
+
+None the preceding references explicitly discuss collisions.
+
+\begin{itemize}
+\item The duplicate key can be added to the tree, either silently or with a warning.
+\item The duplicate key is not added to the tree, either silently or with a warning.
+
+\item In Ruby, does replacing a node in a tree leak memory, or will the deleted node
+get garbage collected? How about Python?
+
+\item How to delete in c/c++ such that memory isn't leaked? This should be easier,
+call delete after the node is orphaned.
+\end{itemize}
+
+
+\section{Operating on the BST}
+
+
+\subsection{Successor and predecessor}
 
 \setcounter{sno}{0}
 
@@ -149,58 +221,6 @@ def predecessor(self, node):
 maximum where predecessor finds the minimum.
 
 
-\subsection{Properties of BST}
-
-
-\subsubsection{Maximum and minimum}
-
-\setcounter{sno}{0}
-
-\sno Maximum and minimum elements of binary search trees are probably the easiest
-algorithms to both understand and implement. \sno The maximum is the right-most
-node, the minimum the left-most, finding either means traversing the tree
-to the appropriate leaf, and returning that node which has no children.
-
-\sno The maximum function written in Ruby is particularly elegant,
-we take advantage of Ruby 2.3.x's ``safe navigation'' operator {\tt \&}:
-\lstset{language={Ruby}}
-\begin{lstlisting}[frame=single]
-def maximum:
-  self&.maximum || self
-end
-\end{lstlisting}
-
-\subsection{Collisions or duplicate values}
-
-None the preceding references explicitly discuss collisions.
-
-\begin{itemize}
-\item The duplicate key can be added to the tree, either silently or with a warning.
-\item The duplicate key is not added to the tree, either silently or with a warning.
-
-\item In Ruby, does replacing a node in a tree leak memory, or will the deleted node
-get garbage collected? How about Python?
-
-\item How to delete in c/c++ such that memory isn't leaked? This should be easier,
-call delete after the node is orphaned.
-\end{itemize}
-
-\section{Persistence}
-
-Here are some ways to store the structure in text format:
-
-\begin{enumerate}
-\item Write to nested json. This requires writing out from the top
-down. Should be able to do this by converting to hash, then
-writing to json. Reading in is the reverse. How to convert a
-hash to a binary tree? Maybe this is where to use combinator.
-
-\item CSV: does this require top down, or can it be done by traversing?
-Does it require a parent pointer?
-
-\item Yaml: how are references handled?
-\end{enumerate}
-
 
 \section{Breadth-first traversal}
 
@@ -224,7 +244,6 @@ For persistence, we have the following:
 
 Can all the pointers be stored in one pass, then process in a second pass,
 or can the nodes be processes as the breadth-first traverse proceeds?
-
 
 
 \section{Containerizing}
@@ -295,6 +314,23 @@ including class.
 
 The usual caveats about instance variables referenced in modules applies,
 particularly that the including class must define the key for the tree.
+
+\section{Persistence}
+
+Here are some ways to store the structure in text format:
+
+\begin{enumerate}
+\item Write to nested json. This requires writing out from the top
+down. Should be able to do this by converting to hash, then
+writing to json. Reading in is the reverse. How to convert a
+hash to a binary tree? Maybe this is where to use combinator.
+
+\item CSV: does this require top down, or can it be done by traversing?
+Does it require a parent pointer?
+
+\item Yaml: how are references handled?
+\end{enumerate}
+
 
 \section{Summary}
 
@@ -530,7 +566,7 @@ deletion, and approximately retaining the tree's balance by using the deleted
 node's successor.
 
 However, it assumes that the node to delete is
-given (rather than providing a key and serching for the node), and that
+given (rather than providing a key and searching for the node), and that
 each node other than the root node has a link to its parent node.
 Also, copying data such as the kay and whatever value(s) are associated
 with the node is required. The number if {\tt if} statements also make
