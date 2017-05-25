@@ -17,6 +17,19 @@ class TestNode(unittest.TestCase):
         node = Node(15)
         assert node.left is None
         assert node.right is None
+        assert node.is_visited() is False
+
+    def test_is_visited(self):
+        node = Node(17)
+        assert node.is_visited() is False
+        node.visited = True
+        assert node.is_visited() is True
+
+    def test_is_unvisited(self):
+        node = Node(17)
+        assert node.is_unvisited() is True
+        node.visited = True
+        assert node.is_unvisited() is False
 
     def test_collect(self):
         node = Node(15)
