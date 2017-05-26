@@ -1,6 +1,7 @@
 class Node(object):
     def __init__(self, key):
         self.key = key
+        self.visited = False
         self.left = None
         self.right = None
         # p is pointer to parent node. The goal of this class is
@@ -12,6 +13,15 @@ class Node(object):
         # elmininated from this class.
         # UPDATE: changing, s/p/parent/ for better readability.
         self.parent = None
+
+    def visit(self):
+        self.visited = True
+
+    def is_visited(self):
+        return self.visited
+
+    def is_unvisited(self):
+        return not self.is_visited()
 
     def max(self, left, right):
         if left > right:

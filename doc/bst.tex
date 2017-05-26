@@ -98,6 +98,13 @@ Operations include:
 \item node successor and predecessor
 \end{itemize}
 
+Node properties include:
+
+\begin{itemize}
+  \item visited and unvisited
+  \item has unvisited children
+\end{itemize}
+
 \section{Properties of BST}
 
 \subsection{Structural uniqueness of binary search tree}
@@ -220,7 +227,46 @@ def predecessor(self, node):
 \sno Implementing {\tt successor} is easy, use right for left, and find the
 maximum where predecessor finds the minimum.
 
+\subsection{Unvisit}
 
+An \method{Unvisit} method needs to be implemented to ensure that once the
+necessity for evaluating nodes for visited state has passed, all
+the nodes in the tree can be reset to \attribute{visited = false}, allowing
+future operations to proceed correctly. Implementation is easy,
+simply pass a callback to any of the tree traversal functions which
+sets \attribute{visited = false}.
+
+
+\section{Properties of nodes}
+
+Trees and nodes aren't the same thing, there is a logical separation.
+That said, the behavior of the tree sometimes depends on the state of the
+node.
+
+\subsection{Visited and unvisited state}
+
+When we visit a node during a walk or traverse of a tree, it might be
+useful to mark whether the node has been visited. This is important, for
+example, when performing depth-first searching, where the ``cursor'' has
+to backtrack. The following methods help make the implementation easy
+to understand:
+
+\begin{itemize}
+  \item \method{Visit} sets the node attribute \attribute{visited = true}.
+  \item \method{Is\_Visited} (or \method{Visited?}) replies with the boolean
+    state of the node, true when the \attribute{visited} is set.
+  \item \method{Is\_Unvisited} (or \method{Unvisited?} is the default state
+      of each node.
+\end{itemize}
+
+\subsubsection{Test cases for \method{Visited?} and \method{Unvisited?}}
+
+Testing is almost superfluous. For TDD, the tests can be set up
+to verify that setting and unsetting the visited state is correctly
+performed. Later, these tests could be removed and the visited and
+unvisited helper methods moved to private methods.
+
+\subsection{\method{has\_unvisited\_children}}
 
 \section{Breadth-first traversal}
 

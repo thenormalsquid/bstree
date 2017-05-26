@@ -22,13 +22,13 @@ class TestNode(unittest.TestCase):
     def test_is_visited(self):
         node = Node(17)
         assert node.is_visited() is False
-        node.visited = True
+        node.visit()
         assert node.is_visited() is True
 
     def test_is_unvisited(self):
         node = Node(17)
         assert node.is_unvisited() is True
-        node.visited = True
+        node.visit()
         assert node.is_unvisited() is False
 
     def test_collect(self):
