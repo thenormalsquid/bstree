@@ -1,29 +1,111 @@
 # frozen_string_literal: true
 
+require 'pry'
 require_relative '../lib/avl_node'
 
 describe AvlNode do
-  describe '.insert' do
-    let(:root) { AvlNode.new 11 }
-    let(:n3) { AvlNode.new 3 }
-    let(:n5) { AvlNode.new(5) }
-    let(:n7) { AvlNode.new 7 }
-    let(:n11) { AvlNode.new 11 }
-    let(:n13) { AvlNode.new 13 }
-    let(:n17) { AvlNode.new 17 }
-    let(:n19) { AvlNode.new 19 }
+  describe '.balanced?' do
+    let(:root) { described_class.new 17 }
+    let(:node2) { described_class.new 2 }
+    let(:node5) { described_class.new 5 }
+    let(:node7) { described_class.new 7 }
+    let(:node11) { described_class.new 11 }
+    let(:node19) { described_class.new 19 }
+    let(:node29) { described_class.new 29 }
+    let(:node43) { described_class.new 43 }
 
-    it 'returns current root on insertion'
+    it 'is true for node with 0 children' do
+      expect(root.balanced?).to be true
+      expect(root.weight).to eq 0
+    end
 
-    it 'inserts a node and balances' do
-      n11.insert n5
-      expect(n5.balanced?).to be true
-      expect(n5.weight).to be 0
+    it 'is true for a node with only left child' do
+      root.insert node7
+      expect(root.balanced?).to be true
+      expect(root.weight).to eq(-1)
+    end
+
+    it 'is true for a node with only right child' do
+      root.insert node29
+      expect(root.balanced?).to be true
+      expect(root.weight).to eq 1
+    end
+
+    it 'is true for node with left child and right child' do
+      root.insert node7
+      root.insert node29
+      expect(root.balanced?).to be true
+      expect(root.weight).to eq 0
+    end
+
+    it 'is false for node with left chain' do
+      root.insert node7
+      root.insert node2
+      expect(root.balanced?).to be false
+      expect(root.weight).to eq(-2)
+      expect(node7.weight).to eq(-1)
+    end
+
+    it 'is false for node with left knee' do
+      root.insert node7
+      root.insert node11
+      expect(root.balanced?).to be false
+      expect(root.weight).to eq(-2)
+      expect(node7.weight).to eq(1)
+      expect(root.left.weight).to eq(1)
+    end
+
+    it 'is false for node with right chain' do
+      root.insert node29
+      root.insert node43
+      expect(root.balanced?).to be false
+      expect(root.weight).to eq 2
+      expect(node29.weight).to eq 1
+    end
+
+    it 'is false for node with right knee' do
+      root.insert node29
+      root.insert node19
+      expect(root.balanced?).to be false
+      expect(root.weight).to eq 2
+      expect(node29.weight).to eq(-1)
+      expect(root.right.weight).to eq(-1)
+    end
+
+    it 'is true for tree with left bell' do
+      root.insert node29
+      root.insert node7
+      root.insert node11
+      root.insert node5
+      expect(root.balanced?).to be true
+      expect(root.weight).to eq(-1)
+    end
+
+    it 'is true for tree with right bell' do
+      root.insert node7
+      root.insert node29
+      root.insert node19
+      root.insert node43
+      expect(root.balanced?).to be true
+      expect(root.weight).to eq(1)
+    end
+
+    it 'is true for right and left chain at root' do
+      root.insert node7
+      root.insert node19
+      root.insert node5
+      root.insert node29
+      root.insert node2
+      root.insert node43
+      expect(root.balanced?).to be true
+      expect(root.weight).to eq(0)
     end
   end
 
+  # TODO: figure out what the actual methods are, then
+  # work out the method names here for the describe blocks.
   describe 'rotations' do
-    it 'rotates counterclockwise with 3 nodes right' do
+    it 'rotates counterclockwise with 3 nodes right chain' do
       root = AvlNode.new 17
       n23 = AvlNode.new 23
       n29 = AvlNode.new 29
@@ -36,7 +118,7 @@ describe AvlNode do
       expect(n23.size).to eq 3
     end
 
-    it 'rotates clockwise with 3 nodes left' do
+    it 'rotates clockwise with 3 nodes left chain' do
       root = AvlNode.new 11
       n5 = AvlNode.new 5
       n3 = AvlNode.new 3
@@ -81,6 +163,25 @@ describe AvlNode do
       expect(n17.left).to eq root
       expect(root.right).to eq n13
       expect(n17.size).to eq 5
+    end
+  end
+
+  describe '.insert' do
+    let(:root) { AvlNode.new 11 }
+    let(:n3) { AvlNode.new 3 }
+    let(:n5) { AvlNode.new(5) }
+    let(:n7) { AvlNode.new 7 }
+    let(:n11) { AvlNode.new 11 }
+    let(:n13) { AvlNode.new 13 }
+    let(:n17) { AvlNode.new 17 }
+    let(:n19) { AvlNode.new 19 }
+
+    it 'returns current root on insertion'
+
+    it 'inserts a node and balances' do
+      n11.insert n5
+      expect(n5.balanced?).to be true
+      expect(n5.weight).to be 0
     end
   end
 

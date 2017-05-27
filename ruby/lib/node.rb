@@ -141,15 +141,6 @@ class Node
     key < @key ? left&.present?(key) : right&.present?(key)
   end
 
-  def balanced?
-    left_height = left&.height || 0
-    right_height = right&.height || 0
-    return false unless [-1, 0, 1].include?(left_height - right_height)
-    left&.balanced?
-    right&.balanced?
-    true
-  end
-
   def full?
     return true if left.nil? && right.nil?
     left&.full? && right&.full? || false # returns nil instead of false, why?
