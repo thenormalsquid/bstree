@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-require 'pry'
+require 'spec_helper'
+
 require_relative '../lib/avl_node'
 
 describe AvlNode do
-  describe '.balanced?' do
+  describe '#balanced?' do
     let(:root) { described_class.new 17 }
     let(:node2) { described_class.new 2 }
     let(:node5) { described_class.new 5 }
@@ -102,13 +103,54 @@ describe AvlNode do
     end
   end
 
+  context 'rotate' do
+    let(:root) { described_class.new 17 }
+    let(:n7) { described_class.new 7 }
+    let(:n5) { described_class.new 5 }
+    let(:n19) { described_class.new 19 }
+    let(:n23) { described_class.new 23 }
+
+    describe '#simple_left' do
+      context 'right chain' do
+        it 'moves the root node to left child' do
+          root.insert n19
+          root.insert n23
+          root.simple_left
+          expected = [19, 17, 23]
+          actual = n19.preorder_collect
+          expect(actual).to eq expected
+        end
+      end
+
+      context 'right knee' do
+      end
+    end
+
+    describe '#simple_right' do
+      context 'left chain' do
+        it 'moves the root node to right child' do
+          root.insert n7
+          root.insert n5
+          expected = [7, 5, 17]
+          root.simple_right
+          actual = n7.preorder_collect
+          expect(actual).to eq expected
+        end
+      end
+
+      context 'left knee' do
+      end
+    end
+  end
+
+
   # TODO: figure out what the actual methods are, then
   # work out the method names here for the describe blocks.
   describe 'rotations' do
     it 'rotates counterclockwise with 3 nodes right chain' do
-      root = AvlNode.new 17
-      n23 = AvlNode.new 23
-      n29 = AvlNode.new 29
+      root = described_class.new 17
+      n23 = described_class.new 23
+      n29 = described_class.new 29
       root.insert n23
       root.insert n29
 
@@ -119,9 +161,9 @@ describe AvlNode do
     end
 
     it 'rotates clockwise with 3 nodes left chain' do
-      root = AvlNode.new 11
-      n5 = AvlNode.new 5
-      n3 = AvlNode.new 3
+      root = described_class.new 11
+      n5 = described_class.new 5
+      n3 = described_class.new 3
       root.insert n5
       root.insert n3
       root.rotate_cw
@@ -131,13 +173,13 @@ describe AvlNode do
     end
 
     it 'rotates clockwise' do
-      root = AvlNode.new 17
-      n23 = AvlNode.new 23
+      root = described_class.new 17
+      n23 = described_class.new 23
       root.insert n23
 
-      n11 = AvlNode.new 11
-      n13 = AvlNode.new 13
-      n7 = AvlNode.new 7
+      n11 = described_class.new 11
+      n13 = described_class.new 13
+      n7 = described_class.new 7
       root.insert n11
       root.insert n13
       root.insert n7
@@ -149,12 +191,12 @@ describe AvlNode do
     end
 
     it 'rotates counterclockwise' do
-      root = AvlNode.new 11
-      n7 = AvlNode.new 7
+      root = described_class.new 11
+      n7 = described_class.new 7
       root.insert n7
-      n17 = AvlNode.new 17
-      n13 = AvlNode.new 13
-      n23 = AvlNode.new 23
+      n17 = described_class.new 17
+      n13 = described_class.new 13
+      n23 = described_class.new 23
       root.insert n17
       root.insert n13
       root.insert n23
@@ -167,14 +209,14 @@ describe AvlNode do
   end
 
   describe '.insert' do
-    let(:root) { AvlNode.new 11 }
-    let(:n3) { AvlNode.new 3 }
-    let(:n5) { AvlNode.new(5) }
-    let(:n7) { AvlNode.new 7 }
-    let(:n11) { AvlNode.new 11 }
-    let(:n13) { AvlNode.new 13 }
-    let(:n17) { AvlNode.new 17 }
-    let(:n19) { AvlNode.new 19 }
+    let(:root) { described_class.new 11 }
+    let(:n3) { described_class.new 3 }
+    let(:n5) { described_class.new(5) }
+    let(:n7) { described_class.new 7 }
+    let(:n11) { described_class.new 11 }
+    let(:n13) { described_class.new 13 }
+    let(:n17) { described_class.new 17 }
+    let(:n19) { described_class.new 19 }
 
     it 'returns current root on insertion'
 
@@ -187,16 +229,16 @@ describe AvlNode do
 
   describe 'build avl trees from sorted lists' do
     describe 'trees as linked lists' do
-      let(:n2) { AvlNode.new 2 }
-      let(:n3) { AvlNode.new 3 }
-      let(:n5) { AvlNode.new 5 }
-      let(:n7) { AvlNode.new 7 }
-      let(:n11) { AvlNode.new 11 }
-      let(:n13) { AvlNode.new 13 }
-      let(:n17) { AvlNode.new 17 }
-      let(:n19) { AvlNode.new 19 }
-      let(:n23) { AvlNode.new 23 }
-      let(:n29) { AvlNode.new 29 }
+      let(:n2) { described_class.new 2 }
+      let(:n3) { described_class.new 3 }
+      let(:n5) { described_class.new 5 }
+      let(:n7) { described_class.new 7 }
+      let(:n11) { described_class.new 11 }
+      let(:n13) { described_class.new 13 }
+      let(:n17) { described_class.new 17 }
+      let(:n19) { described_class.new 19 }
+      let(:n23) { described_class.new 23 }
+      let(:n29) { described_class.new 29 }
 
       # Check to ensure the rotations are getting called
       # correctly.

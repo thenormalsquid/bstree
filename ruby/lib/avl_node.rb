@@ -17,6 +17,8 @@ class AvlNode < Node
     self.left = swinger
     pivot.right = self
   end
+  # alias_method :rotate_cw, :simple_right
+  alias_method :simple_right, :rotate_cw
 
   # TODO: will need to adjust weight at each affected node.
   def rotate_ccw
@@ -25,6 +27,7 @@ class AvlNode < Node
     self.right = swinger
     pivot.left = self
   end
+  alias_method :simple_left, :rotate_ccw
 
   def right_height
     right.nil? ? 0 : right.height + 1
