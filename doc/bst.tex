@@ -180,6 +180,40 @@ call delete after the node is orphaned.
 
 \section{Operating on the BST}
 
+Abstract data structures such as binary search trees support a standard
+set of operations including insertion, deletion, search, etc. A closer look
+at each of these operations follows.
+
+\subsection{Depth-first traverse}
+
+\lstset{language={Ruby}}
+\begin{lstlisting}[frame=single,title=Traverse the tree from the bottom up.]
+def postorder_iterate
+  return unless root
+
+  current = find_unvisited_leaf_node root
+  yield current
+
+  while current.has_parent?
+    current = find_unvisited_leaf_node current.parent
+    yield current
+  end
+end
+\end{lstlisting}
+
+\lstset{language={Ruby}}
+\begin{lstlisting}[frame=single,title=Find the deepest leftmost unvisited node relative to current.]
+def find_unvisited_leaf_node current
+  while current.has_unvisited_children?
+    if current.left&.unvisited?
+      current = current.left
+    elsif current.right&.unvisited?
+      current = current.right
+    end
+  end
+  current.visit
+end
+\end{lstlisting}
 
 \subsection{Successor and predecessor}
 
@@ -266,7 +300,19 @@ to verify that setting and unsetting the visited state is correctly
 performed. Later, these tests could be removed and the visited and
 unvisited helper methods moved to private methods.
 
-\subsection{\method{has\_unvisited\_children}}
+\subsection{\method{has\_unvisited\_children?}}
+
+\lstset{language={Ruby}}
+\begin{lstlisting}[frame=single,title=Helper methods for determining child's status.]
+def unvisited?
+  !visited
+end
+
+def has_unvisited_children?
+  return false unless has_children?
+  left&.unvisited? || right&.unvisited? ? true : false
+end
+\end{lstlisting}
 
 \section{Breadth-first traversal}
 
