@@ -28,28 +28,67 @@ RSpec.describe Tree do
     context 'left' do
       xexample 'child' do
         tree.insert n7
-        expect(tree.invert.root.left).to be nil
-        expect(tree.invert.root.right).to eq n7
+        tree.invert
+        expect(tree.root.left).to be nil
+        expect(tree.root.right).to eq n7
       end
 
       xexample 'chain' do
         tree.insert n7
         tree.insert n2
+        tree.invert
         expect(tree.root.left).to be nil
         expect(tree.root.right).to be n7
         expect(n7.left).to be nil
         expect(n7.right).to be n2
       end
 
-      example 'knee'
+      xexample 'knee' do
+        tree.insert n7
+        tree.insert n11
+        tree.invert
+        expect(root.left).to be nil
+        expect(root.right).to be n7
+        expect(n7.right).to be nil
+        expect(n7.left).to be n11
+      end
     end
 
     context 'right' do
-      example 'child'
-      example 'chain'
-      example 'knee'
+      xexample 'child' do
+        tree.insert n29
+        tree.invert
+        expect(root.right).to be nil
+        expect(root.left).to be n29
+      end
+
+      xexample 'chain' do
+        tree.insert n29
+        tree.insert n43
+        tree.invert
+        expect(tree.root.right).to be nil
+        expect(tree.root.left).to be n29
+        expect(n29.right).to be nil
+        expect(n29.left).to be n23
+      end
+
+      xexample 'knee' do
+        tree.insert n29
+        tree.insert n23
+        tree.invert
+        expect(tree.root.right).to be nil
+        expect(tree.root.left).to be n29
+        expect(n29.left).to be nil
+        expect(n29.right).to be n23
+      end
     end
 
-    example 'full tree with 3 nodes'
+    xexample 'full tree with 3 nodes' do
+      tree.insert n7
+      tree.insert n29
+      tree.invert
+      expect(root.right).to be n7
+      expect(root.left).to be n29
+    end
   end
 end
