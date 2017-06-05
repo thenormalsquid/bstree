@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 require_relative '../lib/tree.rb'
-require_relative '../lib/node.rb'
 
 require 'shared_examples'
 require 'preorder_shared_examples'
 require 'inorder_shared_examples'
 require 'postorder_shared_examples'
 
-describe Tree do
+RSpec.describe Tree do
   it_traverses_with '#postorder_walk'
   it_traverses_with '#inorder_walk'
   it_traverses_with '#preorder_walk'

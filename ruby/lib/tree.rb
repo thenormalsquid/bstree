@@ -41,6 +41,15 @@ class Tree
     @size += 1
   end
 
+  def invert
+    return if root.nil?
+    preorder_walk do |node|
+      temp = node.right
+      node.right = node.left
+      node.left = temp
+    end
+  end
+
   # From CLRS (3rd Edition) p. 296, "transplant" a node's
   # location in the tree. The idea is to replace u with v.
   # This function would be better named `reset_parent` because
@@ -109,6 +118,12 @@ class Tree
 
   def collect _collector
     root&.collect [] || []
+  end
+
+  def preorder_keys
+    collector = []
+    preorder_walk { |node| collector << node.key }
+    collector
   end
 
   def search key
