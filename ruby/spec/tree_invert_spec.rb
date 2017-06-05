@@ -16,34 +16,36 @@ RSpec.describe Tree do
 
     subject(:tree) { described_class.new root }
 
-    xexample 'empty tree' do
-      tree.delete root
-      expect(tree.invert).to eq [] # bogus, not sure what this will do
+    example 'empty tree' do
+      tree.delete_by_key root.key
+      expect(tree.preorder_keys).to eq []
     end
 
-    xexample 'single node' do
-      expect(tree.invert).to eq [root] # bogus again, not sure how to test this.
+    example 'single node' do
+      tree.invert
+      actual = tree.preorder_keys
+      expect(actual).to eq [17]
     end
 
     context 'left' do
-      xexample 'child' do
+      example 'child' do
         tree.insert n7
         tree.invert
-        expect(tree.root.left).to be nil
-        expect(tree.root.right).to eq n7
+        expect(root.left).to be nil
+        expect(root.right).to eq n7
       end
 
-      xexample 'chain' do
+      example 'chain' do
         tree.insert n7
         tree.insert n2
         tree.invert
-        expect(tree.root.left).to be nil
-        expect(tree.root.right).to be n7
+        expect(root.left).to be nil
+        expect(root.right).to be n7
         expect(n7.left).to be nil
         expect(n7.right).to be n2
       end
 
-      xexample 'knee' do
+      example 'knee' do
         tree.insert n7
         tree.insert n11
         tree.invert
@@ -55,40 +57,52 @@ RSpec.describe Tree do
     end
 
     context 'right' do
-      xexample 'child' do
+      example 'child' do
         tree.insert n29
         tree.invert
         expect(root.right).to be nil
         expect(root.left).to be n29
       end
 
-      xexample 'chain' do
+      example 'chain' do
         tree.insert n29
         tree.insert n43
         tree.invert
-        expect(tree.root.right).to be nil
-        expect(tree.root.left).to be n29
+        expect(root.right).to be nil
+        expect(root.left).to be n29
         expect(n29.right).to be nil
-        expect(n29.left).to be n23
+        expect(n29.left).to be n43
       end
 
-      xexample 'knee' do
+      example 'knee' do
         tree.insert n29
         tree.insert n23
         tree.invert
-        expect(tree.root.right).to be nil
-        expect(tree.root.left).to be n29
+        expect(root.right).to be nil
+        expect(root.left).to be n29
         expect(n29.left).to be nil
         expect(n29.right).to be n23
       end
     end
 
-    xexample 'full tree with 3 nodes' do
+    example 'full tree with 3 nodes' do
       tree.insert n7
       tree.insert n29
       tree.invert
       expect(root.right).to be n7
       expect(root.left).to be n29
+    end
+
+    example 'full tree with 7 nodes' do
+      tree.insert n7
+      tree.insert n2
+      tree.insert n11
+      tree.insert n29
+      tree.insert n43
+      tree.insert n23
+      tree.invert
+      expected = [17, 29, 43, 23, 7, 11, 2]
+      expect(tree.preorder_keys).to eq expected
     end
   end
 end
