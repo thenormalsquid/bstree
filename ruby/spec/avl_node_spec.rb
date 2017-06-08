@@ -6,22 +6,22 @@ require_relative '../lib/avl_node'
 
 describe AvlNode do
   let(:root) { described_class.new 17 }
-  let(:node2) { described_class.new 2 }
-  let(:node5) { described_class.new 5 }
+  let(:n2) { described_class.new 2 }
+  let(:n5) { described_class.new 5 }
 
   describe '#rebalance' do
     context 'left' do
       context 'chain' do
         xexample 'moves root->left to root and root to left->right' do
-          root.insert node5
-          root.insert node2
-          node2.rebalance
-          expect(root.parent).to be node5
-          expect(node.right).to be root
+          root.insert n5
+          root.insert n2
+          n2.rebalance
+          expect(root.parent).to be n5
+          expect(n5.right).to be root
           expect(root.left).to be nil
           expect(root.right).to be nil
-          expect(node5.parent).to be nil
-          expect(node5.left).to be node2
+          expect(n5.parent).to be nil
+          expect(n5.left).to be n2
         end
       end
 
@@ -42,11 +42,11 @@ describe AvlNode do
   end
 
   describe '#balanced?' do
-    let(:node7) { described_class.new 7 }
-    let(:node11) { described_class.new 11 }
-    let(:node19) { described_class.new 19 }
-    let(:node29) { described_class.new 29 }
-    let(:node43) { described_class.new 43 }
+    let(:n7) { described_class.new 7 }
+    let(:n11) { described_class.new 11 }
+    let(:n19) { described_class.new 19 }
+    let(:n29) { described_class.new 29 }
+    let(:n43) { described_class.new 43 }
 
     it 'is true for node with 0 children' do
       expect(root.balanced?).to be true
@@ -54,83 +54,83 @@ describe AvlNode do
     end
 
     it 'is true for a node with only left child' do
-      root.insert node7
+      root.insert n7
       expect(root.balanced?).to be true
       expect(root.weight).to eq(-1)
     end
 
     it 'is true for a node with only right child' do
-      root.insert node29
+      root.insert n29
       expect(root.balanced?).to be true
       expect(root.weight).to eq 1
     end
 
     it 'is true for node with left child and right child' do
-      root.insert node7
-      root.insert node29
+      root.insert n7
+      root.insert n29
       expect(root.balanced?).to be true
       expect(root.weight).to eq 0
     end
 
     it 'is false for node with left chain' do
-      root.insert node7
-      root.insert node2
+      root.insert n7
+      root.insert n2
       expect(root.balanced?).to be false
       expect(root.weight).to eq(-2)
-      expect(node7.weight).to eq(-1)
+      expect(n7.weight).to eq(-1)
     end
 
     it 'is false for node with left knee' do
-      root.insert node7
-      root.insert node11
+      root.insert n7
+      root.insert n11
       expect(root.balanced?).to be false
       expect(root.weight).to eq(-2)
-      expect(node7.weight).to eq(1)
+      expect(n7.weight).to eq(1)
       expect(root.left.weight).to eq(1)
     end
 
     it 'is false for node with right chain' do
-      root.insert node29
-      root.insert node43
+      root.insert n29
+      root.insert n43
       expect(root.balanced?).to be false
       expect(root.weight).to eq 2
-      expect(node29.weight).to eq 1
+      expect(n29.weight).to eq 1
     end
 
     it 'is false for node with right knee' do
-      root.insert node29
-      root.insert node19
+      root.insert n29
+      root.insert n19
       expect(root.balanced?).to be false
       expect(root.weight).to eq 2
-      expect(node29.weight).to eq(-1)
+      expect(n29.weight).to eq(-1)
       expect(root.right.weight).to eq(-1)
     end
 
     it 'is true for tree with left bell' do
-      root.insert node29
-      root.insert node7
-      root.insert node11
-      root.insert node5
+      root.insert n29
+      root.insert n7
+      root.insert n11
+      root.insert n5
       expect(root.balanced?).to be true
       expect(root.weight).to eq(-1)
     end
 
     it 'is true for tree with right bell' do
-      root.insert node7
-      root.insert node29
-      root.insert node19
-      root.insert node43
+      root.insert n7
+      root.insert n29
+      root.insert n19
+      root.insert n43
       expect(root.balanced?).to be true
       expect(root.weight).to eq(1)
     end
 
     it 'is true for right and left chain at root' do
-      root.insert node7
-      root.insert node19
-      root.insert node5
-      root.insert node29
-      root.insert node2
-      root.insert node43
+      root.insert n7
+      root.insert n19
+      root.insert n5
+      root.insert n29
+      root.insert n2
+      root.insert n43
       expect(root.balanced?).to be true
       expect(root.weight).to eq(0)
     end
