@@ -46,6 +46,10 @@ class AvlNode < Node
     # [-1, 0, 1].include?(right_height - left_height)
   end
 
+  def rebalance
+
+  end
+
   def insert node
     super
     # node < self ? @weight -= 1 : @weight += 1

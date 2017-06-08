@@ -5,10 +5,43 @@ require 'spec_helper'
 require_relative '../lib/avl_node'
 
 describe AvlNode do
+  let(:root) { described_class.new 17 }
+  let(:node2) { described_class.new 2 }
+  let(:node5) { described_class.new 5 }
+
+  describe '#rebalance' do
+    context 'left' do
+      context 'chain' do
+        xexample 'moves root->left to root and root to left->right' do
+          root.insert node5
+          root.insert node2
+          node2.rebalance
+          expect(root.parent).to be node5
+          expect(node.right).to be root
+          expect(root.left).to be nil
+          expect(root.right).to be nil
+          expect(node5.parent).to be nil
+          expect(node5.left).to be node2
+        end
+      end
+
+      context 'knee' do
+        it 'executes double rotation left'
+      end
+    end
+
+    context 'right' do
+      context 'chain' do
+        example 'moves root->right to root and root to right->left'
+      end
+
+      context 'knee' do
+        it 'executes double rotation right'
+      end
+    end
+  end
+
   describe '#balanced?' do
-    let(:root) { described_class.new 17 }
-    let(:node2) { described_class.new 2 }
-    let(:node5) { described_class.new 5 }
     let(:node7) { described_class.new 7 }
     let(:node11) { described_class.new 11 }
     let(:node19) { described_class.new 19 }
