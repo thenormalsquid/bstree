@@ -17,7 +17,6 @@ class AvlNode < Node
     self.left = swinger
     pivot.right = self
   end
-  # alias_method :rotate_cw, :simple_right
   alias_method :simple_right, :rotate_cw
 
   # TODO: will need to adjust weight at each affected node.
@@ -43,46 +42,23 @@ class AvlNode < Node
 
   def balanced?
     [-1, 0, 1].include? weight
-    # [-1, 0, 1].include?(right_height - left_height)
   end
 
-  def rebalance
-
+  def rebalance node
+    # retrace, to root if necessary
   end
 
+  # TODO: walk the execution with pry to see how the recursion
+  # works between the subclass and superclass.
   def insert node
     super
-    # node < self ? @weight -= 1 : @weight += 1
-
-    # puts "done inserting..."
-
-    # puts weight
-    # if weight >= 2
-    #   rotate_cw
-    # end
-    # super will just insert node.
-    # check the current weights here.
-    # the hard thing is understanding that the root
-    # node may have to change to ensure balance.
+    puts "self.object_id: #{self.object_id}, self.key: #{self.key}"
+    puts "node.object_id: #{node.object_id}, node.key: #{node.key}"
+    # rebalance node
   end
-
-  # TODO: see about defaulting to the super Node class and getting
-  # rid of all this cruft.
-=begin
-  def insert node, _parent = nil
-    node < self ? insert_left(node, self) : insert_right(node, self)
-  end
-
-  def insert_left node, _parent
-    @left.nil? ? @left = node : @left.insert(node, self)
-  end
-
-  def insert_right node, _parent
-    @right.nil? ? @right = node : @right.insert(node, self)
-  end
-=end
 
   # TODO: see if this can punt to the parent Node class.
+  # Move the relevant tests to shared examples.
   def size
     size = 0
     post_order_traverse { size += 1 }

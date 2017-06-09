@@ -8,11 +8,21 @@ describe AvlNode do
   let(:root) { described_class.new 17 }
   let(:n2) { described_class.new 2 }
   let(:n5) { described_class.new 5 }
+  let(:n7) { described_class.new 7 }
+  let(:n19) { described_class.new 19 }
+  let(:n29) { described_class.new 29 }
 
   describe '#rebalance' do
     context 'left' do
       context 'chain' do
-        xexample 'moves root->left to root and root to left->right' do
+        example 'insert execution' do
+          root.insert n7
+          root.insert n5
+          root.insert n2
+          root.insert described_class.new 1
+        end
+
+        xexample 'moves left to root and root to right' do
           root.insert n5
           root.insert n2
           n2.rebalance
@@ -26,26 +36,53 @@ describe AvlNode do
       end
 
       context 'knee' do
-        it 'executes double rotation left'
+        xit 'executes double rotation left' do
+          root.insert n5
+          root.insert n2
+          # n2.rebalance
+          expect(root.parent).to be n5
+          expect(n5.right).to be root
+          expect(root.left).to be nil
+          expect(root.right).to be nil
+          expect(n5.parent).to be nil
+          expect(n5.left).to be n2
+        end
       end
     end
 
     context 'right' do
       context 'chain' do
-        example 'moves root->right to root and root to right->left'
+        xexample 'moves right to root and root to left' do
+          root.insert n19
+          root.insert n29
+          # n29.rebalance
+          expect(root.parent).to be n19
+          expect(n19.left).to be root
+          expect(root.right).to be nil
+          expect(root.left).to be nil
+          expect(n19.parent).to be nil
+          expect(n19.right).to be n29
+        end
       end
 
       context 'knee' do
-        it 'executes double rotation right'
+        xexample 'executes double rotation right' do
+          root.insert n29
+          root.insert n19
+          # n29.rebalance
+          expect(root.parent).to be n19
+          expect(n19.left).to be root
+          expect(root.right).to be nil
+          expect(root.left).to be nil
+          expect(n19.parent).to be nil
+          expect(n19.right).to be n29
+        end
       end
     end
   end
 
   describe '#balanced?' do
-    let(:n7) { described_class.new 7 }
     let(:n11) { described_class.new 11 }
-    let(:n19) { described_class.new 19 }
-    let(:n29) { described_class.new 29 }
     let(:n43) { described_class.new 43 }
 
     it 'is true for node with 0 children' do

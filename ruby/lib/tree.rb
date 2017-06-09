@@ -194,7 +194,6 @@ class Tree
   end
 
   def self.from_hash hash
-    # Tree.new(Node.build_from_hash(hash))
     Tree.new(NODE_CLASS.build_from_hash(hash))
   end
 
