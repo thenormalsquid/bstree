@@ -9,4 +9,11 @@ require 'avl_node'
 # I'm focusing on getting the rotations implemented
 # correctly, and subclassing here reduces distraction.
 class AvlTree < Tree
+  def insert node
+    super
+    rebalance node
+  end
+
+  def rebalance node
+  end
 end

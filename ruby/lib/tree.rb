@@ -36,6 +36,9 @@ class Tree
     root.nil? ? true : false
   end
 
+  # TODO: insert tests, shared examples for tree
+  # AvlTree needs to call super, then call rebalance.
+  # The rebalancing cannot be done via the node insert.
   def insert node
     @root.insert node
     @size += 1

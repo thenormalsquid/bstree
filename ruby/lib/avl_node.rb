@@ -3,7 +3,7 @@
 require 'node'
 
 class AvlNode < Node
-  attr_reader :weight
+  # attr_reader :weight
 
   def initialize key
     super
@@ -45,16 +45,21 @@ class AvlNode < Node
   end
 
   def rebalance node
+    # puts "from rebalance: node.object_id: #{node.object_id}, node.key: #{node.key}"
     # retrace, to root if necessary
   end
 
+  # FIXME: Can't do it this way, need to handle the insert in the AvlTree
+  # by calling the node insert first, then calling rebalance explicitly
+  # after the insert. Otherwise way too much work gets done as all these
+  # recursions fire the rebalance call.
   # TODO: walk the execution with pry to see how the recursion
   # works between the subclass and superclass.
   def insert node
     super
-    puts "self.object_id: #{self.object_id}, self.key: #{self.key}"
-    puts "node.object_id: #{node.object_id}, node.key: #{node.key}"
-    # rebalance node
+    # puts "from insert: self.object_id: #{self.object_id}, self.key: #{self.key}"
+    # puts "from insert: node.object_id: #{node.object_id}, node.key: #{node.key}"
+    rebalance node
   end
 
   # TODO: see if this can punt to the parent Node class.
