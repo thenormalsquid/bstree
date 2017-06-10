@@ -4,10 +4,9 @@ require 'spec_helper'
 require_relative '../lib/iterative_tree'
 require_relative '../lib/node'
 
-require 'shared_examples'
-require 'preorder_shared_examples'
-require 'inorder_shared_examples'
-require 'postorder_shared_examples'
+require 'shared_examples/tree/preorder_walk'
+require 'shared_examples/tree/inorder_walk'
+require 'shared_examples/tree/postorder_walk'
 
 RSpec.describe IterativeTree do
   let(:node) { IterativeTree::NODE_CLASS }

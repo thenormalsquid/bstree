@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
+require 'spec_helper'
+
 require_relative '../lib/tree.rb'
 
-require 'shared_examples'
-require 'preorder_shared_examples'
-require 'inorder_shared_examples'
-require 'postorder_shared_examples'
+require 'shared_examples/tree/preorder_walk'
+require 'shared_examples/tree/inorder_walk'
+require 'shared_examples/tree/postorder_walk'
 
 RSpec.describe Tree do
-  it_traverses_with '#postorder_walk'
-  it_traverses_with '#inorder_walk'
   it_traverses_with '#preorder_walk'
+  it_traverses_with '#inorder_walk'
+  it_traverses_with '#postorder_walk'
 
   let(:node_class) { Tree::NODE_CLASS }
 

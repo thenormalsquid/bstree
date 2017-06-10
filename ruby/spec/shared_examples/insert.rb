@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.shared_examples 'insertion' do
   let(:root) { described_class.new 17 }
 
@@ -22,27 +20,6 @@ RSpec.shared_examples 'insertion' do
       expect(root.right.right).to eq node29
       root.insert node19 = described_class.new(19)
       expect(root.right.left).to eq node19
-    end
-  end
-end
-
-RSpec.shared_examples 'extreme elements' do
-  let(:root) { described_class.new 17 }
-
-  before do
-    root.insert @node2 = described_class.new(2)
-    root.insert @node29 = described_class.new(29)
-  end
-
-  describe '#minimum' do
-    it 'finds the minimum node' do
-      expect(root.minimum).to eq @node2
-    end
-  end
-
-  describe '#maximum' do
-    it 'finds the minimum node' do
-      expect(root.maximum).to eq @node29
     end
   end
 end

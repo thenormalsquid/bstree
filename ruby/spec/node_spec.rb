@@ -4,7 +4,10 @@ require 'spec_helper'
 
 require_relative '../lib/node'
 require_relative './nodes'
-require 'shared_examples'
+
+require 'shared_examples/insert'
+require 'shared_examples/maximum'
+require 'shared_examples/minimum'
 require 'shared_examples/successor'
 require 'shared_examples/predecessor'
 
@@ -12,7 +15,8 @@ require 'pry'
 
 describe Node do
   it_inserts_like 'insertion'
-  it_finds_extremes 'extreme elements'
+  it_finds_extremes '#maximum'
+  it_finds_extremes '#minimum'
   it_finds '#successor'
   it_finds '#predecessor'
 
