@@ -15,5 +15,12 @@ class AvlTree < Tree
   end
 
   def rebalance node
+    x = node.parent
+    g = x.parent
+    if node.left_child?
+      'left'
+      else
+      'right'
+    end
   end
 end

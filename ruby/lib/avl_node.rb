@@ -3,11 +3,11 @@
 require 'node'
 
 class AvlNode < Node
-  # attr_reader :weight
+  attr_reader :weight
 
   def initialize key
     super
-    # @weight = 0
+    @weight = 0
   end
 
   # TODO: will need to adjust weight at each affected node.
