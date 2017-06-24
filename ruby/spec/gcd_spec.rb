@@ -2,6 +2,7 @@ require 'spec_helper'
 
 require_relative '../lib/gcd'
 
+# Greatest Common Divisor
 RSpec.describe Gcd do
   describe '.compute' do
     it 'finds 21 for 1071, 462' do
@@ -28,12 +29,20 @@ RSpec.describe Gcd do
       expect(Gcd.compute(18, 48)).to eq 6
     end
 
-    example 'gcd(18, 0)' do
-      expect(Gcd.compute(18, 0)).to eq 18
+    example 'gcd(18, 48)' do
+      expect(Gcd.compute(18, 48)).to eq 6
+    end
+
+    example 'gcd(17*23, 5*17)' do
+      expect(Gcd.compute(17*23, 5*17)).to eq 17
     end
 
     example 'gcd(0, 18)' do
       expect(Gcd.compute(0, 18)).to eq 18
+    end
+
+    example 'gcd(577, 97) primes' do
+      expect(Gcd.compute(577, 97)).to eq 1
     end
   end
 
@@ -44,6 +53,10 @@ RSpec.describe Gcd do
 
     example 'coprime(3, 5)' do
       expect(Gcd.coprime?(3, 5)).to be true
+    end
+
+    example 'coprime(17, 23)' do
+      expect(Gcd.coprime?(17, 23)).to be true
     end
 
     example 'coprime(6, 8)' do

@@ -91,7 +91,8 @@ module BinarySearchTree
     collect []
   end
 
-  # TODO: rewrite this using `dig` below
+  # TODO: If possible, rewrite this using `dig` below. Not
+  # sure it's possible.
   def common_parent n1, n2
     # Probably should enforce n1 < n2 with a swap if necessary.
     if n1 < n2

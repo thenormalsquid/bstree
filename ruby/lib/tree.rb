@@ -72,6 +72,20 @@ class Tree
     v
   end
 
+  def transplant node, child
+    if node.parent.nil?
+      @root = child
+    elsif node.left_child?
+      node.parent.left = child
+    else # right child
+      node.parent.right = child
+    end
+
+    child&.parent = node.parent
+    # return value is given in book, but not used
+    # child
+  end
+
   def delete_clrs3 key
     z = search key
     if z.left.nil?
