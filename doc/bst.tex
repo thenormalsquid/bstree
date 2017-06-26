@@ -47,8 +47,6 @@ a leaf. The height of the tree is the height of the root. The depth or level of
 a node n is the length of the path from the root to n.
 \end{quote}
 
-Rosen~\cite{rosen}...
-
 Cormen et al.~\cite{cormen:th:1990} remains a classic reference.
 
 Rosen~\cite[pp. 757-760]{rosen} discusses three uses for binary search trees:
@@ -68,7 +66,35 @@ show the AVL tree formed by inserting the ordered sequence $[1, 2, \ldots, 20]$.
 
 \section{The Binary Search Tree}
 
-Two main ideas:
+List of relevant theorems and corollaries:
+
+\begin{enumerate}
+  \item $n$ vertices implies $n-1$ edges (Rosen~\cite[p. 752]{rosen}).
+  \item Number of nodes $n$ in a complete binary tree of height $h$ is $2^{h+1} - 1$
+    (Aho and Ullman~\cite[p. 257]{aho:av:1992}).
+  \item A full binary tree is with $i$ internal vertices contains $n = 2i + 1$ vertices.
+    (Rosen~\cite[p. 752]{rosen}).
+  \item Lookup time $T$ on a binary search tree is governed by the recurrence
+    $T(h) \leq T(h-1) + O(1)$ (Aho and Ullman~\cite[p. 256]{aho:av:1992}).
+  \item There are at most $2^h$ leaves in a binary tree of height $h$ (Rosen~\cite[p. 754]{rosen}).
+  \item Search hits in BST from $N$ random keys require $\tilde2\ln N$ (about $1.39\ln N$) compares
+    on average (Sedgewick and Wayne~\cite[p. 403]{sedgewick:r2011}).
+  \item Sum of heights of complete binary tree, from Manber~\cite[p. 34]{manber:u1989}.
+  \item AVL tree height from Manber~\cite[p. 75]{manber:u1989}.
+  \item Complete binary tree embedding on a lattice, from Manber~\cite[p. 263]{manber:u1989}.
+  \item Range searching with BST in Sedgewick~\cite[p. 373]{sedgewick:r1990}.
+  \item V \& H line intersection with BST from Sedgewick~\cite[p. 391]{sedgewick:r1990}.
+  \item Trapezoidal locations with BST, from O'Rourke~\cite[p. 289]{orourke:j1998}.
+\end{enumerate}
+
+The theorems need to get moved to properties. Some of the above list should be
+moved to a future Applications section.
+
+\subsection{Properties and Operations}
+
+Random definition from Aho and Ullman: \textit{branching factor}
+is the maximum degree of any node in a tree (Aho and Ullman~\cite[exercise on
+p. 259]{aho:av:1992}).
 
 \begin{enumerate}
 \item Operations for manipulating BSTs;
@@ -138,11 +164,29 @@ arrangement of the leaves and internal nodes.
 Binary search tree classifications include
 full, perfect, complete, balanced, unbalanced, and degenerate.
 
+First, how these classifications are defined in the literature is
+worth some discussion, as different authors define trees in slightly
+different ways. For example, Aho and Ullman define full and complete
+trees as the same~\cite[p. 257]{aho:av:1992}, whereas Cormen
+et al.~\cite[p. 1178]{cormen:th2009} distinguish between full and
+complete binary trees.
+
+The definitions which follow will be used consistently through this
+work. The reader is free, of course, to take issue and use definitions
+more to his or her preference.
+
 \begin{itemize}
   \item Full: A rooted tree is called an m-ary tree if every internal
     vertex has no more than m children. The tree is called a full m-ary
     tree if every internal vertex has exactly m children. An m-ary tree
-    with m = 2 is called a binary tree.~\cite[p. 748]{rosen}
+    with m = 2 is called a binary tree.~\cite[p. 748]{rosen} Also see
+    Cormen et al.~\cite[p. 1178]{cormen:th2009}.
+
+  \item Complete: A binary tree is complete when each child of the root node,
+    left and right, is a complete subtree (Aho and Ullman). Cormen et al.\
+    define complete as all leaves having the same depth with all nodes having
+    having degree 2, that is, 2 children. This is equivalent to saying all
+    internal nodes are full~\cite[p. 1179]{cormen:th2009}).
 \end{itemize}
 
 \subsection{Maximum and minimum keys}
