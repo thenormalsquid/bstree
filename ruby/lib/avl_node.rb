@@ -3,28 +3,34 @@
 require 'node'
 
 class AvlNode < Node
-  attr_reader :weight
+  attr_accessor :weight
+  attr_accessor :balance_factor
 
   def initialize key
     super
     @weight = 0
   end
 
-  # TODO: will need to adjust weight at each affected node.
   def rotate_cw
+    parent = self.parent
+
     pivot = left
     swinger = pivot.right
     self.left = swinger
+    # swinger&.parent = self.left
     pivot.right = self
+    pivot.parent = parent
+    self.parent = pivot
   end
   alias_method :simple_right, :rotate_cw
 
-  # TODO: will need to adjust weight at each affected node.
   def rotate_ccw
     pivot = right
     swinger = pivot.left
     self.right = swinger
+    # swinger&.parent = self.right
     pivot.left = self
+    self.parent = pivot
   end
   alias_method :simple_left, :rotate_ccw
 
