@@ -12,7 +12,7 @@ describe AvlTree do
       tree = described_class.new root
       root.left = n7
       n7.parent = root
-      tree.reset_left_balance(n7, root)
+      tree.balance_left(n7)
       expect(root.balance_factor).to eq(-1)
     end
 
@@ -23,10 +23,11 @@ describe AvlTree do
       root.balance_factor = -1
       n2.parent = n7
       n2.parent.parent = root
-      tree.reset_left_balance(n7, root)
+      tree.balance_left(n7)
       expect(n7.right).to eq root
       expect(root.parent).to eq n7
       expect(n7.left).to eq n2
+      expect(tree.root).to eq n7
     end
   end
 
@@ -42,7 +43,7 @@ describe AvlTree do
   describe '#reset_balances' do
   end
 
-  describe '#rebalance' do
+  describe '#retrace' do
     let(:root) { AvlNode.new 17 }
 
     context 'left' do
@@ -59,10 +60,8 @@ describe AvlTree do
         tree.insert n7 = AvlNode.new(7)
         expect(tree.root.balance_factor).to eq(-1)
         tree.insert n2 = AvlNode.new(2)
-        # tree.root need to be n7 after the last insert
 
         expect(tree.root).to eq n7
-
         expect(tree.root.balance_factor).to eq(0)
         expect(root.parent).to eq n7
         expect(n7.right).to eq root

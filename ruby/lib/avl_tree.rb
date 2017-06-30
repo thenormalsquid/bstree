@@ -18,10 +18,12 @@ class AvlTree < Tree
     super
     node.weight = 0
     node.balance_factor = 0
-    rebalance node
+    retrace node
   end
 
-  def reset_right_balance node, parent
+  def balance_right node
+    parent = node.parent
+
     if parent.balance_factor > 0
       parent.rotate_ccw
       @root = node if @root == parent
@@ -30,7 +32,9 @@ class AvlTree < Tree
     end
   end
 
-  def reset_left_balance node, parent
+  def balance_left node
+    parent = node.parent
+
     if parent.balance_factor < 0
       parent.rotate_cw
       @root = node if @root == parent
@@ -40,18 +44,18 @@ class AvlTree < Tree
     end
   end
 
-  def reset_balances node, parent
+  def balance node
     if node.right_child?
-      reset_right_balance(node, parent)
+      balance_right node
     else
-      reset_left_balance(node, parent)
+      balance_left node
     end
   end
 
-  def rebalance node
+  def retrace node
     parent = node.parent
     while !parent.nil?
-      reset_balances(node, parent)
+      balance node
       node = parent
       parent = node.parent
     end
