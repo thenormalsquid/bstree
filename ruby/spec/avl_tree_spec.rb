@@ -3,8 +3,9 @@
 require_relative '../lib/avl_tree'
 
 describe AvlTree do
-  describe 'reset_left_balance' do
+  describe 'balance_left' do
     let(:root) { AvlNode.new 17 }
+    let(:n11) { AvlNode.new 11 }
     let(:n7) { AvlNode.new 7 }
     let(:n2) { AvlNode.new 2 }
 
@@ -16,7 +17,7 @@ describe AvlTree do
       expect(root.balance_factor).to eq(-1)
     end
 
-    it 'rotates with two left children' do
+    it 'rotates with left chain' do
       tree = described_class.new root
       root.left = n7
       root.left.left = n2
@@ -29,15 +30,41 @@ describe AvlTree do
       expect(n7.left).to eq n2
       expect(tree.root).to eq n7
     end
+
+    it 'rotates with left knee' do
+      tree = described_class.new root
+      root.left = n7
+      root.left.right = n11
+      root.balance_factor = -1
+      n11.parent = n7
+      n11.parent.parent = root
+      tree.balance_left(n7)
+    end
   end
 
-  describe '#reset_right_balance' do
+  describe '#balance_right' do
     let(:root) { AvlNode.new 17 }
     let(:n19) { AvlNode.new 19 }
     let(:n23) { AvlNode.new 23 }
 
-    it 'sets root balance to 1 when single right child'
-    it 'rotates with two right children'
+    it 'sets root balance to 1 when single right child' do
+      tree = described_class.new root
+      root.right = n19
+      n19.parent = root
+      tree.balance_right(n19)
+      expect(root.balance_factor).to eq 1
+    end
+
+    it 'rotates with two right children' do
+      tree = described_class.new root
+      root.right = n19
+      root.right.right = n23
+      root.balance_factor = 1
+      n23.parent = n19
+      n23.parent.parent = root
+      tree.balance_right(n19)
+      expect(tree.root).to eq n19
+    end
   end
 
   describe '#reset_balances' do
