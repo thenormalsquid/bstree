@@ -20,16 +20,21 @@ class AvlNode < Node
     # swinger&.parent = self.left
     pivot.right = self
     pivot.parent = parent
+    parent&.right = pivot
     self.parent = pivot
   end
   alias_method :simple_right, :rotate_cw
 
   def rotate_ccw
+    parent = self.parent
+
     pivot = right
     swinger = pivot.left
     self.right = swinger
     # swinger&.parent = self.right
     pivot.left = self
+    pivot.parent = parent
+    parent&.left = pivot
     self.parent = pivot
   end
   alias_method :simple_left, :rotate_ccw
