@@ -39,6 +39,16 @@ class AvlNode < Node
   end
   alias_method :simple_left, :rotate_ccw
 
+  def rotate_left_right
+    self.left.simple_left
+    simple_right
+  end
+
+  def rotate_right_left
+    self.right.simple_right
+    simple_left
+  end
+
   def right_height
     right.nil? ? 0 : right.height + 1
   end
