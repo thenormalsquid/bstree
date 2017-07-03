@@ -14,55 +14,46 @@ class AvlTree < Tree
     retrace node
   end
 
+  def rotate_left node, rotation_root
+    if node.balance_factor < 0
+      node.rotate_right
+      node.balance_factor += 1
+      node = rotation_root.right
+      node.balance_factor += 1
+    end
+    rotation_root.rotate_left
+    rotation_root.balance_factor -= 1
+    @root = node if @root == rotation_root
+  end
+
+  def rotate_right node, parent
+    if node.balance_factor > 0
+      node.rotate_left
+      node.balance_factor -= 1
+      node = parent.left
+      node.balance_factor -= 1
+    end
+    parent.rotate_right
+    parent.balance_factor += 1
+    @root = node if @root == parent
+  end
+
   def balance_right node
     parent = node.parent
-
-    if parent.balance_factor > 0
-      if node.balance_factor < 0
-        node.rotate_right
-        node.balance_factor += 1
-        node = parent.right
-        node.balance_factor += 1
-        parent.rotate_left
-      else
-        parent.rotate_left
-      end
-      parent.balance_factor -= 1
-      @root = node if @root == parent
-    else
-      parent.balance_factor += 1
-    end
+    parent.balance_factor > 0 ?  rotate_left(node, parent) : parent.balance_factor += 1
   end
 
   def balance_left node
     parent = node.parent
-
-    if parent.balance_factor < 0
-      if node.balance_factor > 0
-        node.rotate_left
-        node.balance_factor -= 1
-        node = parent.left
-        node.balance_factor -= 1
-        parent.rotate_right
-      else
-        parent.rotate_right
-      end
-      parent.balance_factor += 1
-      @root = node if @root == parent
-    else
-      parent.balance_factor -= 1
-    end
+    parent.balance_factor < 0 ?  rotate_right(node, parent) : parent.balance_factor -= 1
   end
 
   def balance node
-    if node.right_child?
-      balance_right node
-    else
-      balance_left node
-    end
+    node.right_child? ? balance_right(node) : balance_left(node)
   end
 
   def retrace node
+    # binding.pry if node.key == 5
     parent = node.parent
     while !parent.nil?
       balance node

@@ -69,18 +69,16 @@ describe AvlTree do
     end
   end
 
-  describe '#reset_balances' do
-  end
-
   describe '#retrace' do
     let(:root) { AvlNode.new 17 }
 
-    # TODO: set up retrace without using `insert`
     context 'left' do
       it 'finds left child' do
         tree = AvlTree.new root
         expect(tree.root.balance_factor).to eq 0
-        tree.insert n7
+        tree.root.left = n7
+        n7.parent = tree.root
+        tree.retrace(n7)
         expect(tree.root.balance_factor).to eq(-1)
       end
 
@@ -181,7 +179,45 @@ describe AvlTree do
         expect(tree.root.balance_factor).to eq 0
         expect(root.balance_factor).to eq 0
         expect(n23.balance_factor).to eq 0
+      end
+    end
+  end
 
+  # Yes, these tests are fragile, they're supposed to break if the logic
+  # in the called methods is tampered with. When the called methods need
+  # to change, it's perfectly fine to simply delete these tests.
+  context 'helper method testing to guard against regression' do
+    describe '#balance' do
+      it 'balances right' do
+        tree = AvlTree.new root
+        expect(tree).to receive(:balance_right)
+        tree.insert n19
+      end
+
+      it 'balances left' do
+        tree = AvlTree.new root
+        expect(tree).to receive(:balance_left)
+        tree.insert n7
+      end
+    end
+
+    describe '#balance_right' do
+      it 'rotates left' do
+        tree = AvlTree.new root
+        tree.insert n19
+        expect(tree.root.balance_factor).to eq 1
+        expect(tree).to receive(:rotate_left)
+        tree.insert n23
+      end
+    end
+
+    describe '#balance_left' do
+      it 'rotates right' do
+        tree = AvlTree.new root
+        tree.insert n7
+        expect(tree.root.balance_factor).to eq(-1)
+        expect(tree).to receive(:rotate_right)
+        tree.insert n2
       end
     end
   end
