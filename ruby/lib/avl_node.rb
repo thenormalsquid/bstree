@@ -3,12 +3,11 @@
 require 'node'
 
 class AvlNode < Node
-  attr_accessor :weight
   attr_accessor :balance_factor
 
   def initialize key
     super
-    @weight = 0
+    @balance_factor = 0
   end
 
   def rotate_right
@@ -17,7 +16,7 @@ class AvlNode < Node
     pivot = left
     swinger = pivot.right
     self.left = swinger
-    # swinger&.parent = self.left
+    swinger&.parent = self.left # <- this thing might crash
     pivot.right = self
     pivot.parent = parent
     parent&.right = pivot
@@ -30,7 +29,7 @@ class AvlNode < Node
     pivot = right
     swinger = pivot.left
     self.right = swinger
-    # swinger&.parent = self.right
+    swinger&.parent = self.right # <- this thing might crash
     pivot.left = self
     pivot.parent = parent
     parent&.left = pivot

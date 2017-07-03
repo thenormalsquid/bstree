@@ -12,6 +12,7 @@ describe AvlNode do
   let(:n2) { described_class.new 2 }
   let(:n5) { described_class.new 5 }
   let(:n7) { described_class.new 7 }
+  let(:n13) { described_class.new 13 }
   let(:n19) { described_class.new 19 }
   let(:n29) { described_class.new 29 }
 
@@ -21,7 +22,7 @@ describe AvlNode do
     let(:n19) { described_class.new 19 }
     let(:n23) { described_class.new 23 }
 
-    describe '#rotate_left' do # rotate_left
+    describe '#rotate_left' do
       context 'right chain' do
         it "moves the root node to left child\nrotates counterclockwise with 3 nodes right chain" do
           root.insert n19
@@ -44,7 +45,6 @@ describe AvlNode do
         root = n11
         root.insert n7
         n17 = described_class.new 17
-        n13 = described_class.new 13
         root.insert n17
         root.insert n13
         root.insert n23
@@ -78,14 +78,14 @@ describe AvlNode do
       end
     end
 
-    describe '#rotate_right' do # rotate_right
+    describe '#rotate_right' do
       context 'left chain' do
         it 'moves the root node to right child' do
           root.insert n7
           root.insert n5
-          expected = [7, 5, 17]
           root.rotate_right
 
+          expected = [7, 5, 17]
           actual = n7.preorder_collect
           expect(actual).to eq expected
           expect(n7.size).to eq 3

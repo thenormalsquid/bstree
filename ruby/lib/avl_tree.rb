@@ -11,8 +11,6 @@ class AvlTree < Tree
 
   def insert node
     super
-    node.weight = 0
-    node.balance_factor = 0
     retrace node
   end
 
@@ -20,7 +18,16 @@ class AvlTree < Tree
     parent = node.parent
 
     if parent.balance_factor > 0
-      parent.rotate_left
+      if node.balance_factor < 0
+        node.rotate_right
+        node.balance_factor += 1
+        node = parent.right
+        node.balance_factor += 1
+        parent.rotate_left
+      else
+        parent.rotate_left
+      end
+      parent.balance_factor -= 1
       @root = node if @root == parent
     else
       parent.balance_factor += 1
@@ -31,9 +38,17 @@ class AvlTree < Tree
     parent = node.parent
 
     if parent.balance_factor < 0
-      parent.rotate_right
-      @root = node if @root == parent
+      if node.balance_factor > 0
+        node.rotate_left
+        node.balance_factor -= 1
+        node = parent.left
+        node.balance_factor -= 1
+        parent.rotate_right
+      else
+        parent.rotate_right
+      end
       parent.balance_factor += 1
+      @root = node if @root == parent
     else
       parent.balance_factor -= 1
     end

@@ -3,12 +3,14 @@
 require_relative '../lib/avl_tree'
 
 describe AvlTree do
-  describe 'balance_left' do
-    let(:root) { AvlNode.new 17 }
-    let(:n11) { AvlNode.new 11 }
-    let(:n7) { AvlNode.new 7 }
-    let(:n2) { AvlNode.new 2 }
+  let(:root) { AvlNode.new 17 }
+  let(:n11) { AvlNode.new 11 }
+  let(:n19) { AvlNode.new 19 }
+  let(:n23) { AvlNode.new 23 }
+  let(:n7) { AvlNode.new 7 }
+  let(:n2) { AvlNode.new 2 }
 
+  describe 'balance_left' do
     it 'sets root balance to -1 when single left child' do
       tree = described_class.new root
       root.left = n7
@@ -73,27 +75,56 @@ describe AvlTree do
   describe '#retrace' do
     let(:root) { AvlNode.new 17 }
 
+    # TODO: set up retrace without using `insert`
     context 'left' do
       it 'finds left child' do
         tree = AvlTree.new root
         expect(tree.root.balance_factor).to eq 0
-        tree.insert n7 = AvlNode.new(7)
+        tree.insert n7
         expect(tree.root.balance_factor).to eq(-1)
       end
 
       it 'finds left left child' do
         tree = AvlTree.new root
         expect(tree.root.balance_factor).to eq 0
-        tree.insert n7 = AvlNode.new(7)
+        tree.root.left = n7
+        n7.parent = tree.root
+        tree.retrace(n7)
         expect(tree.root.balance_factor).to eq(-1)
-        tree.insert n2 = AvlNode.new(2)
+        n7.left = n2
+        n2.parent = n7
+        tree.retrace(n2)
 
         expect(tree.root).to eq n7
-        expect(tree.root.balance_factor).to eq(0)
         expect(root.parent).to eq n7
         expect(n7.right).to eq root
+        expect(tree.root.left).to eq n2
+        expect(n2.parent).to eq tree.root
+
+        expect(tree.root.balance_factor).to eq(0)
         expect(n7.balance_factor).to eq 0
         expect(root.balance_factor).to eq 0
+      end
+
+      it 'rotates on left right child' do
+        tree = AvlTree.new root
+        tree.root.left = n2
+        n2.parent = tree.root
+        tree.retrace(n2)
+        expect(tree.root.balance_factor).to eq(-1)
+        n2.right = n7
+        n7.parent = n2
+        tree.retrace(n7)
+
+        expect(tree.root).to eq n7
+        expect(tree.root.right).to eq root
+        expect(root.parent).to eq n7
+        expect(tree.root.left).to eq n2
+        expect(n2.parent).to eq tree.root
+
+        expect(tree.root.balance_factor).to eq 0
+        expect(root.balance_factor).to eq 0
+        expect(n2.balance_factor).to eq 0
       end
     end
 
@@ -101,9 +132,56 @@ describe AvlTree do
       it 'finds right child' do
         tree = AvlTree.new root
         expect(tree.root.balance_factor).to eq 0
-        tree.insert n19 = AvlNode.new(19)
+        tree.root.right = n19
+        n19.parent = tree.root
+        tree.retrace(n19)
         expect(n19.balance_factor).to eq 0
         expect(tree.root.balance_factor).to eq 1
+      end
+
+      it 'find right right child' do
+        tree = AvlTree.new root
+        tree.root.right = n19
+        n19.parent = tree.root
+        tree.retrace(n19)
+        expect(tree.root.balance_factor).to eq(1)
+
+        n19.right = n23
+        n23.parent = n19
+        tree.retrace (n23)
+
+        expect(tree.root).to eq n19
+        expect(tree.root.left).to eq root
+        expect(root.parent).to eq n19
+        expect(tree.root.right).to eq n23
+        expect(n23.parent).to eq n19
+
+        expect(tree.root.balance_factor).to eq 0
+        expect(n23.balance_factor).to eq 0
+        expect(root.balance_factor).to eq 0
+      end
+
+      it 'rotates on right left child' do
+        tree = AvlTree.new root
+        tree.root.right = n23
+        n23.parent = tree.root
+        tree.retrace(n23)
+        expect(tree.root.balance_factor).to eq 1
+
+        n23.left = n19
+        n19.parent = n23
+        tree.retrace(n19)
+
+        expect(tree.root.key).to eq 19
+        expect(tree.root.right).to eq n23
+        expect(n23.parent).to eq tree.root
+        expect(tree.root.left).to eq root
+        expect(root.parent).to eq tree.root
+
+        expect(tree.root.balance_factor).to eq 0
+        expect(root.balance_factor).to eq 0
+        expect(n23.balance_factor).to eq 0
+
       end
     end
   end
