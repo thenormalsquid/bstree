@@ -605,6 +605,26 @@ of the rotation.
 
 \subsection{Retracing}
 
+Retracing is the operation of iterating from the inserted
+node up the tree, possibly (always?) to root, checking
+the balance at each node and rebalancing if necessary.
+Rebalancing is simply applying the correct rotations,
+either the simple right or left, or the double rotations
+as the case may be.
+
+Retracing has two challenges:
+
+\begin{enumerate}
+  \item Determining or maintaining balance factor at each parent, and
+  \item distinguishing between ``chain'' and ``knee'' rotations.
+\end{enumerate}
+
+If the weight or ``balance factor'' is maintained at each node, it must be
+adjusted during the rebalancing process. If balance factor isn't maintained at
+each node, the height of each subtree at each node will be required, which is
+expensive.
+
+\paragraph{Chain versus knee rotations}
 
 \subsection{Implementation design}
 
