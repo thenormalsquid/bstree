@@ -3,11 +3,6 @@
 require 'tree'
 require 'avl_node'
 
-# This may or may not be a temporary class,
-# the regular Tree may be able to handle an AvlNode,
-# but it's confusing me to think about it right now.
-# I'm focusing on getting the rotations implemented
-# correctly, and subclassing here reduces distraction.
 class AvlTree < Tree
   def initialize node
     super
@@ -25,7 +20,7 @@ class AvlTree < Tree
     parent = node.parent
 
     if parent.balance_factor > 0
-      parent.rotate_ccw
+      parent.rotate_left
       @root = node if @root == parent
     else
       parent.balance_factor += 1
@@ -36,7 +31,7 @@ class AvlTree < Tree
     parent = node.parent
 
     if parent.balance_factor < 0
-      parent.rotate_cw
+      parent.rotate_right
       @root = node if @root == parent
       parent.balance_factor += 1
     else

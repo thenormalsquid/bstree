@@ -11,7 +11,7 @@ class AvlNode < Node
     @weight = 0
   end
 
-  def rotate_cw
+  def rotate_right
     parent = self.parent
 
     pivot = left
@@ -23,9 +23,8 @@ class AvlNode < Node
     parent&.right = pivot
     self.parent = pivot
   end
-  alias_method :simple_right, :rotate_cw
 
-  def rotate_ccw
+  def rotate_left
     parent = self.parent
 
     pivot = right
@@ -37,16 +36,15 @@ class AvlNode < Node
     parent&.left = pivot
     self.parent = pivot
   end
-  alias_method :simple_left, :rotate_ccw
 
   def rotate_left_right
-    self.left.simple_left
-    simple_right
+    self.left.rotate_left
+    rotate_right
   end
 
   def rotate_right_left
-    self.right.simple_right
-    simple_left
+    self.right.rotate_right
+    rotate_left
   end
 
   def right_height

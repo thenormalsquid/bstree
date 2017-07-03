@@ -21,12 +21,12 @@ describe AvlNode do
     let(:n19) { described_class.new 19 }
     let(:n23) { described_class.new 23 }
 
-    describe '#simple_left' do # rotate_ccw
+    describe '#rotate_left' do # rotate_left
       context 'right chain' do
         it "moves the root node to left child\nrotates counterclockwise with 3 nodes right chain" do
           root.insert n19
           root.insert n23
-          root.simple_left
+          root.rotate_left
 
           expected = [19, 17, 23]
           actual = n19.preorder_collect
@@ -48,7 +48,7 @@ describe AvlNode do
         root.insert n17
         root.insert n13
         root.insert n23
-        root.rotate_ccw
+        root.rotate_left
 
         expect(n17.left).to eq root
         expect(root.right).to eq n13
@@ -59,14 +59,14 @@ describe AvlNode do
         it 'does a double' do
           root.insert n29
           root.insert n23
-          n29.simple_right
+          n29.rotate_right
           first_result = root.preorder_collect
           expect(first_result).to eq [17, 23, 29]
           expect(n23.parent).to eq root
           expect(n29.parent).to eq n23
           expect(root.right.key).to eq n23.key
 
-          root.simple_left
+          root.rotate_left
           expected = [23, 17, 29]
           end_result = n23.preorder_collect
           expect(end_result).to eq expected
@@ -78,13 +78,13 @@ describe AvlNode do
       end
     end
 
-    describe '#simple_right' do # rotate_cw
+    describe '#rotate_right' do # rotate_right
       context 'left chain' do
         it 'moves the root node to right child' do
           root.insert n7
           root.insert n5
           expected = [7, 5, 17]
-          root.simple_right
+          root.rotate_right
 
           actual = n7.preorder_collect
           expect(actual).to eq expected
@@ -109,7 +109,7 @@ describe AvlNode do
         root.insert n13
         root.insert n7
 
-        root.rotate_cw
+        root.rotate_right
         expect(n11.right).to eq root
         expect(root.left).to eq n13
         expect(n11.size).to eq 5
@@ -119,11 +119,11 @@ describe AvlNode do
         it 'moves the root node to right child' do
           root.insert n7
           root.insert n11
-          n7.simple_left
+          n7.rotate_left
           expect(n11.left).to eq n7
           expect(root.left).to eq n11
 
-          root.simple_right
+          root.rotate_right
           actual = n11.preorder_collect
           expected = [11, 7, 17]
           expect(actual).to eq expected
@@ -355,12 +355,12 @@ describe AvlNode do
       #
       # Consider having insert return the current root.
       #
-      # expect(n2).to receive(:rotate_ccw).with("correct argument")
+      # expect(n2).to receive(:rotate_left).with("correct argument")
       describe 'only right children' do
         xit 'makes a long right list' do
           n2.insert n3
           n2.insert n5
-          expect(n2).to receive(:rotate_cw) # .with("correct argument")
+          expect(n2).to receive(:rotate_right) # .with("correct argument")
           # expect(n2.height).to eq 1
           # expect(n3.height).to eq 0
           # expect(n3.height).to eq 0
