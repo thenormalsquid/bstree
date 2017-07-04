@@ -568,10 +568,8 @@ our new chain into balance.
 
 And it turns out making a chain from knee is easy: choose the middle
 node as the rotation root, the right child as the pivot, and rotate
-counterclockwise. Now the tree looks like 7 <- 11 <- 17, and we
+counterclockwise. Now the tree looks like $7 \leftarrow 11\leftarrow 17$, and we
 already know how to balance a left chain.
-
-
 
 Above, we threw away the right side of the tree by invoking symmetry.
 By invoking symmetry again, we get the right side of the tree back,
@@ -580,8 +578,8 @@ swapping `left' for `right' and `right' for `left.'
 
 \paragraph{Why the base cases are important}
 Invoking the property of the AVL tree, inserting a node triggers retracing,
-which may result in rotations to rebalance.  Given random keys, (I claim!) it's
-at least average behavior that an AVL tree is going to rebalance after
+which may result in rotations to rebalance.  Given random keys, it's
+at least average behavior (I claim!) that an AVL tree is going to rebalance after
 inserting the third node. The chain and knee situations above must be handled
 correctly to proceed with general implementation of AVL tree.
 
@@ -612,11 +610,13 @@ Rebalancing is simply applying the correct rotations,
 either the simple right or left, or the double rotations
 as the case may be.
 
-Retracing has two challenges:
+Retracing has three challenges:
 
 \begin{enumerate}
-  \item Determining or maintaining balance factor at each parent, and
-  \item distinguishing between ``chain'' and ``knee'' rotations.
+  \item Determining or maintaining balance factor at each parent,
+  \item distinguishing between ``chain'' and ``knee'' rotations, and
+  \item Ensuring the relationship between the rotation root, the pivot
+    and the rotation root's parent is correct.
 \end{enumerate}
 
 If the weight or ``balance factor'' is maintained at each node, it must be
@@ -624,34 +624,44 @@ adjusted during the rebalancing process. If balance factor isn't maintained at
 each node, the height of each subtree at each node will be required, which is
 expensive.
 
+Some rotations will move the rotation root to a child position, which
+requires resetting its parent to the pivot, and ensuring that the
+pivot and the rotation root's previous parent are linked.
+
 \paragraph{Chain versus knee rotations}
 
 \subsection{Implementation design}
 
-Assuming we want to maintain an accurate value for the root of the tree,
+Assuming we want to maintain an accurate node pointer for the root of the tree,
 at the highest level, retracing needs to be controlled by the same data
-structure in charge of the root. In a node/tree situation, retracing
+structure in charge of the root node. In a node/tree situation, retracing
 belongs to the tree. Since retracing is performed bottom up from the
 inserted node, the tree data structure needs to keep a reference to
 the inserted node, which requires insertion to be controlled by the
 tree as well.
 
+One critical part for correctly implementing an AVL tree's knowledge of
+it's height balance at every node. For example, the reference implementation
+displayed on Wikipedia manages height balance by adjusting the
+\textit{balance factor} on every rotation, and during retracing. That is,
+balance factors are adjusted in two places. The reader is excused if
+he or she finds splitting the work confusing, it is confusing. If possible,
+balance factors should be updated in one place.
+
 \section{Red-black tree}
 
-The Red black-tree appears to have a reputation of being both ``the
-last word'' in binary search trees (outside of specialist literature)
-and a fearsome reputation among programmers in practice. One might
-speculate this reputation is founded on the red-black tree being about
-as complicated as any particular undergraduate data structure. For
-whatever reason, it seems to come up on a regular basis in those
-discussions on what programmers should or should not be expected to
-be proficient in for job interviews. One camp holds that basic
-data structures should be at a programmer's fingertips, the other
-that book learning from 30 years ago is hardly relevant for shipping
-code daily.
+The Red black-tree appears to have a reputation of being both ``the last word''
+in binary search trees (outside of specialist literature) and a fearsome
+reputation among programmers in practice. One might speculate this reputation
+is founded on the red-black tree being about as complicated as any particular
+undergraduate data structure. For whatever reason, it seems to come up on a
+regular basis in those discussions on what programmers should or should not be
+expected to be proficient in for job interviews. One camp holds that basic data
+structures (i.e., reb-black trees, etc.) should be at a programmer's
+fingertips, the other that book learning from 30 years ago is hardly relevant
+for shipping code daily.
 
 But we don't case about such things. Our interest is in the thing itself.
-
 
 
 \section{Persistence}
