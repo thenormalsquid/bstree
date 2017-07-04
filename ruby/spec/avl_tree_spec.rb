@@ -82,7 +82,7 @@ describe AvlTree do
         expect(tree.root.balance_factor).to eq(-1)
       end
 
-      it 'finds left left child' do
+      xit 'finds left left child' do
         tree = AvlTree.new root
         expect(tree.root.balance_factor).to eq 0
         tree.root.left = n7
@@ -104,7 +104,7 @@ describe AvlTree do
         expect(root.balance_factor).to eq 0
       end
 
-      it 'rotates on left right child' do
+      xit 'rotates on left right child' do
         tree = AvlTree.new root
         tree.root.left = n2
         n2.parent = tree.root

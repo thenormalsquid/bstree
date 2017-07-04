@@ -40,9 +40,18 @@ describe AvlTree do
       expect(n3.right).to eq n4
 
       tree.insert n5
-      # expect(tree.root.balance_factor).to eq 0
-      expect(tree.root.key).to eq n2.key
-      # expect(tree.root.left).to eq n1
+      expect(tree.root).to eq n2
+      expect(tree.root.balance_factor).to eq 1
+      expect(tree.root.left).to eq n1
+      expect(tree.root.right).to eq n4
+      expect(n4.balance_factor).to eq 0
+      expect(n3.balance_factor).to eq 0
+      expect(n4.right).to eq n5
+      expect(n4.left).to eq n3
+
+      tree.insert n6
+      expected = [4, 2, 1, 3, 5, 6]
+      expect(tree.preorder_keys).to eq expected
     end
   end
 end
