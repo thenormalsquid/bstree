@@ -208,6 +208,8 @@ class Tree
   end
 
   # TODO: rename to breadth_first_traverse
+  # TODO: consider add code to test if root.nil?
+  # TODO: rewrite this using a single method with a stack.
   def bfsearch
     rows = [[root]]
     rows << get_next_row(rows.last) until rows.last.empty?
