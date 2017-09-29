@@ -3,11 +3,13 @@
 require_relative '../lib/hash_tree.rb'
 
 describe HashTree do
-  describe HashTree::Node do
+=begin
+  describe HashTree::HashNode do
     it 'instantiates' do
       expect(described_class).not_to be nil
     end
   end
+=end
 
   it 'instantiates' do
     expect(HashTree.new).not_to be nil
