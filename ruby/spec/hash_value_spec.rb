@@ -4,7 +4,8 @@ require_relative '../lib/hash_value.rb'
 
 describe HashValue do
   it 'instantiates' do
-    expect(described_class).not_to be nil
+    data = '1'
+    expect(described_class.new(data)).not_to be nil
   end
 end
 
