@@ -1,13 +1,13 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    ast (2.3.0)
+    ast (2.4.0)
     awesome_print (1.8.0)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    codeclimate-engine-rb (0.4.0)
+    codeclimate-engine-rb (0.4.1)
       virtus (~> 1.0)
     coderay (1.1.2)
     coercible (1.0.0)
@@ -18,7 +18,9 @@ GEM
     equalizer (0.0.11)
     ice_nine (0.11.2)
     method_source (0.8.2)
-    parallel (1.12.0)
+    mry (0.52.0.0)
+      rubocop (>= 0.41.0)
+    parallel (1.12.1)
     parser (2.4.0.2)
       ast (~> 2.3)
     powerpack (0.1.1)
@@ -39,7 +41,7 @@ GEM
       rspec-core (~> 3.7.0)
       rspec-expectations (~> 3.7.0)
       rspec-mocks (~> 3.7.0)
-    rspec-core (3.7.0)
+    rspec-core (3.7.1)
       rspec-support (~> 3.7.0)
     rspec-expectations (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -47,12 +49,12 @@ GEM
     rspec-mocks (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
-    rspec-support (3.7.0)
-    rubocop (0.51.0)
+    rspec-support (3.7.1)
+    rubocop (0.52.1)
       parallel (~> 1.10)
-      parser (>= 2.3.3.1, < 3.0)
+      parser (>= 2.4.0.2, < 3.0)
       powerpack (~> 0.1)
-      rainbow (>= 2.2.2, < 3.0)
+      rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.9.0)
@@ -70,10 +72,11 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  mry
   pry-nav
   reek
   rspec
   rubocop
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
