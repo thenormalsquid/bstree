@@ -7,6 +7,19 @@ leak memory is quite another thing.
 
 This is an attempt at that other thing.
 
+## Building
+
+The usual autotools shenanigans, I can't ever remember which order these
+need to run:
+
+* aclocal
+* automake
+* autoheader
+* autoconf
+* ./configure
+
+Also, read the INSTALL document.
+
 ## TODO
 
 * Run astyle on all the source, headers and tests.
