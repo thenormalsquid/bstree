@@ -8,6 +8,12 @@ But it's such a simple elegant thing, and c++11/14 is so much nicer than
 it used to be, it's inspiring to go back and revisit this simple data
 structure.
 
+## Building and installing
+
+The usual `auto*` shenanigans...
+
+Try autoreconf.
+
 ### About the c++ in this repo...
 
 It's a mishmash of styles to be sure, and certainly reflects
