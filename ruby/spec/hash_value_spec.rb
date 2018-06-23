@@ -8,4 +8,3 @@ describe HashValue do
     expect(described_class.new(data)).not_to be nil
   end
 end
-

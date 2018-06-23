@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 require_relative '../lib/gcd'
@@ -34,7 +36,7 @@ RSpec.describe Gcd do
     end
 
     example 'gcd(17*23, 5*17)' do
-      expect(Gcd.compute(17*23, 5*17)).to eq 17
+      expect(Gcd.compute(17 * 23, 5 * 17)).to eq 17
     end
 
     example 'gcd(0, 18)' do
