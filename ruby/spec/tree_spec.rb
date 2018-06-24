@@ -52,7 +52,8 @@ RSpec.describe Tree do
 
     it 'returns true when root node is not present' do
       class Tree
-        def set_root_to_nil # root is attr_reader
+        def set_root_to_nil
+          # root is attr_reader
           @root = nil
         end
       end
