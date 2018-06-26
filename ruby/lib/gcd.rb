@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Gcd
   def self.compute a, b
     return a if b.zero?
